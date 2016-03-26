@@ -15,7 +15,7 @@ This project will give your classes (and) interfaces a nice & easy way to add ev
 4. Subscribe to the event<br/>
 `x.onPulsate((generator, frequency) => { alert(frequency); }`<br/>
 
-Check the Pulse Generator Example for more details.
+Check the Pulse Generator Example for more details or read: http://keestalkstech.com/2016/03/strongly-typed-event-handlers-in-typescript-part-1/
 
 ## Need something more robust?
 What is you need to handle a lot of events? 
