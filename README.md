@@ -4,18 +4,25 @@ Add the power of events to your TypeScript classes (and interfaces).
 
 ## Events are easy!
 Events can be added as a gettable property to the class.
+```
+class PulseGenerator {
 
-1. Add a private event dispatcher to your class: <br/>
-`private _onPulsate: EventDispatcher<PulseGenerator, number> = new EventDispatcher<PulseGenerator, number>();`<br/>
+	private _onPulsate: EventDispatcher<PulseGenerator, number> = new EventDispatcher<PulseGenerator, number>();
 
-2. Add a public event getter to your class: <br/>
-`get onPulsate(): IEvent<PulseGenerator, number> { return this._onPulsate; ` }<br/>
+	get onPulsate(): IEvent<PulseGenerator, number> {
+		return this._onPulsate;
+	}
 
-3. Dispatch an event using `dispatch`: <br/>
-`this._onPulsate.dispatch(this, 1337);`<br/>
-
-4. Subscribe to the event<br/>
-`x.onPulsate((generator, frequency) => { alert(frequency); }`<br/>
+	public pulse(frequencyInHz : number) {
+		this._onPulsate.dispatch(this, this.frequencyInHz);
+	}
+}
+```
+Use it:
+```
+var p = new PulseGenerator();
+p.onPulsate.subscribe((sender, hz) => alert(hz));
+```
 
 Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/example.pulse-generator.ts">Pulse Generator example</a> for more details or read: <br/> http://keestalkstech.com/2016/03/strongly-typed-event-handlers-in-typescript-part-1/
 
