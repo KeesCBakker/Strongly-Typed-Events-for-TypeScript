@@ -61,7 +61,9 @@ class MyClass {
     start(): void {
         this._events.get('onStart').dispatch(this, null);
 ```
+More info? Check: <a href="http://keestalkstech.com/2016/03/strongly-typed-events-in-typescript-using-an-event-list-part-3/">Strongly Typed Events in TypeScript using an event list (Part 3)</a>
 
+## Add named events to your class
 Need to add named event support to your class? Implement the `IEventHandling` interface or extend from the abstract `EventHandlingBase` class. 
 ```
 class EventTester implements IEventHandling<EventTester, EventTesterArgs>
@@ -79,3 +81,4 @@ class EventTester implements IEventHandling<EventTester, EventTesterArgs>
 
 class EventTesterArgs { }
 ```
+More info? Check: <a href="http://keestalkstech.com/2016/03/adding-named-events-to-your-class-part-4/">Adding named events to your TypeScript classes (Part 4)</a>
