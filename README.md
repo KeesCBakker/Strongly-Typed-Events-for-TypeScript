@@ -1,6 +1,6 @@
 <img src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
 # Strongly Typed Events for TypeScript
-This project will give your classes (and interfaces) a nice & easy way to add events.
+Add the power of events to your TypeScript classes (and interfaces).
 
 ## Events are easy!
 Events can be added as a gettable property to the class.
