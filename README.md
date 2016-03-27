@@ -13,7 +13,7 @@ class PulseGenerator {
 		return this._onPulsate;
 	}
 
-	public pulse(frequencyInHz : number) {
+	pulse(frequencyInHz : number): void {
 		this._onPulsate.dispatch(this, this.frequencyInHz);
 	}
 }
