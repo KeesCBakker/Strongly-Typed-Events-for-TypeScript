@@ -1,6 +1,6 @@
-<img src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
 # Strongly Typed Events for TypeScript
 Add the power of events to your TypeScript classes (and interfaces).
+<img src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
 
 ## Events are easy!
 Events can be added as a gettable property to the class.
