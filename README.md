@@ -16,7 +16,7 @@ Events can be added as a gettable property to the class.
 4. Subscribe to the event<br/>
 `x.onPulsate((generator, frequency) => { alert(frequency); }`<br/>
 
-Check the Pulse Generator example for more details or read: <br/> http://keestalkstech.com/2016/03/strongly-typed-event-handlers-in-typescript-part-1/
+Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/example.pulse-generator.ts">Pulse Generator example</a> for more details or read: <br/> http://keestalkstech.com/2016/03/strongly-typed-event-handlers-in-typescript-part-1/
 
 ## Events on interfaces
 Interfaces don't have properties that only have getters. That's why events should be implemented using a method:
