@@ -1,3 +1,4 @@
+<img src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
 # Strongly Typed Events for TypeScript
 This project will give your classes (and interfaces) a nice & easy way to add events.
 
@@ -39,4 +40,36 @@ http://keestalkstech.com/2016/03/using-strongly-typed-events-in-typescript-with-
 
 
 ## Need something more robust?
-What is you need to handle a lot of events? 
+What is you need to handle a lot of events? Use an `EventList` as store for the events. Events will be automatically created.
+
+```
+class MyClass {
+
+    private _events: EventList<MyClass, EventArgs> = new EventList<MyClass, EventArgs>();
+
+    get onStart(): IEvent<MyClass, EventArgs> {
+        return this._events.get('onStart');
+    }
+
+    start(): void {
+        this._events.get('onStart').dispatch(this, null);
+```
+
+Need to add named event support to your class? Implement the `IEventHandling` interface or extend from the abstract `EventHandlingBase` class. 
+
+```
+class EventTester implements IEventHandling<EventTester, EventTesterArgs>
+{
+    private _events: EventList<EventTester, EventTesterArgs> = new EventList<EventTester, EventTesterArgs>();
+
+    subscribe(name: string, fn: (sender: EventTester, args: EventTesterArgs) => void): void {
+        this._events.get(name).subscribe(fn);
+    }
+
+    unsubscribe(name: string, fn: (sender: EventTester, args: EventTesterArgs) => void): void {
+        this._events.get(name).unsubscribe(fn);
+    }
+}
+
+class EventTesterArgs { }
+```
