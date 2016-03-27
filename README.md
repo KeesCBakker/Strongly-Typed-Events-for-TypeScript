@@ -24,7 +24,7 @@ var p = new PulseGenerator();
 p.onPulsate.subscribe((sender, hz) => alert(hz));
 ```
 Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/example.pulse-generator.ts">Pulse Generator example</a> for more details or read: <a href="http://keestalkstech.com/2016/03/strongly-typed-event-handlers-in-typescript-part-1/">Strongly typed event handlers in TypeScript (Part 1)</a>
-<img height="200" src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
+
 ## Events on interfaces
 Interfaces don't have properties that only have getters. That's why events should be implemented using a method:
 
@@ -55,7 +55,7 @@ class MyClass {
         this._events.get('onStart').dispatch(this, null);
 ```
 More info? Check: <a href="http://keestalkstech.com/2016/03/strongly-typed-events-in-typescript-using-an-event-list-part-3/">Strongly Typed Events in TypeScript using an event list (Part 3)</a>
-<img height="200" src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
+
 ## Add named events to your class
 Need to add named event support to your class? Implement the `IEventHandling` interface or extend from the abstract `EventHandlingBase` class. 
 ```
@@ -75,4 +75,3 @@ class EventTester implements IEventHandling<EventTester, EventTesterArgs>
 class EventTesterArgs { }
 ```
 More info? Check: <a href="http://keestalkstech.com/2016/03/adding-named-events-to-your-class-part-4/">Adding named events to your TypeScript classes (Part 4)</a>
-<img height="200" src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
