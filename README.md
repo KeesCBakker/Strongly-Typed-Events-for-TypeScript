@@ -40,7 +40,7 @@ http://keestalkstech.com/2016/03/using-strongly-typed-events-in-typescript-with-
 
 
 ## Need something more robust?
-What is you need to handle a lot of events? Use an `EventList` as store for the events. Events will be automatically created.
+Do you need to handle a lot of events? Use an `EventList` as store for the events. Events will be automatically created.
 
 ```
 class MyClass {
@@ -56,7 +56,6 @@ class MyClass {
 ```
 
 Need to add named event support to your class? Implement the `IEventHandling` interface or extend from the abstract `EventHandlingBase` class. 
-
 ```
 class EventTester implements IEventHandling<EventTester, EventTesterArgs>
 {
