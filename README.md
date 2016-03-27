@@ -1,8 +1,8 @@
+<img src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
 # Strongly Typed Events for TypeScript
 Add the power of events to your TypeScript classes (and interfaces).
-<img src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
 
-## Events are easy!
+## Events made easy!
 Events can be added as a gettable property to the class.
 ```
 class PulseGenerator {
@@ -61,6 +61,7 @@ class MyClass {
         this._events.get('onStart').dispatch(this, null);
 ```
 More info? Check: <a href="http://keestalkstech.com/2016/03/strongly-typed-events-in-typescript-using-an-event-list-part-3/">Strongly Typed Events in TypeScript using an event list (Part 3)</a>
+
 
 ## Add named events to your class
 Need to add named event support to your class? Implement the `IEventHandling` interface or extend from the abstract `EventHandlingBase` class. 
