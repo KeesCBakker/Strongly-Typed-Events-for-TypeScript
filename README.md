@@ -24,7 +24,7 @@ var p = new PulseGenerator();
 p.onPulsate.subscribe((sender, hz) => alert(hz));
 ```
 
-Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/example.pulse-generator.ts">Pulse Generator example</a> for more details or read: <br/> http://keestalkstech.com/2016/03/strongly-typed-event-handlers-in-typescript-part-1/
+Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/example.pulse-generator.ts">Pulse Generator example</a> for more details or read: <a href="http://keestalkstech.com/2016/03/strongly-typed-event-handlers-in-typescript-part-1/">Strongly typed event handlers in TypeScript (Part 1)</a>
 
 ## Events on interfaces
 Interfaces don't have properties that only have getters. That's why events should be implemented using a method:
@@ -35,15 +35,14 @@ interface IClock {
 }
 ```
 
-Use it like:
+Use it:
 
 ```
 let clock: IClock = new Clock(5000);
 clock.onTick().subscribe((sender, ticks) => alert('Tick-tock #' + ticks));
 ```
 
-Check the Clock example for more details or read: <br/>
-http://keestalkstech.com/2016/03/using-strongly-typed-events-in-typescript-with-interfaces-part2/
+Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/example.clock.ts">Clock example</a> for more details or read: <a href="http://keestalkstech.com/2016/03/using-strongly-typed-events-in-typescript-with-interfaces-part2/">Using strongly typed events in TypeScript with interfaces (Part 2)</a>
 
 
 ## Need something more robust?
