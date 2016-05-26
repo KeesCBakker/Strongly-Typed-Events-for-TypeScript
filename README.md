@@ -1,4 +1,4 @@
-<img height="200" src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
+<img height="300" src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
 # Strongly Typed Events for TypeScript
 Add the power of events to your TypeScript classes (and interfaces).
 
