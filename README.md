@@ -12,14 +12,11 @@ These type of events are modelled after the .Net event handler system and uses a
 ````
 class PulseGenerator {
 
-    //create private event dispatcher
     private _onPulsate: EventDispatcher<PulseGenerator, number> = new EventDispatcher<PulseGenerator, number>();
     frequencyInHz: number;
 
-    //expose the event dispatcher through the IEvent interface
-    //this will hide the dispatch method outside the class
     get onPulsate(): IEvent<PulseGenerator, number> {
-        return this._onPulsate;
+        return this._onPulsate.asEvent();
     }
 
     constructor(frequencyInHz: number) {
@@ -59,7 +56,7 @@ class ImageDownloader {
     private _ondownload: SimpleEventDispatcher<ImageDownloadArg> = new SimpleEventDispatcher();
 
     public get ondownload(): ISimpleEvent<ImageDownloadArg> {
-        return this._ondownload;
+        return this._ondownload.asEvent();
     }
 
     public download(url: string, callback?: ISimpleEventHandler<ImageDownloadArg>) {
