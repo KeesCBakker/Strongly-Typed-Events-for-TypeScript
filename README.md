@@ -6,7 +6,7 @@ Add the power of events to your TypeScript classes (and interfaces).
 This project will help you to add events, event handling en event dispatching to your classes. Code tells more than words,
 so let's give two examples:
 
-#### IEventTArgs<TSender, TArgs>
+#### `IEventTArgs<TSender, TArgs>` 
 These type of events are modelled after the .Net event handler system and uses a generic sender and a generic argument.
 
 ````
@@ -40,8 +40,17 @@ class PulseGenerator {
     }
 }
 ````
+The events can be subscribed to like this: 
+````
+let generator = new PulseGenerator(10);
 
-#### ISimpleEvent<TArgs>
+//subscribe on the onPulse event
+generator.onPulsate.subscribe((p, hz) => {
+    alert('Peep!');
+});
+````
+
+#### `ISimpleEvent<TArgs>`
 Need something simpler? These type of events only use a generic argument.
 
 ````
@@ -72,6 +81,17 @@ class ImageDownloader {
     }
 }
 
+````
+You can use events by subscribing onto the event:
+````
+let downloader = new ImageDownloader();
+
+downloader.ondownload.subscribe((arg: ImageDownloadArg) => {
+    var x = `Url: "${arg.url}", height: ${arg.height}, width: ${arg.width}`;
+    alert(x);
+});
+
+downloader.download('https://keestalkstech.com/wp-content/uploads/2016/05/hashing2-590x332.jpg');
 ````
 
 Check the <a href="documentation">documentation</a> for more information.
