@@ -9,7 +9,8 @@ so let's give two examples:
 #### IEventTArgs<TSender, TArgs>
 These type of events are modelled after the .Net event handler system and uses a generic sender and a generic argument.
 
-````class PulseGenerator {
+````
+class PulseGenerator {
 
     //create private event dispatcher
     private _onPulsate: EventDispatcher<PulseGenerator, number> = new EventDispatcher<PulseGenerator, number>();
@@ -37,12 +38,14 @@ These type of events are modelled after the .Net event handler system and uses a
 
         }, 1000 / this.frequencyInHz);
     }
-}````
+}
+````
 
 #### ISimpleEvent<TArgs>
 Need something simpler? These type of events only use a generic argument.
 
-````class ImageDownloader {
+````
+class ImageDownloader {
 
     private _ondownload: SimpleEventDispatcher<ImageDownloadArg> = new SimpleEventDispatcher();
 
