@@ -9,7 +9,6 @@
  * Released under the MIT license
  */
 
-
 /**
  * Base class for implementation of the dispatcher. It facilitates the subscribe
  * and unsubscribe methods based on generic handlers. The TEventType specifies
@@ -74,6 +73,11 @@ class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEventHandler<TSend
  * subscription, unsubscription and dispatching of a simple event */
 class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHandler<TArgs>> implements ISimpleEvent<TArgs>
 {
+    /**
+     * Dispatches the event.
+     * @param sender The sender.
+     * @param args The arguments object.
+     */
     dispatch(args: TArgs): void {
         for (let handler of this._subscriptions) {
             handler(args);
@@ -106,6 +110,10 @@ class DispatcherWrapper<THandlerType> implements ISubscribable<THandlerType>
         this._dispatcher.subscribe(fn);
     }
 
+    /**
+     * Unsubscribe from the event dispatcher.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
     public unsubscribe(fn: THandlerType): void {
         this._dispatcher.unsubscribe(fn);
     }
@@ -116,6 +124,10 @@ abstract class EventListBase<TEventDispatcher> {
 
     private _events: { [name: string]: TEventDispatcher; } = {};
 
+    /**
+     * Gets the dispatcher associated with the name.
+     * @param name The name of the event.
+     */
     get(name: string): TEventDispatcher {
 
         let event = this._events[name];
@@ -129,6 +141,10 @@ abstract class EventListBase<TEventDispatcher> {
         return event;
     }
 
+    /**
+     * Removes the dispatcher associated with the name.
+     * @param name The name of the event.
+     */
     remove(name: string): void {
         this._events[name] = null;
     }
@@ -174,14 +190,27 @@ abstract class EventHandlingBase<TSender, TArgs> implements IEventHandling<TSend
 
     private _events = new EventList<TSender, TArgs>();
 
+    /**
+     * Gets the list with all the event dispatchers.
+     */
     protected get events(): EventList<TSender, TArgs> {
         return this._events;
     }
 
+    /**
+     * Subscribes to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
     subscribe(name: string, fn: IEventHandler<TSender, TArgs>): void {
         this._events.get(name).subscribe(fn);
     }
 
+    /**
+     * Unsubscribes from the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
     unsubscribe(name: string, fn: IEventHandler<TSender, TArgs>): void {
         this._events.get(name).unsubscribe(fn);
     }
@@ -198,10 +227,20 @@ abstract class SimpleEventHandlingBase<TArgs> implements ISimpleEventHandling<TA
         return this._events;
     }
 
+    /**
+     * Subscribes to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
     subscribe(name: string, fn: ISimpleEventHandler<TArgs>): void {
         this._events.get(name).subscribe(fn);
     }
 
+    /**
+     * Unsubscribes from the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
     unsubscribe(name: string, fn: ISimpleEventHandler<TArgs>): void {
         this._events.get(name).unsubscribe(fn);
     }
