@@ -92,14 +92,16 @@ class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHandler<TA
  */
 class DispatcherWrapper<THandlerType> implements ISubscribable<THandlerType>
 {
-    private _dispatcher: ISubscribable<THandlerType>;
+    private _subscribe: (fn: THandlerType) => void;
+    private _unsubscribe: (fn: THandlerType) => void;
 
     /**
      * Creates a new EventDispatcherWrapper instance.
      * @param dispatcher The dispatcher.
      */
     constructor(dispatcher: ISubscribable<THandlerType>) {
-        this._dispatcher = dispatcher;
+        this._subscribe = (fn: THandlerType) => dispatcher.subscribe(fn);
+        this._unsubscribe = (fn: THandlerType) => dispatcher.unsubscribe(fn);
     }
 
     /**
@@ -107,7 +109,7 @@ class DispatcherWrapper<THandlerType> implements ISubscribable<THandlerType>
      * @param fn The event handler that is called when the event is dispatched.
      */
     public subscribe(fn: THandlerType): void {
-        this._dispatcher.subscribe(fn);
+        this._subscribe(fn);
     }
 
     /**
@@ -115,7 +117,7 @@ class DispatcherWrapper<THandlerType> implements ISubscribable<THandlerType>
      * @param fn The event handler that is called when the event is dispatched.
      */
     public unsubscribe(fn: THandlerType): void {
-        this._dispatcher.unsubscribe(fn);
+        this._unsubscribe(fn);
     }
 }
 
