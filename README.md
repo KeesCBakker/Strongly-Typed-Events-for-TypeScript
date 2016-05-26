@@ -3,75 +3,96 @@
 Add the power of events to your TypeScript classes (and interfaces).
 
 ## Events made easy!
-Events can be added as a gettable property to the class.
-```
-class PulseGenerator {
+This project will help you to add events, event handling en event dispatching to your classes. Code tells more than words,
+so let's give two examples:
 
-	private _onPulsate: EventDispatcher<PulseGenerator, number> = new EventDispatcher<PulseGenerator, number>();
+#### IEventTArgs<TSender, TArgs>
+These type of events are modelled after the .Net event handler system and uses a generic sender and a generic argument.
 
-	get onPulsate(): IEvent<PulseGenerator, number> {
-		return this._onPulsate;
-	}
+````class PulseGenerator {
 
-	pulse(frequencyInHz : number): void {
-		this._onPulsate.dispatch(this, this.frequencyInHz);
-	}
-}
-```
-Use it:
-```
-var p = new PulseGenerator();
-p.onPulsate.subscribe((sender, hz) => alert(hz));
-```
-Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/example.pulse-generator.ts">Pulse Generator example</a> for more details or read: <a href="http://keestalkstech.com/2016/03/strongly-typed-event-handlers-in-typescript-part-1/">Strongly typed event handlers in TypeScript (Part 1)</a>
+    //create private event dispatcher
+    private _onPulsate: EventDispatcher<PulseGenerator, number> = new EventDispatcher<PulseGenerator, number>();
+    frequencyInHz: number;
 
-## Events on interfaces
-Interfaces don't have properties that only have getters. That's why events should be implemented using a method:
-
-```
-interface IClock {
-  onTick(): IEvent<IClock, number>;
-}
-```
-Use it:
-```
-let clock: IClock = new Clock(5000);
-clock.onTick().subscribe((sender, ticks) => alert('Tick-tock #' + ticks));
-```
-Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/example.clock.ts">Clock example</a> for more details or read: <a href="http://keestalkstech.com/2016/03/using-strongly-typed-events-in-typescript-with-interfaces-part2/">Using strongly typed events in TypeScript with interfaces (Part 2)</a>
-<img height="200" src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
-## Need something more robust?
-Do you need to handle a lot of events? Use an `EventList` as store for the events. Events will be automatically created.
-```
-class MyClass {
-
-    private _events: EventList<MyClass, EventArgs> = new EventList<MyClass, EventArgs>();
-
-    get onStart(): IEvent<MyClass, EventArgs> {
-        return this._events.get('onStart');
+    //expose the event dispatcher through the IEvent interface
+    //this will hide the dispatch method outside the class
+    get onPulsate(): IEvent<PulseGenerator, number> {
+        return this._onPulsate;
     }
 
-    start(): void {
-        this._events.get('onStart').dispatch(this, null);
-```
-More info? Check: <a href="http://keestalkstech.com/2016/03/strongly-typed-events-in-typescript-using-an-event-list-part-3/">Strongly Typed Events in TypeScript using an event list (Part 3)</a>
-
-## Add named events to your class
-Need to add named event support to your class? Implement the `IEventHandling` interface or extend from the abstract `EventHandlingBase` class. 
-```
-class EventTester implements IEventHandling<EventTester, EventTesterArgs>
-{
-    private _events: EventList<EventTester, EventTesterArgs> = new EventList<EventTester, EventTesterArgs>();
-
-    subscribe(name: string, fn: (sender: EventTester, args: EventTesterArgs) => void): void {
-        this._events.get(name).subscribe(fn);
+    constructor(frequencyInHz: number) {
+        this.frequencyInHz = frequencyInHz;
+        this.start();
     }
 
-    unsubscribe(name: string, fn: (sender: EventTester, args: EventTesterArgs) => void): void {
-        this._events.get(name).unsubscribe(fn);
+    private start(): void {
+
+        setTimeout(() => {
+
+            this.start();
+
+            //dispatch event by calling the dispatcher 
+            this._onPulsate.dispatch(this, this.frequencyInHz);
+
+        }, 1000 / this.frequencyInHz);
+    }
+}````
+
+#### ISimpleEvent<TArgs>
+Need something simpler? These type of events only use a generic argument.
+
+````class ImageDownloader {
+
+    private _ondownload: SimpleEventDispatcher<ImageDownloadArg> = new SimpleEventDispatcher();
+
+    public get ondownload(): ISimpleEvent<ImageDownloadArg> {
+        return this._ondownload;
+    }
+
+    public download(url: string, callback?: ISimpleEventHandler<ImageDownloadArg>) {
+
+        let img = new Image();
+
+        img.onload = () => {
+
+            let result = new ImageDownloadArg(url, img.height, img.width);
+
+            if (callback) {
+                callback(result);
+            }
+
+            this._ondownload.dispatch(result);
+        };
+
+        img.src = url;
     }
 }
 
-class EventTesterArgs { }
-```
-More info? Check: <a href="http://keestalkstech.com/2016/03/adding-named-events-to-your-class-part-4/">Adding named events to your TypeScript classes (Part 4)</a>
+````
+
+Check the <a href="documentation">documentation</a> for more information.
+
+
+#### Version 0.2
+**Introduced simple events &ndash; events that only use an arguments object.** I've added many base classes and 
+interfaces to make sure the base for both type of events are the same. The following objects and features are present in this version:
+
+- `ISimpleEvent<TSender, TArgs>` &ndash; Event handler function with a generic argument
+- `SimpleEventDispatcher<TSender, TArgs>` &ndash; Dispatcher implementation for simple events. Can be used to subscribe, 
+unsubscribe or dispatch events. Use the ToEvent() method to expose the event
+- `SimpleEventList<TSender, TArgs>` &ndash; Storage class for multiple events that are accessible by name. Events dispatchers are automatically created.
+- `SimpleEventHandlingBase<TSender, TArgs>` &ndash; Extends objects with simple event handling capabilities.
+- Added an `asEvent()` method to the dispatchers that will expose only the subsribe / unsubscribe methods. This will prevent
+the `dispatch` method from being exposed through the events.
+
+
+#### Version 0.1
+Introducing the events - use a generic sender and a generic argument to dispatch events through your projects. The following 
+objects and features are present in this version:
+
+- `IEvent<TSender, TArgs>` &ndash; Event handler function with a generic sender and a generic argument.
+- `EventDispatcher<TSender, TArgs>` &ndash; Dispatcher implementation for events. Can be used to subscribe, 
+unsubscribe or dispatch events. Use the ToEvent() method to expose the event.
+- `EventList<TSender, TArgs>` &ndash; Storage class for multiple events that are accessible by name. Events dispatchers are automatically created.
+- `EventHandlingBase<TSender, TArgs>` &ndash; Extends objects with event handling capabilities.
