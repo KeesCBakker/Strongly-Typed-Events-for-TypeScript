@@ -17,7 +17,7 @@ class ImageDownloader {
     private _ondownload: SimpleEventDispatcher<ImageDownloadArg> = new SimpleEventDispatcher();
 
     public get ondownload(): ISimpleEvent<ImageDownloadArg> {
-        return this._ondownload;
+        return this._ondownload.asEvent();
     }
 
     public download(url: string, callback?: ISimpleEventHandler<ImageDownloadArg>) {

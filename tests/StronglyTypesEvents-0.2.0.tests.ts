@@ -8,7 +8,7 @@ QUnit.test("Testing subscribe / unsubsribe - event as property", (assert) => {
         private _myEvent: EventDispatcher<MyEventTester, string> = new EventDispatcher<MyEventTester, string>();
 
         get myEvent(): IEvent<MyEventTester, string> {
-            return this._myEvent.ToEvent();
+            return this._myEvent.asEvent();
         }
 
         signal(str: string): void {
