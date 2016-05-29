@@ -90,7 +90,6 @@ class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHandler<TA
 {
     /**
      * Dispatches the event.
-     * @param sender The sender.
      * @param args The arguments object.
      */
     dispatch(args: TArgs): void {
@@ -101,7 +100,6 @@ class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHandler<TA
 
     /**
      * Dispatches the events thread.
-     * @param sender The sender.
      * @param args The arguments object.
      */
     dispatchAsync(args: TArgs): void {
