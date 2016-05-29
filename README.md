@@ -1,6 +1,6 @@
-<img height="300" src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
 # Strongly Typed Events for TypeScript
 Add the power of events to your TypeScript classes (and interfaces).
+<img height="300" src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
 
 ## Events made easy!
 This project will help you to add events, event handling en event dispatching to your classes. To get you started, check:
@@ -13,7 +13,7 @@ This project will help you to add events, event handling en event dispatching to
 
 Code tells more than words, so let's give two examples:
 
-#### `IEventTArgs<TSender, TArgs>` 
+#### `IEventArgs<TSender, TArgs>` 
 These type of events are modelled after the .Net event handler system and uses a generic sender and a generic argument.
 
 ````
@@ -98,7 +98,7 @@ downloader.ondownload.subscribe((arg: ImageDownloadArg) => {
 downloader.download('https://keestalkstech.com/wp-content/uploads/2016/05/hashing2-590x332.jpg');
 ````
 
-Check the <a href="documentation">documentation</a> for more information.
+Check the <a href="documentation">documentation</a> or the <a href="examples">examples</a> for more information.
 
 
 #### Version 0.2
