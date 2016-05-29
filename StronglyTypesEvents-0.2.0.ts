@@ -1,4 +1,4 @@
-/// <reference path="definitions/stronglytypesevents-0.2.0.d.ts" />
+/// <reference path="typings/stronglytypesevents-0.2.0.d.ts" />
 
 /*!
  * Strongly Typed Events for TypeScript
@@ -66,8 +66,23 @@ class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEventHandler<TSend
             handler(sender, args);
         }
     }
-}
 
+    /**
+     * Dispatches the events thread.
+     * @param sender The sender.
+     * @param args The arguments object.
+     */
+    dispatchAsync(sender: TSender, args: TArgs): void {
+
+        for (let handler of this._subscriptions) {
+            this.excuteAsync(sender, args, handler);
+        }
+    }
+
+    private excuteAsync(sender: TSender, args: TArgs, handler: IEventHandler<TSender, TArgs>): void {
+        window.setTimeout(() => handler(sender, args), 0);
+    }
+}
 
 /** The dispatcher handles the storage of subsciptions and facilitates
  * subscription, unsubscription and dispatching of a simple event */
@@ -82,6 +97,22 @@ class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHandler<TA
         for (let handler of this._subscriptions) {
             handler(args);
         }
+    }
+
+    /**
+     * Dispatches the events thread.
+     * @param sender The sender.
+     * @param args The arguments object.
+     */
+    dispatchAsync(args: TArgs): void {
+
+        for (let handler of this._subscriptions) {
+            this.excuteAsync( args, handler);
+        }
+    }
+
+    private excuteAsync(args: TArgs, handler: ISimpleEventHandler<TArgs>): void {
+        window.setTimeout(() => handler(args), 0);
     }
 }
 

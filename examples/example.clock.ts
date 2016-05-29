@@ -1,4 +1,7 @@
-﻿/*
+﻿/// <reference path="../stronglytypesevents-0.2.0.ts" />
+/// <reference path="../typings/stronglytypesevents-0.2.0.d.ts" />
+
+/*
  * This clock example shows how to use Strongly Typed Events
  * with interfaces.
  */

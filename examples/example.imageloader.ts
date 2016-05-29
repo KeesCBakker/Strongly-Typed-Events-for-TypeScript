@@ -1,4 +1,7 @@
-﻿window.onload = () => {
+﻿/// <reference path="../stronglytypesevents-0.2.0.ts" />
+/// <reference path="../typings/stronglytypesevents-0.2.0.d.ts" />
+
+window.onload = () => {
 
     let downloader = new ImageDownloader();
 
