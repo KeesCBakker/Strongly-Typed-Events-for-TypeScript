@@ -1,5 +1,5 @@
-﻿/// <reference path="../stronglytypesevents-0.2.0.ts" />
-/// <reference path="../typings/stronglytypesevents-0.2.0.d.ts" />
+﻿/// <reference path="../stronglytypedevents-0.2.0.ts" />
+/// <reference path="../typings/stronglytypedevents-0.2.0.d.ts" />
 
 /*
  * This clock example shows how to use Strongly Typed Events
