@@ -152,7 +152,7 @@ class DispatcherWrapper<THandlerType> implements ISubscribable<THandlerType>
     }
 }
 
-/** Base class for event lists classes. Implements the get and removes. */
+/** Base class for event lists classes. Implements the get and remove. */
 abstract class EventListBase<TEventDispatcher> {
 
     private _events: { [name: string]: TEventDispatcher; } = {};
