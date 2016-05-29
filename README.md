@@ -3,8 +3,15 @@
 Add the power of events to your TypeScript classes (and interfaces).
 
 ## Events made easy!
-This project will help you to add events, event handling en event dispatching to your classes. Code tells more than words,
-so let's give two examples:
+This project will help you to add events, event handling en event dispatching to your classes. To get you started, check:
+
+- <a href="documentation/HowToAddAnEventToAClass.md">How to add an event to a class?</a>
+- <a href="documentation/HowToAddAnEventToAnInterface.md">How to add an event to an interface?</a>
+- <a href="documentation/HowToAddMultipleEventsToAClass.md">How to add multiple events to a class?</a>
+- <a href="documentation/HowToAddDynamicNamedEeventsToAClass.md">How to add dynamic named events to a class?</a>
+- <a href="documentation/OnEventsDispatchersAndLists.md">On events, dispatchers and lists (a general explanation of the system)</a>
+
+Code tells more than words, so let's give two examples:
 
 #### `IEventTArgs<TSender, TArgs>` 
 These type of events are modelled after the .Net event handler system and uses a generic sender and a generic argument.
