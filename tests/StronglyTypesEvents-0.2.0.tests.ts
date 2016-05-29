@@ -266,3 +266,37 @@ QUnit.test('Testing simple event dispatcher', (assert) => {
 
     dispatcher.dispatch(a1);
 });
+
+QUnit.test('Testing event async dispatch', (assert) => {
+
+    let dispatcher = new EventDispatcher<any, number>();
+
+    let i = 0;
+
+    dispatcher.subscribe((s, a) => {
+        i = a;
+
+        assert.equal(i, 1);
+    });
+
+    dispatcher.dispatchAsync(null, 1);
+
+    assert.equal(i, 0);
+});
+
+QUnit.test('Testing simple event async dispatch', (assert) => {
+
+    let dispatcher = new SimpleEventDispatcher<number>();
+
+    let i = 0;
+
+    dispatcher.subscribe((a) => {
+        i = a;
+
+        assert.equal(i, 1);
+    });
+
+    dispatcher.dispatchAsync(1);
+
+    assert.equal(i, 0);
+});
