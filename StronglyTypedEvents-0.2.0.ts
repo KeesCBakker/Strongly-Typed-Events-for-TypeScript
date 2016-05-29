@@ -84,8 +84,10 @@ class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEventHandler<TSend
     }
 }
 
-/** The dispatcher handles the storage of subsciptions and facilitates
- * subscription, unsubscription and dispatching of a simple event */
+/**
+ * The dispatcher handles the storage of subsciptions and facilitates
+ * subscription, unsubscription and dispatching of a simple event 
+ */
 class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHandler<TArgs>> implements ISimpleEvent<TArgs>
 {
     /**
@@ -150,7 +152,9 @@ class DispatcherWrapper<THandlerType> implements ISubscribable<THandlerType>
     }
 }
 
-/** Base class for event lists classes. Implements the get and remove. */
+/**
+ * Base class for event lists classes. Implements the get and remove. 
+ */
 abstract class EventListBase<TEventDispatcher> {
 
     private _events: { [name: string]: TEventDispatcher; } = {};
@@ -236,7 +240,7 @@ abstract class EventHandlingBase<TSender, TArgs> implements IEventHandling<TSend
     subscribe(name: string, fn: IEventHandler<TSender, TArgs>): void {
         this._events.get(name).subscribe(fn);
     }
-
+    
     /**
      * Unsubscribes from the event with the specified name.
      * @param name The name of the event.
