@@ -48,6 +48,6 @@ the event is dispatched.
 - `unsubscribe(eventHandler)` - removes the subscription by removing the handler. This will stop the handler from being executed
 when the event is dispatched.
 
-Only the  `EventDispatcher<TSender, TArgs>` and `SimpleEvenDispatcher<TArgs>` have the `dispatch` event:
+Only the  `EventDispatcher<TSender, TArgs>` and `SimpleEvenDispatcher<TArgs>` have a `dispatch` method:
 
 - `dispatch(args)` - dispatches the event by calling all the registered event handler with the arguments.
