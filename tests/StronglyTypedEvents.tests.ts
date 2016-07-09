@@ -2,301 +2,326 @@
 /// <reference path="../typings/stronglytypedevents.d.ts" />
 /// <reference path="../stronglytypedevents.ts" />
 
-QUnit.test("Testing subscribe / unsubscribe - event as property", (assert) => {
+QUnit.module('Event', function () {
 
-    class MyEventTester {
-        private _myEvent: EventDispatcher<MyEventTester, string> = new EventDispatcher<MyEventTester, string>();
+    QUnit.test("Subscribe / unsubscribe - event as property", (assert) => {
 
-        get myEvent(): IEvent<MyEventTester, string> {
-            return this._myEvent.asEvent();
+        assert.expect(2);
+
+        class MyEventTester {
+            private _myEvent: EventDispatcher<MyEventTester, string> = new EventDispatcher<MyEventTester, string>();
+
+            get myEvent(): IEvent<MyEventTester, string> {
+                return this._myEvent.asEvent();
+            }
+
+            signal(str: string): void {
+                this._myEvent.dispatch(this, str);
+            }
         }
 
-        signal(str: string): void {
-            this._myEvent.dispatch(this, str);
-        }
-    }
-
-    var s = new MyEventTester();
-    var r = null;
-
-    var handler = (sender: MyEventTester, args: string) => {
-        r = args;
-    };
-
-    s.myEvent.subscribe(handler);
-    s.signal('Test1');
-    assert.equal(r, 'Test1');
-
-    s.myEvent.unsubscribe(handler);
-    s.signal('Test2');
-    assert.equal(r, 'Test1');
-});
-
-QUnit.test("Testing subscribe / unsubscribe - event on interface" , (assert) => {
-
-    interface IMyEventTester {
-        myEvent(): IEvent<IMyEventTester, string>;
-
-        signal(str: string);
-    }
-
-    class MyEventTester implements IMyEventTester {
-        private _myEvent: EventDispatcher<IMyEventTester, string> = new EventDispatcher<IMyEventTester, string>();
-
-        myEvent(): IEvent<IMyEventTester, string> {
-            return this._myEvent.asEvent();
-        }
-
-        signal(str: string): void {
-            this._myEvent.dispatch(this, str);
-        }
-    }
-
-    var s: IMyEventTester = new MyEventTester();
-    var r = null;
-
-    var handler = (sender: IMyEventTester, args: string) => {
-        r = args;
-    };
-
-    s.myEvent().subscribe(handler);
-    s.signal('Test1');
-    assert.equal(r, 'Test1');
-
-    s.myEvent().unsubscribe(handler);
-    s.signal('Test2');
-    assert.equal(r, 'Test1');
-});
-
-QUnit.test("Testing event list", (assert) => {
-
-    var events = new EventList<any, string>();
-    var result: string;
-
-    events.get('Test1').subscribe((sender, args) => result = args);
-    events.get('Test1').dispatch(this, 'Testing 123');
-    assert.equal(result, 'Testing 123');
-
-    events.get('Test2').dispatch(this, 'Testing 456');
-    assert.equal(result, 'Testing 123');
-
-    events.get('Test2').subscribe((sender, args) => result = args);
-    events.get('Test2').dispatch(this, 'Testing 789');
-    assert.equal(result, 'Testing 789');
-
-    events.get('Test3').asEvent().subscribe((sender, args) => result = args);
-    events.get('Test3').dispatch(this, 'Testing 42');
-    assert.equal(result, 'Testing 42');
-
-});
-
-QUnit.test('Testing EventHandlingBase', (assert) => {
-
-    class MyTester extends EventHandlingBase<MyTester, string> {
-
-        signal(name: string, str: string): void {
-            this.events.get(name).dispatch(this, str);
-        }
-    }
-
-    var t = new MyTester();
-    var result: string;
-
-    t.subscribe('Test1', (sender, args) => result = args);
-    t.signal('Test1', 'Testing 123');
-    assert.equal(result, 'Testing 123');
-
-    t.signal('Test2', 'Testing 456');
-    assert.equal(result, 'Testing 123');
-
-    t.subscribe('Test2', (sender, args) => result = args);
-    t.signal('Test2', 'Testing 789');
-    assert.equal(result, 'Testing 789');
-});
-
-QUnit.test("Testing subscribe / unsubscribe - simple event as property", (assert) => {
-
-    class MyEventTester {
-        private _myEvent: SimpleEventDispatcher<string> = new SimpleEventDispatcher<string>();
-
-        get myEvent(): ISimpleEvent<string> {
-            return this._myEvent;
-        }
-
-        signal(str: string): void {
-            this._myEvent.dispatch(str);
-        }
-    }
-
-    var s = new MyEventTester();
-    var r = null;
-
-    var handler = (args: string) => {
-        r = args;
-    };
-
-    s.myEvent.subscribe(handler);
-    s.signal('Test1');
-    assert.equal(r, 'Test1');
-
-    s.myEvent.unsubscribe(handler);
-    s.signal('Test2');
-    assert.equal(r, 'Test1');
-});
-
-QUnit.test("Testing subscribe / unsubscribe - simple event on interface", (assert) => {
-
-    interface IMyEventTester {
-        myEvent(): ISimpleEvent<string>;
-
-        signal(str: string);
-    }
-
-    class MyEventTester implements IMyEventTester {
-        private _myEvent: SimpleEventDispatcher<string> = new SimpleEventDispatcher<string>();
-
-        myEvent(): ISimpleEvent<string> {
-            return this._myEvent;
-        }
-
-        signal(str: string): void {
-            this._myEvent.dispatch(str);
-        }
-    }
-
-    var s: IMyEventTester = new MyEventTester();
-    var r = null;
-
-    var handler = (args: string) => {
-        r = args;
-    };
-
-    s.myEvent().subscribe(handler);
-    s.signal('Test1');
-    assert.equal(r, 'Test1');
-
-    s.myEvent().unsubscribe(handler);
-    s.signal('Test2');
-    assert.equal(r, 'Test1');
-});
-
-QUnit.test("Testing simple event list", (assert) => {
-
-    var events = new SimpleEventList<string>();
-    var result: string;
-
-    events.get('Test1').subscribe((args) => result = args);
-    events.get('Test1').dispatch('Testing 123');
-    assert.equal(result, 'Testing 123');
-
-    events.get('Test2').dispatch('Testing 456');
-    assert.equal(result, 'Testing 123');
-
-    events.get('Test2').subscribe((args) => result = args);
-    events.get('Test2').dispatch('Testing 789');
-    assert.equal(result, 'Testing 789');
-
-    events.get('Test3').asEvent().subscribe((args) => result = args);
-    events.get('Test3').dispatch('Testing 42');
-    assert.equal(result, 'Testing 42');
-
-});
-
-QUnit.test('Testing SimpleEventHandlingBase', (assert) => {
-
-    class MyTester extends SimpleEventHandlingBase<string> {
-
-        signal(name: string, str: string): void {
-            this.events.get(name).dispatch(str);
-        }
-    }
-
-    var t = new MyTester();
-    var result: string;
-
-    t.subscribe('Test1', (args) => result = args);
-    t.signal('Test1', 'Testing 123');
-    assert.equal(result, 'Testing 123');
-
-    t.signal('Test2', 'Testing 456');
-    assert.equal(result, 'Testing 123');
-
-    t.subscribe('Test2', (args) => result = args);
-    t.signal('Test2', 'Testing 789');
-    assert.equal(result, 'Testing 789');
-});
-
-QUnit.test('Testing event dispatcher', (assert) => {
-
-    class Source { }
-    class Argument { }
-
-    let dispatcher = new EventDispatcher<Source, Argument>();
-
-    var s1 = new Source();
-    var s2 = new Source();
-    var a1 = new Argument();
-    var a2 = new Argument();
-
-    dispatcher.subscribe((sender: Source, argument: Argument) => {
-        assert.equal(sender === s1, true);
-        assert.equal(sender === s2 ,false);
-
-        assert.equal(argument === a1, true);
-        assert.equal(argument === a2, false);
+        let tester = new MyEventTester();
+        let eventHandlerResult: string = null;
+
+        let handler = (sender: MyEventTester, args: string) => {
+            eventHandlerResult = args;
+        };
+
+        tester.myEvent.subscribe(handler);
+        tester.signal('Test1');
+        assert.equal(eventHandlerResult, 'Test1', 'The eventHandlerResult should be "Test1".');
+
+        tester.myEvent.unsubscribe(handler);
+        tester.signal('Test2');
+        assert.equal(eventHandlerResult, 'Test1', 'The eventHandlerResult should still be "Test1".');
     });
 
-    dispatcher.dispatch(s1, a1);
-});
+    QUnit.test("Subscribe / unsubscribe - event on interface", (assert) => {
 
+        assert.expect(2);
 
-QUnit.test('Testing simple event dispatcher', (assert) => {
+        interface IMyEventTester {
+            myEvent(): IEvent<IMyEventTester, string>;
 
-    class Argument { }
+            signal(str: string): void;
+        }
 
-    let dispatcher = new SimpleEventDispatcher< Argument>();
+        class MyEventTester implements IMyEventTester {
+            private _myEvent: EventDispatcher<IMyEventTester, string> = new EventDispatcher<IMyEventTester, string>();
 
-    var a1 = new Argument();
-    var a2 = new Argument();
+            myEvent(): IEvent<IMyEventTester, string> {
+                return this._myEvent.asEvent();
+            }
 
-    dispatcher.subscribe((argument: Argument) => {
-        assert.equal(argument === a1, true);
-        assert.equal(argument === a2, false);
+            signal(str: string): void {
+                this._myEvent.dispatch(this, str);
+            }
+        }
+
+        let tester: IMyEventTester = new MyEventTester();
+        let eventHandlerResult: string = null;
+
+        let handler = (sender: IMyEventTester, args: string) => {
+            eventHandlerResult = args;
+        };
+
+        tester.myEvent().subscribe(handler);
+        tester.signal('Test1');
+        assert.equal(eventHandlerResult, 'Test1', 'The eventHandlerResult should be "Test1".');
+
+        tester.myEvent().unsubscribe(handler);
+        tester.signal('Test2');
+        assert.equal(eventHandlerResult, 'Test1', 'The eventHandlerResult should still be "Test1".');
     });
 
-    dispatcher.dispatch(a1);
-});
+    QUnit.test("Event list", (assert) => {
 
-QUnit.test('Testing event async dispatch', (assert) => {
+        assert.expect(4);
 
-    let dispatcher = new EventDispatcher<any, number>();
+        var events = new EventList<any, string>();
+        var result: string;
 
-    let i = 0;
+        events.get('Test1').subscribe((sender: any, args: string) => result = args);
+        events.get('Test1').dispatch(this, 'Testing 123');
+        assert.equal(result, 'Testing 123', 'The result should be "Testing 123".');
 
-    dispatcher.subscribe((s, a) => {
-        i = a;
+        events.get('Test2').dispatch(this, 'Testing 456');
+        assert.equal(result, 'Testing 123', 'The result should still be "Testing 123".');
 
-        assert.equal(i, 1);
+        events.get('Test2').subscribe((sender: any, args: string) => result = args);
+        events.get('Test2').dispatch(this, 'Testing 789');
+        assert.equal(result, 'Testing 789', 'The result should be "Testing 789".');
+
+        events.get('Test3').asEvent().subscribe((sender: any, args: string) => result = args);
+        events.get('Test3').dispatch(this, 'Testing 42');
+        assert.equal(result, 'Testing 42', 'The result should be "Testing 42".');
     });
 
-    dispatcher.dispatchAsync(null, 1);
+    QUnit.test('EventHandlingBase', (assert) => {
 
-    assert.equal(i, 0);
-});
+        assert.expect(3);
 
-QUnit.test('Testing simple event async dispatch', (assert) => {
+        class MyTester extends EventHandlingBase<MyTester, string> {
 
-    let dispatcher = new SimpleEventDispatcher<number>();
+            signal(name: string, str: string): void {
+                this.events.get(name).dispatch(this, str);
+            }
+        }
 
-    let i = 0;
+        var t = new MyTester();
+        var result: string;
 
-    dispatcher.subscribe((a) => {
-        i = a;
+        t.subscribe('Test1', (sender: MyTester, args: string) => result = args);
+        t.signal('Test1', 'Testing 123');
+        assert.equal(result, 'Testing 123', 'The result should be "Testing 123".');
 
-        assert.equal(i, 1);
+        t.signal('Test2', 'Testing 456');
+        assert.equal(result, 'Testing 123', 'The result should still be "Testing 123".');
+
+        t.subscribe('Test2', (sender: MyTester, args: string) => result = args);
+        t.signal('Test2', 'Testing 789');
+        assert.equal(result, 'Testing 789', 'The result should be "Testing 789".');
     });
 
-    dispatcher.dispatchAsync(1);
+    QUnit.test('Dispatcher', (assert) => {
 
-    assert.equal(i, 0);
+        assert.expect(4);
+
+        class Source { constructor(public name: string) { } }
+        class Argument { constructor(public name: string) { } }
+
+        let dispatcher = new EventDispatcher<Source, Argument>();
+
+        var s1 = new Source('s1');
+        var s2 = new Source('s2');
+        var a1 = new Argument('a1');
+        var a2 = new Argument('a2');
+
+        dispatcher.subscribe((sender: Source, argument: Argument) => {
+            assert.deepEqual(sender, s1, "Sender should be s1.");
+            assert.notDeepEqual(sender, s2, "Sender should not be s2.");
+
+            assert.deepEqual(argument, a1, 'Argument should be a1.');
+            assert.notDeepEqual(argument, a2, 'Argument should not be a2.');
+        });
+
+        dispatcher.dispatch(s1, a1);
+    });
+
+    QUnit.test('Async dispatch', (assert) => {
+
+        assert.expect(2);
+
+        let done = assert.async();
+        let dispatcher = new EventDispatcher<any, number>();
+
+        let i = 0;
+
+        dispatcher.subscribe((s, a) => {
+            i = a;
+            assert.equal(i, 1, 'i should be 1.');
+            done();
+        });
+
+        dispatcher.dispatchAsync(null, 1);
+        assert.equal(i, 0, 'Because of async dispatch, i should be 0.');
+    });
+});
+
+QUnit.module('Simple event', function () {
+
+    QUnit.test("Subscribe / unsubscribe - simple event as property", (assert) => {
+
+        assert.expect(2);
+
+        class MyEventTester {
+            private _myEvent: SimpleEventDispatcher<string> = new SimpleEventDispatcher<string>();
+
+            get myEvent(): ISimpleEvent<string> {
+                return this._myEvent;
+            }
+
+            signal(str: string): void {
+                this._myEvent.dispatch(str);
+            }
+        }
+
+        let s = new MyEventTester();
+        let result: string = null;
+
+        var handler = (args: string) => {
+            result = args;
+        };
+
+        s.myEvent.subscribe(handler);
+        s.signal('Test1');
+        assert.equal(result, 'Test1', 'Result should be "Test1".');
+
+        s.myEvent.unsubscribe(handler);
+        s.signal('Test2');
+        assert.equal(result, 'Test1', 'Result should still be "Test1" because of unsubscribe.');
+    });
+
+    QUnit.test("Subscribe / unsubscribe - simple event on interface", (assert) => {
+
+        assert.expect(2);
+
+        interface IMyEventTester {
+            myEvent(): ISimpleEvent<string>;
+
+            signal(str: string);
+        }
+
+        class MyEventTester implements IMyEventTester {
+            private _myEvent: SimpleEventDispatcher<string> = new SimpleEventDispatcher<string>();
+
+            myEvent(): ISimpleEvent<string> {
+                return this._myEvent;
+            }
+
+            signal(str: string): void {
+                this._myEvent.dispatch(str);
+            }
+        }
+
+        let s: IMyEventTester = new MyEventTester();
+        let result: string = null;
+
+        var handler = (args: string) => {
+            result = args;
+        };
+
+        s.myEvent().subscribe(handler);
+        s.signal('Test1');
+        assert.equal(result, 'Test1', 'Result should be "Test1".');
+
+        s.myEvent().unsubscribe(handler);
+        s.signal('Test2');
+        assert.equal(result, 'Test1', 'Result should still be "Test1" because of unsubscribe.');
+    });
+
+    QUnit.test("Simple event list", (assert) => {
+
+        assert.expect(4);
+
+        var events = new SimpleEventList<string>();
+        var result: string;
+
+        events.get('Test1').subscribe((args) => result = args);
+        events.get('Test1').dispatch('Testing 123');
+        assert.equal(result, 'Testing 123', 'Result should be "Testing 123".');
+
+        events.get('Test2').dispatch('Testing 456');
+        assert.equal(result, 'Testing 123', 'Result should still be "Testing 123", because of the unsubscribe.');
+
+        events.get('Test2').subscribe((args) => result = args);
+        events.get('Test2').dispatch('Testing 789');
+        assert.equal(result, 'Testing 789', 'Result should be "Testing 789".');
+
+        events.get('Test3').asEvent().subscribe((args) => result = args);
+        events.get('Test3').dispatch('Testing 42');
+        assert.equal(result, 'Testing 42', 'Result of dispatch of interface should be "Testing 42".');
+    });
+
+    QUnit.test('SimpleEventHandlingBase', (assert) => {
+
+        assert.expect(3);
+
+        class MyTester extends SimpleEventHandlingBase<string> {
+
+            signal(name: string, str: string): void {
+                this.events.get(name).dispatch(str);
+            }
+        }
+
+        var t = new MyTester();
+        var result: string;
+
+        t.subscribe('Test1', (args: string) => result = args);
+        t.signal('Test1', 'Testing 123');
+        assert.equal(result, 'Testing 123', 'The result should be "Testing 123".');
+
+        t.signal('Test2', 'Testing 456');
+        assert.equal(result, 'Testing 123', 'The result should still be "Testing 123".');
+
+        t.subscribe('Test2', (args: string) => result = args);
+        t.signal('Test2', 'Testing 789');
+        assert.equal(result, 'Testing 789', 'The result should be "Testing 789".');
+    });
+
+    QUnit.test('Dispatcher', (assert) => {
+
+        assert.expect(2);
+
+        class Argument { constructor(public name: string) { } }
+
+        let dispatcher = new SimpleEventDispatcher<Argument>();
+
+        var a1 = new Argument('a1');
+        var a2 = new Argument('a2');
+
+        dispatcher.subscribe((argument: Argument) => {
+            assert.deepEqual(argument, a1, 'Argument should be a1.');
+            assert.notDeepEqual(argument, a2, 'Argument should not be a2.');
+        });
+
+        dispatcher.dispatch(a1);
+    });
+
+    QUnit.test('Async dispatch', (assert) => {
+
+        let done = assert.async();
+        let dispatcher = new SimpleEventDispatcher<number>();
+
+        let i = 0;
+
+        dispatcher.subscribe((a) => {
+            i = a;
+            assert.equal(i, 1, 'i should be 1.');
+            done();
+        });
+
+        dispatcher.dispatchAsync(1);
+        assert.equal(i, 0, 'Because of async dispatch, i should be 0.');
+    });
 });
