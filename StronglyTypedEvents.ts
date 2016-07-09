@@ -1,7 +1,7 @@
-/// <reference path="typings/stronglytypedevents-0.2.0.d.ts" />
+/// <reference path="typings/stronglytypedevents.d.ts" />
 
 /*!
- * Strongly Typed Events for TypeScript
+ * Strongly Typed Events for TypeScript - 0.2.1
  * https://github.com/KeesCBakker/StronlyTypedEvents/
  * http://keestalkstech.com
  *
