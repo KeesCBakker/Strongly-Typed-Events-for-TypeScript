@@ -1,4 +1,7 @@
-﻿class Stopwatch {
+﻿/// <reference path="../stronglytypedevents.ts" />
+/// <reference path="../typings/stronglytypedevents.d.ts" />
+
+class Stopwatch {
 
     private _events: EventList<Stopwatch, StopwatchEventArgs> = new EventList<Stopwatch, StopwatchEventArgs>();
     private _ticks: number = 0;
