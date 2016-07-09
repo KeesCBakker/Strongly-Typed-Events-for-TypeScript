@@ -1,3 +1,6 @@
 *.js
 *.sln
 *.config
+.vscode
+tsconfig.json
+*.map
