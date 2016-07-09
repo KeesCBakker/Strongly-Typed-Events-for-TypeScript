@@ -1,5 +1,5 @@
 /*!
- * Strongly Typed Events for TypeScript
+ * Strongly Typed Events for TypeScript - 0.2.1
  * https://github.com/KeesCBakker/StronlyTypedEvents/
  * http://keestalkstech.com
  *
