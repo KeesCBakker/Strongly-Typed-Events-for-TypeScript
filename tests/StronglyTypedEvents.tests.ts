@@ -2,7 +2,7 @@
 /// <reference path="../typings/stronglytypedevents.d.ts" />
 /// <reference path="../stronglytypedevents.ts" />
 
-QUnit.test("Testing subscribe / unsubsribe - event as property", (assert) => {
+QUnit.test("Testing subscribe / unsubscribe - event as property", (assert) => {
 
     class MyEventTester {
         private _myEvent: EventDispatcher<MyEventTester, string> = new EventDispatcher<MyEventTester, string>();
@@ -32,7 +32,7 @@ QUnit.test("Testing subscribe / unsubsribe - event as property", (assert) => {
     assert.equal(r, 'Test1');
 });
 
-QUnit.test("Testing subscribe / unsubsribe - event on interface" , (assert) => {
+QUnit.test("Testing subscribe / unsubscribe - event on interface" , (assert) => {
 
     interface IMyEventTester {
         myEvent(): IEvent<IMyEventTester, string>;
@@ -114,7 +114,7 @@ QUnit.test('Testing EventHandlingBase', (assert) => {
     assert.equal(result, 'Testing 789');
 });
 
-QUnit.test("Testing subscribe / unsubsribe - simple event as property", (assert) => {
+QUnit.test("Testing subscribe / unsubscribe - simple event as property", (assert) => {
 
     class MyEventTester {
         private _myEvent: SimpleEventDispatcher<string> = new SimpleEventDispatcher<string>();
@@ -144,7 +144,7 @@ QUnit.test("Testing subscribe / unsubsribe - simple event as property", (assert)
     assert.equal(r, 'Test1');
 });
 
-QUnit.test("Testing subscribe / unsubsribe - simple event on interface", (assert) => {
+QUnit.test("Testing subscribe / unsubscribe - simple event on interface", (assert) => {
 
     interface IMyEventTester {
         myEvent(): ISimpleEvent<string>;
