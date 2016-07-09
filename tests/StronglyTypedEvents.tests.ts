@@ -1,6 +1,6 @@
 /// <reference path="../typings/qunit.d.ts" />
-/// <reference path="../typings/stronglytypedevents-0.2.0.d.ts" />
-/// <reference path="../stronglytypedevents-0.2.0.ts" />
+/// <reference path="../typings/stronglytypedevents.d.ts" />
+/// <reference path="../stronglytypedevents.ts" />
 
 QUnit.test("Testing subscribe / unsubsribe - event as property", (assert) => {
 
