@@ -1,6 +1,12 @@
-# Strongly Typed Events for TypeScript
+# Strongly Typed Events for TypeScript - 0.3.0
 Add the power of events to your TypeScript classes (and interfaces).
 <img height="300" src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
+
+## Event types
+This project gives you the follwing event types:
+- `IEvent<TSender, TArgs>` - styled after the way .Net implements events. The sender and the argument are generic, so your code can be strong typed. (Since 0.1)
+- `ISimpleEvent<TArgs>` - for when you need something simpler with only a generic argument. (Since 0.2)
+- `ISignal` - for when no data is needed, but the firing of the event is enough. (Since 0.3)
 
 ## Events made easy!
 This project will help you to add events, event handling en event dispatching to your classes. To get you started, check:
@@ -96,16 +102,25 @@ downloader.download('https://keestalkstech.com/wp-content/uploads/2016/05/hashin
 
 Check the <a href="documentation">documentation</a> or the <a href="examples">examples</a> for more information.
 
+## History
+
+#### Version 0.3
+**Introduced signal &ndash; events that contain no data and just fire.** The unit tests now support modules. The following objects and features are present in this version:
+- `ISignal` &ndash; Event handler function for a signal.
+- `SignalDispatcher` &ndash; Dispatcher implementation for signals. Can be used to subscribe, 
+unsubscribe or dispatch events. Use the ToEvent() method to expose the event.
+- `SignalList` &ndash; Storage class for multiple signals that are accessible by name. Dispatchers are automatically created.
+- `SignalHandlingBase` &ndash; Extends objects with signal handling capabilities.
 
 #### Version 0.2
 **Introduced simple events &ndash; events that only use an arguments object.** I've added many base classes and 
 interfaces to make sure the base for both type of events are the same. The following objects and features are present in this version:
 
-- `ISimpleEvent<TSender, TArgs>` &ndash; Event handler function with a generic argument
-- `SimpleEventDispatcher<TSender, TArgs>` &ndash; Dispatcher implementation for simple events. Can be used to subscribe, 
+- `ISimpleEvent<TArgs>` &ndash; Event handler function with a generic argument.
+- `SimpleEventDispatcher<TArgs>` &ndash; Dispatcher implementation for simple events. Can be used to subscribe, 
 unsubscribe or dispatch events. Use the ToEvent() method to expose the event
-- `SimpleEventList<TSender, TArgs>` &ndash; Storage class for multiple events that are accessible by name. Events dispatchers are automatically created.
-- `SimpleEventHandlingBase<TSender, TArgs>` &ndash; Extends objects with simple event handling capabilities.
+- `SimpleEventList<TArgs>` &ndash; Storage class for multiple events that are accessible by name. Events dispatchers are automatically created.
+- `SimpleEventHandlingBase<TArgs>` &ndash; Extends objects with simple event handling capabilities.
 - Added an `asEvent` method to the dispatchers that will expose only the subsribe / unsubscribe methods. This will prevent
 the `dispatch` method from being exposed through the events.
 - Added an `dispatchAsync` method to the dispatchers that will execute all subsriptions asynchronously. 
