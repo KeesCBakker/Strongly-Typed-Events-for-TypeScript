@@ -325,3 +325,149 @@ QUnit.module('Simple event', function () {
         assert.equal(i, 0, 'Because of async dispatch, i should be 0.');
     });
 });
+
+
+QUnit.module('Signal', function () {
+
+    QUnit.test("Subscribe / unsubscribe - signal as property", (assert) => {
+
+        assert.expect(2);
+
+        class MyEventTester {
+            private _myEvent = new SignalDispatcher();
+
+            get myEvent(): ISignal {
+                return this._myEvent;
+            }
+
+            signal(): void {
+                this._myEvent.dispatch();
+            }
+        }
+
+        let s = new MyEventTester();
+        let i = 0;
+
+        var handler = () => {
+            i++;
+        };
+
+        s.myEvent.subscribe(handler);
+        s.signal();
+        assert.equal(i, 1, 'i should be 1.');
+
+        s.myEvent.unsubscribe(handler);
+        s.signal();
+        assert.equal(i, 1, 'i should still be 1 because of unsubscribe.');
+    });
+
+    QUnit.test("Subscribe / unsubscribe - signal on interface", (assert) => {
+
+        assert.expect(2);
+
+        interface IMyEventTester {
+            myEvent(): ISignal;
+
+            signal();
+        }
+
+        class MyEventTester implements IMyEventTester {
+            private _myEvent = new SignalDispatcher();
+
+            myEvent(): ISignal {
+                return this._myEvent;
+            }
+
+            signal(): void {
+                this._myEvent.dispatch();
+            }
+        }
+
+        let s: IMyEventTester = new MyEventTester();
+        let i = 0;
+
+        var handler = () => {
+            i++;
+        };
+
+        s.myEvent().subscribe(handler);
+        s.signal();
+        assert.equal(i, 1, 'i should be 1.');
+
+        s.myEvent().unsubscribe(handler);
+        s.signal();
+        assert.equal(i, 1, 'i should still be 1 because of unsubscribe.');
+    });
+
+    QUnit.test("Singal list", (assert) => {
+
+        assert.expect(4);
+
+        let i = 10;
+        let list = new SignalList();
+
+        list.get("one").subscribe(()=>{
+            i += 20;
+        });
+
+        list.get("two").subscribe(()=>{
+            i += 40;
+        });
+
+        list.get("one").dispatch();
+        assert.equal(i, 30, 'i should be 30.');
+
+        list.get('two').dispatch();
+        assert.equal(i, 70, 'i should be 70.');
+
+        list.remove('two');
+        list.get('two').dispatch();
+        assert.equal(i, 70, 'i should still be 70, because event handler two was removed.');
+
+        list.get("one").dispatch();
+        assert.equal(i, 90, 'i should be 90.');
+    });
+
+    QUnit.test('SignalHandlingBase', (assert) => {
+
+        assert.expect(3);
+
+        class MyTester extends SignalHandlingBase {
+
+            signal(name: string): void {
+                this.events.get(name).dispatch();
+            }
+        }
+
+        let t = new MyTester();
+        let result = '';
+
+        t.subscribe('Test1', () => result = 'Testing 123');
+        t.signal('Test1');
+        assert.equal(result, 'Testing 123', 'The result should be "Testing 123".');
+
+        t.signal('Test2');
+        assert.equal(result, 'Testing 123', 'The result should still be "Testing 123".');
+
+        t.subscribe('Test2', () => result = 'Testing 789');
+        t.signal('Test2');
+        assert.equal(result, 'Testing 789', 'The result should be "Testing 789".');
+    });
+
+    QUnit.test('Async dispatch', (assert) => {
+
+        let done = assert.async();
+        let dispatcher = new SignalDispatcher();
+
+        let i = 0;
+
+        dispatcher.subscribe(() => {
+            i = 1;
+            assert.equal(i, 1, 'i should be 1.');
+            done();
+        });
+
+        dispatcher.dispatchAsync();
+        assert.equal(i, 0, 'Because of async dispatch, i should be 0.');
+    });
+});

@@ -1,7 +1,7 @@
 /// <reference path="typings/stronglytypedevents.d.ts" />
 
 /*!
- * Strongly Typed Events for TypeScript - 0.2.1
+ * Strongly Typed Events for TypeScript - 0.3.0
  * https://github.com/KeesCBakker/StronlyTypedEvents/
  * http://keestalkstech.com
  *
@@ -107,7 +107,7 @@ class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHandler<TA
     dispatchAsync(args: TArgs): void {
 
         for (let handler of this._subscriptions) {
-            this.excuteAsync( args, handler);
+            this.excuteAsync(args, handler);
         }
     }
 
@@ -116,6 +116,30 @@ class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHandler<TA
     }
 }
 
+class SignalDispatcher extends DispatcherBase<ISignalHandler> implements ISignal {
+    /**
+     * Dispatches the signal.
+     */
+    dispatch(): void {
+        for (let handler of this._subscriptions) {
+            handler();
+        }
+    }
+
+    /**
+     * Dispatches the signal threaded.
+     */
+    dispatchAsync(): void {
+
+        for (let handler of this._subscriptions) {
+            this.excuteAsync(handler);
+        }
+    }
+
+    private excuteAsync(handler: ISignalHandler): void {
+        window.setTimeout(() => handler(), 0);
+    }
+}
 
 /**
  * Hides the implementation of the event dispatcher. Will expose methods that
@@ -218,6 +242,21 @@ class SimpleEventList<TArgs> extends EventListBase<SimpleEventDispatcher<TArgs>>
     }
 }
 
+
+/**
+ * Storage class for multiple signal events that are accessible by name.
+ * Events dispatchers are automatically created.
+ */
+class SignalList extends EventListBase<SignalDispatcher> {
+
+    /**
+     * Creates a new dispatcher instance.
+     */
+    protected createDispatcher(): SignalDispatcher {
+        return new SignalDispatcher();
+    }
+}
+
 /**
  * Extends objects with event handling capabilities.
  */
@@ -240,7 +279,7 @@ abstract class EventHandlingBase<TSender, TArgs> implements IEventHandling<TSend
     subscribe(name: string, fn: IEventHandler<TSender, TArgs>): void {
         this._events.get(name).subscribe(fn);
     }
-    
+
     /**
      * Unsubscribes from the event with the specified name.
      * @param name The name of the event.
@@ -277,6 +316,36 @@ abstract class SimpleEventHandlingBase<TArgs> implements ISimpleEventHandling<TA
      * @param fn The event handler.
      */
     unsubscribe(name: string, fn: ISimpleEventHandler<TArgs>): void {
+        this._events.get(name).unsubscribe(fn);
+    }
+}
+
+/**
+ * Extends objects with signal event handling capabilities.
+ */
+abstract class SignalHandlingBase implements ISignalHandling {
+
+    private _events = new SignalList();
+
+    protected get events(): SignalList {
+        return this._events;
+    }
+
+    /**
+     * Subscribes to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    subscribe(name: string, fn: ISignalHandler): void {
+        this._events.get(name).subscribe(fn);
+    }
+
+    /**
+     * Unsubscribes from the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    unsubscribe(name: string, fn: ISignalHandler): void {
         this._events.get(name).unsubscribe(fn);
     }
 }

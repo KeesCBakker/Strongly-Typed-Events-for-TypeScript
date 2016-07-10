@@ -1,5 +1,5 @@
 /*!
- * Strongly Typed Events for TypeScript - 0.2.1
+ * Strongly Typed Events for TypeScript - 0.3.0
  * https://github.com/KeesCBakker/StronlyTypedEvents/
  * http://keestalkstech.com
  *
@@ -26,6 +26,13 @@ interface ISimpleEventHandler<TArgs> {
       * @args The argument.
       */
     (args: TArgs): void
+}
+
+/**
+ * Event handler function without arguments
+ */
+interface ISignalHandler {
+    (): void;
 }
 
 /**
@@ -58,6 +65,14 @@ interface IEvent<TSender, TArgs> extends ISubscribable<IEventHandler<TSender, TA
 interface ISimpleEvent<TArgs> extends ISubscribable<ISimpleEventHandler<TArgs>> {
 }
 
+/**
+ * Models a signal. This type of events has no arguments.
+ * @interface ISignalHandler
+ * @extends {ISubscribable<ISignalHandler>}
+ */
+interface ISignal extends ISubscribable<ISignalHandler> {
+}
+
 /** 
  * Base interface for event handling.
  */
@@ -85,7 +100,13 @@ interface IEventHandling<TSender, TArgs> extends IBaseEventHandling<IEventHandle
 }
 
 /**
- * Indicates the object is capable of handling named events.
+ * Indicates the object is capable of handling named simple events.
  */
 interface ISimpleEventHandling<TArgs> extends IBaseEventHandling<ISimpleEventHandler<TArgs>> {
+}
+
+/**
+ * Indicates the object is capable of handling named signals.
+ */
+interface ISignalHandling extends IBaseEventHandling<ISignalHandler>{
 }
