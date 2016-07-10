@@ -1,12 +1,12 @@
-# Strongly Typed Events for TypeScript - 0.3.0
-Add the power of events to your TypeScript classes (and interfaces).
+# Strongly Typed Events for TypeScript &ndash; 0.3.0
+Add the power of events to your TypeScript projects.
 <img height="300" src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
 
 ## Event types
 This project gives you the follwing event types:
-- `IEvent<TSender, TArgs>` - styled after the way .Net implements events. The sender and the argument are generic, so your code can be strong typed. (Since 0.1)
-- `ISimpleEvent<TArgs>` - for when you need something simpler with only a generic argument. (Since 0.2)
-- `ISignal` - for when no data is needed, but the firing of the event is enough. (Since 0.3)
+- `IEvent<TSender, TArgs>` - styled after the way .Net implements events. The sender and the argument are generic, so your code is strong typed. (Since 0.1)
+- `ISimpleEvent<TArgs>` - when you need something simpler with only a generic argument. (Since 0.2)
+- `ISignal` - for when no data is needed, just the firing of the event is enough. (Since 0.3)
 
 ## Events made easy
 Code tells more than words, so let's give an example that uses all types:
@@ -14,6 +14,7 @@ Code tells more than words, so let's give an example that uses all types:
 ```
 class Clock {
 
+    //implement the events as private dispatchers
     private _onTick = new SignalDispatcher();
     private _onSequenceTick = new SimpleEventDispatcher<number>();
     private _onClockTick = new EventDispatcher<Clock, number>();
@@ -29,11 +30,14 @@ class Clock {
     private Tick(): void {
         this._ticks += 1;
 
+        //dispath the events
         this._onTick.dispatch();
         this._onSequenceTick.dispatch(this._ticks);
         this._onClockTick.dispatch(this, this._ticks);
     }
 
+    //expose the events as properties:
+    
     public get onTick(): ISignal {
         return this._onTick.asEvent();
     }
@@ -77,7 +81,7 @@ This project will help you to add events, event handling en event dispatching to
 ## History
 
 #### Version 0.3
-**Introduced signal &ndash; events that contain no data and just fire.** The unit tests now support modules. The following objects and features are present in this version:
+Introduced signal &ndash; events that contain no data and just fire. The unit tests now support modules. The following objects and features are present in this version:
 - `ISignal` &ndash; Event handler function for a signal.
 - `SignalDispatcher` &ndash; Dispatcher implementation for signals. Can be used to subscribe, 
 unsubscribe or dispatch events. Use the ToEvent() method to expose the event.
@@ -85,7 +89,7 @@ unsubscribe or dispatch events. Use the ToEvent() method to expose the event.
 - `SignalHandlingBase` &ndash; Extends objects with signal handling capabilities.
 
 #### Version 0.2
-**Introduced simple events &ndash; events that only use an arguments object.** I've added many base classes and 
+Introduced simple events &ndash; events that only use an arguments object. I've added many base classes and 
 interfaces to make sure the base for both type of events are the same. The following objects and features are present in this version:
 
 - `ISimpleEvent<TArgs>` &ndash; Event handler function with a generic argument.
