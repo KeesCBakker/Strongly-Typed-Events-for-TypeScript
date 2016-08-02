@@ -1,16 +1,17 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-        "module": "es2015",
+        "declaration": true,
+        "module": "commonjs",
         "noImplicitAny": false,
-        "removeComments": true,
+        "removeComments": false,
         "preserveConstEnums": true,
         "sourceMap": false,
         "target": "es5"
     },
     "files": [
         "StronglyTypedEvents.ts",
-        "tests/StronglyTypedEvents.tests.ts",
+        "test/test.ts",
         "examples/example.clock.ts",
         "examples/example.imageloader.ts",
         "examples/example.pulse-generator.ts",

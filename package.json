@@ -1,0 +1,38 @@
+{
+  "name": "strongly-typed-events",
+  "version": "0.3.2",
+  "description": "Add the power of events to your (TypeScript) projects!",
+  "main": "StronglyTypedEvents.js",
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript.git"
+  },
+  "keywords": [
+    "events",
+    "sender",
+    "events",
+    "args",
+    "strongly",
+    "typed"
+  ],
+  "author": "Kees C. Bakker (https://keestalkstech.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/issues"
+  },
+  "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=4.2.4"
+  }
+}
