@@ -8,8 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha --reporter spec",
-    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
+    "test": "node_modules/.bin/mocha --reporter spec"
   },
   "repository": {
     "type": "git",
