@@ -27,4 +27,4 @@ class DynamicEventsExampleArgs
 }
 ```
 
-The `dispatch` method is for demo purposes and doesn't need to be exposed. Normally a class would keep the dispatch a secret.
+The `dispatch` method is for demo purposes and doesn't need to be exposed. Normally a class would keep the dispatch private.

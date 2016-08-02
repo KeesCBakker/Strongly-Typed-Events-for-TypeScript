@@ -10,7 +10,7 @@ The system works with the following classes and interfaces:
 - **Handlers**<br/> This is how the the outside world subscribes to an event. It defines the function signature.
 	- `IEventHandler<TSender, TArgs>` &ndash; `(sender: TSender, args: TArgs): void` &ndash; this handler is for events.
 	- `ISimpleEventHandler<TArgs>` &ndash; `(args: TArgs): void` &ndash; this handler is for simple events.
-	- `ISimpleEventHandler` &ndash; `(): void` &nsash; this handler is for signals.
+	- `ISignalHandler` &ndash; `(): void` &ndash; this handler is for signals.
 <br/><br/>
 - **Dispatchers**<br/>This is how events are implemented. It implements a `subscribe`, `unsubscribe` and provides a
 `dispatch` method for dispatching the events. Dispatchers make the whole system work.
