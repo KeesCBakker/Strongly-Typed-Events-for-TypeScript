@@ -1,6 +1,3 @@
-/// <reference path="../stronglytypedevents.ts" />
-/// <reference path="../typings/stronglytypedevents.d.ts" />
-
 window.onload = function () {
 
     let generator = new PulseGenerator(1);

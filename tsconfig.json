@@ -1,0 +1,20 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "module": "es2015",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": false,
+        "target": "es5"
+    },
+    "files": [
+        "StronglyTypedEvents.ts",
+        "tests/StronglyTypedEvents.tests.ts",
+        "examples/example.clock.ts",
+        "examples/example.imageloader.ts",
+        "examples/example.pulse-generator.ts",
+        "examples/example.stopwatch.ts",
+        "examples/example.trafficlight.ts"
+    ]
+}

@@ -1,6 +1,5 @@
-*.js
 *.sln
 *.config
 .vscode
-tsconfig.json
-*.map
+examples/*.js
+examples/*.map

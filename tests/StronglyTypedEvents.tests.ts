@@ -1,6 +1,5 @@
 /// <reference path="../typings/qunit.d.ts" />
-/// <reference path="../typings/stronglytypedevents.d.ts" />
-/// <reference path="../stronglytypedevents.ts" />
+/// <reference path="../StronglyTypedEvents.ts" />
 
 QUnit.module('Event', function () {
 

@@ -1,6 +1,3 @@
-/// <reference path="../stronglytypedevents.ts" />
-/// <reference path="../typings/stronglytypedevents.d.ts" />
-
 class TrafficLight {
     private _signals = new SignalList();
     private _color = 'red';

@@ -1,7 +1,4 @@
-﻿/// <reference path="../stronglytypedevents.ts" />
-/// <reference path="../typings/stronglytypedevents.d.ts" />
-
-window.onload = () => {
+﻿window.onload = () => {
 
     let downloader = new ImageDownloader();
 
