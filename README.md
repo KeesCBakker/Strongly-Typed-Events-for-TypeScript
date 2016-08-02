@@ -1,4 +1,4 @@
-# Strongly Typed Events for TypeScript &ndash; 0.3.0
+# Strongly Typed Events for TypeScript &ndash; 0.3.2
 Add the power of events to your TypeScript projects.
 <img height="300" src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
 
