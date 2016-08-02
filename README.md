@@ -1,6 +1,8 @@
-# Strongly Typed Events for TypeScript &ndash; 0.3.2
+# Strongly Typed Events for TypeScript &ndash; 0.3.3
 Add the power of events to your TypeScript projects.
-<img height="300" src="http://keestalkstech.com/wp-content/uploads/2016/03/lightning-bolt-1203953_1280-590x332.png" />
+
+[![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
+[![npm version](https://badge.fury.io/js/strongly-typed-events.svg)](https://badge.fury.io/js/strongly-typed-events)
 
 ## Event types
 This project gives you the follwing event types:
