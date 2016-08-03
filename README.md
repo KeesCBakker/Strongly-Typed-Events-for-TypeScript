@@ -70,6 +70,31 @@ clock.onClockTick.subscribe((c, n) => console.log(`${c.name} ticked ${n} times.`
 
 Check the <a href="documentation">documentation</a> or the <a href="examples">examples</a> for more information.
 
+## Node me!
+Using TypeScript and Node.js? Great, we've got a package for you!
+
+```
+npm i strongly-typed-events
+```
+
+Using it is easy:
+
+```
+/// <reference path="node_modules/strongly-typed-events/StronglyTypedEvents.d.ts" />
+
+let _e = require('strongly-typed-events') as IStronglyTypedEvents;
+
+export class TfsBuildClient {
+
+    private _notifier = _e.createEventDispatcher<TfsBuildClient, IBuildData>();
+
+    public get onNotify() : IEvent<TfsBuildClient, IBuildData>{
+        return this._notifier.asEvent();
+    }
+}
+```
+<a href="documentation/HowToUseInNodeJs.md#exposed-classes-and-methods">Read more about what objects are exposed.<a/>
+
 ## Documentation
 This project will help you to add events, event handling en event dispatching to your classes. To get you started, check:
 
@@ -79,6 +104,7 @@ This project will help you to add events, event handling en event dispatching to
 - <a href="documentation/HowToAddDynamicNamedEeventsToAClass.md">How to add dynamic named events to a class?</a>
 - <a href="documentation/HowToDoAsynchronousEventDispatching.md">How to do asynchronous event dispatching?</a>
 - <a href="documentation/OnEventsDispatchersAndLists.md">On events, dispatchers and lists (a general explanation of the system)</a>
+- <a href="documentation/HowToUseInNodeJs.md">How to use Strongly Typed Events in Node.js?</a>
 
 ## History
 
