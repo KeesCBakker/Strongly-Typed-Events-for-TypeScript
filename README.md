@@ -70,6 +70,30 @@ clock.onClockTick.subscribe((c, n) => console.log(`${c.name} ticked ${n} times.`
 
 Check the <a href="documentation">documentation</a> or the <a href="examples">examples</a> for more information.
 
+## Node me!
+Using TypeScript and Node.js? Great, we've got a package for you!
+
+```
+npm i strongly-typed-events
+```
+
+Using it is easy:
+
+```
+/// <reference path="node_modules/strongly-typed-events/StronglyTypedEvents.d.ts" />
+
+let _e = require('strongly-typed-events') as IStronglyTypedEvents;
+
+export class TfsBuildClient {
+
+    private _notifier = _e.createEventDispatcher<TfsBuildClient, IBuildData>();
+
+    public get onNotify() : IEvent<TfsBuildClient, IBuildData>{
+        return this._notifier.asEvent();
+    }
+}
+```
+
 ## Documentation
 This project will help you to add events, event handling en event dispatching to your classes. To get you started, check:
 
