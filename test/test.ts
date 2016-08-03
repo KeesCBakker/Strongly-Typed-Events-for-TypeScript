@@ -5,8 +5,10 @@
 
 'use strict';
 
-let expect = require('chai').expect as Chai.ExpectStatic;
-let _e = require('../StronglyTypedEvents') as IStronglyTypedEvents;
+var r = typeof require !== 'undefined', w = window as any;
+
+var expect:Chai.ExpectStatic = r ? require('chai').expect : w.chai.expect; 
+var _e: IStronglyTypedEvents = r ? require('../StronglyTypedEvents') : w;
 
 describe("Strongly Typed Events", function () {
 

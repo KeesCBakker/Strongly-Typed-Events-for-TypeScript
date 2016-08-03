@@ -8,8 +8,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var expect = require('chai').expect;
-var _e = require('../StronglyTypedEvents');
+var r = typeof require !== 'undefined', w = window;
+var expect = r ? require('chai').expect : w.chai.expect;
+var _e = r ? require('../StronglyTypedEvents') : w;
 describe("Strongly Typed Events", function () {
     describe("Event", function () {
         it("Subscribe / unsubscribe - event as property", function () {
