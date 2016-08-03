@@ -1,4 +1,4 @@
-#How to use Strongly Typed Events in Node.js
+#How to use Strongly Typed Events in Node.js?
 We've got a node package for you! Install it the usual way:
 ```
 npm i strongly-typed-events
@@ -20,8 +20,7 @@ export class TfsBuildClient {
 }
 ```
 ## Exposed classes and methods
-
-The following stuff is exposed through the module exports:
+The following objects are exposed through the module exports:
 
 ```
     createEventDispatcher: <TSender, TArgs>() => EventDispatcher<TSender, TArgs>;
