@@ -8,9 +8,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var r = typeof require !== 'undefined', w = window;
-var expect = r ? require('chai').expect : w.chai.expect;
-var _e = r ? require('../StronglyTypedEvents') : w;
+var r = typeof require !== 'undefined';
+var expect = r ? require('chai').expect : window.chai.expect;
+var _e = r ? require('../StronglyTypedEvents') : window;
 describe("Strongly Typed Events", function () {
     describe("Event", function () {
         it("Subscribe / unsubscribe - event as property", function () {
@@ -145,7 +145,7 @@ describe("Strongly Typed Events", function () {
         });
     });
     describe("Simple Event", function () {
-        it("Subscribe / unsubscribe - event as property", function () {
+        it("Subscribe / unsubscribe - simple event as property", function () {
             var MyEventTester = (function () {
                 function MyEventTester() {
                     this._myEvent = new _e.SimpleEventDispatcher();
@@ -162,19 +162,19 @@ describe("Strongly Typed Events", function () {
                 };
                 return MyEventTester;
             }());
-            var tester = new MyEventTester();
-            var eventHandlerResult = null;
+            var s = new MyEventTester();
+            var result = null;
             var handler = function (args) {
-                eventHandlerResult = args;
+                result = args;
             };
-            tester.myEvent.subscribe(handler);
-            tester.signal('Test1');
-            expect(eventHandlerResult, 'The eventHandlerResult should be "Test1".').to.equal('Test1');
-            tester.myEvent.unsubscribe(handler);
-            tester.signal('Test2');
-            expect(eventHandlerResult, 'The eventHandlerResult should still be "Test1".').to.equal('Test1');
+            s.myEvent.subscribe(handler);
+            s.signal('Test1');
+            expect(result, 'Result should be "Test1".').to.equal('Test1');
+            s.myEvent.unsubscribe(handler);
+            s.signal('Test2');
+            expect(result, 'Result should still be "Test1" because of unsubscribe.').to.equal('Test1');
         });
-        if ("Subscribe / unsubscribe - event on interface", function () {
+        it("Subscribe / unsubscribe - simple event on interface", function () {
             var MyEventTester = (function () {
                 function MyEventTester() {
                     this._myEvent = new _e.SimpleEventDispatcher();
@@ -187,37 +187,32 @@ describe("Strongly Typed Events", function () {
                 };
                 return MyEventTester;
             }());
-            var tester = new MyEventTester();
-            var eventHandlerResult = null;
+            var s = new MyEventTester();
+            var result = null;
             var handler = function (args) {
-                eventHandlerResult = args;
+                result = args;
             };
-            tester.myEvent().subscribe(handler);
-            tester.signal('Test1');
-            it('The eventHandlerResult should be "Test1".', function () {
-                expect(eventHandlerResult).to.equal('Test1');
-            });
-            tester.myEvent().unsubscribe(handler);
-            tester.signal('Test2');
-            it('The eventHandlerResult should still be "Test1".', function () {
-                expect(eventHandlerResult).to.equal('Test1');
-            });
-        })
-            ;
+            s.myEvent().subscribe(handler);
+            s.signal('Test1');
+            expect(result, 'Result should be "Test1".').to.equal('Test1');
+            s.myEvent().unsubscribe(handler);
+            s.signal('Test2');
+            expect(result, 'Result should still be "Test1" because of unsubscribe.').to.equal('Test1');
+        });
         it("Simple Event list", function () {
             var events = new _e.SimpleEventList();
             var result;
             events.get('Test1').subscribe(function (args) { return result = args; });
             events.get('Test1').dispatch('Testing 123');
-            expect(result, 'The result should be "Testing 123".').to.equal('Testing 123');
+            expect(result, 'Result should be "Testing 123".').to.equal('Testing 123');
             events.get('Test2').dispatch('Testing 456');
-            expect(result, 'The result should still be "Testing 123".').to.equal('Testing 123');
+            expect(result, 'Result should still be "Testing 123".').to.equal('Testing 123');
             events.get('Test2').subscribe(function (args) { return result = args; });
             events.get('Test2').dispatch('Testing 789');
-            expect(result, 'The result should be "Testing 789".').to.equal('Testing 789');
+            expect(result, 'Result should be "Testing 789".').to.equal('Testing 789');
             events.get('Test3').asEvent().subscribe(function (args) { return result = args; });
             events.get('Test3').dispatch('Testing 42');
-            expect(result, 'The result should be "Testing 42".').to.equal('Testing 42');
+            expect(result, 'Result of dispatch of interface should be "Testing 42".').to.equal('Testing 42');
         });
         it('SimpleEventHandlingBase', function () {
             var MyTester = (function (_super) {
@@ -242,12 +237,6 @@ describe("Strongly Typed Events", function () {
             expect(result, 'The result should be "Testing 789".').to.equal('Testing 789');
         });
         it('Dispatcher', function () {
-            var Source = (function () {
-                function Source(name) {
-                    this.name = name;
-                }
-                return Source;
-            }());
             var Argument = (function () {
                 function Argument(name) {
                     this.name = name;

@@ -5,10 +5,10 @@
 
 'use strict';
 
-var r = typeof require !== 'undefined', w = window as any;
+var r = typeof require !== 'undefined';
 
-var expect:Chai.ExpectStatic = r ? require('chai').expect : w.chai.expect; 
-var _e: IStronglyTypedEvents = r ? require('../StronglyTypedEvents') : w;
+var expect:Chai.ExpectStatic = r ? require('chai').expect : (window as any).chai.expect;
+var _e: IStronglyTypedEvents = r ? require('../StronglyTypedEvents') : window;
 
 describe("Strongly Typed Events", function () {
 
@@ -36,13 +36,11 @@ describe("Strongly Typed Events", function () {
             };
 
             tester.myEvent.subscribe(handler);
-
             tester.signal('Test1');
             expect(eventHandlerResult, 'The eventHandlerResult should be "Test1".').to.equal('Test1');
 
             tester.signal('Test2');
             expect(eventHandlerResult, 'The eventHandlerResult should be "Test2".').to.equal('Test2');
-
             tester.myEvent.unsubscribe(handler);
             tester.signal('Test3');
 
@@ -143,8 +141,10 @@ describe("Strongly Typed Events", function () {
             var a2 = new Argument('a2');
 
             dispatcher.subscribe((sender: Source, argument: Argument) => {
+
                 expect(sender, "Sender should be s1.").to.equal(s1);
                 expect(sender, "Sender should not be s2.").not.equal(s2);
+
                 expect(argument, "Argument should be a1.").to.equal(a1);
                 expect(argument, "Argument should not be a2.").not.equal(a2);
             });
@@ -171,7 +171,7 @@ describe("Strongly Typed Events", function () {
 
     describe("Simple Event", function () {
 
-        it("Subscribe / unsubscribe - event as property", function () {
+        it("Subscribe / unsubscribe - simple event as property", function () {
 
             class MyEventTester {
                 private _myEvent = new _e.SimpleEventDispatcher<string>();
@@ -185,28 +185,28 @@ describe("Strongly Typed Events", function () {
                 }
             }
 
-            let tester = new MyEventTester();
-            let eventHandlerResult: string = null;
+            let s = new MyEventTester();
+            let result: string = null;
 
-            let handler = (args: string) => {
-                eventHandlerResult = args;
+            var handler = (args: string) => {
+                result = args;
             };
 
-            tester.myEvent.subscribe(handler);
-            tester.signal('Test1');
-            expect(eventHandlerResult, 'The eventHandlerResult should be "Test1".').to.equal('Test1');
+            s.myEvent.subscribe(handler);
+            s.signal('Test1');
+            expect(result, 'Result should be "Test1".').to.equal('Test1');
 
-            tester.myEvent.unsubscribe(handler);
-            tester.signal('Test2');
-            expect(eventHandlerResult, 'The eventHandlerResult should still be "Test1".').to.equal('Test1');
+            s.myEvent.unsubscribe(handler);
+            s.signal('Test2');
+            expect(result, 'Result should still be "Test1" because of unsubscribe.').to.equal('Test1');
         });
 
-        if ("Subscribe / unsubscribe - event on interface", function () {
+        it("Subscribe / unsubscribe - simple event on interface", function () {
 
             interface IMyEventTester {
                 myEvent(): ISimpleEvent<string>;
 
-                signal(str: string): void;
+                signal(str: string);
             }
 
             class MyEventTester implements IMyEventTester {
@@ -221,24 +221,20 @@ describe("Strongly Typed Events", function () {
                 }
             }
 
-            let tester: IMyEventTester = new MyEventTester();
-            let eventHandlerResult: string = null;
+            let s: IMyEventTester = new MyEventTester();
+            let result: string = null;
 
-            let handler = (args: string) => {
-                eventHandlerResult = args;
+            var handler = (args: string) => {
+                result = args;
             };
 
-            tester.myEvent().subscribe(handler);
-            tester.signal('Test1');
-            it('The eventHandlerResult should be "Test1".', function () {
-                expect(eventHandlerResult).to.equal('Test1');
-            });
+            s.myEvent().subscribe(handler);
+            s.signal('Test1');
+            expect(result, 'Result should be "Test1".').to.equal('Test1');
 
-            tester.myEvent().unsubscribe(handler);
-            tester.signal('Test2');
-            it('The eventHandlerResult should still be "Test1".', function () {
-                expect(eventHandlerResult).to.equal('Test1');
-            });
+            s.myEvent().unsubscribe(handler);
+            s.signal('Test2');
+            expect(result, 'Result should still be "Test1" because of unsubscribe.').to.equal('Test1');
         });
 
         it("Simple Event list", function () {
@@ -248,18 +244,18 @@ describe("Strongly Typed Events", function () {
 
             events.get('Test1').subscribe((args: string) => result = args);
             events.get('Test1').dispatch('Testing 123');
-            expect(result, 'The result should be "Testing 123".').to.equal('Testing 123');
+            expect(result, 'Result should be "Testing 123".').to.equal('Testing 123');
 
             events.get('Test2').dispatch('Testing 456');
-            expect(result, 'The result should still be "Testing 123".').to.equal('Testing 123');
+            expect(result, 'Result should still be "Testing 123".').to.equal('Testing 123');
 
             events.get('Test2').subscribe((args: string) => result = args);
             events.get('Test2').dispatch('Testing 789');
-            expect(result, 'The result should be "Testing 789".').to.equal('Testing 789');
+            expect(result, 'Result should be "Testing 789".').to.equal('Testing 789');
 
             events.get('Test3').asEvent().subscribe((args: string) => result = args);
             events.get('Test3').dispatch('Testing 42');
-            expect(result, 'The result should be "Testing 42".').to.equal('Testing 42');
+            expect(result, 'Result of dispatch of interface should be "Testing 42".').to.equal('Testing 42');
         });
 
         it('SimpleEventHandlingBase', function () {
@@ -288,7 +284,6 @@ describe("Strongly Typed Events", function () {
 
         it('Dispatcher', function () {
 
-            class Source { constructor(public name: string) { } }
             class Argument { constructor(public name: string) { } }
 
             let dispatcher = new _e.SimpleEventDispatcher<Argument>();
@@ -319,7 +314,6 @@ describe("Strongly Typed Events", function () {
             dispatcher.dispatchAsync(1);
             expect(i, 'Because of async dispatch, i should be 0.').to.equal(0);
         });
-
     });
 
 
