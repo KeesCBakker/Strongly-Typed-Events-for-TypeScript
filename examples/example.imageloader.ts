@@ -14,7 +14,7 @@
 
 class ImageDownloader {
 
-    private _ondownload: SimpleEventDispatcher<ImageDownloadArg> = new SimpleEventDispatcher();
+    private _ondownload = new SimpleEventDispatcher<ImageDownloadArg>();
 
     public get ondownload(): ISimpleEvent<ImageDownloadArg> {
         return this._ondownload.asEvent();
@@ -51,15 +51,15 @@ class ImageDownloadArg {
         this._width = width;
     }
 
-    public get url(): string {
+    public get url() {
         return this._url;
     }
 
-    public get height(): number {
+    public get height() {
         return this._height;
     }
 
-    public get width(): number {
+    public get width() {
         return this._width;
     }
 }

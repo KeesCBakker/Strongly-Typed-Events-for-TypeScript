@@ -12,7 +12,7 @@ interface IMyInterface
 
 class MyClass implements IMyInterface
 {
-	private _myEvent : EventDispatcher<IMyInterface, IMyArgument> = new EventDispatcher<IMyInterface, IMyArgument>();
+	private _myEvent = new EventDispatcher<IMyInterface, IMyArgument>();
 	
 	public onMyEvent(): IEvent<IMyInterface, IMyArgument>
 	{

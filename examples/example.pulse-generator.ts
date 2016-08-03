@@ -26,13 +26,13 @@ window.onload = function () {
 class PulseGenerator {
 
     //create private event dispatcher
-    private _onPulsate: EventDispatcher<PulseGenerator, number> = new EventDispatcher<PulseGenerator, number>();
+    private _onPulsate = new EventDispatcher<PulseGenerator, number>();
     frequencyInHz: number;
 
     //expose the event dispatcher through the IEvent interface
     //this will hide the dispatch method outside the class
     get onPulsate(): IEvent<PulseGenerator, number> {
-        return this._onPulsate;
+        return this._onPulsate.asEvent();
     }
 
     constructor(frequencyInHz: number) {
@@ -40,7 +40,7 @@ class PulseGenerator {
         this.start();
     }
 
-    private start(): void {
+    private start() {
 
         setTimeout(() => {
 

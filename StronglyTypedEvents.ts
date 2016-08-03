@@ -15,7 +15,7 @@ interface IEventHandler<TSender, TArgs> {
       * @sender The sender.
       * @args The argument.
       */
-    (sender: TSender, args: TArgs): void
+    (sender: TSender, args: TArgs)
 }
 
 /**
@@ -25,14 +25,14 @@ interface ISimpleEventHandler<TArgs> {
     /**
       * @args The argument.
       */
-    (args: TArgs): void
+    (args: TArgs)
 }
 
 /**
  * Event handler function without arguments
  */
 interface ISignalHandler {
-    (): void;
+    ()
 }
 
 /**
@@ -44,13 +44,13 @@ interface ISubscribable<THandlerType> {
      * Subscribe to the event.
      * @param fn The event handler that is called when the event is dispatched.
      */
-    subscribe(fn: THandlerType): void;
+    subscribe(fn: THandlerType);
 
     /** 
      * Unsubscribe from the event.
      * @param fn The event handler that is will be unsubsribed from the event.
      */
-    unsubscribe(fn: THandlerType): void;
+    unsubscribe(fn: THandlerType);
 }
 
 /**
@@ -83,14 +83,14 @@ interface IBaseEventHandling<TEventHandler> {
      * @param name The name of the event.
      * @param fn The event handler that is called when the event is dispatched.
      */
-    subscribe(name: string, fn: TEventHandler): void;
+    subscribe(name: string, fn: TEventHandler);
 
     /** 
      * Unsubscribe from the event with the specified name.
      * @param name The name of the event.
      * @param fn The event handler that is will be unsubsribed from the event.
      */
-    unsubscribe(name: string, fn: TEventHandler): void;
+    unsubscribe(name: string, fn: TEventHandler);
 }
 
 /**
@@ -121,13 +121,13 @@ interface ISignalHandling extends IBaseEventHandling<ISignalHandler> {
 abstract class DispatcherBase<TEventHandler> implements ISubscribable<TEventHandler> {
 
     private _wrap = new DispatcherWrapper(this);
-    protected _subscriptions: Array<TEventHandler> = new Array<TEventHandler>();
+    protected _subscriptions = new Array<TEventHandler>();
 
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
      */
-    subscribe(fn: TEventHandler): void {
+    subscribe(fn: TEventHandler) {
         if (fn) {
             this._subscriptions.push(fn);
         }
@@ -137,7 +137,7 @@ abstract class DispatcherBase<TEventHandler> implements ISubscribable<TEventHand
      * Unsubscribes the handler from the dispatcher.
      * @param fn The event handler.
      */
-    unsubscribe(fn: TEventHandler): void {
+    unsubscribe(fn: TEventHandler) {
         let i = this._subscriptions.indexOf(fn);
         if (i > -1) {
             this._subscriptions.splice(i, 1);
@@ -164,7 +164,7 @@ class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEventHandler<TSend
      * @param sender The sender.
      * @param args The arguments object.
      */
-    dispatch(sender: TSender, args: TArgs): void {
+    dispatch(sender: TSender, args: TArgs) {
         for (let handler of this._subscriptions) {
             handler(sender, args);
         }
@@ -175,14 +175,14 @@ class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEventHandler<TSend
      * @param sender The sender.
      * @param args The arguments object.
      */
-    dispatchAsync(sender: TSender, args: TArgs): void {
+    dispatchAsync(sender: TSender, args: TArgs) {
 
         for (let handler of this._subscriptions) {
             this.excuteAsync(sender, args, handler);
         }
     }
 
-    private excuteAsync(sender: TSender, args: TArgs, handler: IEventHandler<TSender, TArgs>): void {
+    private excuteAsync(sender: TSender, args: TArgs, handler: IEventHandler<TSender, TArgs>) {
         setTimeout(() => handler(sender, args), 0);
     }
 }
@@ -197,7 +197,7 @@ class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHandler<TA
      * Dispatches the event.
      * @param args The arguments object.
      */
-    dispatch(args: TArgs): void {
+    dispatch(args: TArgs) {
         for (let handler of this._subscriptions) {
             handler(args);
         }
@@ -207,14 +207,14 @@ class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHandler<TA
      * Dispatches the events thread.
      * @param args The arguments object.
      */
-    dispatchAsync(args: TArgs): void {
+    dispatchAsync(args: TArgs) {
 
         for (let handler of this._subscriptions) {
             this.excuteAsync(args, handler);
         }
     }
 
-    private excuteAsync(args: TArgs, handler: ISimpleEventHandler<TArgs>): void {
+    private excuteAsync(args: TArgs, handler: ISimpleEventHandler<TArgs>) {
         setTimeout(() => handler(args), 0);
     }
 }
@@ -223,7 +223,7 @@ class SignalDispatcher extends DispatcherBase<ISignalHandler> implements ISignal
     /**
      * Dispatches the signal.
      */
-    dispatch(): void {
+    dispatch() {
         for (let handler of this._subscriptions) {
             handler();
         }
@@ -232,14 +232,14 @@ class SignalDispatcher extends DispatcherBase<ISignalHandler> implements ISignal
     /**
      * Dispatches the signal threaded.
      */
-    dispatchAsync(): void {
+    dispatchAsync() {
 
         for (let handler of this._subscriptions) {
             this.excuteAsync(handler);
         }
     }
 
-    private excuteAsync(handler: ISignalHandler): void {
+    private excuteAsync(handler: ISignalHandler) {
         setTimeout(() => handler(), 0);
     }
 }
@@ -266,7 +266,7 @@ class DispatcherWrapper<THandlerType> implements ISubscribable<THandlerType>
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
      */
-    public subscribe(fn: THandlerType): void {
+    public subscribe(fn: THandlerType) {
         this._subscribe(fn);
     }
 
@@ -274,7 +274,7 @@ class DispatcherWrapper<THandlerType> implements ISubscribable<THandlerType>
      * Unsubscribe from the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
      */
-    public unsubscribe(fn: THandlerType): void {
+    public unsubscribe(fn: THandlerType) {
         this._unsubscribe(fn);
     }
 }
@@ -307,7 +307,7 @@ abstract class EventListBase<TEventDispatcher> {
      * Removes the dispatcher associated with the name.
      * @param name The name of the event.
      */
-    remove(name: string): void {
+    remove(name: string) {
         this._events[name] = null;
     }
 
@@ -345,7 +345,6 @@ class SimpleEventList<TArgs> extends EventListBase<SimpleEventDispatcher<TArgs>>
     }
 }
 
-
 /**
  * Storage class for multiple signal events that are accessible by name.
  * Events dispatchers are automatically created.
@@ -370,7 +369,7 @@ abstract class EventHandlingBase<TSender, TArgs> implements IEventHandling<TSend
     /**
      * Gets the list with all the event dispatchers.
      */
-    protected get events(): EventList<TSender, TArgs> {
+    protected get events() {
         return this._events;
     }
 
@@ -379,7 +378,7 @@ abstract class EventHandlingBase<TSender, TArgs> implements IEventHandling<TSend
      * @param name The name of the event.
      * @param fn The event handler.
      */
-    subscribe(name: string, fn: IEventHandler<TSender, TArgs>): void {
+    subscribe(name: string, fn: IEventHandler<TSender, TArgs>) {
         this._events.get(name).subscribe(fn);
     }
 
@@ -388,7 +387,7 @@ abstract class EventHandlingBase<TSender, TArgs> implements IEventHandling<TSend
      * @param name The name of the event.
      * @param fn The event handler.
      */
-    unsubscribe(name: string, fn: IEventHandler<TSender, TArgs>): void {
+    unsubscribe(name: string, fn: IEventHandler<TSender, TArgs>) {
         this._events.get(name).unsubscribe(fn);
     }
 }
@@ -409,7 +408,7 @@ abstract class SimpleEventHandlingBase<TArgs> implements ISimpleEventHandling<TA
      * @param name The name of the event.
      * @param fn The event handler.
      */
-    subscribe(name: string, fn: ISimpleEventHandler<TArgs>): void {
+    subscribe(name: string, fn: ISimpleEventHandler<TArgs>) {
         this._events.get(name).subscribe(fn);
     }
 
@@ -418,7 +417,7 @@ abstract class SimpleEventHandlingBase<TArgs> implements ISimpleEventHandling<TA
      * @param name The name of the event.
      * @param fn The event handler.
      */
-    unsubscribe(name: string, fn: ISimpleEventHandler<TArgs>): void {
+    unsubscribe(name: string, fn: ISimpleEventHandler<TArgs>) {
         this._events.get(name).unsubscribe(fn);
     }
 }
@@ -439,7 +438,7 @@ abstract class SignalHandlingBase implements ISignalHandling {
      * @param name The name of the event.
      * @param fn The event handler.
      */
-    subscribe(name: string, fn: ISignalHandler): void {
+    subscribe(name: string, fn: ISignalHandler) {
         this._events.get(name).subscribe(fn);
     }
 
@@ -448,7 +447,7 @@ abstract class SignalHandlingBase implements ISignalHandling {
      * @param name The name of the event.
      * @param fn The event handler.
      */
-    unsubscribe(name: string, fn: ISignalHandler): void {
+    unsubscribe(name: string, fn: ISignalHandler) {
         this._events.get(name).unsubscribe(fn);
     }
 }
@@ -487,9 +486,6 @@ function createSimpleEventDispatcher<TArgs>() {
 function createSignalDispatcher() {
     return new SignalDispatcher();
 };
-
-
-
 
 /* modules, require and stuff like that */
 declare var define: any;

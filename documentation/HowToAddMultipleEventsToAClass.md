@@ -12,8 +12,8 @@ done by calling the `dispatch` on the dispatcher.
 ```
 class Stopwatch {
 
-    private _events: EventList<Stopwatch, StopwatchEventArgs> = new EventList<Stopwatch, StopwatchEventArgs>();
-    private _ticks: number = 0;
+    private _events = new EventList<Stopwatch, StopwatchEventArgs>();
+    private _ticks = 0;
     private _timer: number;
 
     get onStart(): IEvent<Stopwatch, StopwatchEventArgs> {
@@ -35,7 +35,7 @@ class Stopwatch {
         );
     }
 
-    start(): void {
+    start() {
 
         if (this._timer == null) {
             this._timer = Date.now();
@@ -43,7 +43,7 @@ class Stopwatch {
         }
     }
 
-    pause(): void {
+    pause() {
 
         if (this._timer) {
             this._ticks = this.getTicks();
@@ -52,13 +52,13 @@ class Stopwatch {
         }
     }
 
-    reset(): void {
+    reset() {
         this._ticks = 0;
         this._timer = Date.now();
         this.dispatch('onReset');
     }
 
-    getTicks(): number {
+    getTicks() {
         if (this._timer) {
             return (Date.now() - this._timer) + this._ticks;
         }

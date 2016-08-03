@@ -14,7 +14,7 @@ class TrafficLight {
         this.internalStart();
     }
 
-    public get color(): string {
+    public get color() {
         return this._color;
     }
 
@@ -30,7 +30,7 @@ class TrafficLight {
         return this._signals.get('orange').asEvent();
     }
 
-    private internalStart(): void {
+    private internalStart() {
         window.setTimeout(() => {
             this._signals.get('green').dispatch();
             window.setTimeout(() => {

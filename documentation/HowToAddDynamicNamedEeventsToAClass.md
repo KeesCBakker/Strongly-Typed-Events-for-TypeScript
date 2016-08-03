@@ -6,17 +6,17 @@ Need to add named event support to your class? Implement the `IEventHandling<TSe
 ```
 class DynamicEventsExample implements IEventHandling<DynamicEventsExample, DynamicEventsExampleArgs>
 {
-    private _events: EventList<DynamicEventsExample, DynamicEventsExampleArgs> = new EventList<DynamicEventsExample, DynamicEventsExampleArgs>();
+    private _events = new EventList<DynamicEventsExample, DynamicEventsExampleArgs>();
 
-    subscribe(name: string, fn: IEventHandler<DynamicEventsExample, DynamicEventsExampleArgs>): void {
+    subscribe(name: string, fn: IEventHandler<DynamicEventsExample, DynamicEventsExampleArgs>) {
         this._events.get(name).subscribe(fn);
     }
 
-    unsubscribe(name: string, fn: IEventHandler<DynamicEventsExample, DynamicEventsExampleArgs>): void {
+    unsubscribe(name: string, fn: IEventHandler<DynamicEventsExample, DynamicEventsExampleArgs>) {
         this._events.get(name).unsubscribe(fn);
     }
 
-    dispatch(name: string, sender: DynamicEventsExample, args: DynamicEventsExampleArgs): void {
+    dispatch(name: string, sender: DynamicEventsExample, args: DynamicEventsExampleArgs) {
         this._events.get(name).dispatch(sender, args);
     }
 }
