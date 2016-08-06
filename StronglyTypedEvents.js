@@ -1,11 +1,4 @@
-/*!
- * Strongly Typed Events for TypeScript - 0.3.3
- * https://github.com/KeesCBakker/StronlyTypedEvents/
- * http://keestalkstech.com
- *
- * Copyright Kees C. Bakker / KeesTalksTech
- * Released under the MIT license
- */
+/// <reference path="typings/node/node.d.ts" />
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -18,6 +11,49 @@ var __extends = (this && this.__extends) || function (d, b) {
  * dispatcher as event.
  */
 "use strict";
+/**
+ * Stores a handler. Manages execution meta data.
+ * @class Subscription
+ * @template TEventHandler
+ */
+var Subscription = (function () {
+    /**
+     * Creates an instance of Subscription.
+     *
+     * @param {TEventHandler} handler The handler for the subscription.
+     * @param {boolean} isOnce Indicates if the handler should only be executed` once.
+     */
+    function Subscription(handler, isOnce) {
+        this.handler = handler;
+        this.isOnce = isOnce;
+        /**
+         * Indicates if the subscription has been executed before.
+         */
+        this.isExecuted = false;
+    }
+    /**
+     * Executes the handler.
+     *
+     * @param {boolean} executeAsync True if the even should be executed async.
+     * @param {*} The scope the scope of the event.
+     * @param {IArguments} args The arguments for the event.
+     */
+    Subscription.prototype.execute = function (executeAsync, scope, args) {
+        if (!this.isOnce || !this.isExecuted) {
+            this.isExecuted = true;
+            var fn = this.handler;
+            if (executeAsync) {
+                setTimeout(function () {
+                    fn.apply(scope, args);
+                }, 1);
+            }
+            else {
+                fn.apply(scope, args);
+            }
+        }
+    };
+    return Subscription;
+}());
 var DispatcherBase = (function () {
     function DispatcherBase() {
         this._wrap = new DispatcherWrapper(this);
@@ -29,17 +65,81 @@ var DispatcherBase = (function () {
      */
     DispatcherBase.prototype.subscribe = function (fn) {
         if (fn) {
-            this._subscriptions.push(fn);
+            this._subscriptions.push(new Subscription(fn, false));
         }
+    };
+    /**
+     * Subscribe to the event dispatcher.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
+    DispatcherBase.prototype.sub = function (fn) {
+        this.subscribe(fn);
+    };
+    /**
+     * Subscribe once to the event with the specified name.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
+    DispatcherBase.prototype.one = function (fn) {
+        if (fn) {
+            this._subscriptions.push(new Subscription(fn, true));
+        }
+    };
+    /**
+     * Checks it the event has a subscription for the specified handler.
+     * @param fn The event handler.
+     */
+    DispatcherBase.prototype.has = function (fn) {
+        if (fn) {
+            for (var _i = 0, _a = this._subscriptions; _i < _a.length; _i++) {
+                var sub = _a[_i];
+                if (sub.handler == fn) {
+                    return true;
+                }
+            }
+        }
+        return false;
     };
     /**
      * Unsubscribes the handler from the dispatcher.
      * @param fn The event handler.
      */
     DispatcherBase.prototype.unsubscribe = function (fn) {
-        var i = this._subscriptions.indexOf(fn);
-        if (i > -1) {
-            this._subscriptions.splice(i, 1);
+        if (fn) {
+            for (var i = 0; i < this._subscriptions.length; i++) {
+                var sub = this._subscriptions[i];
+                if (sub.handler == fn) {
+                    this._subscriptions.splice(i, 1);
+                    break;
+                }
+            }
+        }
+    };
+    /**
+     * Unsubscribes the handler from the dispatcher.
+     * @param fn The event handler.
+     */
+    DispatcherBase.prototype.unsub = function (fn) {
+        this.unsubscribe(fn);
+    };
+    /**
+     * Generic dispatch will dispatch the handlers with the given arguments.
+     *
+     * @protected
+     * @param {boolean} executeAsync True if the even should be executed async.
+     * @param {*} The scope the scope of the event.
+     * @param {IArguments} args The arguments for the event.
+     */
+    DispatcherBase.prototype._dispatch = function (executeAsync, scope, args) {
+        for (var i = 0; i < this._subscriptions.length; i++) {
+            var sub = this._subscriptions[i];
+            if (sub.isOnce) {
+                if (sub.isExecuted === true) {
+                    continue;
+                }
+                this._subscriptions.splice(i, 1);
+                i--;
+            }
+            sub.execute(executeAsync, scope, args);
         }
     };
     /**
@@ -66,10 +166,7 @@ var EventDispatcher = (function (_super) {
      * @param args The arguments object.
      */
     EventDispatcher.prototype.dispatch = function (sender, args) {
-        for (var _i = 0, _a = this._subscriptions; _i < _a.length; _i++) {
-            var handler = _a[_i];
-            handler(sender, args);
-        }
+        this._dispatch(false, this, arguments);
     };
     /**
      * Dispatches the events thread.
@@ -77,13 +174,7 @@ var EventDispatcher = (function (_super) {
      * @param args The arguments object.
      */
     EventDispatcher.prototype.dispatchAsync = function (sender, args) {
-        for (var _i = 0, _a = this._subscriptions; _i < _a.length; _i++) {
-            var handler = _a[_i];
-            this.excuteAsync(sender, args, handler);
-        }
-    };
-    EventDispatcher.prototype.excuteAsync = function (sender, args, handler) {
-        setTimeout(function () { return handler(sender, args); }, 0);
+        this._dispatch(true, this, arguments);
     };
     return EventDispatcher;
 }(DispatcherBase));
@@ -101,26 +192,21 @@ var SimpleEventDispatcher = (function (_super) {
      * @param args The arguments object.
      */
     SimpleEventDispatcher.prototype.dispatch = function (args) {
-        for (var _i = 0, _a = this._subscriptions; _i < _a.length; _i++) {
-            var handler = _a[_i];
-            handler(args);
-        }
+        this._dispatch(false, this, arguments);
     };
     /**
      * Dispatches the events thread.
      * @param args The arguments object.
      */
     SimpleEventDispatcher.prototype.dispatchAsync = function (args) {
-        for (var _i = 0, _a = this._subscriptions; _i < _a.length; _i++) {
-            var handler = _a[_i];
-            this.excuteAsync(args, handler);
-        }
-    };
-    SimpleEventDispatcher.prototype.excuteAsync = function (args, handler) {
-        setTimeout(function () { return handler(args); }, 0);
+        this._dispatch(true, this, arguments);
     };
     return SimpleEventDispatcher;
 }(DispatcherBase));
+/**
+ * The dispatcher handles the storage of subsciptions and facilitates
+ * subscription, unsubscription and dispatching of a signal event.
+ */
 var SignalDispatcher = (function (_super) {
     __extends(SignalDispatcher, _super);
     function SignalDispatcher() {
@@ -130,22 +216,13 @@ var SignalDispatcher = (function (_super) {
      * Dispatches the signal.
      */
     SignalDispatcher.prototype.dispatch = function () {
-        for (var _i = 0, _a = this._subscriptions; _i < _a.length; _i++) {
-            var handler = _a[_i];
-            handler();
-        }
+        this._dispatch(false, this, arguments);
     };
     /**
      * Dispatches the signal threaded.
      */
     SignalDispatcher.prototype.dispatchAsync = function () {
-        for (var _i = 0, _a = this._subscriptions; _i < _a.length; _i++) {
-            var handler = _a[_i];
-            this.excuteAsync(handler);
-        }
-    };
-    SignalDispatcher.prototype.excuteAsync = function (handler) {
-        setTimeout(function () { return handler(); }, 0);
+        this._dispatch(true, this, arguments);
     };
     return SignalDispatcher;
 }(DispatcherBase));
@@ -161,6 +238,8 @@ var DispatcherWrapper = (function () {
     function DispatcherWrapper(dispatcher) {
         this._subscribe = function (fn) { return dispatcher.subscribe(fn); };
         this._unsubscribe = function (fn) { return dispatcher.unsubscribe(fn); };
+        this._one = function (fn) { return dispatcher.one(fn); };
+        this._has = function (fn) { return dispatcher.has(fn); };
     }
     /**
      * Subscribe to the event dispatcher.
@@ -170,11 +249,39 @@ var DispatcherWrapper = (function () {
         this._subscribe(fn);
     };
     /**
+     * Subscribe to the event dispatcher.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
+    DispatcherWrapper.prototype.sub = function (fn) {
+        this.subscribe(fn);
+    };
+    /**
      * Unsubscribe from the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
      */
     DispatcherWrapper.prototype.unsubscribe = function (fn) {
         this._unsubscribe(fn);
+    };
+    /**
+     * Unsubscribe from the event dispatcher.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
+    DispatcherWrapper.prototype.unsub = function (fn) {
+        this.unsubscribe(fn);
+    };
+    /**
+     * Subscribe once to the event with the specified name.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
+    DispatcherWrapper.prototype.one = function (fn) {
+        this._one(fn);
+    };
+    /**
+     * Checks it the event has a subscription for the specified handler.
+     * @param fn The event handler.
+     */
+    DispatcherWrapper.prototype.has = function (fn) {
+        return this._has(fn);
     };
     return DispatcherWrapper;
 }());
@@ -284,12 +391,44 @@ var EventHandlingBase = (function () {
         this._events.get(name).subscribe(fn);
     };
     /**
+     * Subscribes to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    EventHandlingBase.prototype.sub = function (name, fn) {
+        this.subscribe(name, fn);
+    };
+    /**
      * Unsubscribes from the event with the specified name.
      * @param name The name of the event.
      * @param fn The event handler.
      */
     EventHandlingBase.prototype.unsubscribe = function (name, fn) {
         this._events.get(name).unsubscribe(fn);
+    };
+    /**
+     * Unsubscribes from the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    EventHandlingBase.prototype.unsub = function (name, fn) {
+        this.unsubscribe(name, fn);
+    };
+    /**
+     * Subscribes to once the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    EventHandlingBase.prototype.one = function (name, fn) {
+        this._events.get(name).one(fn);
+    };
+    /**
+     * Subscribes to once the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    EventHandlingBase.prototype.has = function (name, fn) {
+        return this._events.get(name).has(fn);
     };
     return EventHandlingBase;
 }());
@@ -316,12 +455,44 @@ var SimpleEventHandlingBase = (function () {
         this._events.get(name).subscribe(fn);
     };
     /**
+     * Subscribes to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    SimpleEventHandlingBase.prototype.sub = function (name, fn) {
+        this.subscribe(name, fn);
+    };
+    /**
+     * Subscribes once to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    SimpleEventHandlingBase.prototype.one = function (name, fn) {
+        this._events.get(name).one(fn);
+    };
+    /**
+     * Checks it the event has a subscription for the specified handler.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    SimpleEventHandlingBase.prototype.has = function (name, fn) {
+        return this._events.get(name).has(fn);
+    };
+    /**
      * Unsubscribes from the event with the specified name.
      * @param name The name of the event.
      * @param fn The event handler.
      */
     SimpleEventHandlingBase.prototype.unsubscribe = function (name, fn) {
         this._events.get(name).unsubscribe(fn);
+    };
+    /**
+     * Unsubscribes from the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    SimpleEventHandlingBase.prototype.unsub = function (name, fn) {
+        this.unsubscribe(name, fn);
     };
     return SimpleEventHandlingBase;
 }());
@@ -340,12 +511,36 @@ var SignalHandlingBase = (function () {
         configurable: true
     });
     /**
+     * Subscribes once to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    SignalHandlingBase.prototype.one = function (name, fn) {
+        this._events.get(name).one(fn);
+    };
+    /**
+     * Checks it the event has a subscription for the specified handler.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    SignalHandlingBase.prototype.has = function (name, fn) {
+        return this._events.get(name).has(fn);
+    };
+    /**
      * Subscribes to the event with the specified name.
      * @param name The name of the event.
      * @param fn The event handler.
      */
     SignalHandlingBase.prototype.subscribe = function (name, fn) {
         this._events.get(name).subscribe(fn);
+    };
+    /**
+     * Subscribes to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    SignalHandlingBase.prototype.sub = function (name, fn) {
+        this.subscribe(name, fn);
     };
     /**
      * Unsubscribes from the event with the specified name.
@@ -355,18 +550,36 @@ var SignalHandlingBase = (function () {
     SignalHandlingBase.prototype.unsubscribe = function (name, fn) {
         this._events.get(name).unsubscribe(fn);
     };
+    /**
+     * Unsubscribes from the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    SignalHandlingBase.prototype.unsub = function (name, fn) {
+        this.unsubscribe(name, fn);
+    };
     return SignalHandlingBase;
 }());
 function createEventDispatcher() {
     return new EventDispatcher();
 }
 ;
+function createEventList() {
+    return new EventList();
+}
 function createSimpleEventDispatcher() {
     return new SimpleEventDispatcher();
 }
 ;
+function createSimpleEventList() {
+    return new SimpleEventList();
+}
 function createSignalDispatcher() {
     return new SignalDispatcher();
+}
+;
+function createSignalList() {
+    return new SignalList();
 }
 ;
 (function () {
@@ -374,7 +587,8 @@ function createSignalDispatcher() {
         EventDispatcher, SimpleEventDispatcher, SignalDispatcher,
         EventList, SimpleEventList, SignalList,
         EventHandlingBase, SimpleEventHandlingBase, SignalHandlingBase,
-        createEventDispatcher, createSimpleEventDispatcher, createSignalDispatcher
+        createEventDispatcher, createSimpleEventDispatcher, createSignalDispatcher,
+        createEventList, createSimpleEventList, createSignalList
     ];
     // Node: Export function
     if (typeof module !== "undefined" && module.exports) {

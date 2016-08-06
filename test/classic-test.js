@@ -372,4 +372,54 @@ describe("Strongly Typed Events", function () {
             expect(i, 'Because of async dispatch, i should be 0.').to.equal(0);
         });
     });
+    describe("One", function () {
+        it("Execute one on an event dispatcher", function () {
+            var i = 0;
+            var dispatcher = _e.createEventDispatcher();
+            dispatcher.one(function (sender, args) {
+                i += args;
+            });
+            dispatcher.dispatch(null, 1);
+            expect(i, 'i should be 1.').to.equal(1);
+            dispatcher.dispatch(null, 1);
+            expect(i, 'i should still be 1, because the event should only fire once.').to.equal(1);
+        });
+        it("Execute 2x one on an event dispatcher", function () {
+            var i = 0;
+            var dispatcher = _e.createEventDispatcher();
+            dispatcher.one(function (sender, args) {
+                i += args;
+            });
+            dispatcher.one(function (sender, args) {
+                i += args;
+            });
+            dispatcher.dispatch(null, 1);
+            expect(i, 'i should be 2.').to.equal(2);
+            dispatcher.dispatch(null, 1);
+            expect(i, 'i should still be 2, because the event should only fire once.').to.equal(2);
+        });
+        it("Unsubscribe one on an event dispatcher", function () {
+            var i = 0;
+            var dispatcher = _e.createEventDispatcher();
+            var fn = function (sender, args) {
+                i += args;
+            };
+            dispatcher.one(fn);
+            dispatcher.unsubscribe(fn);
+            dispatcher.dispatch(null, 1);
+            expect(i, 'i should be 0.').to.equal(0);
+        });
+        it("Register", function () {
+            var i = 0;
+            var dispatcher = _e.createEventDispatcher();
+            var fn = function (sender, args) {
+                i += args;
+            };
+            dispatcher.one(fn);
+            dispatcher.one(fn);
+            dispatcher.unsubscribe(fn);
+            dispatcher.dispatch(null, 1);
+            expect(i, 'i should be 1.').to.equal(1);
+        });
+    });
 });

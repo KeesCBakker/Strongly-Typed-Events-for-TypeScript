@@ -7,15 +7,19 @@
         "removeComments": false,
         "preserveConstEnums": true,
         "sourceMap": false,
-        "target": "es5"
+        "target": "es5",
+        "noEmitOnError": true
     },
     "files": [
         "StronglyTypedEvents.ts",
-        "test/test.ts",
-        "examples/example.clock.ts",
-        "examples/example.imageloader.ts",
-        "examples/example.pulse-generator.ts",
-        "examples/example.stopwatch.ts",
-        "examples/example.trafficlight.ts"
+        "test/classic-test.ts",
+        "test/event-test.ts",
+        "test/signal-test.ts",
+        "test/simple-event-test.ts"
+    ],
+    "exclude": [
+        "StronglyTypedEvents.js",
+        "StronglyTypedEvents.d.ts",
+        "node_modules"
     ]
 }

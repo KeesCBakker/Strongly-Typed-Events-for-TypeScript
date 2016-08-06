@@ -1,5 +1,6 @@
+/// <reference path="typings/node/node.d.ts" />
 /*!
- * Strongly Typed Events for TypeScript - 0.3.1
+ * Strongly Typed Events for TypeScript - 0.4.0
  * https://github.com/KeesCBakker/StronlyTypedEvents/
  * http://keestalkstech.com
  *
@@ -14,7 +15,7 @@ interface IEventHandler<TSender, TArgs> {
       * @sender The sender.
       * @args The argument.
       */
-    (sender: TSender, args: TArgs): void;
+    (sender: TSender, args: TArgs): any;
 }
 /**
  * Event handler function with a generic argument
@@ -23,13 +24,13 @@ interface ISimpleEventHandler<TArgs> {
     /**
       * @args The argument.
       */
-    (args: TArgs): void;
+    (args: TArgs): any;
 }
 /**
  * Event handler function without arguments
  */
 interface ISignalHandler {
-    (): void;
+    (): any;
 }
 /**
  * Indicates the object implements generic subscriptions.
@@ -39,12 +40,32 @@ interface ISubscribable<THandlerType> {
      * Subscribe to the event.
      * @param fn The event handler that is called when the event is dispatched.
      */
-    subscribe(fn: THandlerType): void;
+    subscribe(fn: THandlerType): any;
+    /**
+     * Subscribe to the event.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
+    sub(fn: THandlerType): any;
     /**
      * Unsubscribe from the event.
      * @param fn The event handler that is will be unsubsribed from the event.
      */
-    unsubscribe(fn: THandlerType): void;
+    unsubscribe(fn: THandlerType): any;
+    /**
+     * Unsubscribe from the event.
+     * @param fn The event handler that is will be unsubsribed from the event.
+     */
+    unsub(fn: THandlerType): any;
+    /**
+     * Subscribes to the event only once.
+     * @param fn The event handler that is will be unsubsribed from the event.
+     */
+    one(fn: THandlerType): any;
+    /**
+     * Checks it the event has a subscription for the specified handler.
+     * @param fn The event handler.
+     */
+    has(fn: THandlerType): boolean;
 }
 /**
  * Models an event with a generic sender and generic argument.
@@ -72,13 +93,37 @@ interface IBaseEventHandling<TEventHandler> {
      * @param name The name of the event.
      * @param fn The event handler that is called when the event is dispatched.
      */
-    subscribe(name: string, fn: TEventHandler): void;
+    subscribe(name: string, fn: TEventHandler): any;
+    /**
+     * Subscribe to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
+    sub(name: string, fn: TEventHandler): any;
     /**
      * Unsubscribe from the event with the specified name.
      * @param name The name of the event.
      * @param fn The event handler that is will be unsubsribed from the event.
      */
-    unsubscribe(name: string, fn: TEventHandler): void;
+    unsubscribe(name: string, fn: TEventHandler): any;
+    /**
+     * Unsubscribe from the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler that is will be unsubsribed from the event.
+     */
+    unsub(name: string, fn: TEventHandler): any;
+    /**
+     * Subscribe once to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
+    one(name: string, fn: TEventHandler): any;
+    /**
+     * Checks it the event has a subscription for the specified handler.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    has(name: string, fn: TEventHandler): boolean;
 }
 /**
  * Indicates the object is capable of handling named events.
@@ -95,19 +140,76 @@ interface ISimpleEventHandling<TArgs> extends IBaseEventHandling<ISimpleEventHan
  */
 interface ISignalHandling extends IBaseEventHandling<ISignalHandler> {
 }
+/**
+ * Stores a handler. Manages execution meta data.
+ * @class Subscription
+ * @template TEventHandler
+ */
+declare class Subscription<TEventHandler> {
+    handler: TEventHandler;
+    isOnce: boolean;
+    /**
+     * Indicates if the subscription has been executed before.
+     */
+    isExecuted: boolean;
+    /**
+     * Creates an instance of Subscription.
+     *
+     * @param {TEventHandler} handler The handler for the subscription.
+     * @param {boolean} isOnce Indicates if the handler should only be executed` once.
+     */
+    constructor(handler: TEventHandler, isOnce: boolean);
+    /**
+     * Executes the handler.
+     *
+     * @param {boolean} executeAsync True if the even should be executed async.
+     * @param {*} The scope the scope of the event.
+     * @param {IArguments} args The arguments for the event.
+     */
+    execute(executeAsync: boolean, scope: any, args: IArguments): void;
+}
 declare abstract class DispatcherBase<TEventHandler> implements ISubscribable<TEventHandler> {
     private _wrap;
-    protected _subscriptions: Array<TEventHandler>;
+    private _subscriptions;
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
      */
     subscribe(fn: TEventHandler): void;
     /**
+     * Subscribe to the event dispatcher.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
+    sub(fn: TEventHandler): void;
+    /**
+     * Subscribe once to the event with the specified name.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
+    one(fn: TEventHandler): void;
+    /**
+     * Checks it the event has a subscription for the specified handler.
+     * @param fn The event handler.
+     */
+    has(fn: TEventHandler): boolean;
+    /**
      * Unsubscribes the handler from the dispatcher.
      * @param fn The event handler.
      */
     unsubscribe(fn: TEventHandler): void;
+    /**
+     * Unsubscribes the handler from the dispatcher.
+     * @param fn The event handler.
+     */
+    unsub(fn: TEventHandler): void;
+    /**
+     * Generic dispatch will dispatch the handlers with the given arguments.
+     *
+     * @protected
+     * @param {boolean} executeAsync True if the even should be executed async.
+     * @param {*} The scope the scope of the event.
+     * @param {IArguments} args The arguments for the event.
+     */
+    protected _dispatch(executeAsync: boolean, scope: any, args: IArguments): void;
     /**
      * Creates an event from the dispatcher. Will return the dispatcher
      * in a wrapper. This will prevent exposure of any dispatcher methods.
@@ -131,7 +233,6 @@ declare class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEventHandl
      * @param args The arguments object.
      */
     dispatchAsync(sender: TSender, args: TArgs): void;
-    private excuteAsync(sender, args, handler);
 }
 /**
  * The dispatcher handles the storage of subsciptions and facilitates
@@ -148,8 +249,11 @@ declare class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHa
      * @param args The arguments object.
      */
     dispatchAsync(args: TArgs): void;
-    private excuteAsync(args, handler);
 }
+/**
+ * The dispatcher handles the storage of subsciptions and facilitates
+ * subscription, unsubscription and dispatching of a signal event.
+ */
 declare class SignalDispatcher extends DispatcherBase<ISignalHandler> implements ISignal {
     /**
      * Dispatches the signal.
@@ -159,30 +263,51 @@ declare class SignalDispatcher extends DispatcherBase<ISignalHandler> implements
      * Dispatches the signal threaded.
      */
     dispatchAsync(): void;
-    private excuteAsync(handler);
 }
 /**
  * Hides the implementation of the event dispatcher. Will expose methods that
  * are relevent to the event.
  */
-declare class DispatcherWrapper<THandlerType> implements ISubscribable<THandlerType> {
+declare class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
     private _subscribe;
     private _unsubscribe;
+    private _one;
+    private _has;
     /**
      * Creates a new EventDispatcherWrapper instance.
      * @param dispatcher The dispatcher.
      */
-    constructor(dispatcher: ISubscribable<THandlerType>);
+    constructor(dispatcher: ISubscribable<THandler>);
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
      */
-    subscribe(fn: THandlerType): void;
+    subscribe(fn: THandler): void;
+    /**
+     * Subscribe to the event dispatcher.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
+    sub(fn: THandler): void;
     /**
      * Unsubscribe from the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
      */
-    unsubscribe(fn: THandlerType): void;
+    unsubscribe(fn: THandler): void;
+    /**
+     * Unsubscribe from the event dispatcher.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
+    unsub(fn: THandler): void;
+    /**
+     * Subscribe once to the event with the specified name.
+     * @param fn The event handler that is called when the event is dispatched.
+     */
+    one(fn: THandler): void;
+    /**
+     * Checks it the event has a subscription for the specified handler.
+     * @param fn The event handler.
+     */
+    has(fn: THandler): boolean;
 }
 /**
  * Base class for event lists classes. Implements the get and remove.
@@ -250,11 +375,35 @@ declare abstract class EventHandlingBase<TSender, TArgs> implements IEventHandli
      */
     subscribe(name: string, fn: IEventHandler<TSender, TArgs>): void;
     /**
+     * Subscribes to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    sub(name: string, fn: IEventHandler<TSender, TArgs>): void;
+    /**
      * Unsubscribes from the event with the specified name.
      * @param name The name of the event.
      * @param fn The event handler.
      */
     unsubscribe(name: string, fn: IEventHandler<TSender, TArgs>): void;
+    /**
+     * Unsubscribes from the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    unsub(name: string, fn: IEventHandler<TSender, TArgs>): void;
+    /**
+     * Subscribes to once the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    one(name: string, fn: IEventHandler<TSender, TArgs>): void;
+    /**
+     * Subscribes to once the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    has(name: string, fn: IEventHandler<TSender, TArgs>): boolean;
 }
 /**
  * Extends objects with simple event handling capabilities.
@@ -269,11 +418,35 @@ declare abstract class SimpleEventHandlingBase<TArgs> implements ISimpleEventHan
      */
     subscribe(name: string, fn: ISimpleEventHandler<TArgs>): void;
     /**
+     * Subscribes to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    sub(name: string, fn: ISimpleEventHandler<TArgs>): void;
+    /**
+     * Subscribes once to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    one(name: string, fn: ISimpleEventHandler<TArgs>): void;
+    /**
+     * Checks it the event has a subscription for the specified handler.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    has(name: string, fn: ISimpleEventHandler<TArgs>): boolean;
+    /**
      * Unsubscribes from the event with the specified name.
      * @param name The name of the event.
      * @param fn The event handler.
      */
     unsubscribe(name: string, fn: ISimpleEventHandler<TArgs>): void;
+    /**
+     * Unsubscribes from the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    unsub(name: string, fn: ISimpleEventHandler<TArgs>): void;
 }
 /**
  * Extends objects with signal event handling capabilities.
@@ -282,22 +455,49 @@ declare abstract class SignalHandlingBase implements ISignalHandling {
     private _events;
     protected events: SignalList;
     /**
+     * Subscribes once to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    one(name: string, fn: ISignalHandler): void;
+    /**
+     * Checks it the event has a subscription for the specified handler.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    has(name: string, fn: ISignalHandler): boolean;
+    /**
      * Subscribes to the event with the specified name.
      * @param name The name of the event.
      * @param fn The event handler.
      */
     subscribe(name: string, fn: ISignalHandler): void;
     /**
+     * Subscribes to the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    sub(name: string, fn: ISignalHandler): void;
+    /**
      * Unsubscribes from the event with the specified name.
      * @param name The name of the event.
      * @param fn The event handler.
      */
     unsubscribe(name: string, fn: ISignalHandler): void;
+    /**
+     * Unsubscribes from the event with the specified name.
+     * @param name The name of the event.
+     * @param fn The event handler.
+     */
+    unsub(name: string, fn: ISignalHandler): void;
 }
 interface IStronglyTypedEvents {
     EventList: <TSender, TArgs>() => EventList<TSender, TArgs>;
     SimpleEventList: <TArgs>() => SimpleEventList<TArgs>;
     SignalList: () => SignalList;
+    createEventList: <TSender, TArgs>() => EventList<TSender, TArgs>;
+    createSimpleEventList: <TArgs>() => SimpleEventList<TArgs>;
+    createSignalList: () => SignalList;
     EventDispatcher: <TSender, TArgs>() => EventDispatcher<TSender, TArgs>;
     SimpleEventDispatcher: <TArgs>() => SimpleEventDispatcher<TArgs>;
     SignalDispatcher: () => SignalDispatcher;
@@ -305,14 +505,16 @@ interface IStronglyTypedEvents {
     SimpleEventHandlingBase: <TArgs>() => SimpleEventHandlingBase<TArgs>;
     SignalHandlingBase: () => SignalHandlingBase;
     createEventDispatcher: <TSender, TArgs>() => EventDispatcher<TSender, TArgs>;
-    createSimpleEventDispatcher: <TSender, TArgs>() => EventDispatcher<TSender, TArgs>;
+    createSimpleEventDispatcher: <TArgs>() => SimpleEventDispatcher<TArgs>;
     createSignalDispatcher: () => SignalDispatcher;
     EventListBase: <TEventDispatcher>() => EventListBase<TEventDispatcher>;
     DispatcherBase: <TEventHandler>() => DispatcherBase<TEventHandler>;
     DispatcherWrapper: <THandlerType>() => DispatcherWrapper<THandlerType>;
 }
 declare function createEventDispatcher<TSender, TArgs>(): EventDispatcher<TSender, TArgs>;
+declare function createEventList<TSender, TArgs>(): EventList<TSender, TArgs>;
 declare function createSimpleEventDispatcher<TArgs>(): SimpleEventDispatcher<TArgs>;
+declare function createSimpleEventList<TArgs>(): SimpleEventList<TArgs>;
 declare function createSignalDispatcher(): SignalDispatcher;
+declare function createSignalList(): SignalList;
 declare var define: any;
-declare var module: any;

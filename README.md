@@ -1,4 +1,4 @@
-# Strongly Typed Events for TypeScript &ndash; 0.3.3
+# Strongly Typed Events for TypeScript &ndash; 0.4.0
 Add the power of events to your TypeScript projects.
 
 [![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
@@ -107,6 +107,11 @@ This project will help you to add events, event handling en event dispatching to
 - <a href="documentation/HowToUseInNodeJs.md">How to use Strongly Typed Events in Node.js?</a>
 
 ## History
+
+#### Version 0.4
+Introduced the `one` method on events to subscribe only once. Added `sub` and `unsub` methods as shorthands for `subscribe` and `unsubscribe`. Added a `has` method
+to check if a handler has been registered.
+Now supports Node.js through npm package: `npm i strongly-typed-events`. Rewrote and split tests.
 
 #### Version 0.3
 Introduced signal &ndash; events that contain no data and just fire. The unit tests now support modules. The following objects and features are present in this version:
