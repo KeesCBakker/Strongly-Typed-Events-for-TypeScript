@@ -110,11 +110,11 @@ window.onload = function () {
 
     sw.start();
 
-    window.setTimeout(function () {
+    setTimeout(function () {
         sw.pause();
     }, 3000);
 
-    window.setTimeout(function () {
+    setTimeout(function () {
         sw.start();
     }, 4000);
 
