@@ -9,7 +9,7 @@
     "dist": "dist"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha --reporter spec"
+    "test": "node_modules/.bin/mocha.bat --reporter spec"
   },
   "repository": {
     "type": "git",
