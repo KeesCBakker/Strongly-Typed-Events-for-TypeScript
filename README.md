@@ -109,8 +109,7 @@ This project will help you to add events, event handling en event dispatching to
 ## History
 
 #### Version 0.4
-Introduced the `one` method on events to subscribe only once. Added `sub` and `unsub` methods as shorthands for `subscribe` and `unsubscribe`. Added a `has` method
-to check if a handler has been registered.
+Introduced the `one` method on events to subscribe only once. Added `sub` and `unsub` methods as shorthands for `subscribe` and `unsubscribe`. Added a `has` method to check if a handler has been registered.
 Now supports Node.js through npm package: `npm i strongly-typed-events`. Rewrote and split tests.
 
 #### Version 0.3
