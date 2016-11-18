@@ -1,4 +1,5 @@
 *.sln
+*.suo
 *.config
 .vscode
 examples/*.js

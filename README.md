@@ -80,7 +80,7 @@ npm i strongly-typed-events
 Using it is easy:
 
 ```
-/// <reference path="node_modules/strongly-typed-events/StronglyTypedEvents.d.ts" />
+/// <reference path="node_modules/strongly-typed-events/strongly-typed-events.d.ts" />
 
 let _e = require('strongly-typed-events') as IStronglyTypedEvents;
 

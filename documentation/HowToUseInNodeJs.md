@@ -6,7 +6,7 @@ npm i strongly-typed-events
 ## Code example
 Using it is pretty straight forward:
 ```
-/// <reference path="node_modules/strongly-typed-events/StronglyTypedEvents.d.ts" />
+/// <reference path="node_modules/strongly-typed-events/strongly-typed-events.d.ts" />
 
 let _e = require('strongly-typed-events') as IStronglyTypedEvents;
 
@@ -45,13 +45,13 @@ The following objects are exposed through the module exports:
 ```
 
 ## Express Webserver
-The following code will serve the StronglyTypedEvents.js file from the package to the client:
+The following code will serve the strongly-typed-events.js file from the package to the client:
 ```
 //web dependencies
 var express = require('express');
 var app = express();
 
-app.get("/StronglyTypedEvents.js", function(req, res){
-    res.sendFile('./node_modules/strongly-typed-events/StronglyTypedEvents.js', root);
+app.get("/strongly-typed-events.js", function(req, res){
+    res.sendFile('./node_modules/strongly-typed-events/strongly-typed-events.js', root);
 });
 ```
