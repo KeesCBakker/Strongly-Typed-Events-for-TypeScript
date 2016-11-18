@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var r = typeof require !== 'undefined';
 var expect = r ? require('chai').expect : window.chai.expect;
-var _e = r ? require('../StronglyTypedEvents') : window;
+var _e = r ? require('../strongly-typed-events') : window;
 describe("Strongly Typed Events", function () {
     describe("Event", function () {
         it("Subscribe / unsubscribe - event as property", function () {

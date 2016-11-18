@@ -7,7 +7,7 @@
 
 var r = typeof require !== 'undefined';
 var expect: Chai.ExpectStatic = r ? require('chai').expect : (window as any).chai.expect;
-var _e: IStronglyTypedEvents = r ? require('../StronglyTypedEvents') : window;
+var _e: IStronglyTypedEvents = r ? require('../strongly-typed-events') : window;
 
 class Dummy {
     constructor(name: string) { }

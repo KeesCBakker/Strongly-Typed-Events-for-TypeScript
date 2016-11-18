@@ -5,7 +5,7 @@
 'use strict';
 var r = typeof require !== 'undefined';
 var expect = r ? require('chai').expect : window.chai.expect;
-var _e = r ? require('../StronglyTypedEvents') : window;
+var _e = r ? require('../strongly-typed-events') : window;
 describe("Strongly Typed Events - Simple event", function () {
     describe("createSimpleEventDispatcher", function () {
         it("Subscribing to the simple event dispatcher", function () {
