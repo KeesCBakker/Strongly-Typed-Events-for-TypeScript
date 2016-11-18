@@ -11,15 +11,15 @@
         "noEmitOnError": true
     },
     "files": [
-        "StronglyTypedEvents.ts",
+        "strongly-typed-events.ts",
         "test/classic-test.ts",
         "test/event-test.ts",
         "test/signal-test.ts",
         "test/simple-event-test.ts"
     ],
     "exclude": [
-        "StronglyTypedEvents.js",
-        "StronglyTypedEvents.d.ts",
+        "strongly-typed-events.js",
+        "strongly-typed-events.d.ts",
         "node_modules"
     ]
 }
