@@ -1,6 +1,7 @@
 *.sln
 *.suo
 *.config
+.vs
 .vscode
 examples/*.js
 examples/*.map
