@@ -1,7 +1,7 @@
 /// <reference path="typings/node/node.d.ts" />
 
 /*!
- * Strongly Typed Events for TypeScript - 0.4.1
+ * Strongly Typed Events for TypeScript - 0.4.2
  * https://github.com/KeesCBakker/StronlyTypedEvents/
  * http://keestalkstech.com
  *
@@ -77,6 +77,11 @@ interface ISubscribable<THandlerType> {
      * @param fn The event handler.
      */
     has(fn: THandlerType): boolean;
+
+    /**
+     * Clears all the subscriptions.
+     */
+    clear();
 }
 
 /**
@@ -328,6 +333,13 @@ abstract class DispatcherBase<TEventHandler> implements ISubscribable<TEventHand
     public asEvent(): ISubscribable<TEventHandler> {
         return this._wrap;
     }
+
+    /**
+     * Clears all the subscriptions.
+     */
+    public clear() {
+        this._subscriptions.splice(0, this._subscriptions.length);
+    }
 }
 
 /**
@@ -408,6 +420,7 @@ class DispatcherWrapper<THandler> implements ISubscribable<THandler>
     private _unsubscribe: (fn: THandler) => void;
     private _one: (fn: THandler) => void;
     private _has: (fn: THandler) => boolean;
+    private _clear: () => void;
 
     /**
      * Creates a new EventDispatcherWrapper instance.
@@ -418,6 +431,7 @@ class DispatcherWrapper<THandler> implements ISubscribable<THandler>
         this._unsubscribe = (fn: THandler) => dispatcher.unsubscribe(fn);
         this._one = (fn: THandler) => dispatcher.one(fn);
         this._has = (fn: THandler) => dispatcher.has(fn);
+        this._clear = () => dispatcher.clear();
     }
 
     /**
@@ -466,6 +480,13 @@ class DispatcherWrapper<THandler> implements ISubscribable<THandler>
      */
     public has(fn: THandler) {
         return this._has(fn);
+    }
+ 
+    /**
+     * Clears all the subscriptions.
+     */
+    public clear() {
+        this._clear();
     }
 }
 

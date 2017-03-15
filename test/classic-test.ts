@@ -1,7 +1,7 @@
 /// <reference path="../typings/node/node.d.ts" />
 /// <reference path="../typings/mocha/mocha.d.ts" />
 /// <reference path="../typings/chai/chai.d.ts" />
-/// <reference path="../strongly-typed-events.d.ts" />
+/// <reference path="../strongly-typed-events.ts" />
 
 'use strict';
 
@@ -16,7 +16,7 @@ describe("Strongly Typed Events", function () {
         it("Subscribe / unsubscribe - event as property", function () {
 
             class MyEventTester {
-                private _myEvent: EventDispatcher<MyEventTester, string> = new _e.EventDispatcher<MyEventTester, string>();
+                private _myEvent: EventDispatcher<MyEventTester, string> = _e.createEventDispatcher<MyEventTester, string>();
 
                 get myEvent(): IEvent<MyEventTester, string> {
                     return this._myEvent.asEvent();
@@ -55,7 +55,7 @@ describe("Strongly Typed Events", function () {
             }
 
             class MyEventTester implements IMyEventTester {
-                private _myEvent: EventDispatcher<IMyEventTester, string> = new _e.EventDispatcher<IMyEventTester, string>();
+                private _myEvent: EventDispatcher<IMyEventTester, string> = _e.createEventDispatcher<IMyEventTester, string>();
 
                 myEvent(): IEvent<IMyEventTester, string> {
                     return this._myEvent.asEvent();
@@ -84,7 +84,7 @@ describe("Strongly Typed Events", function () {
 
         it("Event list", function () {
 
-            var events = new _e.EventList<any, string>();
+            var events = _e.createEventList<any, string>();
             var result: string;
 
             events.get('Test1').subscribe((sender: any, args: string) => result = args);
@@ -105,7 +105,7 @@ describe("Strongly Typed Events", function () {
 
         it('EventHandlingBase', function () {
 
-            class MyTester extends _e.EventHandlingBase<MyTester, string> {
+            class MyTester extends EventHandlingBase<MyTester, string> {
 
                 signal(name: string, str: string): void {
                     this.events.get(name).dispatch(this, str);
@@ -132,7 +132,7 @@ describe("Strongly Typed Events", function () {
             class Source { constructor(public name: string) { } }
             class Argument { constructor(public name: string) { } }
 
-            let dispatcher = new _e.EventDispatcher<Source, Argument>();
+            let dispatcher = _e.createEventDispatcher<Source, Argument>();
 
             var s1 = new Source('s1');
             var s2 = new Source('s2');
@@ -153,7 +153,7 @@ describe("Strongly Typed Events", function () {
 
         it('Async dispatch', function (done) {
 
-            let dispatcher = new _e.EventDispatcher<any, number>();
+            let dispatcher = _e.createEventDispatcher<any, number>();
 
             let i = 0;
 
@@ -173,7 +173,7 @@ describe("Strongly Typed Events", function () {
         it("Subscribe / unsubscribe - simple event as property", function () {
 
             class MyEventTester {
-                private _myEvent = new _e.SimpleEventDispatcher<string>();
+                private _myEvent = _e.createSimpleEventDispatcher<string>();
 
                 get myEvent() {
                     return this._myEvent.asEvent();
@@ -209,7 +209,7 @@ describe("Strongly Typed Events", function () {
             }
 
             class MyEventTester implements IMyEventTester {
-                private _myEvent = new _e.SimpleEventDispatcher<string>();
+                private _myEvent = _e.createSimpleEventDispatcher<string>();
 
                 myEvent() {
                     return this._myEvent.asEvent();
@@ -238,7 +238,7 @@ describe("Strongly Typed Events", function () {
 
         it("Simple Event list", function () {
 
-            var events = new _e.SimpleEventList<string>();
+            var events = _e.createSimpleEventList<string>();
             var result: string;
 
             events.get('Test1').subscribe((args: string) => result = args);
@@ -259,7 +259,7 @@ describe("Strongly Typed Events", function () {
 
         it('SimpleEventHandlingBase', function () {
 
-            class MyTester extends _e.SimpleEventHandlingBase<string> {
+            class MyTester extends SimpleEventHandlingBase<string> {
 
                 signal(name: string, str: string): void {
                     this.events.get(name).dispatch(str);
@@ -285,7 +285,7 @@ describe("Strongly Typed Events", function () {
 
             class Argument { constructor(public name: string) { } }
 
-            let dispatcher = new _e.SimpleEventDispatcher<Argument>();
+            let dispatcher = _e.createSimpleEventDispatcher<Argument>();
 
             var a1 = new Argument('a1');
             var a2 = new Argument('a2');
@@ -300,7 +300,7 @@ describe("Strongly Typed Events", function () {
 
         it('Async dispatch', function (done) {
 
-            let dispatcher = new _e.SimpleEventDispatcher<number>();
+            let dispatcher = new SimpleEventDispatcher<number>();
 
             let i = 0;
 
@@ -321,7 +321,7 @@ describe("Strongly Typed Events", function () {
         it("Subscribe / unsubscribe - signal as property", function () {
 
             class MyEventTester {
-                private _myEvent = new _e.SignalDispatcher();
+                private _myEvent = _e.createSignalDispatcher();
 
                 get myEvent() {
                     return this._myEvent.asEvent();
@@ -357,7 +357,7 @@ describe("Strongly Typed Events", function () {
             }
 
             class MyEventTester implements IMyEventTester {
-                private _myEvent = new _e.SignalDispatcher();
+                private _myEvent = new SignalDispatcher();
 
                 myEvent() {
                     return this._myEvent.asEvent();
@@ -387,7 +387,7 @@ describe("Strongly Typed Events", function () {
         it("Signal list", function () {
 
             let i = 10;
-            let list = new _e.SignalList();
+            let list = _e.createSignalList();
 
             list.get("one").subscribe(function () {
                 i += 20;
@@ -413,7 +413,7 @@ describe("Strongly Typed Events", function () {
 
         it('SignalHandlingBase', function () {
 
-            class MyTester extends _e.SignalHandlingBase {
+            class MyTester extends SignalHandlingBase {
 
                 signal(name: string): void {
                     this.events.get(name).dispatch();
@@ -437,7 +437,7 @@ describe("Strongly Typed Events", function () {
 
         it('Async dispatch', function (done) {
 
-            let dispatcher = new _e.SignalDispatcher();
+            let dispatcher = _e.createSignalDispatcher();
 
             let i = 0;
 

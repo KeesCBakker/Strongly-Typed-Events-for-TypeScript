@@ -1,7 +1,7 @@
 /// <reference path="../typings/node/node.d.ts" />
 /// <reference path="../typings/mocha/mocha.d.ts" />
 /// <reference path="../typings/chai/chai.d.ts" />
-/// <reference path="../strongly-typed-events.d.ts" />
+/// <reference path="../strongly-typed-events.ts" />
 'use strict';
 var r = typeof require !== 'undefined';
 var expect = r ? require('chai').expect : window.chai.expect;
@@ -153,6 +153,21 @@ describe("Strongly Typed Events - Event", function () {
             dispatcher.unsubscribe(fn);
             var result = dispatcher.has(fn);
             expect(result, 'Handler should not be present because of unsubscribe.').to.equal(false);
+        });
+        it("Clear subscriptions.", function () {
+            var carolus = new Dummy('Carolus');
+            var willem = new Dummy('Willem');
+            var dispatcher = _e.createEventDispatcher();
+            var resultNr = 0;
+            var resultDummy = willem;
+            dispatcher.subscribe(function (dummy, nr) {
+                resultDummy = dummy;
+                resultNr = nr;
+            });
+            dispatcher.clear();
+            dispatcher.dispatch(carolus, 7);
+            expect(resultDummy, 'resultDummy should be Willem').to.equal(willem);
+            expect(resultNr, 'resultNr should be 0.').to.equal(0);
         });
     });
     describe("EventList", function () {

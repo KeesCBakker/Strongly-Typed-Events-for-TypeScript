@@ -1,6 +1,6 @@
 /// <reference path="typings/node/node.d.ts" />
 /*!
- * Strongly Typed Events for TypeScript - 0.4.0
+ * Strongly Typed Events for TypeScript - 0.4.2
  * https://github.com/KeesCBakker/StronlyTypedEvents/
  * http://keestalkstech.com
  *
@@ -66,6 +66,10 @@ interface ISubscribable<THandlerType> {
      * @param fn The event handler.
      */
     has(fn: THandlerType): boolean;
+    /**
+     * Clears all the subscriptions.
+     */
+    clear(): any;
 }
 /**
  * Models an event with a generic sender and generic argument.
@@ -215,6 +219,10 @@ declare abstract class DispatcherBase<TEventHandler> implements ISubscribable<TE
      * in a wrapper. This will prevent exposure of any dispatcher methods.
      */
     asEvent(): ISubscribable<TEventHandler>;
+    /**
+     * Clears all the subscriptions.
+     */
+    clear(): void;
 }
 /**
  * Dispatcher implementation for events. Can be used to subscribe, unsubscribe
@@ -273,6 +281,7 @@ declare class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
     private _unsubscribe;
     private _one;
     private _has;
+    private _clear;
     /**
      * Creates a new EventDispatcherWrapper instance.
      * @param dispatcher The dispatcher.
@@ -308,6 +317,10 @@ declare class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
      * @param fn The event handler.
      */
     has(fn: THandler): boolean;
+    /**
+     * Clears all the subscriptions.
+     */
+    clear(): void;
 }
 /**
  * Base class for event lists classes. Implements the get and remove.
@@ -367,7 +380,7 @@ declare abstract class EventHandlingBase<TSender, TArgs> implements IEventHandli
     /**
      * Gets the list with all the event dispatchers.
      */
-    protected events: EventList<TSender, TArgs>;
+    protected readonly events: EventList<TSender, TArgs>;
     /**
      * Subscribes to the event with the specified name.
      * @param name The name of the event.
@@ -410,7 +423,7 @@ declare abstract class EventHandlingBase<TSender, TArgs> implements IEventHandli
  */
 declare abstract class SimpleEventHandlingBase<TArgs> implements ISimpleEventHandling<TArgs> {
     private _events;
-    protected events: SimpleEventList<TArgs>;
+    protected readonly events: SimpleEventList<TArgs>;
     /**
      * Subscribes to the event with the specified name.
      * @param name The name of the event.
@@ -453,7 +466,7 @@ declare abstract class SimpleEventHandlingBase<TArgs> implements ISimpleEventHan
  */
 declare abstract class SignalHandlingBase implements ISignalHandling {
     private _events;
-    protected events: SignalList;
+    protected readonly events: SignalList;
     /**
      * Subscribes once to the event with the specified name.
      * @param name The name of the event.

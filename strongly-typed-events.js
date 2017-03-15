@@ -1,9 +1,14 @@
 /// <reference path="typings/node/node.d.ts" />
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 /**
  * Base class for implementation of the dispatcher. It facilitates the subscribe
  * and unsubscribe methods based on generic handlers. The TEventType specifies
@@ -149,6 +154,12 @@ var DispatcherBase = (function () {
     DispatcherBase.prototype.asEvent = function () {
         return this._wrap;
     };
+    /**
+     * Clears all the subscriptions.
+     */
+    DispatcherBase.prototype.clear = function () {
+        this._subscriptions.splice(0, this._subscriptions.length);
+    };
     return DispatcherBase;
 }());
 /**
@@ -158,7 +169,7 @@ var DispatcherBase = (function () {
 var EventDispatcher = (function (_super) {
     __extends(EventDispatcher, _super);
     function EventDispatcher() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * Dispatches the event.
@@ -185,7 +196,7 @@ var EventDispatcher = (function (_super) {
 var SimpleEventDispatcher = (function (_super) {
     __extends(SimpleEventDispatcher, _super);
     function SimpleEventDispatcher() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * Dispatches the event.
@@ -210,7 +221,7 @@ var SimpleEventDispatcher = (function (_super) {
 var SignalDispatcher = (function (_super) {
     __extends(SignalDispatcher, _super);
     function SignalDispatcher() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * Dispatches the signal.
@@ -240,6 +251,7 @@ var DispatcherWrapper = (function () {
         this._unsubscribe = function (fn) { return dispatcher.unsubscribe(fn); };
         this._one = function (fn) { return dispatcher.one(fn); };
         this._has = function (fn) { return dispatcher.has(fn); };
+        this._clear = function () { return dispatcher.clear(); };
     }
     /**
      * Subscribe to the event dispatcher.
@@ -283,6 +295,12 @@ var DispatcherWrapper = (function () {
     DispatcherWrapper.prototype.has = function (fn) {
         return this._has(fn);
     };
+    /**
+     * Clears all the subscriptions.
+     */
+    DispatcherWrapper.prototype.clear = function () {
+        this._clear();
+    };
     return DispatcherWrapper;
 }());
 /**
@@ -321,7 +339,7 @@ var EventListBase = (function () {
 var EventList = (function (_super) {
     __extends(EventList, _super);
     function EventList() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * Creates a new dispatcher instance.
@@ -338,7 +356,7 @@ var EventList = (function (_super) {
 var SimpleEventList = (function (_super) {
     __extends(SimpleEventList, _super);
     function SimpleEventList() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * Creates a new dispatcher instance.
@@ -355,7 +373,7 @@ var SimpleEventList = (function (_super) {
 var SignalList = (function (_super) {
     __extends(SignalList, _super);
     function SignalList() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     /**
      * Creates a new dispatcher instance.

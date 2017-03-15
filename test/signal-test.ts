@@ -1,7 +1,7 @@
 /// <reference path="../typings/node/node.d.ts" />
 /// <reference path="../typings/mocha/mocha.d.ts" />
 /// <reference path="../typings/chai/chai.d.ts" />
-/// <reference path="../strongly-typed-events.d.ts" />
+/// <reference path="../strongly-typed-events.ts" />
 
 'use strict';
 
@@ -184,6 +184,22 @@ describe("Strongly Typed Events - Signal", function () {
             let result = dispatcher.has(fn);
             expect(result, 'Handler should not be present because of unsubscribe.').to.equal(false);
         });
+
+        it("Clear subscriptions.", function () {
+
+            let dispatcher = _e.createSignalDispatcher();
+            let resultNr = 0;
+
+            dispatcher.subscribe(() => {
+                resultNr = 7;
+            });
+
+            dispatcher.clear();
+            dispatcher.dispatch();
+
+            expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
+
     });
 
     describe("SignalList", function () {
