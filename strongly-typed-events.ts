@@ -835,7 +835,7 @@ declare var define: any;
         createEventList, createSimpleEventList, createSignalList
     ];
 
-    // Node: Export function
+    // Node: function
     if (typeof module !== "undefined" && module.exports) {
         exportables.forEach(exp => module.exports[nameof(exp)] = exp);
     }

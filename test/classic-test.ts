@@ -7,7 +7,6 @@
 
 var r = typeof require !== 'undefined';
 var expect: Chai.ExpectStatic = r ? require('chai').expect : (window as any).chai.expect;
-var _e: IStronglyTypedEvents = r ? require('../strongly-typed-events') : window;
 
 describe("Strongly Typed Events", function () {
 
@@ -16,7 +15,7 @@ describe("Strongly Typed Events", function () {
         it("Subscribe / unsubscribe - event as property", function () {
 
             class MyEventTester {
-                private _myEvent: EventDispatcher<MyEventTester, string> = _e.createEventDispatcher<MyEventTester, string>();
+                private _myEvent: EventDispatcher<MyEventTester, string> = new EventDispatcher<MyEventTester, string>();
 
                 get myEvent(): IEvent<MyEventTester, string> {
                     return this._myEvent.asEvent();
@@ -55,7 +54,7 @@ describe("Strongly Typed Events", function () {
             }
 
             class MyEventTester implements IMyEventTester {
-                private _myEvent: EventDispatcher<IMyEventTester, string> = _e.createEventDispatcher<IMyEventTester, string>();
+                private _myEvent: EventDispatcher<IMyEventTester, string> = new EventDispatcher<IMyEventTester, string>();
 
                 myEvent(): IEvent<IMyEventTester, string> {
                     return this._myEvent.asEvent();
@@ -84,7 +83,7 @@ describe("Strongly Typed Events", function () {
 
         it("Event list", function () {
 
-            var events = _e.createEventList<any, string>();
+            var events = new EventList<any, string>();
             var result: string;
 
             events.get('Test1').subscribe((sender: any, args: string) => result = args);
@@ -132,7 +131,7 @@ describe("Strongly Typed Events", function () {
             class Source { constructor(public name: string) { } }
             class Argument { constructor(public name: string) { } }
 
-            let dispatcher = _e.createEventDispatcher<Source, Argument>();
+            let dispatcher = new EventDispatcher<Source, Argument>();
 
             var s1 = new Source('s1');
             var s2 = new Source('s2');
@@ -153,7 +152,7 @@ describe("Strongly Typed Events", function () {
 
         it('Async dispatch', function (done) {
 
-            let dispatcher = _e.createEventDispatcher<any, number>();
+            let dispatcher = new EventDispatcher<any, number>();
 
             let i = 0;
 
@@ -173,7 +172,7 @@ describe("Strongly Typed Events", function () {
         it("Subscribe / unsubscribe - simple event as property", function () {
 
             class MyEventTester {
-                private _myEvent = _e.createSimpleEventDispatcher<string>();
+                private _myEvent = new SimpleEventDispatcher<string>();
 
                 get myEvent() {
                     return this._myEvent.asEvent();
@@ -209,7 +208,7 @@ describe("Strongly Typed Events", function () {
             }
 
             class MyEventTester implements IMyEventTester {
-                private _myEvent = _e.createSimpleEventDispatcher<string>();
+                private _myEvent = new SimpleEventDispatcher<string>();
 
                 myEvent() {
                     return this._myEvent.asEvent();
@@ -238,7 +237,7 @@ describe("Strongly Typed Events", function () {
 
         it("Simple Event list", function () {
 
-            var events = _e.createSimpleEventList<string>();
+            var events = new SimpleEventList<string>();
             var result: string;
 
             events.get('Test1').subscribe((args: string) => result = args);
@@ -285,7 +284,7 @@ describe("Strongly Typed Events", function () {
 
             class Argument { constructor(public name: string) { } }
 
-            let dispatcher = _e.createSimpleEventDispatcher<Argument>();
+            let dispatcher = new SimpleEventDispatcher<Argument>();
 
             var a1 = new Argument('a1');
             var a2 = new Argument('a2');
@@ -321,7 +320,7 @@ describe("Strongly Typed Events", function () {
         it("Subscribe / unsubscribe - signal as property", function () {
 
             class MyEventTester {
-                private _myEvent = _e.createSignalDispatcher();
+                private _myEvent = new SignalDispatcher();
 
                 get myEvent() {
                     return this._myEvent.asEvent();
@@ -387,7 +386,7 @@ describe("Strongly Typed Events", function () {
         it("Signal list", function () {
 
             let i = 10;
-            let list = _e.createSignalList();
+            let list = new SignalList();
 
             list.get("one").subscribe(function () {
                 i += 20;
@@ -437,7 +436,7 @@ describe("Strongly Typed Events", function () {
 
         it('Async dispatch', function (done) {
 
-            let dispatcher = _e.createSignalDispatcher();
+            let dispatcher = new SignalDispatcher();
 
             let i = 0;
 
@@ -457,7 +456,7 @@ describe("Strongly Typed Events", function () {
         it("Execute one on an event dispatcher", function () {
 
             var i = 0;
-            var dispatcher = _e.createEventDispatcher<any, number>();
+            var dispatcher = new EventDispatcher<any, number>();
             dispatcher.one((sender, args) => {
                 i += args;
             });
@@ -472,7 +471,7 @@ describe("Strongly Typed Events", function () {
         it("Execute 2x one on an event dispatcher", function () {
 
             var i = 0;
-            var dispatcher = _e.createEventDispatcher<any, number>();
+            var dispatcher = new EventDispatcher<any, number>();
             dispatcher.one((sender, args) => {
                 i += args;
             });
@@ -490,7 +489,7 @@ describe("Strongly Typed Events", function () {
         it("Unsubscribe one on an event dispatcher", function () {
 
             var i = 0;
-            var dispatcher = _e.createEventDispatcher<any, number>();
+            var dispatcher = new EventDispatcher<any, number>();
             let fn = (sender, args) => {
                 i += args;
             };
@@ -506,7 +505,7 @@ describe("Strongly Typed Events", function () {
 
 
             var i = 0;
-            var dispatcher = _e.createEventDispatcher<any, number>();
+            var dispatcher = new EventDispatcher<any, number>();
             let fn = (sender, args) => {
                 i += args;
             };

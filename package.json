@@ -23,7 +23,9 @@
     "args",
     "strongly",
     "typed",
-    "typescript"
+    "typescript",
+    "signal",
+    "DotNet"
   ],
   "author": "Kees C. Bakker (https://keestalkstech.com)",
   "license": "MIT",

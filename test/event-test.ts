@@ -7,7 +7,6 @@
 
 var r = typeof require !== 'undefined';
 var expect: Chai.ExpectStatic = r ? require('chai').expect : (window as any).chai.expect;
-var _e: IStronglyTypedEvents = r ? require('../strongly-typed-events') : window;
 
 class Dummy {
     constructor(name: string) { }
@@ -21,7 +20,7 @@ describe("Strongly Typed Events - Event", function () {
 
             var carolus = new Dummy('Carolus');
 
-            let dispatcher = _e.createEventDispatcher<Dummy, number>();
+            let dispatcher = new EventDispatcher<Dummy, number>();
             let resultNr: number;
             let resultDummy: Dummy;
 
@@ -40,7 +39,7 @@ describe("Strongly Typed Events - Event", function () {
 
             var carolus = new Dummy('Carolus');
 
-            let dispatcher = _e.createEventDispatcher<Dummy, number>();
+            let dispatcher = new EventDispatcher<Dummy, number>();
             let resultNr: number;
             let resultDummy: Dummy;
 
@@ -60,7 +59,7 @@ describe("Strongly Typed Events - Event", function () {
 
             var carolus = new Dummy('Carolus');
 
-            let dispatcher = _e.createEventDispatcher<Dummy, number>();
+            let dispatcher = new EventDispatcher<Dummy, number>();
             let resultNr = 0;
             let resultDummy: Dummy;
 
@@ -81,7 +80,7 @@ describe("Strongly Typed Events - Event", function () {
 
             var carolus = new Dummy('Carolus');
 
-            let dispatcher = _e.createEventDispatcher<Dummy, number>();
+            let dispatcher = new EventDispatcher<Dummy, number>();
             let resultNr = 0;
             let resultDummy: Dummy;
 
@@ -102,7 +101,7 @@ describe("Strongly Typed Events - Event", function () {
 
             var carolus = new Dummy('Carolus');
 
-            let dispatcher = _e.createEventDispatcher<Dummy, number>();
+            let dispatcher = new EventDispatcher<Dummy, number>();
             let resultNr = 0;
             let resultDummy: Dummy;
 
@@ -122,7 +121,7 @@ describe("Strongly Typed Events - Event", function () {
 
             var carolus = new Dummy('Carolus');
 
-            let dispatcher = _e.createEventDispatcher<Dummy, number>();
+            let dispatcher = new EventDispatcher<Dummy, number>();
             let resultNr = 0;
             let resultDummy: Dummy = null;
 
@@ -144,7 +143,7 @@ describe("Strongly Typed Events - Event", function () {
 
             var carolus = new Dummy('Carolus');
 
-            let dispatcher = _e.createEventDispatcher<Dummy, number>();
+            let dispatcher = new EventDispatcher<Dummy, number>();
             let resultNr = 0;
             let resultDummy: Dummy = null;
 
@@ -166,7 +165,7 @@ describe("Strongly Typed Events - Event", function () {
 
             var carolus = new Dummy('Carolus');
 
-            let dispatcher = _e.createEventDispatcher<Dummy, number>();
+            let dispatcher = new EventDispatcher<Dummy, number>();
             let resultNr = 0;
             let resultDummy: Dummy = null;
 
@@ -186,14 +185,14 @@ describe("Strongly Typed Events - Event", function () {
 
         it("Has no event.", function () {
             var fn = (dummy: Dummy, nr: number) => { };
-            let dispatcher = _e.createEventDispatcher<Dummy, number>();
+            let dispatcher = new EventDispatcher<Dummy, number>();
             let result = dispatcher.has(fn);
             expect(result, 'Handler should not be present.').to.equal(false);
         });
 
         it("Has event through subscribe.", function () {
             var fn = (dummy: Dummy, nr: number) => { };
-            let dispatcher = _e.createEventDispatcher<Dummy, number>();
+            let dispatcher = new EventDispatcher<Dummy, number>();
             dispatcher.subscribe(fn);
             let result = dispatcher.has(fn);
             expect(result, 'Handler should be present.').to.equal(true);
@@ -201,7 +200,7 @@ describe("Strongly Typed Events - Event", function () {
 
         it("Has event through one.", function () {
             var fn = (dummy: Dummy, nr: number) => { };
-            let dispatcher = _e.createEventDispatcher<Dummy, number>();
+            let dispatcher = new EventDispatcher<Dummy, number>();
             dispatcher.one(fn);
             let result = dispatcher.has(fn);
             expect(result, 'Handler should be present.').to.equal(true);
@@ -209,7 +208,7 @@ describe("Strongly Typed Events - Event", function () {
 
         it("Test subscribe -> unsubscribe -> has", function () {
             var fn = (dummy: Dummy, nr: number) => { };
-            let dispatcher = _e.createEventDispatcher<Dummy, number>();
+            let dispatcher = new EventDispatcher<Dummy, number>();
             dispatcher.subscribe(fn);
             dispatcher.unsubscribe(fn);
             let result = dispatcher.has(fn);
@@ -221,7 +220,7 @@ describe("Strongly Typed Events - Event", function () {
             var carolus = new Dummy('Carolus');
             var willem = new Dummy('Willem');
 
-            let dispatcher = _e.createEventDispatcher<Dummy, number>();
+            let dispatcher = new EventDispatcher<Dummy, number>();
             let resultNr = 0;
             let resultDummy = willem;
 
@@ -243,7 +242,7 @@ describe("Strongly Typed Events - Event", function () {
 
         it("Subscribe to event name", function () {
             let event = 'myEvent';
-            let list = _e.createEventList<Dummy, number>();
+            let list = new EventList<Dummy, number>();
             var fn = (dummy: Dummy, nr: number) => { };
 
             list.get(event).subscribe(fn);
@@ -253,7 +252,7 @@ describe("Strongly Typed Events - Event", function () {
 
         it("Unsubscribe to event name", function () {
             let event = 'myEvent';
-            let list = _e.createEventList<Dummy, number>();
+            let list = new EventList<Dummy, number>();
             var fn = (dummy: Dummy, nr: number) => { };
 
             list.get(event).subscribe(fn);
@@ -265,7 +264,7 @@ describe("Strongly Typed Events - Event", function () {
 
         it("Test firing two events in one list", function () {
 
-            let list = _e.createEventList<Dummy, number>();
+            let list = new EventList<Dummy, number>();
             let result: string;
 
             let event1 = 'ev1';
@@ -286,7 +285,7 @@ describe("Strongly Typed Events - Event", function () {
 
         it("Test remove from list.", function () {
 
-            let list = _e.createEventList<Dummy, number>();
+            let list = new EventList<Dummy, number>();
             var fn = (dummy: Dummy, nr: number) => { };
 
             let event1 = 'ev1';

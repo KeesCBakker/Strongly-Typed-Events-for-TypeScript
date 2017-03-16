@@ -608,7 +608,7 @@ function createSignalList() {
         createEventDispatcher, createSimpleEventDispatcher, createSignalDispatcher,
         createEventList, createSimpleEventList, createSignalList
     ];
-    // Node: Export function
+    // Node: function
     if (typeof module !== "undefined" && module.exports) {
         exportables.forEach(function (exp) { return module.exports[nameof(exp)] = exp; });
     }
