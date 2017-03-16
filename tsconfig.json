@@ -8,7 +8,7 @@
         "preserveConstEnums": true,
         "sourceMap": false,
         "target": "es5",
-        "noEmitOnError": true
+        "noEmitOnError": false
     },
     "files": [
         "./strongly-typed-events.ts",

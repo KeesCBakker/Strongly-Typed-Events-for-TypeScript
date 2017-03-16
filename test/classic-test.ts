@@ -3,6 +3,8 @@
 /// <reference path="../typings/chai/chai.d.ts" />
 /// <reference path="../strongly-typed-events.ts" />
 
+'use strict'
+
 var r = typeof require !== 'undefined';
 var expect: Chai.ExpectStatic = r ? require('chai').expect : (window as any).chai.expect;
 var _e: IStronglyTypedEvents = r ? require('../strongly-typed-events') : window;
@@ -103,7 +105,7 @@ describe("Strongly Typed Events", function () {
 
         it('EventHandlingBase', function () {
 
-            class MyTester extends EventHandlingBase<MyTester, string> {
+            class MyTester extends _e.EventHandlingBase<MyTester, string> {
 
                 signal(name: string, str: string): void {
                     this.events.get(name).dispatch(this, str);
@@ -257,7 +259,7 @@ describe("Strongly Typed Events", function () {
 
         it('SimpleEventHandlingBase', function () {
 
-            class MyTester extends SimpleEventHandlingBase<string> {
+            class MyTester extends _e.SimpleEventHandlingBase<string> {
 
                 signal(name: string, str: string): void {
                     this.events.get(name).dispatch(str);
@@ -411,7 +413,7 @@ describe("Strongly Typed Events", function () {
 
         it('SignalHandlingBase', function () {
 
-            class MyTester extends SignalHandlingBase {
+            class MyTester extends _e.SignalHandlingBase {
 
                 signal(name: string): void {
                     this.events.get(name).dispatch();

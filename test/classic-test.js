@@ -2,6 +2,7 @@
 /// <reference path="../typings/mocha/mocha.d.ts" />
 /// <reference path="../typings/chai/chai.d.ts" />
 /// <reference path="../strongly-typed-events.ts" />
+'use strict';
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -98,7 +99,7 @@ describe("Strongly Typed Events", function () {
                     this.events.get(name).dispatch(this, str);
                 };
                 return MyTester;
-            }(EventHandlingBase));
+            }(_e.EventHandlingBase));
             var t = new MyTester();
             var result;
             t.subscribe('Test1', function (sender, args) { return result = args; });
@@ -228,7 +229,7 @@ describe("Strongly Typed Events", function () {
                     this.events.get(name).dispatch(str);
                 };
                 return MyTester;
-            }(SimpleEventHandlingBase));
+            }(_e.SimpleEventHandlingBase));
             var t = new MyTester();
             var result;
             t.subscribe('Test1', function (args) { return result = args; });
@@ -352,7 +353,7 @@ describe("Strongly Typed Events", function () {
                     this.events.get(name).dispatch();
                 };
                 return MyTester;
-            }(SignalHandlingBase));
+            }(_e.SignalHandlingBase));
             var t = new MyTester();
             var result = '';
             t.subscribe('Test1', function () { return result = 'Testing 123'; });
