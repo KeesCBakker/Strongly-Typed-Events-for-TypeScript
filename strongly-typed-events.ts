@@ -352,7 +352,7 @@ class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEventHandler<TSend
      * Creates a new EventDispatcher instance.
      */
     constructor(){
-        super();
+        super(); 
     }
 
     /**
