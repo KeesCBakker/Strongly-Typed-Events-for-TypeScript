@@ -5,6 +5,7 @@
 'use strict';
 var r = typeof require !== 'undefined';
 var expect = r ? require('chai').expect : window.chai.expect;
+var _e = r ? require('../strongly-typed-events') : window;
 var Dummy = (function () {
     function Dummy(name) {
     }
@@ -14,7 +15,7 @@ describe("Strongly Typed Events - Event", function () {
     describe("createEventDispatcher", function () {
         it("Subscribing to the event dispatcher", function () {
             var carolus = new Dummy('Carolus');
-            var dispatcher = new EventDispatcher();
+            var dispatcher = _e.createEventDispatcher();
             var resultNr;
             var resultDummy;
             dispatcher.subscribe(function (dummy, nr) {
@@ -27,7 +28,7 @@ describe("Strongly Typed Events - Event", function () {
         });
         it("Sub to the event dispatcher", function () {
             var carolus = new Dummy('Carolus');
-            var dispatcher = new EventDispatcher();
+            var dispatcher = _e.createEventDispatcher();
             var resultNr;
             var resultDummy;
             dispatcher.sub(function (dummy, nr) {
@@ -40,7 +41,7 @@ describe("Strongly Typed Events - Event", function () {
         });
         it("Subscribing to the event dispatcher. Fire twice", function () {
             var carolus = new Dummy('Carolus');
-            var dispatcher = new EventDispatcher();
+            var dispatcher = _e.createEventDispatcher();
             var resultNr = 0;
             var resultDummy;
             dispatcher.subscribe(function (dummy, nr) {
@@ -54,7 +55,7 @@ describe("Strongly Typed Events - Event", function () {
         });
         it("Sub to the event dispatcher. Fire twice", function () {
             var carolus = new Dummy('Carolus');
-            var dispatcher = new EventDispatcher();
+            var dispatcher = _e.createEventDispatcher();
             var resultNr = 0;
             var resultDummy;
             dispatcher.sub(function (dummy, nr) {
@@ -68,7 +69,7 @@ describe("Strongly Typed Events - Event", function () {
         });
         it("One subscription to the event dispatcher. Fire twice.", function () {
             var carolus = new Dummy('Carolus');
-            var dispatcher = new EventDispatcher();
+            var dispatcher = _e.createEventDispatcher();
             var resultNr = 0;
             var resultDummy;
             dispatcher.one(function (dummy, nr) {
@@ -82,7 +83,7 @@ describe("Strongly Typed Events - Event", function () {
         });
         it("Unsubscribing from the event dispatcher.", function () {
             var carolus = new Dummy('Carolus');
-            var dispatcher = new EventDispatcher();
+            var dispatcher = _e.createEventDispatcher();
             var resultNr = 0;
             var resultDummy = null;
             var fn = function (dummy, nr) {
@@ -97,7 +98,7 @@ describe("Strongly Typed Events - Event", function () {
         });
         it("Unsub from the event dispatcher.", function () {
             var carolus = new Dummy('Carolus');
-            var dispatcher = new EventDispatcher();
+            var dispatcher = _e.createEventDispatcher();
             var resultNr = 0;
             var resultDummy = null;
             var fn = function (dummy, nr) {
@@ -112,7 +113,7 @@ describe("Strongly Typed Events - Event", function () {
         });
         it("Unsubscribing to a one subscription.", function () {
             var carolus = new Dummy('Carolus');
-            var dispatcher = new EventDispatcher();
+            var dispatcher = _e.createEventDispatcher();
             var resultNr = 0;
             var resultDummy = null;
             var fn = function (dummy, nr) {
@@ -127,27 +128,27 @@ describe("Strongly Typed Events - Event", function () {
         });
         it("Has no event.", function () {
             var fn = function (dummy, nr) { };
-            var dispatcher = new EventDispatcher();
+            var dispatcher = _e.createEventDispatcher();
             var result = dispatcher.has(fn);
             expect(result, 'Handler should not be present.').to.equal(false);
         });
         it("Has event through subscribe.", function () {
             var fn = function (dummy, nr) { };
-            var dispatcher = new EventDispatcher();
+            var dispatcher = _e.createEventDispatcher();
             dispatcher.subscribe(fn);
             var result = dispatcher.has(fn);
             expect(result, 'Handler should be present.').to.equal(true);
         });
         it("Has event through one.", function () {
             var fn = function (dummy, nr) { };
-            var dispatcher = new EventDispatcher();
+            var dispatcher = _e.createEventDispatcher();
             dispatcher.one(fn);
             var result = dispatcher.has(fn);
             expect(result, 'Handler should be present.').to.equal(true);
         });
         it("Test subscribe -> unsubscribe -> has", function () {
             var fn = function (dummy, nr) { };
-            var dispatcher = new EventDispatcher();
+            var dispatcher = _e.createEventDispatcher();
             dispatcher.subscribe(fn);
             dispatcher.unsubscribe(fn);
             var result = dispatcher.has(fn);
@@ -156,7 +157,7 @@ describe("Strongly Typed Events - Event", function () {
         it("Clear subscriptions.", function () {
             var carolus = new Dummy('Carolus');
             var willem = new Dummy('Willem');
-            var dispatcher = new EventDispatcher();
+            var dispatcher = _e.createEventDispatcher();
             var resultNr = 0;
             var resultDummy = willem;
             dispatcher.subscribe(function (dummy, nr) {
@@ -172,7 +173,7 @@ describe("Strongly Typed Events - Event", function () {
     describe("EventList", function () {
         it("Subscribe to event name", function () {
             var event = 'myEvent';
-            var list = new EventList();
+            var list = _e.createEventList();
             var fn = function (dummy, nr) { };
             list.get(event).subscribe(fn);
             var result = list.get(event).has(fn);
@@ -180,7 +181,7 @@ describe("Strongly Typed Events - Event", function () {
         });
         it("Unsubscribe to event name", function () {
             var event = 'myEvent';
-            var list = new EventList();
+            var list = _e.createEventList();
             var fn = function (dummy, nr) { };
             list.get(event).subscribe(fn);
             list.get(event).unsubscribe(fn);
@@ -188,7 +189,7 @@ describe("Strongly Typed Events - Event", function () {
             expect(result, 'result should be false due to unsubscribe.').to.equals(false);
         });
         it("Test firing two events in one list", function () {
-            var list = new EventList();
+            var list = _e.createEventList();
             var result;
             var event1 = 'ev1';
             var fn1 = function (dummy, nr) { result = 'ev1:' + nr; };
@@ -202,7 +203,7 @@ describe("Strongly Typed Events - Event", function () {
             expect(result, 'Result should be "ev1:8.').to.equal("ev1:8");
         });
         it("Test remove from list.", function () {
-            var list = new EventList();
+            var list = _e.createEventList();
             var fn = function (dummy, nr) { };
             var event1 = 'ev1';
             list.get(event1).subscribe(fn);

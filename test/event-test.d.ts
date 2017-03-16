@@ -4,6 +4,7 @@
 /// <reference path="../strongly-typed-events.d.ts" />
 declare var r: boolean;
 declare var expect: Chai.ExpectStatic;
+declare var _e: IStronglyTypedEvents;
 declare class Dummy {
     constructor(name: string);
 }
