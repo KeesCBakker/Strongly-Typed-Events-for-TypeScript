@@ -557,6 +557,14 @@ abstract class EventListBase<TEventDispatcher> {
 class EventList<TSender, TArgs> extends EventListBase<EventDispatcher<TSender, TArgs>> {
 
     /**
+     * Creates a new EventList instance.
+     */
+    constructor() {
+        super();
+    }
+
+
+    /**
      * Creates a new dispatcher instance.
      */
     protected createDispatcher(): EventDispatcher<TSender, TArgs> {
@@ -571,6 +579,14 @@ class EventList<TSender, TArgs> extends EventListBase<EventDispatcher<TSender, T
 class SimpleEventList<TArgs> extends EventListBase<SimpleEventDispatcher<TArgs>> {
 
     /**
+     * Creates a new SimpleEventList instance.
+     */
+    constructor() {
+        super();
+    }
+
+
+    /**
      * Creates a new dispatcher instance.
      */
     protected createDispatcher(): SimpleEventDispatcher<TArgs> {
@@ -583,6 +599,13 @@ class SimpleEventList<TArgs> extends EventListBase<SimpleEventDispatcher<TArgs>>
  * Events dispatchers are automatically created.
  */
 class SignalList extends EventListBase<SignalDispatcher> {
+
+    /**
+     * Creates a new SignalList instance.
+     */
+    constructor() {
+        super();
+    }
 
     /**
      * Creates a new dispatcher instance.

@@ -1,9 +1,14 @@
 /// <reference path="typings/node/node.d.ts" />
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 /**
  * Base class for implementation of the dispatcher. It facilitates the subscribe
  * and unsubscribe methods based on generic handlers. The TEventType specifies
@@ -342,8 +347,11 @@ var EventListBase = (function () {
  */
 var EventList = (function (_super) {
     __extends(EventList, _super);
+    /**
+     * Creates a new EventList instance.
+     */
     function EventList() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        return _super.call(this) || this;
     }
     /**
      * Creates a new dispatcher instance.
@@ -359,8 +367,11 @@ var EventList = (function (_super) {
  */
 var SimpleEventList = (function (_super) {
     __extends(SimpleEventList, _super);
+    /**
+     * Creates a new SimpleEventList instance.
+     */
     function SimpleEventList() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        return _super.call(this) || this;
     }
     /**
      * Creates a new dispatcher instance.
@@ -376,8 +387,11 @@ var SimpleEventList = (function (_super) {
  */
 var SignalList = (function (_super) {
     __extends(SignalList, _super);
+    /**
+     * Creates a new SignalList instance.
+     */
     function SignalList() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        return _super.call(this) || this;
     }
     /**
      * Creates a new dispatcher instance.
