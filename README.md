@@ -5,7 +5,7 @@ Add the power of events to your TypeScript projects.
 [![npm version](https://badge.fury.io/js/strongly-typed-events.svg)](https://badge.fury.io/js/strongly-typed-events)
 
 ## Event types
-This project gives you the follwing event types:
+This project gives you the following event types:
 - `IEvent<TSender, TArgs>` - styled after the way .Net implements events. The sender and the argument are generic, so your code is strong typed. (Since 0.1)
 - `ISimpleEvent<TArgs>` - when you need something simpler with only a generic argument. (Since 0.2)
 - `ISignal` - for when no data is needed, just the firing of the event is enough. (Since 0.3)
