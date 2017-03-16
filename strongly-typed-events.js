@@ -168,8 +168,11 @@ var DispatcherBase = (function () {
  */
 var EventDispatcher = (function (_super) {
     __extends(EventDispatcher, _super);
+    /**
+     * Creates a new EventDispatcher instance.
+     */
     function EventDispatcher() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        return _super.call(this) || this;
     }
     /**
      * Dispatches the event.
@@ -195,8 +198,11 @@ var EventDispatcher = (function (_super) {
  */
 var SimpleEventDispatcher = (function (_super) {
     __extends(SimpleEventDispatcher, _super);
+    /**
+     * Creates a new SimpleEventDispatcher instance.
+     */
     function SimpleEventDispatcher() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        return _super.call(this) || this;
     }
     /**
      * Dispatches the event.
@@ -220,8 +226,11 @@ var SimpleEventDispatcher = (function (_super) {
  */
 var SignalDispatcher = (function (_super) {
     __extends(SignalDispatcher, _super);
+    /**
+     * Creates a new SignalDispatcher instance.
+     */
     function SignalDispatcher() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        return _super.call(this) || this;
     }
     /**
      * Dispatches the signal.

@@ -349,6 +349,13 @@ abstract class DispatcherBase<TEventHandler> implements ISubscribable<TEventHand
 class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEventHandler<TSender, TArgs>> implements IEvent<TSender, TArgs>
 {
     /**
+     * Creates a new EventDispatcher instance.
+     */
+    constructor(){
+        super();
+    }
+
+    /**
      * Dispatches the event.
      * @param sender The sender.
      * @param args The arguments object.
@@ -374,6 +381,13 @@ class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEventHandler<TSend
 class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHandler<TArgs>> implements ISimpleEvent<TArgs>
 {
     /**
+     * Creates a new SimpleEventDispatcher instance.
+     */
+    constructor(){
+        super();
+    }
+
+    /**
      * Dispatches the event.
      * @param args The arguments object.
      */
@@ -395,6 +409,14 @@ class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHandler<TA
  * subscription, unsubscription and dispatching of a signal event. 
  */
 class SignalDispatcher extends DispatcherBase<ISignalHandler> implements ISignal {
+
+    /**
+     * Creates a new SignalDispatcher instance.
+     */
+    constructor(){
+        super();
+    }
+
     /**
      * Dispatches the signal.
      */

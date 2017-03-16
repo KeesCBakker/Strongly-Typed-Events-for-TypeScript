@@ -258,7 +258,7 @@ describe("Strongly Typed Events", function () {
             dispatcher.dispatch(a1);
         });
         it('Async dispatch', function (done) {
-            var dispatcher = new SimpleEventDispatcher();
+            var dispatcher = _e.createSimpleEventDispatcher();
             var i = 0;
             dispatcher.subscribe(function (a) {
                 i = a;
@@ -302,7 +302,7 @@ describe("Strongly Typed Events", function () {
         it("Subscribe / unsubscribe - signal on interface", function () {
             var MyEventTester = (function () {
                 function MyEventTester() {
-                    this._myEvent = new SignalDispatcher();
+                    this._myEvent = _e.createSignalDispatcher();
                 }
                 MyEventTester.prototype.myEvent = function () {
                     return this._myEvent.asEvent();
