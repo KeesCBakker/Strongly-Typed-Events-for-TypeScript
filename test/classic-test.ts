@@ -300,7 +300,7 @@ describe("Strongly Typed Events", function () {
 
         it('Async dispatch', function (done) {
 
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
 
             let i = 0;
 
@@ -357,7 +357,7 @@ describe("Strongly Typed Events", function () {
             }
 
             class MyEventTester implements IMyEventTester {
-                private _myEvent = new SignalDispatcher();
+                private _myEvent = _e.createSignalDispatcher();
 
                 myEvent() {
                     return this._myEvent.asEvent();
