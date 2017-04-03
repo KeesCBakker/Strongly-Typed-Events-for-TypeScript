@@ -3,11 +3,14 @@
 *.config
 .vs
 .vscode
+*.njsproj
 examples/*.js
 examples/*.map
 examples/*.d.ts
 tests/*.d.ts
 tests/*.map
+obj
+bin
 
 # Logs
 logs

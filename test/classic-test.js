@@ -3,25 +3,19 @@
 /// <reference path="../typings/chai/chai.d.ts" />
 /// <reference path="../strongly-typed-events.ts" />
 'use strict';
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var r = typeof require !== 'undefined';
-var expect = r ? require('chai').expect : window.chai.expect;
-var _e = r ? require('../strongly-typed-events') : window;
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var expect = require('chai').expect;
+var strongly_typed_events_1 = require("../strongly-typed-events");
 describe("Strongly Typed Events", function () {
     describe("Event", function () {
         it("Subscribe / unsubscribe - event as property", function () {
             var MyEventTester = (function () {
                 function MyEventTester() {
-                    this._myEvent = _e.createEventDispatcher();
+                    this._myEvent = new strongly_typed_events_1.EventDispatcher();
                 }
                 Object.defineProperty(MyEventTester.prototype, "myEvent", {
                     get: function () {
@@ -52,7 +46,7 @@ describe("Strongly Typed Events", function () {
         it("Subscribe / unsubscribe - event on interface", function () {
             var MyEventTester = (function () {
                 function MyEventTester() {
-                    this._myEvent = _e.createEventDispatcher();
+                    this._myEvent = new strongly_typed_events_1.EventDispatcher();
                 }
                 MyEventTester.prototype.myEvent = function () {
                     return this._myEvent.asEvent();
@@ -75,7 +69,7 @@ describe("Strongly Typed Events", function () {
             expect(eventHandlerResult, 'The eventHandlerResult should still be "Test1".').to.equal('Test1');
         });
         it("Event list", function () {
-            var events = _e.createEventList();
+            var events = new strongly_typed_events_1.EventList();
             var result;
             events.get('Test1').subscribe(function (sender, args) { return result = args; });
             events.get('Test1').dispatch(this, 'Testing 123');
@@ -99,7 +93,7 @@ describe("Strongly Typed Events", function () {
                     this.events.get(name).dispatch(this, str);
                 };
                 return MyTester;
-            }(_e.EventHandlingBase));
+            }(strongly_typed_events_1.EventHandlingBase));
             var t = new MyTester();
             var result;
             t.subscribe('Test1', function (sender, args) { return result = args; });
@@ -124,7 +118,7 @@ describe("Strongly Typed Events", function () {
                 }
                 return Argument;
             }());
-            var dispatcher = _e.createEventDispatcher();
+            var dispatcher = new strongly_typed_events_1.EventDispatcher();
             var s1 = new Source('s1');
             var s2 = new Source('s2');
             var a1 = new Argument('a1');
@@ -138,7 +132,7 @@ describe("Strongly Typed Events", function () {
             dispatcher.dispatch(s1, a1);
         });
         it('Async dispatch', function (done) {
-            var dispatcher = _e.createEventDispatcher();
+            var dispatcher = new strongly_typed_events_1.EventDispatcher();
             var i = 0;
             dispatcher.subscribe(function (s, a) {
                 i = a;
@@ -153,7 +147,7 @@ describe("Strongly Typed Events", function () {
         it("Subscribe / unsubscribe - simple event as property", function () {
             var MyEventTester = (function () {
                 function MyEventTester() {
-                    this._myEvent = _e.createSimpleEventDispatcher();
+                    this._myEvent = new strongly_typed_events_1.SimpleEventDispatcher();
                 }
                 Object.defineProperty(MyEventTester.prototype, "myEvent", {
                     get: function () {
@@ -182,7 +176,7 @@ describe("Strongly Typed Events", function () {
         it("Subscribe / unsubscribe - simple event on interface", function () {
             var MyEventTester = (function () {
                 function MyEventTester() {
-                    this._myEvent = _e.createSimpleEventDispatcher();
+                    this._myEvent = new strongly_typed_events_1.SimpleEventDispatcher();
                 }
                 MyEventTester.prototype.myEvent = function () {
                     return this._myEvent.asEvent();
@@ -205,7 +199,7 @@ describe("Strongly Typed Events", function () {
             expect(result, 'Result should still be "Test1" because of unsubscribe.').to.equal('Test1');
         });
         it("Simple Event list", function () {
-            var events = _e.createSimpleEventList();
+            var events = new strongly_typed_events_1.SimpleEventList();
             var result;
             events.get('Test1').subscribe(function (args) { return result = args; });
             events.get('Test1').dispatch('Testing 123');
@@ -229,7 +223,7 @@ describe("Strongly Typed Events", function () {
                     this.events.get(name).dispatch(str);
                 };
                 return MyTester;
-            }(_e.SimpleEventHandlingBase));
+            }(strongly_typed_events_1.SimpleEventHandlingBase));
             var t = new MyTester();
             var result;
             t.subscribe('Test1', function (args) { return result = args; });
@@ -248,7 +242,7 @@ describe("Strongly Typed Events", function () {
                 }
                 return Argument;
             }());
-            var dispatcher = _e.createSimpleEventDispatcher();
+            var dispatcher = new strongly_typed_events_1.SimpleEventDispatcher();
             var a1 = new Argument('a1');
             var a2 = new Argument('a2');
             dispatcher.subscribe(function (argument) {
@@ -258,7 +252,7 @@ describe("Strongly Typed Events", function () {
             dispatcher.dispatch(a1);
         });
         it('Async dispatch', function (done) {
-            var dispatcher = _e.createSimpleEventDispatcher();
+            var dispatcher = new strongly_typed_events_1.SimpleEventDispatcher();
             var i = 0;
             dispatcher.subscribe(function (a) {
                 i = a;
@@ -273,7 +267,7 @@ describe("Strongly Typed Events", function () {
         it("Subscribe / unsubscribe - signal as property", function () {
             var MyEventTester = (function () {
                 function MyEventTester() {
-                    this._myEvent = _e.createSignalDispatcher();
+                    this._myEvent = new strongly_typed_events_1.SignalDispatcher();
                 }
                 Object.defineProperty(MyEventTester.prototype, "myEvent", {
                     get: function () {
@@ -302,7 +296,7 @@ describe("Strongly Typed Events", function () {
         it("Subscribe / unsubscribe - signal on interface", function () {
             var MyEventTester = (function () {
                 function MyEventTester() {
-                    this._myEvent = _e.createSignalDispatcher();
+                    this._myEvent = new strongly_typed_events_1.SignalDispatcher();
                 }
                 MyEventTester.prototype.myEvent = function () {
                     return this._myEvent.asEvent();
@@ -326,7 +320,7 @@ describe("Strongly Typed Events", function () {
         });
         it("Signal list", function () {
             var i = 10;
-            var list = _e.createSignalList();
+            var list = new strongly_typed_events_1.SignalList();
             list.get("one").subscribe(function () {
                 i += 20;
             });
@@ -353,7 +347,7 @@ describe("Strongly Typed Events", function () {
                     this.events.get(name).dispatch();
                 };
                 return MyTester;
-            }(_e.SignalHandlingBase));
+            }(strongly_typed_events_1.SignalHandlingBase));
             var t = new MyTester();
             var result = '';
             t.subscribe('Test1', function () { return result = 'Testing 123'; });
@@ -366,7 +360,7 @@ describe("Strongly Typed Events", function () {
             expect(result, 'The result should be "Testing 789".').to.equal('Testing 789');
         });
         it('Async dispatch', function (done) {
-            var dispatcher = _e.createSignalDispatcher();
+            var dispatcher = new strongly_typed_events_1.SignalDispatcher();
             var i = 0;
             dispatcher.subscribe(function () {
                 i = 1;
@@ -380,7 +374,7 @@ describe("Strongly Typed Events", function () {
     describe("One", function () {
         it("Execute one on an event dispatcher", function () {
             var i = 0;
-            var dispatcher = _e.createEventDispatcher();
+            var dispatcher = new strongly_typed_events_1.EventDispatcher();
             dispatcher.one(function (sender, args) {
                 i += args;
             });
@@ -391,7 +385,7 @@ describe("Strongly Typed Events", function () {
         });
         it("Execute 2x one on an event dispatcher", function () {
             var i = 0;
-            var dispatcher = _e.createEventDispatcher();
+            var dispatcher = new strongly_typed_events_1.EventDispatcher();
             dispatcher.one(function (sender, args) {
                 i += args;
             });
@@ -405,7 +399,7 @@ describe("Strongly Typed Events", function () {
         });
         it("Unsubscribe one on an event dispatcher", function () {
             var i = 0;
-            var dispatcher = _e.createEventDispatcher();
+            var dispatcher = new strongly_typed_events_1.EventDispatcher();
             var fn = function (sender, args) {
                 i += args;
             };
@@ -416,7 +410,7 @@ describe("Strongly Typed Events", function () {
         });
         it("Register", function () {
             var i = 0;
-            var dispatcher = _e.createEventDispatcher();
+            var dispatcher = new strongly_typed_events_1.EventDispatcher();
             var fn = function (sender, args) {
                 i += args;
             };

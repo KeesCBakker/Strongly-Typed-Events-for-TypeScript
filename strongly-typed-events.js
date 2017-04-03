@@ -1,14 +1,25 @@
 /// <reference path="typings/node/node.d.ts" />
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+/*!
+ * Strongly Typed Events for TypeScript - 0.5.0
+ * https://github.com/KeesCBakker/StronlyTypedEvents/
+ * http://keestalkstech.com
+ *
+ * Copyright Kees C. Bakker / KeesTalksTech
+ * Released under the MIT license
+ */
+/* small bridge to web JS */
+(function (w) {
+    w.exports = w.exports || {};
+    w.require = w.require || function (src) {
+        return w[src] || w.exports;
     };
-})();
+}(window));
 /**
  * Base class for implementation of the dispatcher. It facilitates the subscribe
  * and unsubscribe methods based on generic handlers. The TEventType specifies
@@ -59,6 +70,7 @@ var Subscription = (function () {
     };
     return Subscription;
 }());
+exports.Subscription = Subscription;
 var DispatcherBase = (function () {
     function DispatcherBase() {
         this._wrap = new DispatcherWrapper(this);
@@ -162,6 +174,7 @@ var DispatcherBase = (function () {
     };
     return DispatcherBase;
 }());
+exports.DispatcherBase = DispatcherBase;
 /**
  * Dispatcher implementation for events. Can be used to subscribe, unsubscribe
  * or dispatch events. Use the ToEvent() method to expose the event.
@@ -192,6 +205,7 @@ var EventDispatcher = (function (_super) {
     };
     return EventDispatcher;
 }(DispatcherBase));
+exports.EventDispatcher = EventDispatcher;
 /**
  * The dispatcher handles the storage of subsciptions and facilitates
  * subscription, unsubscription and dispatching of a simple event
@@ -220,6 +234,7 @@ var SimpleEventDispatcher = (function (_super) {
     };
     return SimpleEventDispatcher;
 }(DispatcherBase));
+exports.SimpleEventDispatcher = SimpleEventDispatcher;
 /**
  * The dispatcher handles the storage of subsciptions and facilitates
  * subscription, unsubscription and dispatching of a signal event.
@@ -246,6 +261,7 @@ var SignalDispatcher = (function (_super) {
     };
     return SignalDispatcher;
 }(DispatcherBase));
+exports.SignalDispatcher = SignalDispatcher;
 /**
  * Hides the implementation of the event dispatcher. Will expose methods that
  * are relevent to the event.
@@ -312,6 +328,7 @@ var DispatcherWrapper = (function () {
     };
     return DispatcherWrapper;
 }());
+exports.DispatcherWrapper = DispatcherWrapper;
 /**
  * Base class for event lists classes. Implements the get and remove.
  */
@@ -341,6 +358,7 @@ var EventListBase = (function () {
     };
     return EventListBase;
 }());
+exports.EventListBase = EventListBase;
 /**
  * Storage class for multiple events that are accessible by name.
  * Events dispatchers are automatically created.
@@ -361,6 +379,7 @@ var EventList = (function (_super) {
     };
     return EventList;
 }(EventListBase));
+exports.EventList = EventList;
 /**
  * Storage class for multiple simple events that are accessible by name.
  * Events dispatchers are automatically created.
@@ -381,6 +400,7 @@ var SimpleEventList = (function (_super) {
     };
     return SimpleEventList;
 }(EventListBase));
+exports.SimpleEventList = SimpleEventList;
 /**
  * Storage class for multiple signal events that are accessible by name.
  * Events dispatchers are automatically created.
@@ -401,6 +421,7 @@ var SignalList = (function (_super) {
     };
     return SignalList;
 }(EventListBase));
+exports.SignalList = SignalList;
 /**
  * Extends objects with event handling capabilities.
  */
@@ -468,6 +489,7 @@ var EventHandlingBase = (function () {
     };
     return EventHandlingBase;
 }());
+exports.EventHandlingBase = EventHandlingBase;
 /**
  * Extends objects with simple event handling capabilities.
  */
@@ -532,6 +554,7 @@ var SimpleEventHandlingBase = (function () {
     };
     return SimpleEventHandlingBase;
 }());
+exports.SimpleEventHandlingBase = SimpleEventHandlingBase;
 /**
  * Extends objects with signal event handling capabilities.
  */
@@ -596,50 +619,67 @@ var SignalHandlingBase = (function () {
     };
     return SignalHandlingBase;
 }());
+exports.SignalHandlingBase = SignalHandlingBase;
 function createEventDispatcher() {
     return new EventDispatcher();
 }
+exports.createEventDispatcher = createEventDispatcher;
 ;
 function createEventList() {
     return new EventList();
 }
+exports.createEventList = createEventList;
 function createSimpleEventDispatcher() {
     return new SimpleEventDispatcher();
 }
+exports.createSimpleEventDispatcher = createSimpleEventDispatcher;
 ;
 function createSimpleEventList() {
     return new SimpleEventList();
 }
+exports.createSimpleEventList = createSimpleEventList;
 function createSignalDispatcher() {
     return new SignalDispatcher();
 }
+exports.createSignalDispatcher = createSignalDispatcher;
 ;
 function createSignalList() {
     return new SignalList();
 }
+exports.createSignalList = createSignalList;
 ;
 (function () {
-    var exportables = [
-        EventDispatcher, SimpleEventDispatcher, SignalDispatcher,
-        EventList, SimpleEventList, SignalList,
-        EventHandlingBase, SimpleEventHandlingBase, SignalHandlingBase,
-        createEventDispatcher, createSimpleEventDispatcher, createSignalDispatcher,
-        createEventList, createSimpleEventList, createSignalList
-    ];
-    // Node: function
-    if (typeof module !== "undefined" && module.exports) {
-        exportables.forEach(function (exp) { return module.exports[nameof(exp)] = exp; });
+    var exportables = {};
+    exportables['EventDispatcher'] = EventDispatcher;
+    exportables['SimpleEventDispatcher'] = SimpleEventDispatcher;
+    exportables['SignalDispatcher'] = SignalDispatcher;
+    exportables['EventList'] = EventList;
+    exportables['SimpleEventList'] = SimpleEventList;
+    exportables['SignalList'] = SignalList;
+    exportables['EventHandlingBase'] = EventHandlingBase;
+    exportables['SimpleEventHandlingBase'] = SimpleEventHandlingBase;
+    exportables['SignalHandlingBase'] = SignalHandlingBase;
+    exportables['createEventDispatcher'] = createEventDispatcher;
+    exportables['createSimpleEventDispatcher'] = createSimpleEventDispatcher;
+    exportables['createSignalDispatcher'] = createSignalDispatcher;
+    exportables['createEventList'] = createEventList;
+    exportables['createSimpleEventList'] = createSimpleEventList;
+    exportables['createSignalList'] = createSignalList;
+    function map(key, exp) {
+        if (typeof module !== "undefined" && module.exports) {
+            module.exports[key] = exp;
+        }
+        else if (typeof define === 'function' && define.amd) {
+            define(function () { return exp; });
+        }
+        else {
+            window[key] = exp;
+            window._e = window._e || window;
+        }
     }
-    else if (typeof define === 'function' && define.amd) {
-        exportables.forEach(function (exp) { return define(function () { return exp; }); });
-    }
-    else if (window) {
-        exportables.forEach(function (exp) { return window[nameof(exp)] = exp; });
-    }
-    function nameof(fn) {
-        return typeof fn === 'undefined' ? '' : fn.name ? fn.name : (function () {
-            var result = /^function\s+([\w\$]+)\s*\(/.exec(fn.toString());
-            return !result ? '' : result[1];
-        })();
+    for (var key in exportables) {
+        if (exportables.hasOwnProperty(key)) {
+            map(key, exportables[key]);
+        }
     }
 }());
