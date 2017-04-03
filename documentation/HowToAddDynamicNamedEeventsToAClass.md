@@ -1,4 +1,5 @@
-#How to add multiple events to a class?#
+#How to add multiple events to a class?
+
 Need to add named event support to your class? Implement the `IEventHandling<TSender, TArgs>` or 
 `ISimpleEventHandling<TArgs>` interface or extend from the abstract `EventHandlingBase` or `SimpleEventHandling` class. 
 
