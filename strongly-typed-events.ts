@@ -11,6 +11,11 @@
 
 /* small bridge to web JS */
 (function (w: any) {
+
+    if (!w) {
+        return;
+    }
+
     w.exports = w.exports || {};
     w.require = w.require || function (src) {
         return w[src] || w.exports;

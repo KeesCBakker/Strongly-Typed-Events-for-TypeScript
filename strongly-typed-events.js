@@ -15,6 +15,9 @@ var __extends = (this && this.__extends) || function (d, b) {
  */
 /* small bridge to web JS */
 (function (w) {
+    if (!w) {
+        return;
+    }
     w.exports = w.exports || {};
     w.require = w.require || function (src) {
         return w[src] || w.exports;
