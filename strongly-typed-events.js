@@ -14,15 +14,14 @@ var __extends = (this && this.__extends) || function (d, b) {
  * Released under the MIT license
  */
 /* small bridge to web JS */
-(function (w) {
-    if (!w) {
-        return;
-    }
-    w.exports = w.exports || {};
-    w.require = w.require || function (src) {
-        return w[src] || w.exports;
-    };
-}(window));
+if (typeof (module) === 'undefined') {
+    (function (w) {
+        w.exports = w.exports || {};
+        w.require = w.require || function (src) {
+            return w[src] || w.exports;
+        };
+    }(window || {}));
+}
 /**
  * Base class for implementation of the dispatcher. It facilitates the subscribe
  * and unsubscribe methods based on generic handlers. The TEventType specifies
