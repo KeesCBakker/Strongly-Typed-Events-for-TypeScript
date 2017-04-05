@@ -3,8 +3,7 @@ Add the power of events to your TypeScript projects.
 
 [![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
 [![npm version](https://badge.fury.io/js/strongly-typed-events.svg)](https://badge.fury.io/js/strongly-typed-events)
-
-[![forever js](https://david-dm.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg)
+[![forever](https://david-dm.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg)
 
 ## Event types
 This project gives you the following event types:
