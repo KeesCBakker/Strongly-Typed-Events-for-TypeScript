@@ -1,3 +1,8 @@
+import { EventDispatcher, IEvent } from '../strongly-typed-events'
+
+declare var window: any;
+declare var Audio: any;
+
 window.onload = function () {
 
     let generator = new PulseGenerator(1);
@@ -42,7 +47,7 @@ class PulseGenerator {
 
     private start() {
 
-        setTimeout(() => {
+        window.setTimeout(() => {
 
             this.start();
 

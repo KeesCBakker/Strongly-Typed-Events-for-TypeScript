@@ -1,4 +1,11 @@
-﻿/*
+﻿import { SimpleEventDispatcher, SignalDispatcher, EventDispatcher, ISignal, IEvent, ISimpleEvent } from '../strongly-typed-events'
+
+declare var window: any;
+declare var alert: any;
+declare var console: any;
+declare var Image: any;
+
+/*
  * This clock example shows how to use Strongly Typed Events
  * with interfaces.
  */

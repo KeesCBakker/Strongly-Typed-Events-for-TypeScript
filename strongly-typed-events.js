@@ -1,10 +1,3 @@
-/// <reference path="typings/node/node.d.ts" />
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 /*!
  * Strongly Typed Events for TypeScript - 0.5.0
  * https://github.com/KeesCBakker/StronlyTypedEvents/
@@ -13,15 +6,12 @@ var __extends = (this && this.__extends) || function (d, b) {
  * Copyright Kees C. Bakker / KeesTalksTech
  * Released under the MIT license
  */
-/* small bridge to web JS */
-if (typeof (module) === 'undefined') {
-    (function (w) {
-        w.exports = w.exports || {};
-        w.require = w.require || function (src) {
-            return w[src] || w.exports;
-        };
-    }(window || {}));
-}
+"use strict";
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 /**
  * Base class for implementation of the dispatcher. It facilitates the subscribe
  * and unsubscribe methods based on generic handlers. The TEventType specifies
@@ -650,38 +640,27 @@ function createSignalList() {
 }
 exports.createSignalList = createSignalList;
 ;
-(function () {
-    var exportables = {};
-    exportables['EventDispatcher'] = EventDispatcher;
-    exportables['SimpleEventDispatcher'] = SimpleEventDispatcher;
-    exportables['SignalDispatcher'] = SignalDispatcher;
-    exportables['EventList'] = EventList;
-    exportables['SimpleEventList'] = SimpleEventList;
-    exportables['SignalList'] = SignalList;
-    exportables['EventHandlingBase'] = EventHandlingBase;
-    exportables['SimpleEventHandlingBase'] = SimpleEventHandlingBase;
-    exportables['SignalHandlingBase'] = SignalHandlingBase;
-    exportables['createEventDispatcher'] = createEventDispatcher;
-    exportables['createSimpleEventDispatcher'] = createSimpleEventDispatcher;
-    exportables['createSignalDispatcher'] = createSignalDispatcher;
-    exportables['createEventList'] = createEventList;
-    exportables['createSimpleEventList'] = createSimpleEventList;
-    exportables['createSignalList'] = createSignalList;
-    function map(key, exp) {
-        if (typeof module !== "undefined" && module.exports) {
-            module.exports[key] = exp;
-        }
-        else if (typeof define === 'function' && define.amd) {
-            define(function () { return exp; });
-        }
-        else {
-            window[key] = exp;
-            window._e = window._e || window;
-        }
-    }
-    for (var key in exportables) {
-        if (exportables.hasOwnProperty(key)) {
-            map(key, exportables[key]);
-        }
-    }
-}());
+var StronglyTypedEventsStatic = {
+    EventList: EventList,
+    SimpleEventList: SimpleEventList,
+    SignalList: SignalList,
+    createEventList: createEventList,
+    createSimpleEventList: createSimpleEventList,
+    createSignalList: createSignalList,
+    EventDispatcher: EventDispatcher,
+    SimpleEventDispatcher: SimpleEventDispatcher,
+    SignalDispatcher: SignalDispatcher,
+    EventHandlingBase: EventHandlingBase,
+    SimpleEventHandlingBase: SimpleEventHandlingBase,
+    SignalHandlingBase: SignalHandlingBase,
+    createEventDispatcher: createEventDispatcher,
+    createSimpleEventDispatcher: createSimpleEventDispatcher,
+    createSignalDispatcher: createSignalDispatcher,
+    EventListBase: EventListBase,
+    DispatcherBase: DispatcherBase,
+    DispatcherWrapper: DispatcherWrapper
+};
+var IStronglyTypedEvents = StronglyTypedEventsStatic;
+var _e = IStronglyTypedEvents;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = StronglyTypedEventsStatic;

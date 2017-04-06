@@ -1,18 +1,8 @@
-/// <reference path="../typings/node/node.d.ts" />
-/// <reference path="../typings/mocha/mocha.d.ts" />
-/// <reference path="../typings/chai/chai.d.ts" />
-/// <reference path="../strongly-typed-events.ts" />
+'use strict'
 
-'use strict';
+import { expect } from 'chai'
 
-var r = typeof require !== 'undefined';
-var expect: Chai.ExpectStatic = r ? require('chai').expect : (window as any).chai.expect;
-
-import {
-    SimpleEventDispatcher,
-    SimpleEventList
-} from '../strongly-typed-events'
-
+import _e from '../strongly-typed-events'
 
 describe("Strongly Typed Events - Simple event", function () {
 
@@ -20,7 +10,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Subscribing to the simple event dispatcher", function () {
 
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             let resultNr: number;
 
             dispatcher.subscribe((nr) => {
@@ -34,7 +24,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Sub to the simple event dispatcher", function () {
 
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             let resultNr: number;
 
             dispatcher.sub((nr) => {
@@ -49,7 +39,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Subscribing to the simple event dispatcher. Fire twice", function () {
 
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             let resultNr = 0;
 
             dispatcher.subscribe((nr) => {
@@ -64,7 +54,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Sub to the simple event dispatcher. Fire twice", function () {
 
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             let resultNr = 0;
 
             dispatcher.sub((nr) => {
@@ -79,7 +69,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("One subscription to the simple event dispatcher. Fire twice.", function () {
 
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             let resultNr = 0;
 
             dispatcher.one((nr) => {
@@ -94,7 +84,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Unsubscribing to the simple event dispatcher.", function () {
 
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             let resultNr = 0;
 
             var fn = (nr: number) => {
@@ -111,7 +101,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Unsub to the simple event dispatcher.", function () {
 
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             let resultNr = 0;
 
             var fn = (nr: number) => {
@@ -128,7 +118,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Unsubscribing to a one subscription.", function () {
 
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             let resultNr = 0;
 
             var fn = (nr: number) => {
@@ -144,7 +134,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Unsub from one subscription.", function () {
 
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             let resultNr = 0;
 
             var fn = (nr: number) => {
@@ -160,14 +150,14 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Has no event.", function () {
             var fn = (nr: number) => { };
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             let result = dispatcher.has(fn);
             expect(result, 'Handler should not be present.').to.equal(false);
         });
 
         it("Has event through subscribe.", function () {
             var fn = (nr: number) => { };
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             dispatcher.subscribe(fn);
             let result = dispatcher.has(fn);
             expect(result, 'Handler should be present.').to.equal(true);
@@ -175,7 +165,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Has event through one.", function () {
             var fn = (nr: number) => { };
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             dispatcher.one(fn);
             let result = dispatcher.has(fn);
             expect(result, 'Handler should be present.').to.equal(true);
@@ -183,7 +173,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Test subscribe -> unsubscribe -> has", function () {
             var fn = (nr: number) => { };
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             dispatcher.subscribe(fn);
             dispatcher.unsubscribe(fn);
             let result = dispatcher.has(fn);
@@ -192,7 +182,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Clear subscriptions.", function () {
 
-            let dispatcher = new SimpleEventDispatcher<number>();
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
             let resultNr = 0;
 
             dispatcher.subscribe((nr) => {
@@ -210,7 +200,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Subscribe to event name", function () {
             let event = 'myEvent';
-            let list = new SimpleEventList<number>();
+            let list = _e.createSimpleEventList<number>();
             var fn = (nr: number) => { };
 
             list.get(event).subscribe(fn);
@@ -220,7 +210,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Unsubscribe to event name", function () {
             let event = 'myEvent';
-            let list = new SimpleEventList<number>();
+            let list = _e.createSimpleEventList<number>();
             var fn = (nr: number) => { };
 
             list.get(event).subscribe(fn);
@@ -232,7 +222,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Test firing two events in one list", function () {
 
-            let list = new SimpleEventList<number>();
+            let list = _e.createSimpleEventList<number>();
             let result: string;
 
             let event1 = 'ev1';
@@ -253,7 +243,7 @@ describe("Strongly Typed Events - Simple event", function () {
 
         it("Test remove from list.", function () {
 
-            let list = new SimpleEventList<number>();
+            let list = _e.createSimpleEventList<number>();
             var fn = (nr: number) => { };
 
             let event1 = 'ev1';

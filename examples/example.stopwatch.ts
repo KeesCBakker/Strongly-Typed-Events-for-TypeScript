@@ -1,4 +1,6 @@
-﻿class Stopwatch {
+﻿import { EventList, IEvent } from '../strongly-typed-events'
+
+class Stopwatch {
 
     private _events = new EventList<Stopwatch, StopwatchEventArgs>();
     private _ticks = 0;
@@ -96,6 +98,9 @@ class StopwatchEventArgs {
     }
 }
 
+declare var window: any; 
+declare var alert: any;
+
 window.onload = function () {
 
     var sw = new Stopwatch();
@@ -110,11 +115,11 @@ window.onload = function () {
 
     sw.start();
 
-    setTimeout(function () {
+    window.setTimeout(function () {
         sw.pause();
     }, 3000);
 
-    setTimeout(function () {
+    window.setTimeout(function () {
         sw.start();
     }, 4000);
 

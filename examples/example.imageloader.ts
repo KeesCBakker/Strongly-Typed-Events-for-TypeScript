@@ -1,4 +1,10 @@
-﻿window.onload = () => {
+﻿import { SimpleEventDispatcher, ISimpleEvent, ISimpleEventHandler } from '../strongly-typed-events'
+
+declare var window: any;
+declare var alert: any;
+declare var Image: any;
+
+window.onload = () => {
 
     let downloader = new ImageDownloader();
 

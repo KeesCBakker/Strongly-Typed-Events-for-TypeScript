@@ -1,4 +1,4 @@
-# Strongly Typed Events for TypeScript &ndash; 0.5.0
+# Strongly Typed Events for TypeScript &ndash; 1.0.0
 Add the power of events to your TypeScript projects.
 
 [![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
@@ -107,6 +107,9 @@ This project will help you to add events, event handling en event dispatching to
 - <a href="documentation/HowToUseInNodeJs.md">How to use Strongly Typed Events in Node.js?</a>
 
 ## History
+
+#### Version 1.0
+Added default exports. Removed emulation through window.
 
 #### Version 0.5
 Restructured includes for 'normal' web applications. Using `import` / `export` mechanisme. Emulating `exports` and `require` nodes through the `window` object for web.

@@ -1,6 +1,6 @@
 {
   "name": "strongly-typed-events",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "description": "Add the power of events to your (TypeScript) projects!",
   "main": "./strongly-typed-events.js",
   "types": "./strongly-typed-events.d.ts",
@@ -34,10 +34,9 @@
   },
   "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
   "devDependencies": {
-    "blanket": "^1.2.3",
+    "@types/chai": "^3.4.35",
+    "@types/mocha": "^2.2.40",
     "chai": "^3.5.0",
-    "coveralls": "^2.11.12",
-    "istanbul": "^0.4.4",
     "mocha": "^3.0.0"
   },
   "engines": {

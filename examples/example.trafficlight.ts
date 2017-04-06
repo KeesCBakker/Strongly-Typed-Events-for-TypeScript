@@ -1,3 +1,8 @@
+import { SignalList, ISignal } from '../strongly-typed-events'
+
+declare var console: any;
+declare var setTimeout: any;
+
 class TrafficLight {
     private _signals = new SignalList();
     private _color = 'red';
@@ -31,11 +36,11 @@ class TrafficLight {
     }
 
     private internalStart() {
-        window.setTimeout(() => {
+        setTimeout(() => {
             this._signals.get('green').dispatch();
-            window.setTimeout(() => {
+            setTimeout(() => {
                 this._signals.get('orange').dispatch();
-                window.setTimeout(() => {
+                setTimeout(() => {
                     this._signals.get('red').dispatch();
                     this.internalStart();
                 }, this.orangeMs);

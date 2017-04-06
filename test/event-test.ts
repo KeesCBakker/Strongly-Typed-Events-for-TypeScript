@@ -1,12 +1,6 @@
-/// <reference path="../typings/node/node.d.ts" />
-/// <reference path="../typings/mocha/mocha.d.ts" />
-/// <reference path="../typings/chai/chai.d.ts" />
-/// <reference path="../strongly-typed-events.ts" />
+'use strict'
 
-'use strict';
-
-var r = typeof require !== 'undefined';
-var expect: Chai.ExpectStatic = r ? require('chai').expect : (window as any).chai.expect;
+import { expect } from 'chai'
 
 import {
     EventDispatcher,

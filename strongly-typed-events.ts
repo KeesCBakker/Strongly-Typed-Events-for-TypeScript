@@ -1,5 +1,3 @@
-/// <reference path="typings/node/node.d.ts" />
-
 /*!
  * Strongly Typed Events for TypeScript - 0.5.0
  * https://github.com/KeesCBakker/StronlyTypedEvents/
@@ -8,16 +6,6 @@
  * Copyright Kees C. Bakker / KeesTalksTech
  * Released under the MIT license
  */
-
-/* small bridge to web JS */
-if (typeof (module) === 'undefined') {
-    (function (w: any) {
-        w.exports = w.exports || {};
-        w.require = w.require || function (src) {
-            return w[src] || w.exports;
-        }
-    }(window || {}));
-}
 
 /**
  * Event handler function with a generic sender and a generic argument.
@@ -301,7 +289,7 @@ export abstract class DispatcherBase<TEventHandler> implements ISubscribable<TEv
         }
     }
 
-    
+
     /**
      * Unsubscribes the handler from the dispatcher.
      * @param fn The event handler.
@@ -361,8 +349,8 @@ export class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEventHandle
     /**
      * Creates a new EventDispatcher instance.
      */
-    constructor(){
-        super(); 
+    constructor() {
+        super();
     }
 
     /**
@@ -393,7 +381,7 @@ export class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHan
     /**
      * Creates a new SimpleEventDispatcher instance.
      */
-    constructor(){
+    constructor() {
         super();
     }
 
@@ -423,7 +411,7 @@ export class SignalDispatcher extends DispatcherBase<ISignalHandler> implements 
     /**
      * Creates a new SignalDispatcher instance.
      */
-    constructor(){
+    constructor() {
         super();
     }
 
@@ -513,7 +501,7 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler>
     public has(fn: THandler): boolean {
         return this._has(fn);
     }
- 
+
     /**
      * Clears all the subscriptions.
      */
@@ -720,7 +708,7 @@ export abstract class SimpleEventHandlingBase<TArgs> implements ISimpleEventHand
      * @param fn The event handler.
      */
     sub(name: string, fn: ISimpleEventHandler<TArgs>): void {
-        this.subscribe(name, fn);    
+        this.subscribe(name, fn);
     }
 
     /**
@@ -756,7 +744,7 @@ export abstract class SimpleEventHandlingBase<TArgs> implements ISimpleEventHand
      * @param fn The event handler.
      */
     unsub(name: string, fn: ISimpleEventHandler<TArgs>): void {
-        this.unsubscribe(name, fn);    
+        this.unsubscribe(name, fn);
     }
 }
 
@@ -815,7 +803,7 @@ export abstract class SignalHandlingBase implements ISignalHandling {
     unsubscribe(name: string, fn: ISignalHandler): void {
         this._events.get(name).unsubscribe(fn);
     }
-        
+
     /**
      * Unsubscribes from the event with the specified name.
      * @param name The name of the event.
@@ -824,33 +812,6 @@ export abstract class SignalHandlingBase implements ISignalHandling {
     unsub(name: string, fn: ISignalHandler): void {
         this.unsubscribe(name, fn);
     }
-}
-
-export interface IStronglyTypedEvents {
-
-    EventList: <TSender, TArgs>() => EventList<TSender, TArgs>;
-    SimpleEventList: <TArgs>() => SimpleEventList<TArgs>;
-    SignalList: () => SignalList;
-
-    createEventList: <TSender, TArgs>() => EventList<TSender, TArgs>;
-    createSimpleEventList: <TArgs>() => SimpleEventList<TArgs>;
-    createSignalList: () => SignalList;
-
-    EventDispatcher: <TSender, TArgs>() => EventDispatcher<TSender, TArgs>;
-    SimpleEventDispatcher: <TArgs>() => SimpleEventDispatcher<TArgs>;
-    SignalDispatcher: () => SignalDispatcher;
-
-    EventHandlingBase: <TSender, TArgs>() => EventHandlingBase<TSender, TArgs>;
-    SimpleEventHandlingBase: <TArgs>() => SimpleEventHandlingBase<TArgs>;
-    SignalHandlingBase: () => SignalHandlingBase;
-
-    createEventDispatcher: <TSender, TArgs>() => EventDispatcher<TSender, TArgs>;
-    createSimpleEventDispatcher: <TArgs>() => SimpleEventDispatcher<TArgs>;
-    createSignalDispatcher: () => SignalDispatcher;
-
-    EventListBase: <TEventDispatcher>() => EventListBase<TEventDispatcher>;
-    DispatcherBase: <TEventHandler>() => DispatcherBase<TEventHandler>;
-    DispatcherWrapper: <THandlerType>() => DispatcherWrapper<THandlerType>;
 }
 
 export function createEventDispatcher<TSender, TArgs>() {
@@ -877,50 +838,34 @@ export function createSignalList() {
     return new SignalList();
 };
 
-/* modules, require and stuff like that */
-declare var define: any;
+var StronglyTypedEventsStatic = {
 
-(function () {
+    EventList: EventList,
+    SimpleEventList: SimpleEventList,
+    SignalList: SignalList,
 
-    interface IExportableMap {
-        [key: string]: any;
-    }
+    createEventList: createEventList,
+    createSimpleEventList: createSimpleEventList,
+    createSignalList: createSignalList,
 
-    let exportables: IExportableMap = {};
-    exportables['EventDispatcher'] = EventDispatcher;
-    exportables['SimpleEventDispatcher'] = SimpleEventDispatcher;
-    exportables['SignalDispatcher'] = SignalDispatcher;
-    exportables['EventList'] = EventList;
-    exportables['SimpleEventList'] = SimpleEventList;
-    exportables['SignalList'] = SignalList;
-    exportables['EventHandlingBase'] = EventHandlingBase;
-    exportables['SimpleEventHandlingBase'] = SimpleEventHandlingBase;
-    exportables['SignalHandlingBase'] = SignalHandlingBase;
-    exportables['createEventDispatcher'] = createEventDispatcher;
-    exportables['createSimpleEventDispatcher'] = createSimpleEventDispatcher;
-    exportables['createSignalDispatcher'] = createSignalDispatcher;
-    exportables['createEventList'] = createEventList;
-    exportables['createSimpleEventList'] = createSimpleEventList;
-    exportables['createSignalList'] = createSignalList;
+    EventDispatcher: EventDispatcher,
+    SimpleEventDispatcher: SimpleEventDispatcher,
+    SignalDispatcher: SignalDispatcher,
 
-    function map(key: string, exp: any) {
-        if (typeof module !== "undefined" && module.exports) {
-            module.exports[key] = exp;
-        }
-        else if (typeof define === 'function' && define.amd) {
-            define(() => exp);
-        }
-        else {
-            (window as any)[key] = exp;
-            (window as any)._e = (window as any)._e || window;
-        }
-    }
+    EventHandlingBase: EventHandlingBase,
+    SimpleEventHandlingBase: SimpleEventHandlingBase,
+    SignalHandlingBase: SignalHandlingBase,
 
-    for (var key in exportables) {
-        if (exportables.hasOwnProperty(key)) {
-            map(key, exportables[key]);
-        }
-    }
-    
-}());
+    createEventDispatcher: createEventDispatcher,
+    createSimpleEventDispatcher: createSimpleEventDispatcher,
+    createSignalDispatcher: createSignalDispatcher,
 
+    EventListBase: EventListBase,
+    DispatcherBase: DispatcherBase,
+    DispatcherWrapper: DispatcherWrapper
+};
+
+var IStronglyTypedEvents = StronglyTypedEventsStatic;
+var _e = IStronglyTypedEvents;
+
+export default StronglyTypedEventsStatic;

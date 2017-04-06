@@ -1,25 +1,19 @@
 {
-    "compileOnSave": true,
-    "compilerOptions": {
-        "declaration": true,
-        "noImplicitAny": false,
-        "removeComments": false,
-        "preserveConstEnums": true,
-        "sourceMap": false,
-        "target": "es5",
-        "noEmitOnError": false
-    },
-    "files": [
-        "./strongly-typed-events.ts",
-        "./test/classic-test.ts",
-        "./test/event-test.ts",
-        "./test/signal-test.ts",
-        "./test/simple-event-test.ts"
-    ],
-    "exclude": [
-        "strongly-typed-events.js",
-        "strongly-typed-events.d.ts",
-        "node_modules",
-        "typings"
-    ]
+  "compileOnSave": true,
+  "compilerOptions": {
+    "declaration": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": false,
+    "noImplicitAny": false,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "sourceMap": false,
+    "target": "es5"
+  },
+  "exclude": [
+    "node_modules",
+    "examples",
+    "documentation"
+  ]
 }

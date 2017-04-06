@@ -1,4 +1,3 @@
-/// <reference path="typings/node/node.d.ts" />
 /*!
  * Strongly Typed Events for TypeScript - 0.5.0
  * https://github.com/KeesCBakker/StronlyTypedEvents/
@@ -528,29 +527,30 @@ export declare abstract class SignalHandlingBase implements ISignalHandling {
      */
     unsub(name: string, fn: ISignalHandler): void;
 }
-export interface IStronglyTypedEvents {
-    EventList: <TSender, TArgs>() => EventList<TSender, TArgs>;
-    SimpleEventList: <TArgs>() => SimpleEventList<TArgs>;
-    SignalList: () => SignalList;
-    createEventList: <TSender, TArgs>() => EventList<TSender, TArgs>;
-    createSimpleEventList: <TArgs>() => SimpleEventList<TArgs>;
-    createSignalList: () => SignalList;
-    EventDispatcher: <TSender, TArgs>() => EventDispatcher<TSender, TArgs>;
-    SimpleEventDispatcher: <TArgs>() => SimpleEventDispatcher<TArgs>;
-    SignalDispatcher: () => SignalDispatcher;
-    EventHandlingBase: <TSender, TArgs>() => EventHandlingBase<TSender, TArgs>;
-    SimpleEventHandlingBase: <TArgs>() => SimpleEventHandlingBase<TArgs>;
-    SignalHandlingBase: () => SignalHandlingBase;
-    createEventDispatcher: <TSender, TArgs>() => EventDispatcher<TSender, TArgs>;
-    createSimpleEventDispatcher: <TArgs>() => SimpleEventDispatcher<TArgs>;
-    createSignalDispatcher: () => SignalDispatcher;
-    EventListBase: <TEventDispatcher>() => EventListBase<TEventDispatcher>;
-    DispatcherBase: <TEventHandler>() => DispatcherBase<TEventHandler>;
-    DispatcherWrapper: <THandlerType>() => DispatcherWrapper<THandlerType>;
-}
 export declare function createEventDispatcher<TSender, TArgs>(): EventDispatcher<TSender, TArgs>;
 export declare function createEventList<TSender, TArgs>(): EventList<TSender, TArgs>;
 export declare function createSimpleEventDispatcher<TArgs>(): SimpleEventDispatcher<TArgs>;
 export declare function createSimpleEventList<TArgs>(): SimpleEventList<TArgs>;
 export declare function createSignalDispatcher(): SignalDispatcher;
 export declare function createSignalList(): SignalList;
+declare var StronglyTypedEventsStatic: {
+    EventList: typeof EventList;
+    SimpleEventList: typeof SimpleEventList;
+    SignalList: typeof SignalList;
+    createEventList: <TSender, TArgs>() => EventList<TSender, TArgs>;
+    createSimpleEventList: <TArgs>() => SimpleEventList<TArgs>;
+    createSignalList: () => SignalList;
+    EventDispatcher: typeof EventDispatcher;
+    SimpleEventDispatcher: typeof SimpleEventDispatcher;
+    SignalDispatcher: typeof SignalDispatcher;
+    EventHandlingBase: typeof EventHandlingBase;
+    SimpleEventHandlingBase: typeof SimpleEventHandlingBase;
+    SignalHandlingBase: typeof SignalHandlingBase;
+    createEventDispatcher: <TSender, TArgs>() => EventDispatcher<TSender, TArgs>;
+    createSimpleEventDispatcher: <TArgs>() => SimpleEventDispatcher<TArgs>;
+    createSignalDispatcher: () => SignalDispatcher;
+    EventListBase: typeof EventListBase;
+    DispatcherBase: typeof DispatcherBase;
+    DispatcherWrapper: typeof DispatcherWrapper;
+};
+export default StronglyTypedEventsStatic;

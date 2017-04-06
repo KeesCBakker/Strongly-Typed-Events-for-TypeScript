@@ -6,12 +6,37 @@
   <link rel="stylesheet" media="all" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.0.0/mocha.css">
 </head>
 <body>
+   <script>
+        var exports = {};
+       var require = function (x) {
+
+            if (typeof window[x] !== 'undefined') {
+                return window[x];
+            }
+
+            var scripts = document.getElementsByTagName('script');
+            var array = Array.prototype.slice.call(scripts);
+
+            var useExports = array.some(function (node) {
+                return node.getAttribute('data-type') == 'exported';
+            });
+
+            if (useExports) {
+                return exports;
+            }
+
+            return null;
+        }
+    </script>
+
   <div id="mocha"><p><a href="./test.html">Index</a></p></div>
   <div id="messages"></div>
-  <div id="fixtures"></div>`
+  <div id="fixtures"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.20.11/system-production.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.0.0/mocha.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.min.js"></script>
-  <script src="../strongly-typed-events.js"></script>
+
+  <script data-type="exported" src="../strongly-typed-events.js"></script>
   <script>mocha.setup('bdd')</script>
   <script src="classic-test.js"></script>
   <script src="event-test.js"></script>
