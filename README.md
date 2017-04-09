@@ -1,4 +1,4 @@
-# Strongly Typed Events for TypeScript &ndash; 1.0.0
+# Strongly Typed Events for TypeScript
 Add the power of events to your TypeScript projects.
 
 [![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
