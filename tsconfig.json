@@ -2,18 +2,16 @@
   "compileOnSave": true,
   "compilerOptions": {
     "declaration": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noEmitOnError": false,
     "noImplicitAny": false,
-    "preserveConstEnums": true,
     "removeComments": false,
+    "preserveConstEnums": true,
     "sourceMap": false,
-    "target": "es5"
+    "target": "es5",
+    "noEmitOnError": false,
+    "module": "commonjs",
+    "moduleResolution": "node"
   },
   "exclude": [
-    "node_modules",
-    "examples",
-    "documentation"
+    "node_modules"
   ]
 }

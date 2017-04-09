@@ -1,5 +1,5 @@
 /*!
- * Strongly Typed Events for TypeScript - 0.5.0
+ * Strongly Typed Events for TypeScript - 1.0.1
  * https://github.com/KeesCBakker/StronlyTypedEvents/
  * http://keestalkstech.com
  *
@@ -171,6 +171,12 @@ export declare class Subscription<TEventHandler> {
      */
     execute(executeAsync: boolean, scope: any, args: IArguments): void;
 }
+/**
+ * Base class for implementation of the dispatcher. It facilitates the subscribe
+ * and unsubscribe methods based on generic handlers. The TEventType specifies
+ * the type of event that should be exposed. Use the asEvent to expose the
+ * dispatcher as event.
+ */
 export declare abstract class DispatcherBase<TEventHandler> implements ISubscribable<TEventHandler> {
     private _wrap;
     private _subscriptions;
@@ -244,6 +250,11 @@ export declare class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEve
      * @param args The arguments object.
      */
     dispatchAsync(sender: TSender, args: TArgs): void;
+    /**
+     * Creates an event from the dispatcher. Will return the dispatcher
+     * in a wrapper. This will prevent exposure of any dispatcher methods.
+     */
+    asEvent(): IEvent<TSender, TArgs>;
 }
 /**
  * The dispatcher handles the storage of subsciptions and facilitates
@@ -264,6 +275,11 @@ export declare class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimple
      * @param args The arguments object.
      */
     dispatchAsync(args: TArgs): void;
+    /**
+     * Creates an event from the dispatcher. Will return the dispatcher
+     * in a wrapper. This will prevent exposure of any dispatcher methods.
+     */
+    asEvent(): ISimpleEvent<TArgs>;
 }
 /**
  * The dispatcher handles the storage of subsciptions and facilitates
@@ -282,6 +298,11 @@ export declare class SignalDispatcher extends DispatcherBase<ISignalHandler> imp
      * Dispatches the signal threaded.
      */
     dispatchAsync(): void;
+    /**
+     * Creates an event from the dispatcher. Will return the dispatcher
+     * in a wrapper. This will prevent exposure of any dispatcher methods.
+     */
+    asEvent(): ISignal;
 }
 /**
  * Hides the implementation of the event dispatcher. Will expose methods that
@@ -534,6 +555,26 @@ export declare function createSimpleEventList<TArgs>(): SimpleEventList<TArgs>;
 export declare function createSignalDispatcher(): SignalDispatcher;
 export declare function createSignalList(): SignalList;
 declare var StronglyTypedEventsStatic: {
+    EventList: typeof EventList;
+    SimpleEventList: typeof SimpleEventList;
+    SignalList: typeof SignalList;
+    createEventList: <TSender, TArgs>() => EventList<TSender, TArgs>;
+    createSimpleEventList: <TArgs>() => SimpleEventList<TArgs>;
+    createSignalList: () => SignalList;
+    EventDispatcher: typeof EventDispatcher;
+    SimpleEventDispatcher: typeof SimpleEventDispatcher;
+    SignalDispatcher: typeof SignalDispatcher;
+    EventHandlingBase: typeof EventHandlingBase;
+    SimpleEventHandlingBase: typeof SimpleEventHandlingBase;
+    SignalHandlingBase: typeof SignalHandlingBase;
+    createEventDispatcher: <TSender, TArgs>() => EventDispatcher<TSender, TArgs>;
+    createSimpleEventDispatcher: <TArgs>() => SimpleEventDispatcher<TArgs>;
+    createSignalDispatcher: () => SignalDispatcher;
+    EventListBase: typeof EventListBase;
+    DispatcherBase: typeof DispatcherBase;
+    DispatcherWrapper: typeof DispatcherWrapper;
+};
+export declare var IStronglyTypedEvents: {
     EventList: typeof EventList;
     SimpleEventList: typeof SimpleEventList;
     SignalList: typeof SignalList;

@@ -1,5 +1,5 @@
 /*!
- * Strongly Typed Events for TypeScript - 0.5.0
+ * Strongly Typed Events for TypeScript - 1.0.1
  * https://github.com/KeesCBakker/StronlyTypedEvents/
  * http://keestalkstech.com
  *
@@ -168,12 +168,6 @@ export interface ISimpleEventHandling<TArgs> extends IBaseEventHandling<ISimpleE
 export interface ISignalHandling extends IBaseEventHandling<ISignalHandler> {
 }
 
-/**
- * Base class for implementation of the dispatcher. It facilitates the subscribe
- * and unsubscribe methods based on generic handlers. The TEventType specifies
- * the type of event that should be exposed. Use the asEvent to expose the
- * dispatcher as event.
- */
 "use strict";
 /**
  * Stores a handler. Manages execution meta data.
@@ -221,6 +215,12 @@ export class Subscription<TEventHandler> {
     }
 }
 
+/**
+ * Base class for implementation of the dispatcher. It facilitates the subscribe
+ * and unsubscribe methods based on generic handlers. The TEventType specifies
+ * the type of event that should be exposed. Use the asEvent to expose the
+ * dispatcher as event.
+ */
 export abstract class DispatcherBase<TEventHandler> implements ISubscribable<TEventHandler> {
 
     private _wrap = new DispatcherWrapper(this);
@@ -358,7 +358,7 @@ export class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEventHandle
      * @param sender The sender.
      * @param args The arguments object.
      */
-    dispatch(sender: TSender, args: TArgs): void {
+    public dispatch(sender: TSender, args: TArgs): void {
         this._dispatch(false, this, arguments);
     }
 
@@ -367,8 +367,16 @@ export class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEventHandle
      * @param sender The sender.
      * @param args The arguments object.
      */
-    dispatchAsync(sender: TSender, args: TArgs): void {
+    public dispatchAsync(sender: TSender, args: TArgs): void {
         this._dispatch(true, this, arguments);
+    }
+
+    /**
+     * Creates an event from the dispatcher. Will return the dispatcher
+     * in a wrapper. This will prevent exposure of any dispatcher methods.
+     */
+    public asEvent(): IEvent<TSender, TArgs> {
+        return super.asEvent();
     }
 }
 
@@ -400,6 +408,14 @@ export class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHan
     dispatchAsync(args: TArgs): void {
         this._dispatch(true, this, arguments);
     }
+
+    /**
+     * Creates an event from the dispatcher. Will return the dispatcher
+     * in a wrapper. This will prevent exposure of any dispatcher methods.
+     */
+    public asEvent(): ISimpleEvent<TArgs> {
+        return super.asEvent();
+    }
 }
 
 /**
@@ -418,15 +434,23 @@ export class SignalDispatcher extends DispatcherBase<ISignalHandler> implements 
     /**
      * Dispatches the signal.
      */
-    dispatch(): void {
+    public dispatch(): void {
         this._dispatch(false, this, arguments);
     }
 
     /**
      * Dispatches the signal threaded.
      */
-    dispatchAsync(): void {
+    public dispatchAsync(): void {
         this._dispatch(true, this, arguments);
+    }
+
+    /**
+     * Creates an event from the dispatcher. Will return the dispatcher
+     * in a wrapper. This will prevent exposure of any dispatcher methods.
+     */
+    public asEvent(): ISignal {
+        return super.asEvent();
     }
 }
 
@@ -865,7 +889,7 @@ var StronglyTypedEventsStatic = {
     DispatcherWrapper: DispatcherWrapper
 };
 
-var IStronglyTypedEvents = StronglyTypedEventsStatic;
+export var IStronglyTypedEvents = StronglyTypedEventsStatic;
 var _e = IStronglyTypedEvents;
 
 export default StronglyTypedEventsStatic;

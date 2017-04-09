@@ -1,5 +1,5 @@
 /*!
- * Strongly Typed Events for TypeScript - 0.5.0
+ * Strongly Typed Events for TypeScript - 1.0.1
  * https://github.com/KeesCBakker/StronlyTypedEvents/
  * http://keestalkstech.com
  *
@@ -12,12 +12,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-/**
- * Base class for implementation of the dispatcher. It facilitates the subscribe
- * and unsubscribe methods based on generic handlers. The TEventType specifies
- * the type of event that should be exposed. Use the asEvent to expose the
- * dispatcher as event.
- */
 "use strict";
 /**
  * Stores a handler. Manages execution meta data.
@@ -63,6 +57,12 @@ var Subscription = (function () {
     return Subscription;
 }());
 exports.Subscription = Subscription;
+/**
+ * Base class for implementation of the dispatcher. It facilitates the subscribe
+ * and unsubscribe methods based on generic handlers. The TEventType specifies
+ * the type of event that should be exposed. Use the asEvent to expose the
+ * dispatcher as event.
+ */
 var DispatcherBase = (function () {
     function DispatcherBase() {
         this._wrap = new DispatcherWrapper(this);
@@ -195,6 +195,13 @@ var EventDispatcher = (function (_super) {
     EventDispatcher.prototype.dispatchAsync = function (sender, args) {
         this._dispatch(true, this, arguments);
     };
+    /**
+     * Creates an event from the dispatcher. Will return the dispatcher
+     * in a wrapper. This will prevent exposure of any dispatcher methods.
+     */
+    EventDispatcher.prototype.asEvent = function () {
+        return _super.prototype.asEvent.call(this);
+    };
     return EventDispatcher;
 }(DispatcherBase));
 exports.EventDispatcher = EventDispatcher;
@@ -224,6 +231,13 @@ var SimpleEventDispatcher = (function (_super) {
     SimpleEventDispatcher.prototype.dispatchAsync = function (args) {
         this._dispatch(true, this, arguments);
     };
+    /**
+     * Creates an event from the dispatcher. Will return the dispatcher
+     * in a wrapper. This will prevent exposure of any dispatcher methods.
+     */
+    SimpleEventDispatcher.prototype.asEvent = function () {
+        return _super.prototype.asEvent.call(this);
+    };
     return SimpleEventDispatcher;
 }(DispatcherBase));
 exports.SimpleEventDispatcher = SimpleEventDispatcher;
@@ -250,6 +264,13 @@ var SignalDispatcher = (function (_super) {
      */
     SignalDispatcher.prototype.dispatchAsync = function () {
         this._dispatch(true, this, arguments);
+    };
+    /**
+     * Creates an event from the dispatcher. Will return the dispatcher
+     * in a wrapper. This will prevent exposure of any dispatcher methods.
+     */
+    SignalDispatcher.prototype.asEvent = function () {
+        return _super.prototype.asEvent.call(this);
     };
     return SignalDispatcher;
 }(DispatcherBase));
@@ -660,7 +681,7 @@ var StronglyTypedEventsStatic = {
     DispatcherBase: DispatcherBase,
     DispatcherWrapper: DispatcherWrapper
 };
-var IStronglyTypedEvents = StronglyTypedEventsStatic;
-var _e = IStronglyTypedEvents;
+exports.IStronglyTypedEvents = StronglyTypedEventsStatic;
+var _e = exports.IStronglyTypedEvents;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = StronglyTypedEventsStatic;
