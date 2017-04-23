@@ -61,13 +61,13 @@ You can subscribe to the events like this:
 let clock = new Clock('Smu', 1000);
 
 //log the ticks to the console
-clock.onTick.subscribe(()=> console.log('Tick!'));
+clock.onTick().subscribe(()=> console.log('Tick!'));
 
 //log the sequence parameter to the console
-clock.onSequenceTick.subscribe((s) => console.log(`Sequence: ${s}`));
+clock.onSequenceTick().subscribe((s) => console.log(`Sequence: ${s}`));
 
 //log the name of the clock and the tick argument to the console
-clock.onClockTick.subscribe((c, n) => console.log(`${c.name} ticked ${n} times.`))
+clock.onClockTick().subscribe((c, n) => console.log(`${c.name} ticked ${n} times.`))
 ```
 
 Check the <a href="documentation">documentation</a> or the <a href="examples">examples</a> for more information.
