@@ -38,13 +38,15 @@ export interface ISubscribable<THandlerType> {
     /**
      * Subscribe to the event.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    subscribe(fn: THandlerType): void;
+    subscribe(fn: THandlerType): () => void;
     /**
      * Subscribe to the event.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    sub(fn: THandlerType): void;
+    sub(fn: THandlerType): () => void;
     /**
      * Unsubscribe from the event.
      * @param fn The event handler that is will be unsubsribed from the event.
@@ -183,13 +185,15 @@ export declare abstract class DispatcherBase<TEventHandler> implements ISubscrib
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    subscribe(fn: TEventHandler): void;
+    subscribe(fn: TEventHandler): () => void;
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    sub(fn: TEventHandler): void;
+    sub(fn: TEventHandler): () => void;
     /**
      * Subscribe once to the event with the specified name.
      * @param fn The event handler that is called when the event is dispatched.
@@ -322,13 +326,15 @@ export declare class DispatcherWrapper<THandler> implements ISubscribable<THandl
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    subscribe(fn: THandler): void;
+    subscribe(fn: THandler): () => void;
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    sub(fn: THandler): void;
+    sub(fn: THandler): () => void;
     /**
      * Unsubscribe from the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.

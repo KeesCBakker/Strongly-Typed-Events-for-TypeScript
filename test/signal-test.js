@@ -1,4 +1,5 @@
 'use strict';
+Object.defineProperty(exports, "__esModule", { value: true });
 var chai_1 = require("chai");
 var strongly_typed_events_1 = require("../strongly-typed-events");
 describe("Strongly Typed Events - Signal", function () {
@@ -70,6 +71,26 @@ describe("Strongly Typed Events - Signal", function () {
             };
             dispatcher.sub(fn);
             dispatcher.unsub(fn);
+            dispatcher.dispatch();
+            chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
+        it("Unsubscribing from signal dispatcher using subscribe's return function.", function () {
+            var dispatcher = new strongly_typed_events_1.SignalDispatcher();
+            var resultNr = 0;
+            var unsub = dispatcher.subscribe(function () {
+                resultNr += 2;
+            });
+            unsub();
+            dispatcher.dispatch();
+            chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
+        it("Unsubscribing from signal dispatcher using sub's return function.", function () {
+            var dispatcher = new strongly_typed_events_1.SignalDispatcher();
+            var resultNr = 0;
+            var unsub = dispatcher.sub(function () {
+                resultNr += 2;
+            });
+            unsub();
             dispatcher.dispatch();
             chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);
         });

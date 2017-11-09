@@ -43,14 +43,16 @@ export interface ISubscribable<THandlerType> {
     /** 
      * Subscribe to the event.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    subscribe(fn: THandlerType): void;
+    subscribe(fn: THandlerType): () => void;
 
     /** 
      * Subscribe to the event.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    sub(fn: THandlerType): void;
+    sub(fn: THandlerType): () => void;
 
     /** 
      * Unsubscribe from the event.
@@ -229,19 +231,24 @@ export abstract class DispatcherBase<TEventHandler> implements ISubscribable<TEv
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    public subscribe(fn: TEventHandler): void {
+    public subscribe(fn: TEventHandler): () => void {
         if (fn) {
             this._subscriptions.push(new Subscription<TEventHandler>(fn, false));
         }
+        return () => {
+            this.unsubscribe(fn);
+        };
     }
 
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    public sub(fn: TEventHandler): void {
-        this.subscribe(fn);
+    public sub(fn: TEventHandler): () => void {
+        return this.subscribe(fn);
     }
 
     /** 
@@ -382,7 +389,7 @@ export class EventDispatcher<TSender, TArgs> extends DispatcherBase<IEventHandle
 
 /**
  * The dispatcher handles the storage of subsciptions and facilitates
- * subscription, unsubscription and dispatching of a simple event 
+ * subscription, unsubscription and dispatching of a simple event
  */
 export class SimpleEventDispatcher<TArgs> extends DispatcherBase<ISimpleEventHandler<TArgs>> implements ISimpleEvent<TArgs>
 {
@@ -460,7 +467,7 @@ export class SignalDispatcher extends DispatcherBase<ISignalHandler> implements 
  */
 export class DispatcherWrapper<THandler> implements ISubscribable<THandler>
 {
-    private _subscribe: (fn: THandler) => void;
+    private _subscribe: (fn: THandler) => () => void;
     private _unsubscribe: (fn: THandler) => void;
     private _one: (fn: THandler) => void;
     private _has: (fn: THandler) => boolean;
@@ -481,17 +488,19 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler>
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    public subscribe(fn: THandler): void {
-        this._subscribe(fn);
+    public subscribe(fn: THandler): () => void {
+        return this._subscribe(fn);
     }
 
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    public sub(fn: THandler): void {
-        this.subscribe(fn);
+    public sub(fn: THandler): () => void {
+        return this.subscribe(fn);
     }
 
     /**
@@ -535,7 +544,7 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler>
 }
 
 /**
- * Base class for event lists classes. Implements the get and remove. 
+ * Base class for event lists classes. Implements the get and remove.
  */
 export abstract class EventListBase<TEventDispatcher> {
 
