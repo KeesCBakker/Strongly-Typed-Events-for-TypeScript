@@ -56,19 +56,19 @@ export interface ISubscribable<THandlerType> {
 
     /** 
      * Unsubscribe from the event.
-     * @param fn The event handler that is will be unsubsribed from the event.
+     * @param fn The event handler that will be unsubsribed from the event.
      */
     unsubscribe(fn: THandlerType): void;
 
     /** 
      * Unsubscribe from the event.
-     * @param fn The event handler that is will be unsubsribed from the event.
+     * @param fn The event handler that will be unsubsribed from the event.
      */
     unsub(fn: THandlerType): void;
 
     /**
      * Subscribes to the event only once.
-     * @param fn The event handler that is will be unsubsribed from the event.
+     * @param fn The event handler that is called when the event is dispatched.
      */
     one(fn: THandlerType): void;
 
