@@ -160,6 +160,20 @@ describe("Strongly Typed Events - Simple event", function () {
             expect(resultNr, 'resultNr should be 0.').to.equal(0);
         });
 
+        it("Unsubscribing from simple event dispatcher using one's return function.", function () {
+
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
+            let resultNr = 0;
+
+            let unsub = dispatcher.one((nr: number) => {
+                resultNr += nr;
+            });
+            unsub();
+            dispatcher.dispatch(6);
+
+            expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
+
         it("Unsub from one subscription.", function () {
 
             let dispatcher = _e.createSimpleEventDispatcher<number>();

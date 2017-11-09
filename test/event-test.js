@@ -150,6 +150,20 @@ describe("Strongly Typed Events - Event", function () {
             chai_1.expect(resultDummy, 'resultDummy should be empty.').to.equal(null);
             chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);
         });
+        it("Unsubscribing from event dispatcher using one's return function.", function () {
+            var carolus = new Dummy('Carolus');
+            var dispatcher = new strongly_typed_events_1.EventDispatcher();
+            var resultNr = 0;
+            var resultDummy = null;
+            var unsub = dispatcher.one(function (dummy, nr) {
+                resultDummy = dummy;
+                resultNr += nr;
+            });
+            unsub();
+            dispatcher.dispatch(carolus, 6);
+            chai_1.expect(resultDummy, 'resultDummy should be empty.').to.equal(null);
+            chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
         it("Has no event.", function () {
             var fn = function (dummy, nr) { };
             var dispatcher = new strongly_typed_events_1.EventDispatcher();

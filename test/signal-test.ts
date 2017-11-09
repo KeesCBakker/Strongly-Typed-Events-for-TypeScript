@@ -163,6 +163,20 @@ describe("Strongly Typed Events - Signal", function () {
             expect(resultNr, 'resultNr should be 0.').to.equal(0);
         });
 
+        it("Unsubscribing from signal dispatcher using one's return function.", function () {
+
+            let dispatcher = new SignalDispatcher();
+            let resultNr = 0;
+
+            let unsub = dispatcher.one(() => {
+                resultNr += 2;
+            });
+            unsub();
+            dispatcher.dispatch();
+
+            expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
+
 
         it("Unsub from one subscription.", function () {
 

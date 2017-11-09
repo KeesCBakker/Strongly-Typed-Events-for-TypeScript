@@ -60,8 +60,9 @@ export interface ISubscribable<THandlerType> {
     /**
      * Subscribes to the event only once.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    one(fn: THandlerType): void;
+    one(fn: THandlerType): () => void;
     /**
      * Checks it the event has a subscription for the specified handler.
      * @param fn The event handler.
@@ -197,8 +198,9 @@ export declare abstract class DispatcherBase<TEventHandler> implements ISubscrib
     /**
      * Subscribe once to the event with the specified name.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    one(fn: TEventHandler): void;
+    one(fn: TEventHandler): () => void;
     /**
      * Checks it the event has a subscription for the specified handler.
      * @param fn The event handler.
@@ -349,7 +351,7 @@ export declare class DispatcherWrapper<THandler> implements ISubscribable<THandl
      * Subscribe once to the event with the specified name.
      * @param fn The event handler that is called when the event is dispatched.
      */
-    one(fn: THandler): void;
+    one(fn: THandler): () => void;
     /**
      * Checks it the event has a subscription for the specified handler.
      * @param fn The event handler.

@@ -99,11 +99,16 @@ var DispatcherBase = /** @class */ (function () {
     /**
      * Subscribe once to the event with the specified name.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
     DispatcherBase.prototype.one = function (fn) {
+        var _this = this;
         if (fn) {
             this._subscriptions.push(new Subscription(fn, true));
         }
+        return function () {
+            _this.unsubscribe(fn);
+        };
     };
     /**
      * Checks it the event has a subscription for the specified handler.
@@ -338,7 +343,7 @@ var DispatcherWrapper = /** @class */ (function () {
      * @param fn The event handler that is called when the event is dispatched.
      */
     DispatcherWrapper.prototype.one = function (fn) {
-        this._one(fn);
+        return this._one(fn);
     };
     /**
      * Checks it the event has a subscription for the specified handler.

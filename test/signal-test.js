@@ -105,6 +105,16 @@ describe("Strongly Typed Events - Signal", function () {
             dispatcher.dispatch();
             chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);
         });
+        it("Unsubscribing from signal dispatcher using one's return function.", function () {
+            var dispatcher = new strongly_typed_events_1.SignalDispatcher();
+            var resultNr = 0;
+            var unsub = dispatcher.one(function () {
+                resultNr += 2;
+            });
+            unsub();
+            dispatcher.dispatch();
+            chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
         it("Unsub from one subscription.", function () {
             var dispatcher = new strongly_typed_events_1.SignalDispatcher();
             var resultNr = 0;

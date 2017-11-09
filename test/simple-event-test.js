@@ -105,6 +105,16 @@ describe("Strongly Typed Events - Simple event", function () {
             dispatcher.dispatch(6);
             chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);
         });
+        it("Unsubscribing from simple event dispatcher using one's return function.", function () {
+            var dispatcher = strongly_typed_events_1.default.createSimpleEventDispatcher();
+            var resultNr = 0;
+            var unsub = dispatcher.one(function (nr) {
+                resultNr += nr;
+            });
+            unsub();
+            dispatcher.dispatch(6);
+            chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
         it("Unsub from one subscription.", function () {
             var dispatcher = strongly_typed_events_1.default.createSimpleEventDispatcher();
             var resultNr = 0;

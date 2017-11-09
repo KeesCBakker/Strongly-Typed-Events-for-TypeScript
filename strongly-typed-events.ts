@@ -69,8 +69,9 @@ export interface ISubscribable<THandlerType> {
     /**
      * Subscribes to the event only once.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    one(fn: THandlerType): void;
+    one(fn: THandlerType): () => void;
 
     /**
      * Checks it the event has a subscription for the specified handler.
@@ -254,11 +255,15 @@ export abstract class DispatcherBase<TEventHandler> implements ISubscribable<TEv
     /** 
      * Subscribe once to the event with the specified name.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
-    public one(fn: TEventHandler): void {
+    public one(fn: TEventHandler): () => void {
         if (fn) {
             this._subscriptions.push(new Subscription<TEventHandler>(fn, true));
         }
+        return () => {
+            this.unsubscribe(fn);
+        };
     }
 
     /**
@@ -469,7 +474,7 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler>
 {
     private _subscribe: (fn: THandler) => () => void;
     private _unsubscribe: (fn: THandler) => void;
-    private _one: (fn: THandler) => void;
+    private _one: (fn: THandler) => () => void;
     private _has: (fn: THandler) => boolean;
     private _clear: () => void;
 
@@ -523,8 +528,8 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler>
      * Subscribe once to the event with the specified name.
      * @param fn The event handler that is called when the event is dispatched.
      */
-    public one(fn: THandler): void {
-        this._one(fn);
+    public one(fn: THandler): () => void {
+        return this._one(fn);
     }
 
     /**
