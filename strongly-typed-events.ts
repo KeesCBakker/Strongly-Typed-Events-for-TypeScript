@@ -15,7 +15,7 @@ export interface IEventHandler<TSender, TArgs> {
       * @sender The sender.
       * @args The argument.
       */
-    (sender: TSender, args: TArgs)
+    (sender: TSender, args: TArgs): any
 }
 
 /**
@@ -25,14 +25,14 @@ export interface ISimpleEventHandler<TArgs> {
     /**
       * @args The argument.
       */
-    (args: TArgs)
+    (args: TArgs): any
 }
 
 /**
  * Event handler function without arguments
  */
 export interface ISignalHandler {
-    ()
+    (): any
 }
 
 /**
