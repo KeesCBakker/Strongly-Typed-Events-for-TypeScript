@@ -1,9 +1,9 @@
-﻿#How to add dynamic named events to a class?
+﻿# How to add dynamic named events to a class?
 Events can be implemented using <a href="HowToAddAnEventToAClass.md">private event dispatchers</a>. If you need more
 events, it might be smart to use a more robust solution: the `EventList` or the `SimpleEventList`. It will create
 the dispatchers automatically.
 
-###Stopwatch example
+### Stopwatch example
 To illustrate the handling of multiple event, I'll use the Stopwatch example. Any stopwatch has the following events:
 start, pause, reset. The events will be implemented using an `EventList<Stopwacht, StopwatchEventArgs>`. It has 
 a `get` method to get the event dispatcher by name. When it doesn't exists, one will be created an returned. The dispatch is 
@@ -81,7 +81,7 @@ class StopwatchEventArgs {
 
 ```
 
-###EventList methods
+### EventList methods
 The `EventList<TSender, TArgs>` and `SimpleEventList<TArgs>` share the same basic methods:
 
 - `get(name)` - returns a dispatcher for the event with the given name.
