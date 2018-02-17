@@ -65,3 +65,4 @@ test/*.d.ts
 test/*.js
 *.d.ts
 *.js
+dist

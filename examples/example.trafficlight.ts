@@ -1,4 +1,4 @@
-import { SignalList, ISignal } from "./../";
+import { SignalList, ISignal } from "./../src";
 
 declare var console: any;
 declare var setTimeout: any;

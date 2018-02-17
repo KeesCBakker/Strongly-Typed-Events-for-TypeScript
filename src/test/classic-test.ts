@@ -16,7 +16,7 @@ import {
   SimpleEventList,
   SignalDispatcher,
   SignalList
-} from "../strongly-typed-events";
+} from "../";
 
 describe("Strongly Typed Events", function() {
   describe("Event", function() {

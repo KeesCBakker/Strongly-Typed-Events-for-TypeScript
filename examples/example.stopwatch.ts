@@ -1,4 +1,4 @@
-﻿import { EventList, IEvent } from "./../";
+﻿import { EventList, IEvent } from "./../src";
 
 class Stopwatch {
   private _events = new EventList<Stopwatch, StopwatchEventArgs>();

@@ -2,7 +2,7 @@
 
 import { expect } from "chai";
 
-import { EventDispatcher, EventList } from "../strongly-typed-events";
+import { EventDispatcher, EventList } from "./../";
 
 class Dummy {
   constructor(name: string) {}

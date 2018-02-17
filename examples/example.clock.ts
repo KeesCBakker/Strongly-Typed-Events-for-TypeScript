@@ -5,7 +5,7 @@
   ISignal,
   IEvent,
   ISimpleEvent
-} from "./../";
+} from "./../src/";
 
 declare var window: any;
 declare var alert: any;

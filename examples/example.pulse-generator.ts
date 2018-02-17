@@ -1,4 +1,4 @@
-import { EventDispatcher, IEvent } from "./..";
+import { EventDispatcher, IEvent } from "./../src/";
 
 declare var window: any;
 declare var Audio: any;

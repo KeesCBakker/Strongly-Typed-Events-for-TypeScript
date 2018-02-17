@@ -1,18 +1,15 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "declaration": true,
-    "noImplicitAny": false,
-    "removeComments": false,
-    "preserveConstEnums": true,
-    "sourceMap": false,
-    "target": "es5",
-    "noEmitOnError": false,
+    "target": "es6",
     "module": "commonjs",
-    "moduleResolution": "node"
+    "outDir": "dist",
+    "declaration": true
   },
+  "include": [
+    "src/**/*.ts"
+  ],
   "exclude": [
-    "node_modules",
-    "examples"
+    "node_modules"
   ]
 }

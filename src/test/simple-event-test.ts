@@ -2,7 +2,7 @@
 
 import { expect } from "chai";
 
-import _e from "../strongly-typed-events";
+import _e from "./../";
 
 describe("Strongly Typed Events - Simple event", function() {
   describe("createSimpleEventDispatcher", function() {

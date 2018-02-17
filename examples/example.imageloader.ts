@@ -2,7 +2,7 @@
   SimpleEventDispatcher,
   ISimpleEvent,
   ISimpleEventHandler
-} from "./../";
+} from "./../src/";
 
 declare var window: any;
 declare var alert: any;
