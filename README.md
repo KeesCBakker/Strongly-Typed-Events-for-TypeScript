@@ -111,7 +111,7 @@ This project will help you to add events, event handling en event dispatching to
 ## History
 
 #### Version 1.0
-Added default exports. Removed emulation through window.
+Added default exports. Removed emulation through window. 
 
 #### Version 0.5
 Restructured includes for 'normal' web applications. Using `import` / `export` mechanisme. Emulating `exports` and `require` nodes through the `window` object for web.
