@@ -26,7 +26,7 @@ class Clock {
     private _ticks: number = 0;
 
     constructor(public name: string, timeout: number) {
-        window.setInterval( () => { 
+        setInterval( () => { 
             this.Tick(); 
         }, timeout);
     }
