@@ -1,7 +1,8 @@
 'use strict';
+Object.defineProperty(exports, "__esModule", { value: true });
 var chai_1 = require("chai");
 var strongly_typed_events_1 = require("../strongly-typed-events");
-var Dummy = (function () {
+var Dummy = /** @class */ (function () {
     function Dummy(name) {
     }
     return Dummy;
@@ -106,6 +107,34 @@ describe("Strongly Typed Events - Event", function () {
             chai_1.expect(resultDummy, 'resultDummy should be empty.').to.equal(null);
             chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);
         });
+        it("Unsubscribing from event dispatcher using subscribe's return function.", function () {
+            var carolus = new Dummy('Carolus');
+            var dispatcher = new strongly_typed_events_1.EventDispatcher();
+            var resultNr = 0;
+            var resultDummy = null;
+            var unsub = dispatcher.subscribe(function (dummy, nr) {
+                resultDummy = dummy;
+                resultNr += nr;
+            });
+            unsub();
+            dispatcher.dispatch(carolus, 6);
+            chai_1.expect(resultDummy, 'resultDummy should be empty.').to.equal(null);
+            chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
+        it("Unsubscribing from event dispatcher using sub's return function.", function () {
+            var carolus = new Dummy('Carolus');
+            var dispatcher = new strongly_typed_events_1.EventDispatcher();
+            var resultNr = 0;
+            var resultDummy = null;
+            var unsub = dispatcher.sub(function (dummy, nr) {
+                resultDummy = dummy;
+                resultNr += nr;
+            });
+            unsub();
+            dispatcher.dispatch(carolus, 6);
+            chai_1.expect(resultDummy, 'resultDummy should be empty.').to.equal(null);
+            chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
         it("Unsubscribing to a one subscription.", function () {
             var carolus = new Dummy('Carolus');
             var dispatcher = new strongly_typed_events_1.EventDispatcher();
@@ -117,6 +146,20 @@ describe("Strongly Typed Events - Event", function () {
             };
             dispatcher.one(fn);
             dispatcher.unsubscribe(fn);
+            dispatcher.dispatch(carolus, 6);
+            chai_1.expect(resultDummy, 'resultDummy should be empty.').to.equal(null);
+            chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
+        it("Unsubscribing from event dispatcher using one's return function.", function () {
+            var carolus = new Dummy('Carolus');
+            var dispatcher = new strongly_typed_events_1.EventDispatcher();
+            var resultNr = 0;
+            var resultDummy = null;
+            var unsub = dispatcher.one(function (dummy, nr) {
+                resultDummy = dummy;
+                resultNr += nr;
+            });
+            unsub();
             dispatcher.dispatch(carolus, 6);
             chai_1.expect(resultDummy, 'resultDummy should be empty.').to.equal(null);
             chai_1.expect(resultNr, 'resultNr should be 0.').to.equal(0);

@@ -1,3 +1,4 @@
+"use strict";
 /*!
  * Strongly Typed Events for TypeScript - 1.0.1
  * https://github.com/KeesCBakker/StronlyTypedEvents/
@@ -6,19 +7,24 @@
  * Copyright Kees C. Bakker / KeesTalksTech
  * Released under the MIT license
  */
-"use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 "use strict";
 /**
  * Stores a handler. Manages execution meta data.
  * @class Subscription
  * @template TEventHandler
  */
-var Subscription = (function () {
+var Subscription = /** @class */ (function () {
     /**
      * Creates an instance of Subscription.
      *
@@ -63,7 +69,7 @@ exports.Subscription = Subscription;
  * the type of event that should be exposed. Use the asEvent to expose the
  * dispatcher as event.
  */
-var DispatcherBase = (function () {
+var DispatcherBase = /** @class */ (function () {
     function DispatcherBase() {
         this._wrap = new DispatcherWrapper(this);
         this._subscriptions = new Array();
@@ -71,27 +77,38 @@ var DispatcherBase = (function () {
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
     DispatcherBase.prototype.subscribe = function (fn) {
+        var _this = this;
         if (fn) {
             this._subscriptions.push(new Subscription(fn, false));
         }
+        return function () {
+            _this.unsubscribe(fn);
+        };
     };
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
     DispatcherBase.prototype.sub = function (fn) {
-        this.subscribe(fn);
+        return this.subscribe(fn);
     };
     /**
      * Subscribe once to the event with the specified name.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
     DispatcherBase.prototype.one = function (fn) {
+        var _this = this;
         if (fn) {
             this._subscriptions.push(new Subscription(fn, true));
         }
+        return function () {
+            _this.unsubscribe(fn);
+        };
     };
     /**
      * Checks it the event has a subscription for the specified handler.
@@ -171,7 +188,7 @@ exports.DispatcherBase = DispatcherBase;
  * Dispatcher implementation for events. Can be used to subscribe, unsubscribe
  * or dispatch events. Use the ToEvent() method to expose the event.
  */
-var EventDispatcher = (function (_super) {
+var EventDispatcher = /** @class */ (function (_super) {
     __extends(EventDispatcher, _super);
     /**
      * Creates a new EventDispatcher instance.
@@ -209,7 +226,7 @@ exports.EventDispatcher = EventDispatcher;
  * The dispatcher handles the storage of subsciptions and facilitates
  * subscription, unsubscription and dispatching of a simple event
  */
-var SimpleEventDispatcher = (function (_super) {
+var SimpleEventDispatcher = /** @class */ (function (_super) {
     __extends(SimpleEventDispatcher, _super);
     /**
      * Creates a new SimpleEventDispatcher instance.
@@ -245,7 +262,7 @@ exports.SimpleEventDispatcher = SimpleEventDispatcher;
  * The dispatcher handles the storage of subsciptions and facilitates
  * subscription, unsubscription and dispatching of a signal event.
  */
-var SignalDispatcher = (function (_super) {
+var SignalDispatcher = /** @class */ (function (_super) {
     __extends(SignalDispatcher, _super);
     /**
      * Creates a new SignalDispatcher instance.
@@ -279,7 +296,7 @@ exports.SignalDispatcher = SignalDispatcher;
  * Hides the implementation of the event dispatcher. Will expose methods that
  * are relevent to the event.
  */
-var DispatcherWrapper = (function () {
+var DispatcherWrapper = /** @class */ (function () {
     /**
      * Creates a new EventDispatcherWrapper instance.
      * @param dispatcher The dispatcher.
@@ -294,16 +311,18 @@ var DispatcherWrapper = (function () {
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
     DispatcherWrapper.prototype.subscribe = function (fn) {
-        this._subscribe(fn);
+        return this._subscribe(fn);
     };
     /**
      * Subscribe to the event dispatcher.
      * @param fn The event handler that is called when the event is dispatched.
+     * @returns A function that unsubscribes the event handler from the event.
      */
     DispatcherWrapper.prototype.sub = function (fn) {
-        this.subscribe(fn);
+        return this.subscribe(fn);
     };
     /**
      * Unsubscribe from the event dispatcher.
@@ -324,7 +343,7 @@ var DispatcherWrapper = (function () {
      * @param fn The event handler that is called when the event is dispatched.
      */
     DispatcherWrapper.prototype.one = function (fn) {
-        this._one(fn);
+        return this._one(fn);
     };
     /**
      * Checks it the event has a subscription for the specified handler.
@@ -345,7 +364,7 @@ exports.DispatcherWrapper = DispatcherWrapper;
 /**
  * Base class for event lists classes. Implements the get and remove.
  */
-var EventListBase = (function () {
+var EventListBase = /** @class */ (function () {
     function EventListBase() {
         this._events = {};
     }
@@ -376,7 +395,7 @@ exports.EventListBase = EventListBase;
  * Storage class for multiple events that are accessible by name.
  * Events dispatchers are automatically created.
  */
-var EventList = (function (_super) {
+var EventList = /** @class */ (function (_super) {
     __extends(EventList, _super);
     /**
      * Creates a new EventList instance.
@@ -397,7 +416,7 @@ exports.EventList = EventList;
  * Storage class for multiple simple events that are accessible by name.
  * Events dispatchers are automatically created.
  */
-var SimpleEventList = (function (_super) {
+var SimpleEventList = /** @class */ (function (_super) {
     __extends(SimpleEventList, _super);
     /**
      * Creates a new SimpleEventList instance.
@@ -418,7 +437,7 @@ exports.SimpleEventList = SimpleEventList;
  * Storage class for multiple signal events that are accessible by name.
  * Events dispatchers are automatically created.
  */
-var SignalList = (function (_super) {
+var SignalList = /** @class */ (function (_super) {
     __extends(SignalList, _super);
     /**
      * Creates a new SignalList instance.
@@ -438,7 +457,7 @@ exports.SignalList = SignalList;
 /**
  * Extends objects with event handling capabilities.
  */
-var EventHandlingBase = (function () {
+var EventHandlingBase = /** @class */ (function () {
     function EventHandlingBase() {
         this._events = new EventList();
     }
@@ -506,7 +525,7 @@ exports.EventHandlingBase = EventHandlingBase;
 /**
  * Extends objects with simple event handling capabilities.
  */
-var SimpleEventHandlingBase = (function () {
+var SimpleEventHandlingBase = /** @class */ (function () {
     function SimpleEventHandlingBase() {
         this._events = new SimpleEventList();
     }
@@ -571,7 +590,7 @@ exports.SimpleEventHandlingBase = SimpleEventHandlingBase;
 /**
  * Extends objects with signal event handling capabilities.
  */
-var SignalHandlingBase = (function () {
+var SignalHandlingBase = /** @class */ (function () {
     function SignalHandlingBase() {
         this._events = new SignalList();
     }
@@ -683,5 +702,4 @@ var StronglyTypedEventsStatic = {
 };
 exports.IStronglyTypedEvents = StronglyTypedEventsStatic;
 var _e = exports.IStronglyTypedEvents;
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = StronglyTypedEventsStatic;

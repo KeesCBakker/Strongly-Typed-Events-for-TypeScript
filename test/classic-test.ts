@@ -175,6 +175,26 @@ describe("Strongly Typed Events", function () {
             dispatcher.dispatchAsync(null, 1);
             expect(i, 'Because of async dispatch, i should be 0.').to.equal(0);
         });
+
+        it('Unsubscribe event handler after dispatching 2 times.', function () {
+
+            let dispatcher = new EventDispatcher<any, number>();
+
+            let i = 0;
+
+            let unsub = dispatcher.subscribe((s, a) => {
+                i += a;
+                if(i == 3) {
+                    unsub();
+                }
+            });
+
+            dispatcher.dispatch(null, 1);
+            dispatcher.dispatch(null, 2);
+            dispatcher.dispatch(null, 4);
+
+            expect(i, 'Because of unsubscribing, i should be 3.').to.equal(3);
+        });
     });
 
     describe("Simple Event", function () {
@@ -322,6 +342,26 @@ describe("Strongly Typed Events", function () {
             dispatcher.dispatchAsync(1);
             expect(i, 'Because of async dispatch, i should be 0.').to.equal(0);
         });
+
+        it('Unsubscribe event handler after dispatching 2 times.', function () {
+
+            let dispatcher = new SimpleEventDispatcher<number>();
+
+            let i = 0;
+
+            let unsub = dispatcher.subscribe((a) => {
+                i += a;
+                if(i == 3) {
+                    unsub();
+                }
+            });
+
+            dispatcher.dispatch(1);
+            dispatcher.dispatch(2);
+            dispatcher.dispatch(4);
+
+            expect(i, 'Because of unsubscribing, i should be 3.').to.equal(3);
+        });
     });
 
 
@@ -458,6 +498,26 @@ describe("Strongly Typed Events", function () {
 
             dispatcher.dispatchAsync();
             expect(i, 'Because of async dispatch, i should be 0.').to.equal(0);
+        });
+
+        it('Unsubscribe event handler after dispatching 2 times.', function () {
+
+            let dispatcher = new SignalDispatcher();
+
+            let i = 0;
+
+            let unsub = dispatcher.subscribe(() => {
+                i++;
+                if(i == 2) {
+                    unsub();
+                }
+            });
+
+            dispatcher.dispatch();
+            dispatcher.dispatch();
+            dispatcher.dispatch();
+
+            expect(i, 'Because of unsubscribing, i should be 2.').to.equal(2);
         });
     });
 

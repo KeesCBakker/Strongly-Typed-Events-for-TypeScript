@@ -160,6 +160,44 @@ describe("Strongly Typed Events - Event", function () {
             expect(resultNr, 'resultNr should be 0.').to.equal(0);
         });
 
+        it("Unsubscribing from event dispatcher using subscribe's return function.", function () {
+
+            var carolus = new Dummy('Carolus');
+
+            let dispatcher = new EventDispatcher<Dummy, number>();
+            let resultNr = 0;
+            let resultDummy: Dummy = null;
+
+            let unsub = dispatcher.subscribe((dummy: Dummy, nr: number) => {
+                resultDummy = dummy;
+                resultNr += nr;
+            });
+            unsub();
+            dispatcher.dispatch(carolus, 6);
+
+            expect(resultDummy, 'resultDummy should be empty.').to.equal(null);
+            expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
+
+        it("Unsubscribing from event dispatcher using sub's return function.", function () {
+
+            var carolus = new Dummy('Carolus');
+
+            let dispatcher = new EventDispatcher<Dummy, number>();
+            let resultNr = 0;
+            let resultDummy: Dummy = null;
+
+            let unsub = dispatcher.sub((dummy: Dummy, nr: number) => {
+                resultDummy = dummy;
+                resultNr += nr;
+            });
+            unsub();
+            dispatcher.dispatch(carolus, 6);
+
+            expect(resultDummy, 'resultDummy should be empty.').to.equal(null);
+            expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
+
 
         it("Unsubscribing to a one subscription.", function () {
 
@@ -176,6 +214,25 @@ describe("Strongly Typed Events - Event", function () {
 
             dispatcher.one(fn);
             dispatcher.unsubscribe(fn);
+            dispatcher.dispatch(carolus, 6);
+
+            expect(resultDummy, 'resultDummy should be empty.').to.equal(null);
+            expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
+
+        it("Unsubscribing from event dispatcher using one's return function.", function () {
+
+            var carolus = new Dummy('Carolus');
+
+            let dispatcher = new EventDispatcher<Dummy, number>();
+            let resultNr = 0;
+            let resultDummy: Dummy = null;
+
+            let unsub = dispatcher.one((dummy: Dummy, nr: number) => {
+                resultDummy = dummy;
+                resultNr += nr;
+            });
+            unsub();
             dispatcher.dispatch(carolus, 6);
 
             expect(resultDummy, 'resultDummy should be empty.').to.equal(null);

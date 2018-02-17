@@ -37,12 +37,21 @@ myObject.onMyEvent.subscribe((s: MyClass, a: string) => {
 });
 ```
 
+An event handler can be unsubscribed like this:
+
+```
+let unsubscribe = myObject.onMyEvent.subscribe((s: MyClass, a: string) => {
+	alert(s);
+});
+unsubscribe();
+``` 
+
 ###Event methods
 The `IEvent<TSender, TArgs>`, `ISimple<TArgs>`, `EventDispatcher<TSender, TArgs>`, `SimpleEvenDispatcher<TArgs>` share the 
 same basic methods:
 
 - `subscribe(eventHandler)` - subscribes to the event by registring an event handler. The handler will be executed when
-the event is dispatched.
+the event is dispatched. The subscribe method returns a function that can be used to unsubscribe the eventHandler directly.
 - `unsubscribe(eventHandler)` - removes the subscription by removing the handler. This will stop the handler from being executed
 when the event is dispatched.
 

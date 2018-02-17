@@ -115,6 +115,34 @@ describe("Strongly Typed Events - Simple event", function () {
             expect(resultNr, 'resultNr should be 0.').to.equal(0);
         });
 
+        it("Unsubscribing from simple event dispatcher using subscribe's return function.", function () {
+
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
+            let resultNr = 0;
+
+            let unsub = dispatcher.subscribe((nr: number) => {
+                resultNr += nr;
+            });
+            unsub();
+            dispatcher.dispatch(6);
+
+            expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
+
+        it("Unsubscribing from simple event dispatcher using sub's return function.", function () {
+
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
+            let resultNr = 0;
+
+            let unsub = dispatcher.sub((nr: number) => {
+                resultNr += nr;
+            });
+            unsub();
+            dispatcher.dispatch(6);
+
+            expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
+
 
         it("Unsubscribing to a one subscription.", function () {
 
@@ -127,6 +155,20 @@ describe("Strongly Typed Events - Simple event", function () {
 
             dispatcher.one(fn);
             dispatcher.unsubscribe(fn);
+            dispatcher.dispatch(6);
+
+            expect(resultNr, 'resultNr should be 0.').to.equal(0);
+        });
+
+        it("Unsubscribing from simple event dispatcher using one's return function.", function () {
+
+            let dispatcher = _e.createSimpleEventDispatcher<number>();
+            let resultNr = 0;
+
+            let unsub = dispatcher.one((nr: number) => {
+                resultNr += nr;
+            });
+            unsub();
             dispatcher.dispatch(6);
 
             expect(resultNr, 'resultNr should be 0.').to.equal(0);

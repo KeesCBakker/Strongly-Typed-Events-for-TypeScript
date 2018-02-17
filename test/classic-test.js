@@ -1,15 +1,21 @@
 'use strict';
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var chai_1 = require("chai");
 var strongly_typed_events_1 = require("../strongly-typed-events");
 describe("Strongly Typed Events", function () {
     describe("Event", function () {
         it("Subscribe / unsubscribe - event as property", function () {
-            var MyEventTester = (function () {
+            var MyEventTester = /** @class */ (function () {
                 function MyEventTester() {
                     this._myEvent = new strongly_typed_events_1.EventDispatcher();
                 }
@@ -40,7 +46,7 @@ describe("Strongly Typed Events", function () {
             chai_1.expect(eventHandlerResult, 'The eventHandlerResult should still be "Test2".').to.equal('Test2');
         });
         it("Subscribe / unsubscribe - event on interface", function () {
-            var MyEventTester = (function () {
+            var MyEventTester = /** @class */ (function () {
                 function MyEventTester() {
                     this._myEvent = new strongly_typed_events_1.EventDispatcher();
                 }
@@ -80,7 +86,7 @@ describe("Strongly Typed Events", function () {
             chai_1.expect(result, 'The result should be "Testing 42".').to.equal('Testing 42');
         });
         it('EventHandlingBase', function () {
-            var MyTester = (function (_super) {
+            var MyTester = /** @class */ (function (_super) {
                 __extends(MyTester, _super);
                 function MyTester() {
                     return _super !== null && _super.apply(this, arguments) || this;
@@ -102,13 +108,13 @@ describe("Strongly Typed Events", function () {
             chai_1.expect(result, 'The result should be "Testing 789".').to.equal('Testing 789');
         });
         it('Dispatcher', function () {
-            var Source = (function () {
+            var Source = /** @class */ (function () {
                 function Source(name) {
                     this.name = name;
                 }
                 return Source;
             }());
-            var Argument = (function () {
+            var Argument = /** @class */ (function () {
                 function Argument(name) {
                     this.name = name;
                 }
@@ -138,10 +144,24 @@ describe("Strongly Typed Events", function () {
             dispatcher.dispatchAsync(null, 1);
             chai_1.expect(i, 'Because of async dispatch, i should be 0.').to.equal(0);
         });
+        it('Unsubscribe event handler after dispatching 2 times.', function () {
+            var dispatcher = new strongly_typed_events_1.EventDispatcher();
+            var i = 0;
+            var unsub = dispatcher.subscribe(function (s, a) {
+                i += a;
+                if (i == 3) {
+                    unsub();
+                }
+            });
+            dispatcher.dispatch(null, 1);
+            dispatcher.dispatch(null, 2);
+            dispatcher.dispatch(null, 4);
+            chai_1.expect(i, 'Because of unsubscribing, i should be 3.').to.equal(3);
+        });
     });
     describe("Simple Event", function () {
         it("Subscribe / unsubscribe - simple event as property", function () {
-            var MyEventTester = (function () {
+            var MyEventTester = /** @class */ (function () {
                 function MyEventTester() {
                     this._myEvent = new strongly_typed_events_1.SimpleEventDispatcher();
                 }
@@ -170,7 +190,7 @@ describe("Strongly Typed Events", function () {
             chai_1.expect(result, 'Result should still be "Test1" because of unsubscribe.').to.equal('Test1');
         });
         it("Subscribe / unsubscribe - simple event on interface", function () {
-            var MyEventTester = (function () {
+            var MyEventTester = /** @class */ (function () {
                 function MyEventTester() {
                     this._myEvent = new strongly_typed_events_1.SimpleEventDispatcher();
                 }
@@ -210,7 +230,7 @@ describe("Strongly Typed Events", function () {
             chai_1.expect(result, 'Result of dispatch of interface should be "Testing 42".').to.equal('Testing 42');
         });
         it('SimpleEventHandlingBase', function () {
-            var MyTester = (function (_super) {
+            var MyTester = /** @class */ (function (_super) {
                 __extends(MyTester, _super);
                 function MyTester() {
                     return _super !== null && _super.apply(this, arguments) || this;
@@ -232,7 +252,7 @@ describe("Strongly Typed Events", function () {
             chai_1.expect(result, 'The result should be "Testing 789".').to.equal('Testing 789');
         });
         it('Dispatcher', function () {
-            var Argument = (function () {
+            var Argument = /** @class */ (function () {
                 function Argument(name) {
                     this.name = name;
                 }
@@ -258,10 +278,24 @@ describe("Strongly Typed Events", function () {
             dispatcher.dispatchAsync(1);
             chai_1.expect(i, 'Because of async dispatch, i should be 0.').to.equal(0);
         });
+        it('Unsubscribe event handler after dispatching 2 times.', function () {
+            var dispatcher = new strongly_typed_events_1.SimpleEventDispatcher();
+            var i = 0;
+            var unsub = dispatcher.subscribe(function (a) {
+                i += a;
+                if (i == 3) {
+                    unsub();
+                }
+            });
+            dispatcher.dispatch(1);
+            dispatcher.dispatch(2);
+            dispatcher.dispatch(4);
+            chai_1.expect(i, 'Because of unsubscribing, i should be 3.').to.equal(3);
+        });
     });
     describe('Signal', function () {
         it("Subscribe / unsubscribe - signal as property", function () {
-            var MyEventTester = (function () {
+            var MyEventTester = /** @class */ (function () {
                 function MyEventTester() {
                     this._myEvent = new strongly_typed_events_1.SignalDispatcher();
                 }
@@ -290,7 +324,7 @@ describe("Strongly Typed Events", function () {
             chai_1.expect(i, 'i should still be 1 because of unsubscribe.').to.equal(1);
         });
         it("Subscribe / unsubscribe - signal on interface", function () {
-            var MyEventTester = (function () {
+            var MyEventTester = /** @class */ (function () {
                 function MyEventTester() {
                     this._myEvent = new strongly_typed_events_1.SignalDispatcher();
                 }
@@ -334,7 +368,7 @@ describe("Strongly Typed Events", function () {
             chai_1.expect(i, 'i should be 90.').to.equal(90);
         });
         it('SignalHandlingBase', function () {
-            var MyTester = (function (_super) {
+            var MyTester = /** @class */ (function (_super) {
                 __extends(MyTester, _super);
                 function MyTester() {
                     return _super !== null && _super.apply(this, arguments) || this;
@@ -365,6 +399,20 @@ describe("Strongly Typed Events", function () {
             });
             dispatcher.dispatchAsync();
             chai_1.expect(i, 'Because of async dispatch, i should be 0.').to.equal(0);
+        });
+        it('Unsubscribe event handler after dispatching 2 times.', function () {
+            var dispatcher = new strongly_typed_events_1.SignalDispatcher();
+            var i = 0;
+            var unsub = dispatcher.subscribe(function () {
+                i++;
+                if (i == 2) {
+                    unsub();
+                }
+            });
+            dispatcher.dispatch();
+            dispatcher.dispatch();
+            dispatcher.dispatch();
+            chai_1.expect(i, 'Because of unsubscribing, i should be 2.').to.equal(2);
         });
     });
     describe("One", function () {
