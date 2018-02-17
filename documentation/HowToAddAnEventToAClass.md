@@ -1,9 +1,9 @@
-﻿#How to add an event to a class?
+﻿# How to add an event to a class?
 
 Adding an event to a class is pretty easy. Expose it an an `IEvent<TSender, TArgs>` or 
 `ISimpleEvent<TArgs` and implement it as a dispatcher (`EventDispatcher` or `SimpleEventDispatcher`).
 
-###Example
+### Example
 Conside the following example:
 
 ```
@@ -28,7 +28,7 @@ The event itself is exposed by a getter. The implementation can return the entir
 or class the `asEvent()` on the dispatcher to return a wrapper with the dispatcher.
 
 
-###Usage
+### Usage
 Subscibing to an event is pretty straight forward:
 ```
 let myObject = new MyClass();
@@ -46,7 +46,7 @@ let unsubscribe = myObject.onMyEvent.subscribe((s: MyClass, a: string) => {
 unsubscribe();
 ``` 
 
-###Event methods
+### Event methods
 The `IEvent<TSender, TArgs>`, `ISimple<TArgs>`, `EventDispatcher<TSender, TArgs>`, `SimpleEvenDispatcher<TArgs>` share the 
 same basic methods:
 
