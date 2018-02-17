@@ -1,8 +1,8 @@
-﻿#How to add an event to an interface?
+﻿# How to add an event to an interface?
 Interfaces work a little different than <a href="HowToAddAnEventToAClass.md">events on classes<a>, because 
 interfaces don't support 'getter' properies. The best way to implement them is with a method.
 
-###Example
+### Example
 
 ````
 interface IMyInterface
@@ -25,7 +25,7 @@ interface IMyArgument
 }
 ````
 
-###Usage
+### Usage
 ````
 let myObject: IMyInterface = new MyClass();
 myObject.onMyEvent().subscribe((s: IMyInterface, a: IMyArgument) => {
