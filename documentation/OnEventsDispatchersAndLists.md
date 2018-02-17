@@ -1,4 +1,4 @@
-﻿#On events, dispatchers and lists (a general explanation of the system)
+﻿# On events, dispatchers and lists (a general explanation of the system)
 The system works with the following classes and interfaces:
 
 - **Events**<br/> This is how events are exposed to the ourside world
