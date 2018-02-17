@@ -50,3 +50,18 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+test/event-test.js
+test/classic-test.d.ts
+strongly-typed-events.js
+strongly-typed-events.d.ts
+test/classic-test.js
+test/event-test.js
+test/event-test.d.ts
+test/signal-test.js
+test/signal-test.d.ts
+test/simple-event-test.js
+test/simple-event-test.d.ts
+test/*.d.ts
+test/*.js
+*.d.ts
+*.js
