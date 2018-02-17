@@ -1,4 +1,4 @@
-#How to use Strongly Typed Events in Node.js?
+# How to use Strongly Typed Events in Node.js?
 We've got a node package for you! Install it the usual way:
 ```
 npm i strongly-typed-events
