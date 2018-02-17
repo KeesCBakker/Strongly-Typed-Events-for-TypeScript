@@ -1,9 +1,9 @@
-﻿#How to do asynchronous event dispatching?
+﻿# How to do asynchronous event dispatching?
 Normally event dispatching using a `EventDispatcher<TSender, TArgs>` or `SimpleEventDispatcher<TArgs>`
 is a synchronous process. This might not be desirable because a long event handler can hold up the rest of the
 handlers from being executed. That's why dispatchers can dispatch asynchronously by calling `dispatchAsync`.
 
-###Example
+### Example
 Conside the following example:
 
 ```
@@ -24,3 +24,4 @@ QUnit.test('Testing simple event async dispatch', (assert) => {
     assert.equal(i, 0);
 });
 ```
+Dispatching is now done asynchronously.
