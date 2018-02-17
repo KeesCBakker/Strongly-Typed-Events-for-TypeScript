@@ -2,14 +2,14 @@
   "name": "strongly-typed-events",
   "version": "1.0.2",
   "description": "Add the power of events to your (TypeScript) projects!",
-  "main": "./strongly-typed-events.js",
-  "types": "./strongly-typed-events.d.ts",
+  "main": "./src/strongly-typed-events.js",
+  "types": "./src/strongly-typed-events.d.ts",
   "directories": {
     "example": "examples",
     "test": "test"
   },
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*-test.ts",
+    "test": "mocha -r ts-node/register src/test/**/*-test.ts",
     "build": "tsc",
     "prepare": "npm test & npm version patch",
     "postpublish": "git push origin --tags"
