@@ -2,7 +2,7 @@ import { SignalDispatcher } from "./../";
 import { expect } from "chai";
 
 describe("Dispatching", () => {
-  it("Garbage collection for 'one' events", () => {
+  it("Garbage collection for 'one' events.", () => {
     //Implemented in the base of the dispatcher.
     let dispatcher = new SignalDispatcher();
 
