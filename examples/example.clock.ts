@@ -2,9 +2,7 @@
   SimpleEventDispatcher,
   SignalDispatcher,
   EventDispatcher,
-  ISignal,
-  IEvent,
-  ISimpleEvent
+  IEvent
 } from "./../src/";
 
 declare var window: any;
@@ -25,32 +23,26 @@ class Clock {
   private _onTick = new SignalDispatcher();
   private _onSequenceTick = new SimpleEventDispatcher<number>();
   private _onClockTick = new EventDispatcher<Clock, number>();
-
   private _ticks: number = 0;
 
   constructor(public name: string, timeout: number) {
-    window.setInterval(() => {
-      this.Tick();
+    setInterval(() => {
+      this._ticks += 1;
+      this._onTick.dispatch();
+      this._onSequenceTick.dispatch(this._ticks);
+      this._onClockTick.dispatch(this, this._ticks);
     }, timeout);
   }
 
-  private Tick(): void {
-    this._ticks += 1;
-
-    this._onTick.dispatch();
-    this._onSequenceTick.dispatch(this._ticks);
-    this._onClockTick.dispatch(this, this._ticks);
-  }
-
-  public get onTick(): ISignal {
+  public get onTick() {
     return this._onTick.asEvent();
   }
 
-  public get onSequenceTick(): ISimpleEvent<number> {
+  public get onSequenceTick() {
     return this._onSequenceTick.asEvent();
   }
 
-  public get onClockTick(): IEvent<Clock, number> {
+  public get onClockTick() {
     return this._onClockTick.asEvent();
   }
 }
