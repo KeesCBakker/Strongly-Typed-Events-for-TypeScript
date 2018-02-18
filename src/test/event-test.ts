@@ -9,7 +9,7 @@ class Dummy {
 }
 
 describe("Strongly Typed Events - Event", function() {
-  describe("createEventDispatcher", function() {
+  describe("EventDispatcher", function() {
     it("Subscribing to the event dispatcher", function() {
       var carolus = new Dummy("Carolus");
 

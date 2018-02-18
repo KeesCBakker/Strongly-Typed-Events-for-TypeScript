@@ -14,7 +14,7 @@ export class Subscription<TEventHandler> {
    * Creates an instance of Subscription.
    *
    * @param {TEventHandler} handler The handler for the subscription.
-   * @param {boolean} isOnce Indicates if the handler should only be executed` once.
+   * @param {boolean} isOnce Indicates if the handler should only be executed once.
    */
   constructor(public handler: TEventHandler, public isOnce: boolean) {}
 
@@ -30,6 +30,7 @@ export class Subscription<TEventHandler> {
       this.isExecuted = true;
 
       var fn: any = this.handler;
+
       if (executeAsync) {
         setTimeout(() => {
           fn.apply(scope, args);
