@@ -5,7 +5,7 @@ import { expect } from "chai";
 import { SignalDispatcher, SignalList } from "./../";
 
 describe("Strongly Typed Events - Signal", function() {
-  describe("createSignalDispatcher", function() {
+  describe("SignalDispatcher", function() {
     it("Subscribing to the signal dispatcher", function() {
       let dispatcher = new SignalDispatcher();
       let resultNr: number;

@@ -6,7 +6,7 @@ import { SimpleEventDispatcher, SimpleEventList } from "./../";
 
 
 describe("Strongly Typed Events - Simple event", function() {
-  describe("createSimpleEventDispatcher", function() {
+  describe("SimpleEventDispatcher", function() {
     it("Subscribing to the simple event dispatcher", function() {
       let dispatcher = new SimpleEventDispatcher<number>();
       let resultNr: number;
