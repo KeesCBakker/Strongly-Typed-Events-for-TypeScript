@@ -63,8 +63,6 @@ test/simple-event-test.js
 test/simple-event-test.d.ts
 test/*.d.ts
 test/*.js
-*.d.ts
-*.js
 tsconfig.json
 documentation
 examples
@@ -72,3 +70,4 @@ examples
 src
 node_modules
 .gitignore
+dist/test
