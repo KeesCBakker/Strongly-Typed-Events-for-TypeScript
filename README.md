@@ -87,6 +87,7 @@ This project will help you to add events, event handling en event dispatching to
 
 #### Version 1.1
 Removed the static. Internal restructuring of the package. Removed default exports, all exports are now named. _This is a breaking change_.
+An unsubscribe function is now returned when registering a subscription: `let unsub = x.sub(x => {}); unsub();`.
 
 #### Version 1.0
 Added default exports. Removed emulation through window. 
