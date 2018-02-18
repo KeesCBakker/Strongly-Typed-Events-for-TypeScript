@@ -89,9 +89,27 @@ export abstract class DispatcherBase<TEventHandler>
     scope: any,
     args: IArguments
   ): void {
-    this._subscriptions
-      .filter(sub => !sub.isOnce || !sub.isExecuted)
-      .forEach(sub => sub.execute(executeAsync, scope, args));
+
+    //execute on a copy because of bug #9
+    for (let sub of [...this._subscriptions]) {
+
+      sub.execute(executeAsync, scope, args);
+
+      //cleanup subs that are no longer needed
+      this.cleanup(sub);
+    }
+  }
+
+  /**
+   * Cleans up subs that ran and should run only once.
+   */
+  protected cleanup(sub: Subscription<TEventHandler>){
+    if (sub.isOnce && sub.isExecuted) {
+      let i = this._subscriptions.indexOf(sub);
+      if (i > -1) {
+        this._subscriptions.splice(i, 1);
+      }
+    }
   }
 
   /**
