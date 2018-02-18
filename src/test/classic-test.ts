@@ -4,7 +4,6 @@ import { expect } from "chai";
 
 import {
   IEvent,
-  createEventDispatcher,
   EventDispatcher,
   EventHandlingBase,
   ISimpleEvent,
