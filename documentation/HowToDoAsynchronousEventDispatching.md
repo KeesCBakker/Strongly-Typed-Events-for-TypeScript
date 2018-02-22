@@ -6,7 +6,7 @@ handlers from being executed. That's why dispatchers can dispatch asynchronously
 ### Example
 Conside the following example:
 
-```
+```typescript
 QUnit.test('Testing simple event async dispatch', (assert) => {
 
     let dispatcher = new SimpleEventDispatcher<number>();

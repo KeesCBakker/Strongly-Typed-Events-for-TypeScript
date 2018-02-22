@@ -5,7 +5,7 @@ npm install strongly-typed-events --save
 ```
 ## Code example
 Using it is pretty straight forward:
-```
+```typescript
 const { EventDispatcher } = require('strongly-typed-events');
 
 export class TfsBuildClient {
@@ -20,7 +20,7 @@ export class TfsBuildClient {
 ## Exposed classes and methods
 The following classes are exposed through the module exports:
 
-```
+```typescript
     EventDispatcher: <TSender, TArgs>() => EventDispatcher<TSender, TArgs>;
     SimpleEventDispatcher: <TArgs>() => SimpleEventDispatcher<TArgs>;
     SignalDispatcher: () => SignalDispatcher;

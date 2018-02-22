@@ -6,7 +6,7 @@ Adding an event to a class is pretty easy. Expose it an an `IEvent<TSender, TArg
 ### Example
 Conside the following example:
 
-```
+```typescript
 class MyClass
 {
 	private _myEvent = new EventDispatcher<MyClass, string>();
@@ -30,7 +30,7 @@ or class the `asEvent()` on the dispatcher to return a wrapper with the dispatch
 
 ### Usage
 Subscibing to an event is pretty straight forward:
-```
+```typescript
 let myObject = new MyClass();
 myObject.onMyEvent.subscribe((s: MyClass, a: string) => {
 	alert(s);
@@ -39,7 +39,7 @@ myObject.onMyEvent.subscribe((s: MyClass, a: string) => {
 
 An event handler can be unsubscribed like this:
 
-```
+```typescript
 let unsubscribe = myObject.onMyEvent.subscribe((s: MyClass, a: string) => {
 	alert(s);
 });
