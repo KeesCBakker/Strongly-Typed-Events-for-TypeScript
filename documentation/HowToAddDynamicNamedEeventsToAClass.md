@@ -4,7 +4,7 @@ Need to add named event support to your class? Implement the `IEventHandling<TSe
 `ISimpleEventHandling<TArgs>` interface or extend from the abstract `EventHandlingBase` or `SimpleEventHandling` class. 
 
 ### Example
-```
+```typescript
 class DynamicEventsExample implements IEventHandling<DynamicEventsExample, DynamicEventsExampleArgs>
 {
     private _events = new EventList<DynamicEventsExample, DynamicEventsExampleArgs>();

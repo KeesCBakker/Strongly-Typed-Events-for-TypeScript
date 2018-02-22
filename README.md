@@ -13,7 +13,7 @@ This project gives you the following event types:
 
 ### Subscription made easy
 An example says more than a 1000 words. Imagine if you have events like this on your class:
-```
+```typescript
 let clock = new Clock("Smu", 1000);
 
 //log the ticks to the console - this is a signal event
@@ -31,7 +31,7 @@ clock.onClockTick.subscribe((c, n) =>
 ### Events made easy
 So let's look at the implementation from a TypeScript perspective. (Do you program NodeJs without typescript? <a href="documentation/HowToUseInNodeJs.md">Check this</a>.)
 
-```
+```typescript
 import { SignalDispatcher, SimpleEventDispatcher, EventDispatcher } from "strongly-typed-events";
 
 class Clock {
