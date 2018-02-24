@@ -64,8 +64,13 @@ export abstract class DispatcherBase<TEventHandler>
    */
   public unsubscribe(fn: TEventHandler): void {
     if (!fn) return;
-    const index = this._subscriptions.findIndex(sub => sub.handler == fn);
-    if (index != -1) this._subscriptions.splice(index, 1);
+
+    for (let i = 0; i < this._subscriptions.length; i++) {
+      if (this._subscriptions[i].handler == fn) {
+        this._subscriptions.splice(i, 1);
+        break;
+      }
+    }
   }
 
   /**
@@ -89,10 +94,8 @@ export abstract class DispatcherBase<TEventHandler>
     scope: any,
     args: IArguments
   ): void {
-
     //execute on a copy because of bug #9
     for (let sub of [...this._subscriptions]) {
-
       sub.execute(executeAsync, scope, args);
 
       //cleanup subs that are no longer needed
@@ -103,7 +106,7 @@ export abstract class DispatcherBase<TEventHandler>
   /**
    * Cleans up subs that ran and should run only once.
    */
-  protected cleanup(sub: Subscription<TEventHandler>){
+  protected cleanup(sub: Subscription<TEventHandler>) {
     if (sub.isOnce && sub.isExecuted) {
       let i = this._subscriptions.indexOf(sub);
       if (i > -1) {
