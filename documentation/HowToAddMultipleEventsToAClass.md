@@ -9,7 +9,7 @@ start, pause, reset. The events will be implemented using an `EventList<Stopwach
 a `get` method to get the event dispatcher by name. When it doesn't exists, one will be created an returned. The dispatch is 
 done by calling the `dispatch` on the dispatcher.
 
-```
+```typescript
 class Stopwatch {
 
     private _events = new EventList<Stopwatch, StopwatchEventArgs>();
