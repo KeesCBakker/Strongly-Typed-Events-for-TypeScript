@@ -8,7 +8,7 @@ describe("Strongly Typed Events - Signal", function() {
   describe("SignalDispatcher", function() {
     it("Subscribing to the signal dispatcher", function() {
       let dispatcher = new SignalDispatcher();
-      let resultNr: number;
+      let resultNr = 0;
 
       dispatcher.subscribe(() => {
         resultNr = 7;
@@ -21,7 +21,7 @@ describe("Strongly Typed Events - Signal", function() {
 
     it("Sub to the signal dispatcher", function() {
       let dispatcher = new SignalDispatcher();
-      let resultNr: number;
+      let resultNr = 0;
 
       dispatcher.sub(() => {
         resultNr = 7;
@@ -250,7 +250,7 @@ describe("Strongly Typed Events - Signal", function() {
 
     it("Test firing two events in one list", function() {
       let list = new SignalList();
-      let result: string;
+      let result = "";
 
       let event1 = "ev1";
       var fn1 = () => {

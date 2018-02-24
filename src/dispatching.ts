@@ -158,7 +158,7 @@ export abstract class EventListBase<TEventDispatcher> {
    * @param name The name of the event.
    */
   remove(name: string): void {
-    this._events[name] = null;
+    delete this._events[name];
   }
 
   /**

@@ -9,7 +9,7 @@ describe("Strongly Typed Events - Simple event", function() {
   describe("SimpleEventDispatcher", function() {
     it("Subscribing to the simple event dispatcher", function() {
       let dispatcher = new SimpleEventDispatcher<number>();
-      let resultNr: number;
+      let resultNr = 0;
 
       dispatcher.subscribe(nr => {
         resultNr = nr;
@@ -22,7 +22,7 @@ describe("Strongly Typed Events - Simple event", function() {
 
     it("Sub to the simple event dispatcher", function() {
       let dispatcher = new SimpleEventDispatcher<number>();
-      let resultNr: number;
+      let resultNr = 0;
 
       dispatcher.sub(nr => {
         resultNr = nr;
@@ -251,7 +251,7 @@ describe("Strongly Typed Events - Simple event", function() {
 
     it("Test firing two events in one list", function() {
       let list = new SimpleEventList<number>();
-      let result: string;
+      let result = "";
 
       let event1 = "ev1";
       var fn1 = (nr: number) => {

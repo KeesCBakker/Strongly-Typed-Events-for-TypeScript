@@ -33,7 +33,7 @@ describe("Strongly Typed Events", function() {
       }
 
       let tester = new MyEventTester();
-      let eventHandlerResult: string = null;
+      let eventHandlerResult = "";
 
       let handler = (sender: MyEventTester, args: string) => {
         eventHandlerResult = args;
@@ -83,7 +83,7 @@ describe("Strongly Typed Events", function() {
       }
 
       let tester: IMyEventTester = new MyEventTester();
-      let eventHandlerResult: string = null;
+      let eventHandlerResult = "";
 
       let handler = (sender: IMyEventTester, args: string) => {
         eventHandlerResult = args;
@@ -106,7 +106,7 @@ describe("Strongly Typed Events", function() {
 
     it("Event list", function() {
       var events = new EventList<any, string>();
-      var result: string;
+      var result = "";
 
       events
         .get("Test1")
@@ -147,7 +147,7 @@ describe("Strongly Typed Events", function() {
       }
 
       var t = new MyTester();
-      var result: string;
+      var result = "";
 
       t.subscribe("Test1", (sender: MyTester, args: string) => (result = args));
       t.signal("Test1", "Testing 123");
@@ -243,7 +243,7 @@ describe("Strongly Typed Events", function() {
       }
 
       let s = new MyEventTester();
-      let result: string = null;
+      let result = "";
 
       var handler = (args: string) => {
         result = args;
@@ -265,7 +265,7 @@ describe("Strongly Typed Events", function() {
       interface IMyEventTester {
         myEvent(): ISimpleEvent<string>;
 
-        signal(str: string);
+        signal(str: string) : void;
       }
 
       class MyEventTester implements IMyEventTester {
@@ -281,7 +281,7 @@ describe("Strongly Typed Events", function() {
       }
 
       let s: IMyEventTester = new MyEventTester();
-      let result: string = null;
+      let result = "";
 
       var handler = (args: string) => {
         result = args;
@@ -301,7 +301,7 @@ describe("Strongly Typed Events", function() {
 
     it("Simple Event list", function() {
       var events = new SimpleEventList<string>();
-      var result: string;
+      var result = "";
 
       events.get("Test1").subscribe((args: string) => (result = args));
       events.get("Test1").dispatch("Testing 123");
@@ -335,7 +335,7 @@ describe("Strongly Typed Events", function() {
       }
 
       var t = new MyTester();
-      var result: string;
+      var result = "";
 
       t.subscribe("Test1", (args: string) => (result = args));
       t.signal("Test1", "Testing 123");
@@ -442,7 +442,7 @@ describe("Strongly Typed Events", function() {
       interface IMyEventTester {
         myEvent(): ISignal;
 
-        signal();
+        signal() : void;
       }
 
       class MyEventTester implements IMyEventTester {
@@ -606,7 +606,7 @@ describe("Strongly Typed Events", function() {
     it("Unsubscribe one on an event dispatcher", function() {
       var i = 0;
       var dispatcher = new EventDispatcher<any, number>();
-      let fn = (sender, args) => {
+      let fn = (sender: any, args: number) => {
         i += args;
       };
 
@@ -620,7 +620,7 @@ describe("Strongly Typed Events", function() {
     it("Register", function() {
       var i = 0;
       var dispatcher = new EventDispatcher<any, number>();
-      let fn = (sender, args) => {
+      let fn = (sender: any, args: number) => {
         i += args;
       };
 

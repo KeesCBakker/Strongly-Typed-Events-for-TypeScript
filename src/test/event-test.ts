@@ -14,8 +14,8 @@ describe("Strongly Typed Events - Event", function() {
       var carolus = new Dummy("Carolus");
 
       let dispatcher = new EventDispatcher<Dummy, number>();
-      let resultNr: number;
-      let resultDummy: Dummy;
+      let resultNr = 0;
+      let resultDummy: Dummy|null = null;
 
       dispatcher.subscribe((dummy, nr) => {
         resultDummy = dummy;
@@ -32,8 +32,8 @@ describe("Strongly Typed Events - Event", function() {
       var carolus = new Dummy("Carolus");
 
       let dispatcher = new EventDispatcher<Dummy, number>();
-      let resultNr: number;
-      let resultDummy: Dummy;
+      let resultNr = 0;
+      let resultDummy: Dummy | null = null;
 
       dispatcher.sub((dummy, nr) => {
         resultDummy = dummy;
@@ -51,7 +51,7 @@ describe("Strongly Typed Events - Event", function() {
 
       let dispatcher = new EventDispatcher<Dummy, number>();
       let resultNr = 0;
-      let resultDummy: Dummy;
+      let resultDummy: Dummy | null = null;
 
       dispatcher.subscribe((dummy, nr) => {
         resultDummy = dummy;
@@ -70,7 +70,7 @@ describe("Strongly Typed Events - Event", function() {
 
       let dispatcher = new EventDispatcher<Dummy, number>();
       let resultNr = 0;
-      let resultDummy: Dummy;
+      let resultDummy: Dummy | null = null;
 
       dispatcher.sub((dummy, nr) => {
         resultDummy = dummy;
@@ -89,7 +89,7 @@ describe("Strongly Typed Events - Event", function() {
 
       let dispatcher = new EventDispatcher<Dummy, number>();
       let resultNr = 0;
-      let resultDummy: Dummy;
+      let resultDummy: Dummy | null = null;
 
       dispatcher.one((dummy, nr) => {
         resultDummy = dummy;
@@ -108,7 +108,7 @@ describe("Strongly Typed Events - Event", function() {
 
       let dispatcher = new EventDispatcher<Dummy, number>();
       let resultNr = 0;
-      let resultDummy: Dummy = null;
+      let resultDummy: Dummy | null = null;
 
       var fn = (dummy: Dummy, nr: number) => {
         resultDummy = dummy;
@@ -128,7 +128,7 @@ describe("Strongly Typed Events - Event", function() {
 
       let dispatcher = new EventDispatcher<Dummy, number>();
       let resultNr = 0;
-      let resultDummy: Dummy = null;
+      let resultDummy: Dummy | null = null;
 
       var fn = (dummy: Dummy, nr: number) => {
         resultDummy = dummy;
@@ -148,7 +148,7 @@ describe("Strongly Typed Events - Event", function() {
 
       let dispatcher = new EventDispatcher<Dummy, number>();
       let resultNr = 0;
-      let resultDummy: Dummy = null;
+      let resultDummy: Dummy | null = null;
 
       let unsub = dispatcher.subscribe((dummy: Dummy, nr: number) => {
         resultDummy = dummy;
@@ -166,7 +166,7 @@ describe("Strongly Typed Events - Event", function() {
 
       let dispatcher = new EventDispatcher<Dummy, number>();
       let resultNr = 0;
-      let resultDummy: Dummy = null;
+      let resultDummy: Dummy | null = null;
 
       let unsub = dispatcher.sub((dummy: Dummy, nr: number) => {
         resultDummy = dummy;
@@ -183,8 +183,8 @@ describe("Strongly Typed Events - Event", function() {
       var carolus = new Dummy("Carolus");
 
       let dispatcher = new EventDispatcher<Dummy, number>();
-      let resultNr = 0;
-      let resultDummy: Dummy = null;
+       let resultNr = 0;
+      let resultDummy: Dummy | null = null;
 
       var fn = (dummy: Dummy, nr: number) => {
         resultDummy = dummy;
@@ -204,7 +204,7 @@ describe("Strongly Typed Events - Event", function() {
 
       let dispatcher = new EventDispatcher<Dummy, number>();
       let resultNr = 0;
-      let resultDummy: Dummy = null;
+      let resultDummy: Dummy | null = null;
 
       let unsub = dispatcher.one((dummy: Dummy, nr: number) => {
         resultDummy = dummy;
@@ -299,16 +299,16 @@ describe("Strongly Typed Events - Event", function() {
     });
 
     it("Test firing two events in one list", function() {
-      let list = new EventList<Dummy, number>();
-      let result: string;
+      let list = new EventList<Dummy | null, number>();
+      let result = "";
 
       let event1 = "ev1";
-      var fn1 = (dummy: Dummy, nr: number) => {
+      var fn1 = (dummy: Dummy | null, nr: number) => {
         result = "ev1:" + nr;
       };
 
       let event2 = "ev2";
-      var fn2 = (dummy: Dummy, nr: number) => {
+      var fn2 = (dummy: Dummy | null, nr: number) => {
         result = "ev2:" + nr;
       };
 
