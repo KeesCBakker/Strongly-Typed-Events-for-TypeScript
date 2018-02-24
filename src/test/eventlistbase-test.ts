@@ -14,11 +14,11 @@ describe("EventList", () => {
     eventList.get("myEvent").sub(fn1);
     eventList.get("myEvent").dispatch();
 
-    expect(i).to.eq(1, "i should have been bumped to 1.");
+    expect(i).to.eq(i, "i should have been bumped to 1.");
     
     eventList.remove("myEvent");
     eventList.get("myEvent").dispatch();
 
-    expect(i).to.eq(1, "i should still be 1.");
+    expect(i).to.eq(i, "i should still be 1.");
   });
 });
