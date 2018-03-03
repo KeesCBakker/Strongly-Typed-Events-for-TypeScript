@@ -15,7 +15,7 @@ describe("Strongly Typed Events - Event", function() {
 
       let dispatcher = new EventDispatcher<Dummy, number>();
       let resultNr = 0;
-      let resultDummy: Dummy|null = null;
+      let resultDummy: Dummy | null = null;
 
       dispatcher.subscribe((dummy, nr) => {
         resultDummy = dummy;
@@ -183,7 +183,7 @@ describe("Strongly Typed Events - Event", function() {
       var carolus = new Dummy("Carolus");
 
       let dispatcher = new EventDispatcher<Dummy, number>();
-       let resultNr = 0;
+      let resultNr = 0;
       let resultDummy: Dummy | null = null;
 
       var fn = (dummy: Dummy, nr: number) => {

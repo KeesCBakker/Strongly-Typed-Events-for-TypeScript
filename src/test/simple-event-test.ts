@@ -4,7 +4,6 @@ import { expect } from "chai";
 
 import { SimpleEventDispatcher, SimpleEventList } from "./../";
 
-
 describe("Strongly Typed Events - Simple event", function() {
   describe("SimpleEventDispatcher", function() {
     it("Subscribing to the simple event dispatcher", function() {

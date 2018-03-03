@@ -265,7 +265,7 @@ describe("Strongly Typed Events", function() {
       interface IMyEventTester {
         myEvent(): ISimpleEvent<string>;
 
-        signal(str: string) : void;
+        signal(str: string): void;
       }
 
       class MyEventTester implements IMyEventTester {
@@ -442,7 +442,7 @@ describe("Strongly Typed Events", function() {
       interface IMyEventTester {
         myEvent(): ISignal;
 
-        signal() : void;
+        signal(): void;
       }
 
       class MyEventTester implements IMyEventTester {

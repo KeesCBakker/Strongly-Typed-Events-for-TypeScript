@@ -10,7 +10,7 @@ describe("Dispatching", () => {
     let fn1 = () => {};
     dispatcher.sub(fn1);
 
-    //should be gone after execution    
+    //should be gone after execution
     let fn2 = () => {};
     dispatcher.one(fn2);
 
