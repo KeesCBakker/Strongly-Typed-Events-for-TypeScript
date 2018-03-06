@@ -7,7 +7,9 @@ describe("EventList", () => {
     let eventList = new SignalList();
 
     let i = 0;
-    let fn1 = () => { i++ };
+    let fn1 = () => {
+      i++;
+    };
 
     expect(i).to.eq(0, "Nothing should have been changed at this point.");
 
@@ -15,7 +17,7 @@ describe("EventList", () => {
     eventList.get("myEvent").dispatch();
 
     expect(i).to.eq(i, "i should have been bumped to 1.");
-    
+
     eventList.remove("myEvent");
     eventList.get("myEvent").dispatch();
 
