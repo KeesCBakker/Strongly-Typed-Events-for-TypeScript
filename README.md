@@ -81,8 +81,26 @@ This project will help you to add events, event handling en event dispatching to
 - <a href="documentation/HowToDoAsynchronousEventDispatching.md">How to do asynchronous event dispatching?</a>
 - <a href="documentation/OnEventsDispatchersAndLists.md">On events, dispatchers and lists (a general explanation of the system)</a>
 - <a href="documentation/HowToUseInNodeJs.md">How to use Strongly Typed Events in Node.js?</a>
+- <a href="documentation/SomeUnsubStrategies.md">Some unsubscribe strategies</a>
 
 # History
+
+#### Version 1.2
+Added `ev.stopPropagation` and `ev.unsub()` to aid in event management. Each event type has
+an extra parameter that can be used to manage the event:
+```typescript
+//log the name of the clock and the tick argument to the console - this is an event
+clock.onClockTick.subscribe((c, n, ev) =>
+
+  console.log(`${c.name} ticked ${n} times.`)
+
+  //stop further event propagation:
+  ev.stopPropagation();
+
+  //unsubscribes the event handler that caused the event:
+  ev.unsub();
+);
+```
 
 #### Version 1.1
 Removed the static. Internal restructuring of the package. Removed default exports, all exports are now named. _This is a breaking change_.

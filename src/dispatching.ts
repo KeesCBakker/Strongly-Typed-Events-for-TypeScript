@@ -1,5 +1,22 @@
 import { ISubscribable } from "./definitions/subscribables";
+import { IEventManagement } from "./definitions/handlers";
 import { Subscription } from "./subscription";
+
+/**
+ * Allows the user to interact with the event.
+ *
+ * @class EventManagement
+ * @implements {IEventManagement}
+ */
+class EventManagement implements IEventManagement {
+  public propagationStopped = false;
+
+  constructor(public unsub: () => void) {}
+
+  public stopPropagation() {
+    this.propagationStopped = true;
+  }
+}
 
 /**
  * Base class for implementation of the dispatcher. It facilitates the subscribe
@@ -96,10 +113,18 @@ export abstract class DispatcherBase<TEventHandler>
   ): void {
     //execute on a copy because of bug #9
     for (let sub of [...this._subscriptions]) {
-      sub.execute(executeAsync, scope, args);
+      let ev = new EventManagement(() => this.unsub(sub.handler));
+      let nargs = Array.prototype.slice.call(args);
+      nargs.push(ev);
+
+      sub.execute(executeAsync, scope, nargs as IArguments);
 
       //cleanup subs that are no longer needed
       this.cleanup(sub);
+
+      if (!executeAsync && ev.propagationStopped) {
+        break;
+      }
     }
   }
 
