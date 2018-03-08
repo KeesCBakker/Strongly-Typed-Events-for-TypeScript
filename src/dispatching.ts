@@ -125,6 +125,10 @@ export abstract class DispatcherBase<TEventHandler>
 
       //cleanup subs that are no longer needed
       this.cleanup(sub);
+
+      if(!executeAsync && ev.propagationStopped){
+          break;
+      }
     }
   }
 

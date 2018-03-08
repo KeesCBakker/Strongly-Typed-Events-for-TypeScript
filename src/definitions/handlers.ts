@@ -12,33 +12,39 @@ export interface IEventManagement {
    * @memberof IEventManagement
    */
   unsub(): void;
+
+  /**
+   * Stops the propagation of the event.
+   * Cannot be used when async dispatch is done.
+   * 
+   * @memberof IEventManagement
+   */
+  stopPropagation():void;
 }
 
 /**
- * Event handler function with a generic sender and a generic argument.
+ * Interface for event handlers.
+ * 
+ * @export
+ * @interface IEventHandler
+ * @template TSender The sender type.
+ * @template TArgs The arguments type.
  */
 export interface IEventHandler<TSender, TArgs> {
-  /**
-   * @sender The sender.
-   * @args The argument.
-   */
-  (sender: TSender, args: TArgs, ev: IEventManagement): any;
+  (sender: TSender, args: TArgs, ev: IEventManagement): void;
 }
 
 /**
  * Event handler function with a generic argument
  */
 export interface ISimpleEventHandler<TArgs> {
-  /**
-   * @args The argument.
-   */
-  (args: TArgs, ev: IEventManagement): any;
+  (args: TArgs, ev: IEventManagement): void;
 }
 
 /**
  * Event handler function without arguments
  */
 export interface ISignalHandler {
-  (ev: IEventManagement): any;
+  (ev: IEventManagement): void;
 }
 
