@@ -7,11 +7,11 @@ describe("Dispatching", () => {
     let dispatcher = new SignalDispatcher();
 
     //should aways be present
-    let fn1 = () => { };
+    let fn1 = () => {};
     dispatcher.sub(fn1);
 
     //should be gone after execution
-    let fn2 = () => { };
+    let fn2 = () => {};
     dispatcher.one(fn2);
 
     //should never "see" fn2 - because it should be gone before
@@ -33,7 +33,6 @@ describe("Dispatching", () => {
   });
 
   it("Unsub through ev", () => {
-
     let dispatcher = new SignalDispatcher();
     let result = 0;
 
@@ -56,7 +55,6 @@ describe("Dispatching", () => {
   });
 
   it("stopPropagation through ev", () => {
-
     let dispatcher = new SignalDispatcher();
 
     let a = 0;
@@ -77,16 +75,11 @@ describe("Dispatching", () => {
     dispatcher.dispatch();
     dispatcher.dispatch();
 
-    expect(a).to.eq(
-      4,
-      "A should be 4, because 4 dispatches are done."
-    );
+    expect(a).to.eq(4, "A should be 4, because 4 dispatches are done.");
 
     expect(b).to.eq(
       2,
       "B should be 2, because everything after the 2nd dispatch is cancelled."
     );
-
   });
-
 });

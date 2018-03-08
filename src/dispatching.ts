@@ -4,21 +4,18 @@ import { Subscription } from "./subscription";
 
 /**
  * Allows the user to interact with the event.
- * 
+ *
  * @class EventManagement
  * @implements {IEventManagement}
  */
 class EventManagement implements IEventManagement {
-
   public propagationStopped = false;
 
-  constructor(public unsub: ()=>void){
-  }
+  constructor(public unsub: () => void) {}
 
-  public stopPropagation(){
+  public stopPropagation() {
     this.propagationStopped = true;
   }
-
 }
 
 /**
@@ -116,8 +113,7 @@ export abstract class DispatcherBase<TEventHandler>
   ): void {
     //execute on a copy because of bug #9
     for (let sub of [...this._subscriptions]) {
-
-      let ev = new EventManagement(()=> this.unsub(sub.handler));
+      let ev = new EventManagement(() => this.unsub(sub.handler));
       let nargs = Array.prototype.slice.call(args);
       nargs.push(ev);
 
@@ -126,8 +122,8 @@ export abstract class DispatcherBase<TEventHandler>
       //cleanup subs that are no longer needed
       this.cleanup(sub);
 
-      if(!executeAsync && ev.propagationStopped){
-          break;
+      if (!executeAsync && ev.propagationStopped) {
+        break;
       }
     }
   }

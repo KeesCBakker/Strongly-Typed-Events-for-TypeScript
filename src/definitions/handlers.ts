@@ -1,14 +1,13 @@
 /**
  * Manages the event.
- * 
+ *
  * @export
  * @interface IEventManagement
  */
 export interface IEventManagement {
-
   /**
    * Will unsubscribe the handler.
-   * 
+   *
    * @memberof IEventManagement
    */
   unsub(): void;
@@ -16,15 +15,15 @@ export interface IEventManagement {
   /**
    * Stops the propagation of the event.
    * Cannot be used when async dispatch is done.
-   * 
+   *
    * @memberof IEventManagement
    */
-  stopPropagation():void;
+  stopPropagation(): void;
 }
 
 /**
  * Interface for event handlers.
- * 
+ *
  * @export
  * @interface IEventHandler
  * @template TSender The sender type.
@@ -47,4 +46,3 @@ export interface ISimpleEventHandler<TArgs> {
 export interface ISignalHandler {
   (ev: IEventManagement): void;
 }
-
