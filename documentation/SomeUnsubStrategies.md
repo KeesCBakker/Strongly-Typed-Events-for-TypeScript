@@ -24,11 +24,33 @@ let clock = new Clock(1000);
 ```
 
 ## Unsubscribe using the handler
-
+You can unsubscribe using the event and calling `unsub` or `unsubscribe`.
 ```typescript
+let fn = (c: Clock, n: number) { };
+clock.onClockTick.sub(fn);
+clock.onClockTick.unsub(fn);
+```
 
-let handler = (c: Clock, n: number) { };
+## Unsubscribe through the subscribe (since v1.1)
+The `sub` or `subscribe` of the event will return an unsubscribe function.
+```typescript
+let fn = (c: Clock, n:number) { };
+let unsub = clock.onClockTick.sub(fn);
+unsub();
+```
 
+## Auto unsubscribe if one
+The `one` method of the event will only fire once and unsubscribe itself after firing.
+```typescript
+let fn = (c: Clock, n:number) { };
+clock.onClockTick.one(fn);
+```
 
-
+## Unsub through event management
+Each event gets an event management object as last parameter. You can use this object
+to unsubscribe the handler that caused the event.
+```typescript
+clock.onClockTick.sub((c: Clock, n:number, ev:IEventManagement) => {
+    ev.unsub();
+});
 ```
