@@ -1,5 +1,9 @@
 import { DispatcherBase, EventListBase } from "ste-core";
-import { ISimpleEventHandling, ISimpleEventHandler, ISimpleEvent } from "./definitions";
+import {
+  ISimpleEventHandling,
+  ISimpleEventHandler,
+  ISimpleEvent
+} from "./definitions";
 
 /**
  * The dispatcher handles the storage of subsciptions and facilitates

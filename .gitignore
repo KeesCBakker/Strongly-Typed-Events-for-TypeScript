@@ -51,3 +51,5 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 dist
+**/src/**/*.d.ts
+**/src/**/*.js
