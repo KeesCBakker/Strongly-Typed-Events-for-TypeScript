@@ -3,9 +3,10 @@ node_js:
   - stable
 install:
   - npm install
+  - npm install --g lerna
 
 script:
-  - npm run test
+  - lerna run test
 
 # Send coverage data to Coveralls
 # after_script: "cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
