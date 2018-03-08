@@ -1,4 +1,4 @@
-import { IEventManagement } from "./definitions/handlers";
+import { IEventManagement } from "./management";
 
 "use strict";
 /**

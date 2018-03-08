@@ -1,15 +1,13 @@
-import { IEvent } from "./definitions/subscribables";
-import { IEventHandler } from "./definitions/handlers";
-import { IEventHandling } from "./definitions/handling";
-import { DispatcherBase, EventListBase } from "./dispatching";
+import { DispatcherBase, EventListBase } from "ste-core";
+import { IEventHandler, IEvent, IEventHandling } from "./definitions";
 
 /**
  * Dispatcher implementation for events. Can be used to subscribe, unsubscribe
  * or dispatch events. Use the ToEvent() method to expose the event.
  */
-export class EventDispatcher<TSender, TArgs> extends DispatcherBase<
-  IEventHandler<TSender, TArgs>
-> implements IEvent<TSender, TArgs> {
+export class EventDispatcher<TSender, TArgs>
+  extends DispatcherBase<IEventHandler<TSender, TArgs>>
+  implements IEvent<TSender, TArgs> {
   /**
    * Creates a new EventDispatcher instance.
    */

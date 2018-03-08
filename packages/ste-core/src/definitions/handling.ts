@@ -1,5 +1,3 @@
-import { IEventHandler, ISimpleEventHandler, ISignalHandler } from "./handlers";
-
 /**
  * Base interface for event handling.
  */
@@ -46,20 +44,3 @@ export interface IBaseEventHandling<TEventHandler> {
    */
   has(name: string, fn: TEventHandler): boolean;
 }
-
-/**
- * Indicates the object is capable of handling named events.
- */
-export interface IEventHandling<TSender, TArgs>
-  extends IBaseEventHandling<IEventHandler<TSender, TArgs>> {}
-
-/**
- * Indicates the object is capable of handling named simple events.
- */
-export interface ISimpleEventHandling<TArgs>
-  extends IBaseEventHandling<ISimpleEventHandler<TArgs>> {}
-
-/**
- * Indicates the object is capable of handling named signals.
- */
-export interface ISignalHandling extends IBaseEventHandling<ISignalHandler> {}

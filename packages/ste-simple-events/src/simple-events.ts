@@ -1,15 +1,17 @@
-import { ISimpleEvent } from "./definitions/subscribables";
-import { ISimpleEventHandler } from "./definitions/handlers";
-import { ISimpleEventHandling } from "./definitions/handling";
-import { DispatcherBase, EventListBase } from "./dispatching";
+import { DispatcherBase, EventListBase } from "ste-core";
+import {
+  ISimpleEventHandling,
+  ISimpleEventHandler,
+  ISimpleEvent
+} from "./definitions";
 
 /**
  * The dispatcher handles the storage of subsciptions and facilitates
  * subscription, unsubscription and dispatching of a simple event
  */
-export class SimpleEventDispatcher<TArgs> extends DispatcherBase<
-  ISimpleEventHandler<TArgs>
-> implements ISimpleEvent<TArgs> {
+export class SimpleEventDispatcher<TArgs>
+  extends DispatcherBase<ISimpleEventHandler<TArgs>>
+  implements ISimpleEvent<TArgs> {
   /**
    * Creates a new SimpleEventDispatcher instance.
    */

@@ -1,16 +1,16 @@
 {
-  "compileOnSave": true,
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "outDir": "dist",
-    "declaration": true,
-    "strict": true
-  },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": true,
+        "strict": true,
+    },
+    "include": [
+        "packages/*/src/**/*.ts"
+    ],
+    "exclude": [
+        "documentations",
+        "examples",
+        "node_modules"
+    ]
 }
