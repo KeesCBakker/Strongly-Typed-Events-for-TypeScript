@@ -1,3 +1,5 @@
+import { IEventManagement } from "./definitions/handlers";
+
 "use strict";
 /**
  * Stores a handler. Manages execution meta data.
@@ -22,7 +24,7 @@ export class Subscription<TEventHandler> {
    * Executes the handler.
    *
    * @param {boolean} executeAsync True if the even should be executed async.
-   * @param {*} The scope the scope of the event.
+   * @param {*} scope The scope the scope of the event.
    * @param {IArguments} args The arguments for the event.
    */
   public execute(executeAsync: boolean, scope: any, args: IArguments) {
