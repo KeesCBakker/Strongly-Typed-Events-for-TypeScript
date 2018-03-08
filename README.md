@@ -84,6 +84,21 @@ This project will help you to add events, event handling en event dispatching to
 
 # History
 
+#### Version 1.2
+Added `ev.stopPropagation` and `ev.unsub()` to aid in event management. Each event type has
+an extra parameter that can be used to manage the event:
+```typescript
+//log the name of the clock and the tick argument to the console - this is an event
+clock.onClockTick.subscribe((c, n, ev) =>
+
+  //stop further event propagation:
+  ev.stopPropagation();
+
+  //unsubscribes the event handler that caused the event:
+  ev.unsub();
+);
+```
+
 #### Version 1.1
 Removed the static. Internal restructuring of the package. Removed default exports, all exports are now named. _This is a breaking change_.
 An unsubscribe function is now returned when registering a subscription: `let unsub = x.sub(x => {}); unsub();`.
