@@ -3,8 +3,9 @@ node_js:
   - stable
 install:
   - npm install --g lerna
+  - lerna exec "npm install"
   - lerna bootstrap
-
+  
 script:
   - lerna run test
 
