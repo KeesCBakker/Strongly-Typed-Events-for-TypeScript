@@ -1,7 +1,5 @@
-import { ISignal } from "./definitions/subscribables";
-import { ISignalHandler } from "./definitions/handlers";
-import { ISignalHandling } from "./definitions/handling";
-import { DispatcherBase, EventListBase } from "./dispatching";
+import { DispatcherBase, EventListBase } from "ste-core";
+import { ISignal, ISignalHandler, ISignalHandling } from "./definitions";
 
 /**
  * The dispatcher handles the storage of subsciptions and facilitates

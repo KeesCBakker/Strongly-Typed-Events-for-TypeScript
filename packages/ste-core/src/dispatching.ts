@@ -1,22 +1,6 @@
-import { ISubscribable } from "./definitions/subscribables";
-import { IEventManagement } from "./definitions/handlers";
+import { ISubscribable } from "./definitions/subscribable";
+import { IEventManagement, EventManagement } from "./management";
 import { Subscription } from "./subscription";
-
-/**
- * Allows the user to interact with the event.
- *
- * @class EventManagement
- * @implements {IEventManagement}
- */
-class EventManagement implements IEventManagement {
-  public propagationStopped = false;
-
-  constructor(public unsub: () => void) {}
-
-  public stopPropagation() {
-    this.propagationStopped = true;
-  }
-}
 
 /**
  * Base class for implementation of the dispatcher. It facilitates the subscribe

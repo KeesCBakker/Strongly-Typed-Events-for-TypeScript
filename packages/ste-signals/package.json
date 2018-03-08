@@ -1,0 +1,49 @@
+{
+  "name": "ste-signals",
+  "version": "1.2.1",
+  "description": "Add the power of Signals to your projects. They are the most barebones implementation of an event.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "mocha -r ts-node/register src/test/**/*-test.ts",
+    "build": "tsc",
+    "pretty": "prettier --write \"src/**/*.ts\"",
+    "prepublishOnly": "npm run pretty & npm run build & npm test & npm version patch",
+    "postpublish": "git push origin --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript.git"
+  },
+  "keywords": [
+    "signals",
+    "events",
+    "event",
+    "strongly",
+    "typed",
+    "typescript",
+    "DotNet"
+  ],
+  "author": "Kees C. Bakker (https://keestalkstech.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/issues"
+  },
+  "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
+  "devDependencies": {
+    "@types/chai": "^4.1.2",
+    "@types/mocha": "^2.2.48",
+    "@types/node": "^9.4.6",
+    "chai": "^4.1.2",
+    "mocha": "^5.0.1",
+    "prettier": "^1.11.1",
+    "ts-node": "^4.1.0",
+    "typescript": "^2.7.2"
+  },
+  "engines": {
+    "node": ">=4.2.4"
+  },
+  "dependencies": {
+    "ste-core": "^1.2.1"
+  }
+}

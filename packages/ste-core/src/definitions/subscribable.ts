@@ -1,5 +1,3 @@
-import { IEventHandler, ISimpleEventHandler, ISignalHandler } from "./handlers";
-
 /**
  * Indicates the object implements generic subscriptions.
  */
@@ -48,22 +46,3 @@ export interface ISubscribable<THandlerType> {
    */
   clear(): void;
 }
-
-/**
- * Models an event with a generic sender and generic argument.
- */
-export interface IEvent<TSender, TArgs>
-  extends ISubscribable<IEventHandler<TSender, TArgs>> {}
-
-/**
- * Models a simple event with a generic argument.
- */
-export interface ISimpleEvent<TArgs>
-  extends ISubscribable<ISimpleEventHandler<TArgs>> {}
-
-/**
- * Models a signal. This type of events has no arguments.
- * @interface ISignalHandler
- * @extends {ISubscribable<ISignalHandler>}
- */
-export interface ISignal extends ISubscribable<ISignalHandler> {}
