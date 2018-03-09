@@ -12,7 +12,7 @@ The project is seperated into multiple packages, so you only need
 to include what you need. We have the following packages:
 
 |Package|Description|
-|--|--|--|
+|-------|-----------|
 |`ste-core`|Package that contains all the building blocks for the creation of events. The dispatcher implementation is its main hero.|
 |`ste-events`|Events that are modeled after .Net with a `sender` and `argument`. If you use typescript, you can leverage the support for generics and get strongly typed code.|
 |`ste-simple-events`|A simpler version of the `ste-event`-event. No sender, just an argument.|
