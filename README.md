@@ -7,9 +7,9 @@ Add the power of events to your projects. We even have 3 flavors for you.
 
 ## Event types
 This project gives you the following event types:
-- `IEvent<TSender, TArgs>` - styled after the way .Net implements events. With each event you'll get a `sender` and an `argument` object. If you use typescript, you can implement them using generics. `npm install ste-events --save`
-- `ISimpleEvent<TArgs>` - basically the same thing, with only an argument. `npm install ste-simple-events --save`
-- `ISignal` - for when no data is needed, just the firing of the event is enough. `npm install ste-signals --save`
+- **Events** - styled after the way .Net implements events. With each event you'll get a `sender` and an `argument` object. If you use typescript, you can implement them using generics. `npm install ste-events --save`
+- **Simple events** - basically the same thing, with only an argument. `npm install ste-simple-events --save`
+- **Signals** - for when no data is needed, just the firing of the event is enough. `npm install ste-signals --save`
 - You want them all? Just use `npm install strongly-typed-events --save`.
 
 ### Subscription made easy
