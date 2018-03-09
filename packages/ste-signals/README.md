@@ -1,5 +1,5 @@
 # Strongly Typed Events - Signals
-Signals are the most barebone of all events. They don't contain
+Signals are the most barebone of all <a href="https://www.npmjs.com/package/strongly-typed-events">events</a>. They don't contain
 any data. They just invoke the registered handler. 
 
 [![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
@@ -18,7 +18,7 @@ clock.onTick.subscribe(() => console.log("Tick!"));
 ```
 
 ### Events made easy
-So let's look at the implementation from a TypeScript perspective. (Do you program NodeJs without typescript? <a href="../../documentation/HowToUseInNodeJs.md">Check this</a>.)
+So let's look at the implementation from a TypeScript perspective. (Do you program NodeJs without typescript? <a href="../../documentation/HowToUseInNodeJs.md">Check this</a>)
 
 ```typescript
 import { SignalDispatcher, SimpleEventDispatcher, EventDispatcher } from "ste-signals";
