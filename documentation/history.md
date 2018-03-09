@@ -1,5 +1,33 @@
 # History
 
+#### Version 1.3
+We transformed the single package to 5 packages:
+
+|Package|Description|
+|-------|-----------|
+|`ste-core`|Package that contains all the building blocks for the creation of events. The dispatcher implementation is its main hero.|
+|`ste-events`|Events that are modeled after .Net with a `sender` and `argument`. If you use typescript, you can leverage the support for generics and get strongly typed code.|
+|`ste-simple-events`|A simpler version of the `ste-event`-event. No sender, just an argument.|
+|`ste-signals`|A signal is even simpler, it is just a callback for when you need to be alerted without any scope.|
+|`strongly-typed-events`|This package includes everything.|
+
+#### Version 1.2
+Added `ev.stopPropagation` and `ev.unsub()` to aid in event management. Each event type has
+an extra parameter that can be used to manage the event:
+```typescript
+//log the name of the clock and the tick argument to the console - this is an event
+clock.onClockTick.subscribe((c, n, ev) =>
+
+  console.log(`${c.name} ticked ${n} times.`)
+
+  //stop further event propagation:
+  ev.stopPropagation();
+
+  //unsubscribes the event handler that caused the event:
+  ev.unsub();
+);
+```
+
 #### Version 1.1
 Removed the static. Internal restructuring of the package. Removed default exports, all exports are now named. _This is a breaking change_.
 An unsubscribe function is now returned when registering a subscription: `let unsub = x.sub(x => {}); unsub();`.
