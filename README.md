@@ -82,6 +82,7 @@ This project will help you to add events, event handling en event dispatching to
 
 #### Version 1.3
 We transformed the single package to 5 packages:
+
 |Package|Description|
 |-------|-----------|
 |`ste-core`|Package that contains all the building blocks for the creation of events. The dispatcher implementation is its main hero.|
