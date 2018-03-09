@@ -2,7 +2,7 @@
 There multiple ways to unsubscribe from an event. This page shows all the 
 options using the following example:
 ```typescript
-import { SignalDispatcher, SimpleEventDispatcher, EventDispatcher } from "strongly-typed-events";
+import { EventDispatcher } from "strongly-typed-events";
 
 class Clock {
   private _onClockTick = new EventDispatcher<Clock, number>();
