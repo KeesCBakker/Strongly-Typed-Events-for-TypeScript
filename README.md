@@ -1,5 +1,5 @@
-# Strongly Typed Events for TypeScript
-Add the power of events to your TypeScript projects.
+# Strongly Typed Events
+Add the power of events to your projects. We even have 3 flavors for you.
 
 [![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
 [![npm version](https://badge.fury.io/js/strongly-typed-events.svg)](https://badge.fury.io/js/strongly-typed-events)
@@ -7,9 +7,10 @@ Add the power of events to your TypeScript projects.
 
 ## Event types
 This project gives you the following event types:
-- `IEvent<TSender, TArgs>` - styled after the way .Net implements events. The sender and the argument are generic, so your code is strong typed. (Since 0.1)
-- `ISimpleEvent<TArgs>` - when you need something simpler with only a generic argument. (Since 0.2)
-- `ISignal` - for when no data is needed, just the firing of the event is enough. (Since 0.3)
+- `IEvent<TSender, TArgs>` - styled after the way .Net implements events. With each event you'll get a `sender` and an `argument` object. If you use typescript, you can implement them using generics.<br/>`npm install ste-events --save`
+- `ISimpleEvent<TArgs>` - basically the same thing, with only an argument.<br/>`npm install ste-simple-events --save`
+- `ISignal` - for when no data is needed, just the firing of the event is enough.<br/>`npm install ste-signals --save`
+- You want them all? Just use `npm install strongly-typed-events --save`.
 
 ### Subscription made easy
 An example says more than a 1000 words. Imagine if you have events like this on your class:
@@ -65,12 +66,6 @@ class Clock {
 
 Check the <a href="documentation">documentation</a> or the <a href="examples">examples</a> for more information.
 
-## Installation
-Installation is easy using NPM:
-```
-npm install strongly-typed-events --save
-```
-
 ## Documentation
 This project will help you to add events, event handling en event dispatching to your classes. To get you started, check:
 
@@ -84,6 +79,16 @@ This project will help you to add events, event handling en event dispatching to
 - <a href="documentation/SomeUnsubStrategies.md">Some unsubscribe strategies</a>
 
 # History
+
+#### Version 1.3
+We transformed the single package to 5 packages:
+|Package|Description|
+|-------|-----------|
+|`ste-core`|Package that contains all the building blocks for the creation of events. The dispatcher implementation is its main hero.|
+|`ste-events`|Events that are modeled after .Net with a `sender` and `argument`. If you use typescript, you can leverage the support for generics and get strongly typed code.|
+|`ste-simple-events`|A simpler version of the `ste-event`-event. No sender, just an argument.|
+|`ste-signals`|A signal is even simpler, it is just a callback for when you need to be alerted without any scope.|
+|`strongly-typed-events`|This package includes everything.|
 
 #### Version 1.2
 Added `ev.stopPropagation` and `ev.unsub()` to aid in event management. Each event type has
