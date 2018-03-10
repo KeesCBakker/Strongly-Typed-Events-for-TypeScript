@@ -1,4 +1,4 @@
-import { SignalList, ISignal } from "./../src";
+import { SignalList, ISignal } from "strongly-typed-events";
 
 declare var console: any;
 declare var setTimeout: any;

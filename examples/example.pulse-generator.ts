@@ -1,4 +1,4 @@
-import { EventDispatcher, IEvent } from "./../src/";
+import { EventDispatcher, IEvent } from "strongly-typed-events";
 
 declare var window: any;
 declare var Audio: any;

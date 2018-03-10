@@ -3,7 +3,7 @@
   SignalDispatcher,
   EventDispatcher,
   IEvent
-} from "./../src/";
+} from "strongly-typed-events";
 
 declare var window: any;
 declare var alert: any;

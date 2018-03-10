@@ -1,6 +1,9 @@
 {
 	"name": "strongly-typed-events-mono-root",
 	"private": true,
+	"dependencies": {
+		"strongly-typed-events": "*"
+	},
 	"devDependencies": {
 		"lerna": "^2.9.0",
 		"prettier": "^1.11.1"

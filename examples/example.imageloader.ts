@@ -2,7 +2,7 @@
   SimpleEventDispatcher,
   ISimpleEvent,
   ISimpleEventHandler
-} from "./../src/";
+} from "strongly-typed-events";
 
 declare var window: any;
 declare var alert: any;
@@ -45,7 +45,7 @@ class ImageDownloader {
       let result = new ImageDownloadArg(url, img.height, img.width);
 
       if (callback) {
-        callback(result);
+        callback(result, null);
       }
 
       this._ondownload.dispatch(result);
