@@ -13,19 +13,19 @@ The package contains the following scripts:
 - Events that are modeled after .Net with a `sender` and `argument`. 
     - dist/ste-events.js
     - dist/ste-events.min.js
-    - dist/ste-events.min.js.map
+    - dist/ste-events.min.js.map<br/>
 - A simpler version of the `ste-event`-event. No sender, just an argument.
     - dist/ste-simple-events.js
     - dist/ste-simple-events.min.js
-    - dist/ste-simple-events.min.js.map
+    - dist/ste-simple-events.min.js.map<br/>
 - A signal is even simpler, it is just a callback for when you need to be alerted without any scope.
     - dist/ste-signals.js
     - dist/ste-signals.min.js
-    - dist/ste-signals.min.js.map
+    - dist/ste-signals.min.js.map<br/>
 - All objects to build and use events:
     - dist/strongly-typed-events.js
     - dist/strongly-typed-events.min.js
-    - dist/strongly-typed-events.min.js.map
+    - dist/strongly-typed-events.min.js.map<br/>
 - Want to build your own style of events? You can use the dispatcher and other base classes for our core project:
     - dist/ste-core.js
     - dist/ste-core.min.js
@@ -37,9 +37,9 @@ You want to use a CDN? Great!
 |What|Link|
 |----|----|
 |All event types|https://cdn.jsdelivr.net/npm/ste-browser/dist/strongly-typed-events.min.js|
-|Events|https://cdn.jsdelivr.net/npm/ste-browser/dist/strongly-typed-events.min.js|
-|Simple Events|https://cdn.jsdelivr.net/npm/ste-browser/dist/strongly-typed-events.min.js|
-|Signals|https://cdn.jsdelivr.net/npm/ste-browser/dist/strongly-typed-events.min.js|
+|Events|https://cdn.jsdelivr.net/npm/ste-browser/dist/ste-events.min.js|
+|Simple Events|https://cdn.jsdelivr.net/npm/ste-browser/dist/ste-simple-events.min.js|
+|Signals|https://cdn.jsdelivr.net/npm/ste-browser/dist/ste-sigals.min.js|
 |Core|https://cdn.jsdelivr.net/npm/ste-browser/dist/strongly-typed-events.min.js|
 
 Every link comes with a `.map`. If you need a specific version, just include after
