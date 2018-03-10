@@ -1,5 +1,12 @@
 {
+	"name": "strongly-typed-events-mono-root",
+	"private": true,
 	"devDependencies": {
-		"lerna": "^2.9.0"
+		"lerna": "^2.9.0",
+		"prettier": "^1.11.1"
+	},
+	"scripts": {
+		"pretty": "prettier --write \"packages/**/src/**/*.ts\"",
+		"make": "lerna bootstrap & lerna run test & lerna run build & lerna publish"
 	}
 }
