@@ -2,7 +2,7 @@
 There multiple ways to unsubscribe from an event. This page shows all the 
 options using the following example:
 ```typescript
-import { SignalDispatcher, SimpleEventDispatcher, EventDispatcher } from "strongly-typed-events";
+import { EventDispatcher } from "strongly-typed-events";
 
 class Clock {
   private _onClockTick = new EventDispatcher<Clock, number>();
@@ -46,7 +46,7 @@ let fn = (c: Clock, n:number) { };
 clock.onClockTick.one(fn);
 ```
 
-## Unsub through event management
+## Unsub through event management (since v1.2)
 Each event gets an event management object as last parameter. You can use this object
 to unsubscribe the handler that caused the event.
 ```typescript
