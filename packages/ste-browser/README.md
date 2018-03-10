@@ -1,4 +1,4 @@
-# Strongly Typed Events - Browser
+# Strongly Typed Events for your browser
 Why not use Strongly Typed Events in your browser? We got a special package for
 you that already contains all the files you need. You can even serve them from
 a CDN for extra speed (or easy prototyping).
