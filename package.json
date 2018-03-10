@@ -7,6 +7,6 @@
 	},
 	"scripts": {
 		"pretty": "prettier --write \"packages/**/src/**/*.ts\"",
-		"make": "lerna bootstrap & lerna run test & lerna run build & lerna publish"
+		"make": "lerna bootstrap & lerna run test & lerna run build & lerna publish & git add . & git commit -m 'Version bump' & git push "
 	}
 }
