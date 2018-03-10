@@ -7,6 +7,73 @@ a CDN for extra speed (or easy prototyping).
 [![npm version](https://badge.fury.io/js/ste-browser.svg)](https://badge.fury.io/js/ste-core)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## Code
+Include the script from this NPM package or from a CDN:
+```html
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/strongly-typed-events.js"></script>
+```
+
+### Subscription is easy
+Let's assume you have a clock, subscribing to events on it is easy:
+```javascript
+var clock = new Clock("Smu", 1000);
+
+//log the ticks to the console - this is a signal event
+clock.onTick.subscribe(function () {
+    console.log("Tick!");
+});
+
+//log the sequence parameter to the console - this is a simple event
+clock.onSequenceTick.subscribe(function (s) {
+    console.log(`Sequence: ${s}`);
+});
+
+//log the name of the clock and the tick argument to the console - this is an event
+clock.onClockTick.subscribe(function (c, n) {
+    console.log(c.name + " ticked " + n + " times.");
+});
+```
+
+### Creating events is also easy
+We've created a dispatcher to help you propagate your events:
+```javascript
+function Clock(name, timeout) {
+
+    var _this = this;
+    var _ticks = 0;
+    var _onTick = new SignalDispatcher();
+    var _onSequenceTick = new SimpleEventDispatcher();
+    var _onClockTick = new EventDispatcher();
+
+    setInterval(function () {
+        _ticks += 1;
+        _onTick.dispatch();
+        _onSequenceTick.dispatch(_ticks);
+        _onClockTick.dispatch(_this, _ticks);
+    }, timeout);
+
+    Object.defineProperty(this, "name", {
+        get: function () { return name; }
+    });
+
+    Object.defineProperty(this, "ticks", {
+        get: function () { return _ticks; }
+    });
+
+    Object.defineProperty(this, "onTick", {
+        get: function () { return _onTick.asEvent(); }
+    });
+
+    Object.defineProperty(this, "onSequenceTick", {
+        get: function () { return _onSequenceTick.asEvent(); }
+    });
+
+    Object.defineProperty(this, "onClockTick", {
+        get: function () { return _onClockTick.asEvent(); }
+    });
+}
+```
+
 ## Usage
 The package contains the following scripts:
 
