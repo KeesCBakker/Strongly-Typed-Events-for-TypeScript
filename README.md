@@ -89,7 +89,8 @@ We transformed the single package to 5 packages:
 |`ste-events`|Events that are modeled after .Net with a `sender` and `argument`. If you use typescript, you can leverage the support for generics and get strongly typed code.|
 |`ste-simple-events`|A simpler version of the `ste-event`-event. No sender, just an argument.|
 |`ste-signals`|A signal is even simpler, it is just a callback for when you need to be alerted without any scope.|
-|`strongly-typed-events`|This package includes everything.|
+|`strongly-typed-events`|This package all the events.|
+|`ste-browser`|Compiled JavaScript files for the browser.|
 
 #### Version 1.2
 Added `ev.stopPropagation` and `ev.unsub()` to aid in event management. Each event type has
