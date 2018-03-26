@@ -10,6 +10,7 @@ module.exports = [
   {
     entry: {
       'ste-core': './src/ste-core.js',
+      'strongly-typed-events': './src/strongly-typed-events.js'
     },
     output: output,
     devtool: 'source-map'
@@ -23,19 +24,6 @@ module.exports = [
     output: output,
     externals: [
       'ste-core'
-    ],
-    devtool: 'source-map'
-  },
-  {
-    entry: {
-      'strongly-typed-events': './src/strongly-typed-events.js'
-    },
-    output: output,
-    externals: [
-      'ste-core',
-      'ste-events',
-      'ste-signals',
-      'ste-simple-events'
     ],
     devtool: 'source-map'
   }
