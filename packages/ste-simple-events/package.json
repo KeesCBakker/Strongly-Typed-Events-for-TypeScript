@@ -1,6 +1,6 @@
 {
   "name": "ste-simple-events",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Add the power of Simple Events to your projects. Every event has an argument with its data.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
