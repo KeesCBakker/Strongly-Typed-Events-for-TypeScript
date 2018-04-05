@@ -47,9 +47,9 @@
     "node": ">=4.2.4"
   },
   "dependencies": {
-    "ste-core": "^1.3.11",
-    "ste-events": "^1.3.11",
-    "ste-signals": "^1.3.11",
-    "ste-simple-events": "^1.3.11"
+    "ste-core": "^1.3.12",
+    "ste-events": "^1.3.12",
+    "ste-signals": "^1.3.12",
+    "ste-simple-events": "^1.3.12"
   }
 }
