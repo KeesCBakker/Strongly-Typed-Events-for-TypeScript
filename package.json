@@ -10,6 +10,6 @@
 	},
 	"scripts": {
 		"pretty": "prettier --write \"packages/**/src/**/*.ts\"",
-		"make": "lerna bootstrap & lerna run test & lerna run build & lerna publish --yes --cd-version patch & git add . & git commit -m Version-bump & git push "
+		"make": "lerna bootstrap & lerna run test & lerna run build & lerna publish --yes --cd-version minor & git add . & git commit -m Version-bump & git push "
 	}
 }
