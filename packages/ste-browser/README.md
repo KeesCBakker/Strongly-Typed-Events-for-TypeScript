@@ -1,7 +1,7 @@
 # Strongly Typed Events for your browser
 Why not use Strongly Typed Events in your browser? We got a special package for
 you that already contains all the files you need. You can even serve them from
-a CDN for extra speed (or easy prototyping).
+a CDN for extra speed (or easy prototyping). The packae is UMD compatible.
 
 [![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
 [![npm version](https://badge.fury.io/js/ste-browser.svg)](https://badge.fury.io/js/ste-core)
