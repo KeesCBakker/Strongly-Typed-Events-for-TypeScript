@@ -1,6 +1,6 @@
 {
   "name": "ste-events",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Add the power of Events to your projects. They are styled after .Net using a sender and arguments.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -46,6 +46,6 @@
   "dependencies": {
     "del-cli": "^1.1.0",
     "package": "^1.0.1",
-    "ste-core": "^1.4.1"
+    "ste-core": "^1.4.2"
   }
 }
