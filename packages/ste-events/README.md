@@ -19,7 +19,7 @@ clock.onClockTick.subscribe((c, n) =>
 ```
 
 ### Events made easy
-So let's look at the implementation from a TypeScript perspective. (Do you program NodeJs without typescript? <a href="../../documentation/HowToUseInNodeJs.md">Check this</a>)
+So let's look at the implementation from a TypeScript perspective. (Do you program NodeJs without typescript? <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/HowToUseInNodeJs.md">Check this</a>)
 
 ```typescript
 import { EventDispatcher } from "ste-events";
@@ -41,6 +41,6 @@ class Clock {
 }
 ```
 
-Check the <a href="../../documentation">documentation</a> or the <a href="../../examples">examples</a> for more information.
+Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/tree/master/documentation">documentation</a> or the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/tree/master/examples">examples</a> for more information.
 
 Need more info? Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript">repo</a>.

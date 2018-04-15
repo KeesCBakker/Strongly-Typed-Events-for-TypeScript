@@ -29,7 +29,7 @@ clock.onClockTick.subscribe((c, n) =>
 ```
 
 ### Events made easy
-So let's look at the implementation from a TypeScript perspective. (Do you program NodeJs without typescript? <a href="documentation/HowToUseInNodeJs.md">Check this</a>.)
+So let's look at the implementation from a TypeScript perspective. (Do you program NodeJs without typescript? <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/HowToUseInNodeJs.md">Check this</a>)
 
 ```typescript
 import { SignalDispatcher, SimpleEventDispatcher, EventDispatcher } from "strongly-typed-events";
@@ -74,14 +74,14 @@ npm install strongly-typed-events --save
 ## Documentation
 This project will help you to add events, event handling en event dispatching to your classes. To get you started, check:
 
-- <a href="documentation/HowToAddAnEventToAClass.md">How to add an event to a class?</a>
-- <a href="documentation/HowToAddAnEventToAnInterface.md">How to add an event to an interface?</a>
-- <a href="documentation/HowToAddMultipleEventsToAClass.md">How to add multiple events to a class?</a>
-- <a href="documentation/HowToAddDynamicNamedEeventsToAClass.md">How to add dynamic named events to a class?</a>
-- <a href="documentation/HowToDoAsynchronousEventDispatching.md">How to do asynchronous event dispatching?</a>
-- <a href="documentation/OnEventsDispatchersAndLists.md">On events, dispatchers and lists (a general explanation of the system)</a>
-- <a href="documentation/HowToUseInNodeJs.md">How to use Strongly Typed Events in Node.js?</a>
-- <a href="documentation/SomeUnsubStrategies.md">Some unsubscribe strategies</a>
+- <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/HowToAddAnEventToAClass.md">How to add an event to a class?</a>
+- <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/HowToAddAnEventToAnInterface.md">How to add an event to an interface?</a>
+- <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/HowToAddMultipleEventsToAClass.md">How to add multiple events to a class?</a>
+- <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/HowToAddDynamicNamedEeventsToAClass.md">How to add dynamic named events to a class?</a>
+- <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/HowToDoAsynchronousEventDispatching.md">How to do asynchronous event dispatching?</a>
+- <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/OnEventsDispatchersAndLists.md">On events, dispatchers and lists (a general explanation of the system)</a>
+- <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/HowToUseInNodeJs.md">How to use Strongly Typed Events in Node.js?</a>
+- <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/SomeUnsubStrategies.md">Some unsubscribe strategies</a>
 
 # History
 
@@ -117,4 +117,4 @@ Introduced the `one` method on events to subscribe only once. Added `sub` and `u
 Now supports Node.js through npm package: `npm i strongly-typed-events`. Rewrote and split tests.<br/>
 0.4.2: Introduced the `clear` method on events to clear all subscriptions.
 
-<a href="documentation/history.md">Click here for more history...</a>
+<a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/history.md">Click here for more history...</a>
