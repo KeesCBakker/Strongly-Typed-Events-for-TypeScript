@@ -7,7 +7,7 @@
  * Released under the MIT license
  */
 
-import {
+export {
   DispatcherBase,
   DispatcherWrapper,
   EventListBase,
@@ -17,7 +17,7 @@ import {
   IBaseEventHandling
 } from "ste-core";
 
-import {
+export {
   EventDispatcher,
   EventHandlingBase,
   EventList,
@@ -26,7 +26,7 @@ import {
   IEventHandler
 } from "ste-events";
 
-import {
+export {
   SimpleEventDispatcher,
   SimpleEventHandlingBase,
   SimpleEventList,
@@ -35,7 +35,7 @@ import {
   ISimpleEventHandler
 } from "ste-simple-events";
 
-import {
+export {
   SignalDispatcher,
   SignalHandlingBase,
   SignalList,
@@ -43,31 +43,3 @@ import {
   ISignal,
   ISignalHandler
 } from "ste-signals";
-
-export {
-  DispatcherBase,
-  DispatcherWrapper,
-  EventListBase,
-  Subscription,
-  IEventManagement,
-  ISubscribable,
-  IBaseEventHandling,
-  EventDispatcher,
-  EventHandlingBase,
-  EventList,
-  IEventHandling,
-  IEvent,
-  IEventHandler,
-  SimpleEventDispatcher,
-  SimpleEventHandlingBase,
-  SimpleEventList,
-  ISimpleEventHandling,
-  ISimpleEvent,
-  ISimpleEventHandler,
-  SignalDispatcher,
-  SignalHandlingBase,
-  SignalList,
-  ISignalHandling,
-  ISignal,
-  ISignalHandler
-};

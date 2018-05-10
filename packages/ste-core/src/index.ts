@@ -7,22 +7,12 @@
  * Released under the MIT license
  */
 
-import { IEventManagement } from "./management";
-import { ISubscribable } from "./definitions/subscribable";
-import {
+export { IEventManagement } from "./management";
+export { ISubscribable } from "./definitions/subscribable";
+export {
   DispatcherBase,
   DispatcherWrapper,
   EventListBase
 } from "./dispatching";
-import { Subscription } from "./subscription";
-import { IBaseEventHandling } from "./definitions/handling";
-
-export {
-  DispatcherBase,
-  DispatcherWrapper,
-  EventListBase,
-  Subscription,
-  IEventManagement,
-  ISubscribable,
-  IBaseEventHandling
-};
+export { Subscription } from "./subscription";
+export { IBaseEventHandling } from "./definitions/handling";

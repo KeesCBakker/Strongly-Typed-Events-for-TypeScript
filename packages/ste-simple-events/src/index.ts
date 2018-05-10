@@ -1,19 +1,10 @@
-import {
+export {
   SimpleEventDispatcher,
   SimpleEventHandlingBase,
   SimpleEventList
 } from "./simple-events";
-import {
+export {
   ISimpleEventHandling,
   ISimpleEvent,
   ISimpleEventHandler
 } from "./definitions";
-
-export {
-  SimpleEventDispatcher,
-  SimpleEventHandlingBase,
-  SimpleEventList,
-  ISimpleEventHandling,
-  ISimpleEvent,
-  ISimpleEventHandler
-};
