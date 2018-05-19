@@ -1,15 +1,22 @@
 {
-	"name": "strongly-typed-events-mono-root",
-	"private": true,
-	"dependencies": {
-		"strongly-typed-events": "*"
-	},
-	"devDependencies": {
-		"lerna": "^2.9.0",
-		"prettier": "^1.11.1"
-	},
-	"scripts": {
-		"pretty": "prettier --write \"packages/**/src/**/*.ts\"",
-		"make": "lerna bootstrap & lerna run test & lerna run build & lerna publish --yes --cd-version patch & git add . & git commit -m Version-bump & git push "
-	}
+  "name": "strongly-typed-events-mono-root",
+  "private": true,
+  "dependencies": {
+    "strongly-typed-events": "*"
+  },
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lerna": "^2.11.0"
+  },
+  "scripts": {
+    "test": "lerna bootstrap & lerna run test",
+    "upgrade-packages": "ncu -a & npm install",
+    "make": "lerna bootstrap & lerna run test & lerna run build && lerna publish --yes --cd-version patch & git add . & git commit -m Version-bump && git push "
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "pre-push": "npm test"
+    }
+  }
 }
