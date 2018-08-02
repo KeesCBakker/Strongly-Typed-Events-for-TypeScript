@@ -1,5 +1,5 @@
 # Some unsubscribe strategies
-There multiple ways to unsubscribe from an event. This page shows all the 
+There are multiple ways to unsubscribe from an event. This page shows all the 
 options using the following example:
 ```typescript
 import { EventDispatcher } from "strongly-typed-events";
