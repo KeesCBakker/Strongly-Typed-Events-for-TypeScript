@@ -1,7 +1,7 @@
 ﻿# How to add an event to a class?
 
 Adding an event to a class is pretty easy. Expose it an an `IEvent<TSender, TArgs>` or 
-`ISimpleEvent<TArgs` and implement it as a dispatcher (`EventDispatcher` or `SimpleEventDispatcher`).
+`ISimpleEvent<TArgs>` and implement it as a dispatcher (`EventDispatcher` or `SimpleEventDispatcher`).
 
 ### Example
 Conside the following example:
