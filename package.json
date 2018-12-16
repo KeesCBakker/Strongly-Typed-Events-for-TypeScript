@@ -5,8 +5,8 @@
     "strongly-typed-events": "*"
   },
   "devDependencies": {
-    "husky": "^0.14.3",
-    "lerna": "^2.11.0"
+    "husky": "^1.2.1",
+    "lerna": "^3.6.0"
   },
   "scripts": {
     "test": "lerna bootstrap & lerna run test",

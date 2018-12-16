@@ -1,4 +1,4 @@
-import { SignalDispatcher, SignalList } from "./../";
+import { SignalDispatcher, SignalList } from "./../src/";
 import { expect } from "chai";
 
 describe("EventList", () => {

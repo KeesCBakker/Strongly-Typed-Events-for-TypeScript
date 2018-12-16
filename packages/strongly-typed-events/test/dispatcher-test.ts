@@ -1,4 +1,4 @@
-import { SignalDispatcher } from "./../";
+import { SignalDispatcher } from "./../src/";
 import { expect } from "chai";
 
 describe("Dispatching", () => {

@@ -98,7 +98,7 @@ export abstract class DispatcherBase<TEventHandler>
     //execute on a copy because of bug #9
     for (let sub of [...this._subscriptions]) {
       let ev = new EventManagement(() => this.unsub(sub.handler));
-      let nargs = Array.prototype.slice.call(args);
+      let nargs: any = Array.prototype.slice.call(args);
       nargs.push(ev);
 
       sub.execute(executeAsync, scope, nargs as IArguments);

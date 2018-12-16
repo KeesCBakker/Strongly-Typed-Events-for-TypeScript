@@ -1,7 +1,7 @@
 "use strict";
 
 import { expect } from "chai";
-import { EventDispatcher, EventList } from "../";
+import { EventDispatcher, EventList } from "../src/";
 
 class Dummy {
   constructor(name: string) {}

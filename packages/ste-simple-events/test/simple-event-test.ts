@@ -2,7 +2,7 @@
 
 import { expect } from "chai";
 
-import { SimpleEventDispatcher, SimpleEventList } from "./../";
+import { SimpleEventDispatcher, SimpleEventList } from "./../src/";
 
 describe("Strongly Typed Events - Simple event", function() {
   describe("SimpleEventDispatcher", function() {

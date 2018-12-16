@@ -3,7 +3,7 @@ import {
   DispatcherWrapper,
   EventListBase,
   Subscription
-} from "./../";
+} from "./../src";
 import { expect } from "chai";
 
 describe("Bug fixes", () => {});

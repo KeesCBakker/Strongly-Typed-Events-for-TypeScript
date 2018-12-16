@@ -2,7 +2,7 @@
 
 import { expect } from "chai";
 
-import { SignalDispatcher, SignalList } from "./../";
+import { SignalDispatcher, SignalList } from "./../src/";
 
 describe("Strongly Typed Events - Signal", function() {
   describe("SignalDispatcher", function() {
