@@ -57,3 +57,4 @@ packages/ste-events/src/**/*.js
 packages/ste-signals/src/**/*.js
 packages/ste-simple-events/src/**/*.js
 packages/strongly-typed-events/src/**/*.js
+*.tgz
