@@ -54,6 +54,7 @@ jspm_packages
 documentation
 examples
 src
+test
 .travis.yml
 tsconfig.json
 dist/test

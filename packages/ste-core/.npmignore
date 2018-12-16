@@ -57,3 +57,4 @@ src
 .travis.yml
 tsconfig.json
 dist/test
+test
