@@ -24,14 +24,14 @@ describe("Dispatching", () => {
     expect(dispatcher.has(fn1)).to.eq(true, "fn1 should be present.");
     expect(dispatcher.has(fn2)).to.eq(true, "fn2 should be present.");
     expect(dispatcher.has(fn3)).to.eq(true, "fn3 should be present.");
+    expect(dispatcher.subscriptions.length).to.eq(3, "dispatcher should have 3 subscriptions.");
 
     dispatcher.dispatch();
 
     expect(dispatcher.has(fn1)).to.eq(true, "fn1 should still be present.");
     expect(dispatcher.has(fn2)).to.eq(false, "fn2 should not be present.");
     expect(dispatcher.has(fn3)).to.eq(true, "fn3 should still be present.");
-
-    expect(dispatcher.subscriptions.length).to.eq(3, "dispatcher should have 3 subscriptions.");
+    expect(dispatcher.subscriptions.length).to.eq(2, "dispatcher should have 2 subscriptions.");
   });
 
   it("Unsub through ev", () => {
