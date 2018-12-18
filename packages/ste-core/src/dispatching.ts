@@ -83,6 +83,13 @@ export abstract class DispatcherBase<TEventHandler>
   }
 
   /**
+   * Gets a readonly list of all subscribers.
+   */
+  public get subscriptions(): Readonly<Array<Subscription<TEventHandler>>> {
+    return this._subscriptions;
+  }
+
+  /**
    * Generic dispatch will dispatch the handlers with the given arguments.
    *
    * @protected
@@ -186,6 +193,7 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
   private _one: (fn: THandler) => () => void;
   private _has: (fn: THandler) => boolean;
   private _clear: () => void;
+  private _subscriptions: () => Readonly<Array<Subscription<THandler>>>;
 
   /**
    * Creates a new EventDispatcherWrapper instance.
@@ -197,6 +205,7 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
     this._one = (fn: THandler) => dispatcher.one(fn);
     this._has = (fn: THandler) => dispatcher.has(fn);
     this._clear = () => dispatcher.clear();
+    this._subscriptions = () => dispatcher.subscriptions;
   }
 
   /**
@@ -254,5 +263,12 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
    */
   public clear(): void {
     this._clear();
+  }
+
+  /**
+   * Gets a readonly list of all subscribers.
+   */
+  public get subscriptions(): Readonly<Array<Subscription<THandler>>> {
+    return this._subscriptions();
   }
 }

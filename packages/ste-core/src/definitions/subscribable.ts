@@ -1,3 +1,5 @@
+import { Subscription } from "../subscription";
+
 /**
  * Indicates the object implements generic subscriptions.
  */
@@ -45,4 +47,9 @@ export interface ISubscribable<THandlerType> {
    * Clears all the subscriptions.
    */
   clear(): void;
+
+  /**
+   * Gets a readonly list of all subscribers.
+   */
+  readonly subscriptions: Readonly<Array<Subscription<THandlerType>>>;
 }
