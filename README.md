@@ -80,6 +80,9 @@ This project will help you to add events, event handling en event dispatching to
 
 # History
 
+#### Version 1.5
+Added support for subscription `.count` from the dispatcher.
+
 #### Version 1.4
 Added support for UMD for the ste-browser package.
 
