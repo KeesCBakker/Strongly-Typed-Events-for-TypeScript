@@ -1,6 +1,6 @@
 {
   "name": "ste-core",
-  "version": "1.4.10",
+  "version": "1.5.0",
   "description": "Core files for the Strongly Typed Events project.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
