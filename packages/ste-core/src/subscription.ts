@@ -1,5 +1,3 @@
-import { IEventManagement } from "./management";
-
 "use strict";
 /**
  * Stores a handler. Manages execution meta data.

@@ -14,6 +14,17 @@ export abstract class DispatcherBase<TEventHandler>
   private _subscriptions = new Array<Subscription<TEventHandler>>();
 
   /**
+   * Returns the number of subscriptions.
+   * 
+   * @readonly
+   * 
+   * @memberOf DispatcherBase
+   */
+  public get count() {
+    return this._subscriptions.length;
+  }
+
+  /**
    * Subscribe to the event dispatcher.
    * @param fn The event handler that is called when the event is dispatched.
    * @returns A function that unsubscribes the event handler from the event.
@@ -186,6 +197,7 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
   private _one: (fn: THandler) => () => void;
   private _has: (fn: THandler) => boolean;
   private _clear: () => void;
+  private _count: () => number;
 
   /**
    * Creates a new EventDispatcherWrapper instance.
@@ -197,6 +209,18 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
     this._one = (fn: THandler) => dispatcher.one(fn);
     this._has = (fn: THandler) => dispatcher.has(fn);
     this._clear = () => dispatcher.clear();
+    this._count = () => dispatcher.count;
+  }
+
+  /**
+   * Returns the number of subscriptions.
+   * 
+   * @readonly
+   * @type {number}
+   * @memberOf DispatcherWrapper
+   */
+  get count(): number {
+    return this._count();
   }
 
   /**
