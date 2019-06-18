@@ -4,9 +4,25 @@ import { expect } from "chai";
 
 import { SignalDispatcher, SignalList } from "./../src/";
 
-describe("Strongly Typed Events - Signal", function() {
-  describe("SignalDispatcher", function() {
-    it("Subscribing to the signal dispatcher", function() {
+describe("Strongly Typed Events - Signal", () => {
+  describe("SignalDispatcher", () => {
+
+    it("Counting subscriptions", () => {
+      let dispatcher = new SignalDispatcher();
+      let callback = ()=>{};
+      let callback2 = ()=>{};
+
+      expect(dispatcher.count, "Subscription count should be 0").to.equal(0);
+      dispatcher.sub(callback);
+      expect(dispatcher.count, "Subscription count should be 1").to.equal(1);
+      dispatcher.unsub(callback);
+      expect(dispatcher.count, "Subscription count should be 0").to.equal(0);
+      dispatcher.sub(callback);
+      dispatcher.sub(callback2);
+      expect(dispatcher.count, "Subscription count should be 2").to.equal(2);
+    });
+
+    it("Subscribing to the signal dispatcher", () => {
       let dispatcher = new SignalDispatcher();
       let resultNr = 0;
 
@@ -19,7 +35,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(resultNr, "resultNr should be 7.").to.equal(7);
     });
 
-    it("Sub to the signal dispatcher", function() {
+    it("Sub to the signal dispatcher", () => {
       let dispatcher = new SignalDispatcher();
       let resultNr = 0;
 
@@ -32,7 +48,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(resultNr, "resultNr should be 7.").to.equal(7);
     });
 
-    it("Subscribing to the signal dispatcher. Fire twice", function() {
+    it("Subscribing to the signal dispatcher. Fire twice", () => {
       let dispatcher = new SignalDispatcher();
       let resultNr = 0;
 
@@ -46,7 +62,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(resultNr, "resultNr should be 12.").to.equal(12);
     });
 
-    it("Sub to the signal dispatcher. Fire twice", function() {
+    it("Sub to the signal dispatcher. Fire twice", () => {
       let dispatcher = new SignalDispatcher();
       let resultNr = 0;
 
@@ -60,7 +76,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(resultNr, "resultNr should be 12.").to.equal(12);
     });
 
-    it("One subscription to the signal dispatcher. Fire twice.", function() {
+    it("One subscription to the signal dispatcher. Fire twice.", () => {
       let dispatcher = new SignalDispatcher();
       let resultNr = 0;
 
@@ -74,7 +90,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(resultNr, "resultNr should be 2.").to.equal(2);
     });
 
-    it("Unsubscribing to the signal dispatcher.", function() {
+    it("Unsubscribing to the signal dispatcher.", () => {
       let dispatcher = new SignalDispatcher();
       let resultNr = 0;
 
@@ -89,7 +105,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(resultNr, "resultNr should be 0.").to.equal(0);
     });
 
-    it("Unsub to the signal dispatcher.", function() {
+    it("Unsub to the signal dispatcher.", () => {
       let dispatcher = new SignalDispatcher();
       let resultNr = 0;
 
@@ -104,7 +120,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(resultNr, "resultNr should be 0.").to.equal(0);
     });
 
-    it("Unsubscribing from signal dispatcher using subscribe's return function.", function() {
+    it("Unsubscribing from signal dispatcher using subscribe's return function.", () => {
       let dispatcher = new SignalDispatcher();
       let resultNr = 0;
 
@@ -117,7 +133,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(resultNr, "resultNr should be 0.").to.equal(0);
     });
 
-    it("Unsubscribing from signal dispatcher using sub's return function.", function() {
+    it("Unsubscribing from signal dispatcher using sub's return function.", () => {
       let dispatcher = new SignalDispatcher();
       let resultNr = 0;
 
@@ -130,7 +146,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(resultNr, "resultNr should be 0.").to.equal(0);
     });
 
-    it("Unsubscribing from one subscription.", function() {
+    it("Unsubscribing from one subscription.", () => {
       let dispatcher = new SignalDispatcher();
       let resultNr = 0;
 
@@ -145,7 +161,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(resultNr, "resultNr should be 0.").to.equal(0);
     });
 
-    it("Unsubscribing from signal dispatcher using one's return function.", function() {
+    it("Unsubscribing from signal dispatcher using one's return function.", () => {
       let dispatcher = new SignalDispatcher();
       let resultNr = 0;
 
@@ -158,7 +174,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(resultNr, "resultNr should be 0.").to.equal(0);
     });
 
-    it("Unsub from one subscription.", function() {
+    it("Unsub from one subscription.", () => {
       let dispatcher = new SignalDispatcher();
       let resultNr = 0;
 
@@ -173,14 +189,14 @@ describe("Strongly Typed Events - Signal", function() {
       expect(resultNr, "resultNr should be 0.").to.equal(0);
     });
 
-    it("Has no event.", function() {
+    it("Has no event.", () => {
       var fn = () => {};
       let dispatcher = new SignalDispatcher();
       let result = dispatcher.has(fn);
       expect(result, "Handler should not be present.").to.equal(false);
     });
 
-    it("Has event through subscribe.", function() {
+    it("Has event through subscribe.", () => {
       var fn = () => {};
       let dispatcher = new SignalDispatcher();
       dispatcher.subscribe(fn);
@@ -188,7 +204,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(result, "Handler should be present.").to.equal(true);
     });
 
-    it("Has event through one.", function() {
+    it("Has event through one.", () => {
       var fn = () => {};
       let dispatcher = new SignalDispatcher();
       dispatcher.one(fn);
@@ -196,7 +212,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(result, "Handler should be present.").to.equal(true);
     });
 
-    it("Test subscribe -> unsubscribe -> has", function() {
+    it("Test subscribe -> unsubscribe -> has", () => {
       var fn = () => {};
       let dispatcher = new SignalDispatcher();
       dispatcher.subscribe(fn);
@@ -208,7 +224,7 @@ describe("Strongly Typed Events - Signal", function() {
       ).to.equal(false);
     });
 
-    it("Clear subscriptions.", function() {
+    it("Clear subscriptions.", () => {
       let dispatcher = new SignalDispatcher();
       let resultNr = 0;
 
@@ -223,8 +239,8 @@ describe("Strongly Typed Events - Signal", function() {
     });
   });
 
-  describe("SignalList", function() {
-    it("Subscribe to event name", function() {
+  describe("SignalList", () => {
+    it("Subscribe to event name", () => {
       let event = "myEvent";
       let list = new SignalList();
       var fn = () => {};
@@ -234,7 +250,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(result, "result should be true.").to.equals(true);
     });
 
-    it("Unsubscribe to event name", function() {
+    it("Unsubscribe to event name", () => {
       let event = "myEvent";
       let list = new SignalList();
       var fn = () => {};
@@ -248,7 +264,7 @@ describe("Strongly Typed Events - Signal", function() {
       );
     });
 
-    it("Test firing two events in one list", function() {
+    it("Test firing two events in one list", () => {
       let list = new SignalList();
       let result = "";
 
@@ -272,7 +288,7 @@ describe("Strongly Typed Events - Signal", function() {
       expect(result, 'Result should be "ev1:8.').to.equal("ev1:8");
     });
 
-    it("Test remove from list.", function() {
+    it("Test remove from list.", () => {
       let list = new SignalList();
       var fn = () => {};
 

@@ -2,6 +2,15 @@
  * Indicates the object implements generic subscriptions.
  */
 export interface ISubscribable<THandlerType> {
+
+  /**
+   * Returns the number of subsriptions.
+   * 
+   * @type {number}
+   * @memberOf ISubscribable
+   */
+  readonly count: number;
+
   /**
    * Subscribe to the event.
    * @param fn The event handler that is called when the event is dispatched.
