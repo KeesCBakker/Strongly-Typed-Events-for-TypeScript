@@ -1,6 +1,6 @@
 {
   "name": "ste-events",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Add the power of Events to your projects. They are styled after .Net using a sender and arguments.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -1,6 +1,6 @@
 {
   "name": "ste-browser",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Add the power of events directly to your client projects. This version of Strongly Typed Events works in the browser.",
   "scripts": {
     "upgrade": "ncu -a & npm install",
