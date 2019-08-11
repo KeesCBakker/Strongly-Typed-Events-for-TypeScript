@@ -113,12 +113,12 @@ class FileHandles
 
     open(){
         this._openHandles++;
-        this._myEvents.get("openHandlesChange").dispatch(this._openHandles);
+        this._myEvents.get("openHandlesChange").dispatchAsync(this._openHandles);
     }
 
     close(){
         this._openHandles--;
-        this._myEvents.get("openHandlesChange").dispatch(this._openHandles);
+        this._myEvents.get("openHandlesChange").dispatchAsync(this._openHandles);
     }
     
     public get onRename(): ISimpleEvent<string>
