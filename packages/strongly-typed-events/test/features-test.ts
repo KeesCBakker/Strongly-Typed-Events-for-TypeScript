@@ -71,12 +71,12 @@ describe("Features", () => {
             var file = new FileHandles("kaas.jpg");
             var name = "kaas.jpg"
 
-            file.onRename.sub(x => name = x);
+            file.onRename.sub((x:string) => name = x);
             file.rename("kees.jpg");
             expect(name).to.equal("kees.jpg");
 
             var openHandles = 0;
-            file.onOpenHandlesChange.sub(x => openHandles = x);
+            file.onOpenHandlesChange.sub((x:number) => openHandles = x);
             file.open();
             expect(openHandles).to.equal(1);
             file.open();
