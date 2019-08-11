@@ -1,2 +1,2 @@
-export { EventDispatcher, EventHandlingBase, EventList } from "./events";
+export { EventDispatcher, EventHandlingBase, EventList, NonUniformEventList } from "./events";
 export { IEventHandler, IEventHandling, IEvent } from "./definitions";

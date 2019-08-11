@@ -1,7 +1,7 @@
 "use strict";
 
 import { expect } from "chai";
-import { EventDispatcher, EventList } from "../src/";
+import { EventDispatcher, EventList, NonUniformEventList } from "../src/";
 
 class Dummy {
   constructor(name: string) {}
@@ -340,6 +340,76 @@ describe("Strongly Typed Events - Event", function() {
       expect(result, "Event 1 should still be present.").to.equal(true);
 
       result = list.get(event2).has(fn);
+      expect(result, "Event 2 should not be present.").to.equal(false);
+    });
+  });
+
+  describe("NonUniformEventList", function() {
+    it("Subscribe to event name", function() {
+      type ArgMap = {"myEvent": number};
+      let list = new NonUniformEventList<Dummy, ArgMap>();
+      var fn = (dummy: Dummy, nr: number) => {};
+
+      list.get("myEvent").subscribe(fn);
+      var result = list.get("myEvent").has(fn);
+      expect(result, "result should be true.").to.equals(true);
+    });
+
+    it("Unsubscribe to event name", function() {
+      type ArgMap = {"myEvent": number};
+      let list = new NonUniformEventList<Dummy, ArgMap>();
+      var fn = (dummy: Dummy, nr: number) => {};
+
+      list.get("myEvent").subscribe(fn);
+      list.get("myEvent").unsubscribe(fn);
+
+      var result = list.get("myEvent").has(fn);
+      expect(result, "result should be false due to unsubscribe.").to.equals(
+        false
+      );
+    });
+
+    it("Test firing two events in one list", function() {
+      type ArgMap = {"ev1": number, "ev2": number};
+      let list = new NonUniformEventList<Dummy | null, ArgMap>();
+      let result = "";
+
+      var fn1 = (dummy: Dummy | null, nr: number) => {
+        result = "ev1:" + nr;
+      };
+
+      var fn2 = (dummy: Dummy | null, nr: number) => {
+        result = "ev2:" + nr;
+      };
+
+      list.get("ev1").subscribe(fn1);
+      list.get("ev2").subscribe(fn2);
+
+      list.get("ev2").dispatch(null, 16);
+      expect(result, 'Result should be "ev2:16.').to.equal("ev2:16");
+
+      list.get("ev1").dispatch(null, 8);
+      expect(result, 'Result should be "ev1:8.').to.equal("ev1:8");
+    });
+
+    it("Test remove from list.", function() {
+      type ArgMap = {"ev1": number, "ev2": number};
+      let list = new NonUniformEventList<Dummy, ArgMap>();
+      var fn = (dummy: Dummy, nr: number) => {};
+
+      list.get("ev1").subscribe(fn);
+
+      list.get("ev2").subscribe(fn);
+
+      let result = list.get("ev2").has(fn);
+      expect(result, "Event 2 should be present.").to.equal(true);
+
+      list.remove("ev2");
+
+      result = list.get("ev1").has(fn);
+      expect(result, "Event 1 should still be present.").to.equal(true);
+
+      result = list.get("ev2").has(fn);
       expect(result, "Event 2 should not be present.").to.equal(false);
     });
   });
