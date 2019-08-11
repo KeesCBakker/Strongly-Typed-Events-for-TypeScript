@@ -1,4 +1,3 @@
-import { ISimpleEvent } from './../../ste-simple-events/dist/definitions.d';
 import { SimpleEventList, NonUniformSimpleEventList } from './../../ste-simple-events/src/simple-events';
 import { SignalDispatcher } from "../src";
 import { expect } from "chai";
