@@ -21,6 +21,7 @@ export {
   EventDispatcher,
   EventHandlingBase,
   EventList,
+  NonUniformEventList,
   IEventHandling,
   IEvent,
   IEventHandler
@@ -30,6 +31,7 @@ export {
   SimpleEventDispatcher,
   SimpleEventHandlingBase,
   SimpleEventList,
+  NonUniformSimpleEventList,
   ISimpleEventHandling,
   ISimpleEvent,
   ISimpleEventHandler

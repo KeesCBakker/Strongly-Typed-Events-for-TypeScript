@@ -1,5 +1,4 @@
-import { SimpleEventList, NonUniformSimpleEventList } from './../../ste-simple-events/src/simple-events';
-import { SignalDispatcher } from "../src";
+import { SignalDispatcher, SimpleEventList, NonUniformSimpleEventList , ISimpleEvent } from "../src";
 import { expect } from "chai";
 
 describe("Features", () => {
