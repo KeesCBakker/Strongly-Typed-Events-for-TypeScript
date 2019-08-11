@@ -113,12 +113,12 @@ class FileHandles
 
     open(){
         this._openHandles++;
-        this._myEvents.get("openHandlesChange").dispatch(this._openHandles);
+        this._myEvents.get("openHandlesChange").dispatchAsync(this._openHandles);
     }
 
     close(){
         this._openHandles--;
-        this._myEvents.get("openHandlesChange").dispatch(this._openHandles);
+        this._myEvents.get("openHandlesChange").dispatchAsync(this._openHandles);
     }
     
     public get onRename(): ISimpleEvent<string>
@@ -132,3 +132,4 @@ class FileHandles
     }
 }
 ```
+None: you don't have to do a `dispatchAsync`, a `dispatch` is also possible, but it might interfere what you are trying to do.
