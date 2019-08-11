@@ -44,7 +44,7 @@ describe("Features", () => {
 
                 rename(newName: string){
                     this._name = newName;
-                    this._myEvents.get("rename").dispatchAsync(this._name);
+                    this._myEvents.get("rename").dispatch(this._name);
                 }
 
                 open(){
