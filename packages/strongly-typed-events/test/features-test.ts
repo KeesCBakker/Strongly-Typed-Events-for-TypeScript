@@ -38,13 +38,13 @@ describe("Features", () => {
                 private _openHandles = 0;
                 private _name: string;
                 
-                constructor(name){
+                constructor(name: string){
                     this._name = name;
                 }
 
                 rename(newName: string){
                     this._name = newName;
-                    this._myEvents.get("rename").dispatchAsync(newName);
+                    this._myEvents.get("rename").dispatchAsync(this._name);
                 }
 
                 open(){
