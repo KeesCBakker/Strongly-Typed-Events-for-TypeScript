@@ -1,7 +1,8 @@
 export {
   SimpleEventDispatcher,
   SimpleEventHandlingBase,
-  SimpleEventList
+  SimpleEventList,
+  NonUniformSimpleEventList
 } from "./simple-events";
 export {
   ISimpleEventHandling,

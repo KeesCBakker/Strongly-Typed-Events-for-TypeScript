@@ -5,13 +5,12 @@
     "strongly-typed-events": "*"
   },
   "devDependencies": {
-    "husky": "^3.0.2",
+    "husky": "^3.0.3",
     "lerna": "^3.16.4"
   },
   "scripts": {
     "build": "lerna bootstrap & lerna run build",
     "test": "lerna bootstrap & lerna run test",
-    "upgrade": "lerna run upgrade & ncu -a & npm install",
     "make": "lerna bootstrap & lerna run test & lerna run build && lerna publish --yes --cd-version patch & git add . & git commit -m Version-bump && git push "
   },
   "husky": {

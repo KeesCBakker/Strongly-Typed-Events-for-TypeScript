@@ -3,7 +3,6 @@
   "version": "1.5.2",
   "description": "Add the power of events directly to your client projects. This version of Strongly Typed Events works in the browser.",
   "scripts": {
-    "upgrade": "ncu -a & npm install",
     "webpack:dev": "webpack --mode=development",
     "webpack:prod": "webpack --mode=production --output-filename=[name].min.js",
     "build": "del-cli ./dist && npm run webpack:prod"
@@ -29,15 +28,15 @@
   },
   "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
   "devDependencies": {
-    "@types/node": "^12.7.0",
-    "browserify": "^16.3.0",
+    "@types/node": "^12.7.1",
+    "browserify": "^16.5.0",
     "del-cli": "^2.0.0",
     "prettier": "^1.18.2",
-    "ste-core": "^1.5.2",
-    "ste-events": "^1.5.2",
-    "ste-signals": "^1.5.2",
-    "ste-simple-events": "^1.5.2",
-    "strongly-typed-events": "^1.5.2",
+    "ste-core": "^1.5.3",
+    "ste-events": "^1.5.3",
+    "ste-signals": "^1.5.3",
+    "ste-simple-events": "^1.5.3",
+    "strongly-typed-events": "^1.5.3",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6"
   },
