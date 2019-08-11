@@ -86,3 +86,49 @@ The `EventList<TSender, TArgs>` and `SimpleEventList<TArgs>` share the same basi
 
 - `get(name)` - returns a dispatcher for the event with the given name.
 - `remove(name)` - removed the dispatcher associated with the given name. This will disconnect all subscriptions.
+
+### Non uniform event lists
+Often events are not styled the same way and use different arguments. That's why the `NonUniformEventList` and `NonUniformSimpleEventList` were build. You can supply a type-map to define the name of the event and the type of the argument.
+
+```typescript
+type FileHandlesArgMap = {
+    "rename": string,
+    "openHandlesChange": number
+};
+
+class FileHandles
+{
+    private _myEvents = new NonUniformSimpleEventList<FileHandlesArgMap>();
+    private _openHandles = 0;
+    private _name: string;
+    
+    constructor(name){
+        this._name = name;
+    }
+
+    rename(newName: string){
+        this._name = newName;
+        this._myEvents.get("rename").dispatchAsync(newName);
+    }
+
+    open(){
+        this._openHandles++;
+        this._myEvents.get("openHandlesChange").dispatch(this._openHandles);
+    }
+
+    close(){
+        this._openHandles--;
+        this._myEvents.get("openHandlesChange").dispatch(this._openHandles);
+    }
+    
+    public get onRename(): ISimpleEvent<string>
+    {
+        return this._myEvents.get("rename").asEvent();
+    }
+
+    public get onOpenHandlesChange(): ISimpleEvent<number>
+    {
+        return this._myEvents.get("openHandlesChange").asEvent();
+    }
+}
+```

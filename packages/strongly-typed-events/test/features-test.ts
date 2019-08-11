@@ -27,45 +27,62 @@ describe("Features", () => {
 
         it.only("Non-uniform arguments as events of a class", ()=>{
 
-            type ArgMap = {
-                "eventOne": number,
-                "eventTwo": string
+            type FileHandlesArgMap = {
+                "rename": string,
+                "openHandlesChange": number
             };
 
-            class MyClass
+            class FileHandles
             {
-                private _myEvents = new NonUniformSimpleEventList<ArgMap>();
-
-                public triggerOne(nr:number){
-                    this._myEvents.get('eventOne').dispatch(nr);
+                private _myEvents = new NonUniformSimpleEventList<FileHandlesArgMap>();
+                private _openHandles = 0;
+                private _name: string;
+                
+                constructor(name){
+                    this._name = name;
                 }
 
-                public triggerTwo(str: string){
-                    this._myEvents.get('eventTwo').dispatch(str);
+                rename(newName: string){
+                    this._name = newName;
+                    this._myEvents.get("rename").dispatchAsync(newName);
                 }
 
-                public get onOne(): ISimpleEvent<number>
+                open(){
+                    this._openHandles++;
+                    this._myEvents.get("openHandlesChange").dispatch(this._openHandles);
+                }
+
+                close(){
+                    this._openHandles--;
+                    this._myEvents.get("openHandlesChange").dispatch(this._openHandles);
+                }
+                
+                public get onRename(): ISimpleEvent<string>
                 {
-                    return this._myEvents.get("eventOne").asEvent();
+                    return this._myEvents.get("rename").asEvent();
                 }
 
-                public get onTwo(): ISimpleEvent<string>
+                public get onOpenHandlesChange(): ISimpleEvent<number>
                 {
-                    return this._myEvents.get("eventTwo").asEvent();
+                    return this._myEvents.get("openHandlesChange").asEvent();
                 }
             }
 
-            var obj = new MyClass
-            var resultOne = 0;
-            var resultTwo = "";
-            obj.onOne.sub(x => resultOne = x);
-            obj.onTwo.sub(x => resultTwo = x);
+            var file = new FileHandles("kaas.jpg");
+            var name = "kaas.jpg"
 
-            obj.triggerOne(1337);
-            obj.triggerTwo("Hello");
+            file.onRename.sub(x => name = x);
+            file.rename("kees.jpg");
+            expect(name).to.equal("kees.jpg");
 
-            expect(resultOne).to.eql(1337);
-            expect(resultTwo).to.eq("Hello");
+            var openHandles = 0;
+            file.onOpenHandlesChange.sub(x => openHandles = x);
+            file.open();
+            expect(openHandles).to.equal(1);
+            file.open();
+            expect(openHandles).to.equal(2);
+            file.close();
+            expect(openHandles).to.equal(1);
         });
     });
 
