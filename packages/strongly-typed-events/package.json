@@ -33,24 +33,24 @@
   },
   "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
   "devDependencies": {
-    "@types/chai": "^4.2.0",
+    "@types/chai": "^4.2.3",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^12.7.1",
+    "@types/node": "^12.7.5",
     "chai": "^4.2.0",
-    "del-cli": "^2.0.0",
+    "del-cli": "^3.0.0",
     "mocha": "^6.2.0",
     "prettier": "^1.18.2",
-    "ts-node": "^8.3.0",
-    "typescript": "^3.5.3"
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
   },
   "engines": {
     "node": ">=4.2.4"
   },
   "dependencies": {
-    "ste-core": "^1.6.1",
-    "ste-events": "^1.6.1",
-    "ste-signals": "^1.6.1",
-    "ste-simple-events": "^1.6.1"
+    "ste-core": "^1.6.2",
+    "ste-events": "^1.6.2",
+    "ste-signals": "^1.6.2",
+    "ste-simple-events": "^1.6.2"
   },
   "gitHead": "fd05578200503492858113549ab429c123e7a9fe"
 }

@@ -48,4 +48,7 @@ echo "Building & testing:"
 npm build
 npm test
 
+git add .
+git commit -m "Packages upgrade"
+
 echo "Ready!"
