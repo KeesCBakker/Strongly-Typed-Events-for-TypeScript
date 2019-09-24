@@ -1,6 +1,6 @@
 {
   "name": "ste-signals",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "Add the power of Signals to your projects. They are the most barebones implementation of an event.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
