@@ -81,7 +81,7 @@ This project will help you to add events, event handling en event dispatching to
 # History
 
 #### Version 1.6
-<a href="https://github.com/DustinWoods">@DustinWoods</a> added support for <a href="/documentation/HowToAddMultipleEventsToAClass.md#non-uniform-event-lists">non uniform event lists</a>.
+<a href="https://github.com/DustinWoods">@DustinWoods</a> added support for <a href="/documentation/HowToAddDynamicNamedEeventsToAClass.md#non-uniform-event-lists">non uniform event lists</a>.
 
 #### Version 1.5
 Added support for subscription `.count` from the dispatcher.
