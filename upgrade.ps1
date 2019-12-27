@@ -45,7 +45,7 @@ ncu -u
 npm install
 
 echo "Building & testing:"
-npm build
+npm run build
 npm test
 
 git add .
