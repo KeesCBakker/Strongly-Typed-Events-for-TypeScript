@@ -6,7 +6,7 @@ describe("Features", () => {
 
     describe("Non-uniform arguments", ()=>{
 
-        it.only("Simple event with non-uniform argument", ()=>{
+        it("Simple event with non-uniform argument", ()=>{
 
             let myEvents = new SimpleEventList<number|string>();
 
@@ -23,7 +23,7 @@ describe("Features", () => {
 
         });
 
-        it.only("Non-uniform arguments as events of a class", ()=>{
+        it("Non-uniform arguments as events of a class", ()=>{
 
             type FileHandlesArgMap = {
                 "rename": string,
