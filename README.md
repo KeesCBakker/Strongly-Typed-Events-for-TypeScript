@@ -134,3 +134,6 @@ Now supports Node.js through npm package: `npm i strongly-typed-events`. Rewrote
 0.4.2: Introduced the `clear` method on events to clear all subscriptions.
 
 <a href="documentation/history.md">Click here for more history...</a>
+
+## Maintenance
+This project is maintained by <a href="https://keestalkstech.com/">Kees C. Bakker</a>.

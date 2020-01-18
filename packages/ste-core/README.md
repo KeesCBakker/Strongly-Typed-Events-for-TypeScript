@@ -18,3 +18,6 @@ to include what you need. We have the following packages:
 |`ste-simple-events`|A simpler version of the `ste-event`-event. No sender, just an argument.|
 |`ste-signals`|A signal is even simpler, it is just a callback for when you need to be alerted without any scope.|
 |`strongly-typed-events`|This package includes everything.|
+
+## Maintenance
+This project is maintained by <a href="https://keestalkstech.com/">Kees C. Bakker</a>.

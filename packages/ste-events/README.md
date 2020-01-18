@@ -44,3 +44,6 @@ class Clock {
 Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/tree/master/documentation">documentation</a> or the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/tree/master/examples">examples</a> for more information.
 
 Need more info? Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript">repo</a>.
+
+## Maintenance
+This project is maintained by <a href="https://keestalkstech.com/">Kees C. Bakker</a>.

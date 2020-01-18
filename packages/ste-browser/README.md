@@ -125,3 +125,6 @@ to include what you need. We have the following packages:
 |`ste-signals`|A signal is even simpler, it is just a callback for when you need to be alerted without any scope.|
 |`strongly-typed-events`|This package all the events.|
 |`ste-browser`|Compiled JavaScript files for the browser.|
+
+## Maintenance
+This project is maintained by <a href="https://keestalkstech.com/">Kees C. Bakker</a>.
