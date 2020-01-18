@@ -10,9 +10,9 @@
   },
   "scripts": {
     "build": "lerna bootstrap & lerna run build",
-    "test": "lerna bootstrap & lerna run test",
-    "make": "lerna bootstrap & lerna run test & lerna run build && lerna publish --yes --cd-version patch & git add . & git commit -m Version-bump && git push ",
-    "make-feature": "lerna bootstrap & lerna run test & lerna run build && lerna publish --yes --cd-version minor & git add . & git commit -m Version-bump && git push "
+    "test": "lerna run test",
+    "make": "lerna run build && lerna publish --yes --cd-version patch & git add . & git commit -m Version-bump && git push ",
+    "make-feature": "lerna run build && lerna publish --yes --cd-version minor & git add . & git commit -m Version-bump && git push "
   },
   "husky": {
     "hooks": {
