@@ -5,7 +5,7 @@
     "strongly-typed-events": "*"
   },
   "devDependencies": {
-    "husky": "^4.2.1",
+    "husky": "^4.2.3",
     "lerna": "^3.20.2"
   },
   "scripts": {
