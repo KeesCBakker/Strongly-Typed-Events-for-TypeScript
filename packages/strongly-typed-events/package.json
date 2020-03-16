@@ -1,6 +1,6 @@
 {
   "name": "strongly-typed-events",
-  "version": "1.6.8",
+  "version": "1.6.9",
   "description": "Add the power of events to your (TypeScript) projects!",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -47,10 +47,10 @@
     "node": ">=4.2.4"
   },
   "dependencies": {
-    "ste-core": "^1.6.8",
-    "ste-events": "^1.6.8",
-    "ste-signals": "^1.6.8",
-    "ste-simple-events": "^1.6.8"
+    "ste-core": "^1.6.9",
+    "ste-events": "^1.6.9",
+    "ste-signals": "^1.6.9",
+    "ste-simple-events": "^1.6.9"
   },
   "gitHead": "fd05578200503492858113549ab429c123e7a9fe"
 }
