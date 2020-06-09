@@ -5,8 +5,8 @@
     "strongly-typed-events": "*"
   },
   "devDependencies": {
-    "husky": "^4.2.3",
-    "lerna": "^3.20.2"
+    "husky": "^4.2.5",
+    "lerna": "^3.22.1"
   },
   "scripts": {
     "build": "lerna bootstrap & lerna run build",
