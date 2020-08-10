@@ -5,7 +5,6 @@
     "strongly-typed-events": "*"
   },
   "devDependencies": {
-    "husky": "^4.2.5",
     "lerna": "^3.22.1"
   },
   "scripts": {
@@ -13,10 +12,5 @@
     "test": "lerna run test",
     "make": "lerna run build && lerna publish --yes --cd-version patch & git add . & git commit -m Version-bump && git push ",
     "make-feature": "lerna run build && lerna publish --yes --cd-version minor & git add . & git commit -m Version-bump && git push "
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm test"
-    }
   }
 }
