@@ -1,6 +1,6 @@
 {
   "name": "ste-simple-events",
-  "version": "1.6.17",
+  "version": "1.6.18",
   "description": "Add the power of Simple Events to your projects. Every event has an argument with its data.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -45,7 +45,7 @@
     "node": ">=4.2.4"
   },
   "dependencies": {
-    "ste-core": "^1.6.17"
+    "ste-core": "^1.6.18"
   },
   "gitHead": "fd05578200503492858113549ab429c123e7a9fe"
 }
