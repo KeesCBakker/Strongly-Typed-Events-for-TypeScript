@@ -31,7 +31,7 @@
     "@types/node": "^14.6.0",
     "browserify": "^16.5.2",
     "del-cli": "^3.0.1",
-    "prettier": "^2.0.5",
+    "prettier": "^2.1.1",
     "ste-core": "^1.6.17",
     "ste-events": "^1.6.17",
     "ste-signals": "^1.6.17",
