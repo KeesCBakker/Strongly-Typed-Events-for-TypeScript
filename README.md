@@ -81,7 +81,8 @@ This project will help you to add events, event handling en event dispatching to
 # History
 
 #### Version 1.7
-Browser support for the individual flavors of events.
+Added browser support for the individual flavors of events:
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-events.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-events.min.js"></script>
