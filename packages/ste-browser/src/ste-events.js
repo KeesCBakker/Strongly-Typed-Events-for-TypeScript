@@ -6,11 +6,20 @@
  * Copyright Kees C. Bakker / KeesTalksTech
  * Released under the MIT license
  */
+
+var c = require("ste-core");
 var m = require("ste-events");
+
 var expose = require("./expose"); 
 
 expose({
+
+    DispatcherBase: c.DispatcherBase,
+    DispatcherWrapper: c.DispatcherWrapper,
+    EventListBase: c.EventListBase,
+    Subscription: c.Subscription,
+
     EventDispatcher: m.EventDispatcher,
     EventHandlingBase: m.EventHandlingBase,
-    EventList: m.EventList
+    EventList: m.EventList,
 });

@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <script src="../dist/ste-signals.js"></script>
+    </head>
+<body>
+
+    <div id="log"></div>
+
+
+    <script>
+
+replaceLog();
+
+var clock = new Clock("Smu", 1000);
+
+console.log("Starting...");
+console.log(clock.name);
+
+//log the ticks to the console - this is a signal event
+clock.onTick.subscribe(function() {
+  console.log("Tick!");
+});
+
+function Clock(name, timeout) {
+
+    var _this = this;
+    var _ticks = 0;
+    var _onTick = new SignalDispatcher();
+
+    setInterval(function() {
+      _ticks += 1;
+      _onTick.dispatch();
+    }, timeout);
+    
+    Object.defineProperty(this,"name",{
+    	get: function() { return name; }
+    });
+    
+    Object.defineProperty(this,"ticks",{
+    	get: function() { return _ticks; }
+    });
+    
+    Object.defineProperty(this,"onTick",{
+    	get: function() { return _onTick.asEvent(); }
+    });
+}
+
+function replaceLog() {
+  console = {
+    log: function(str) {
+      var lg = document.getElementById("log");
+      lg.innerHTML = "<div>" + console.encode(str) + "</div>" + lg.innerHTML;
+    },
+
+    encode: function(str) {
+      var buf = [];
+
+      for (var i = str.length - 1; i >= 0; i--) {
+        buf.unshift(['&#', str[i].charCodeAt(), ';'].join(''));
+      }
+
+      return buf.join('');
+    }
+  }
+}
+        
+    </script>
+</body>
+</html>
