@@ -80,6 +80,17 @@ This project will help you to add events, event handling en event dispatching to
 
 # History
 
+#### Version 1.7
+Browser support for the individual flavors of events.
+```html
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-events.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-events.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-simple-events.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-simple-events.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-signals.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-signals.min.js"></script>
+```
+
 #### Version 1.6
 <a href="https://github.com/DustinWoods">@DustinWoods</a> added support for <a href="/documentation/HowToAddDynamicNamedEeventsToAClass.md#non-uniform-event-lists">non uniform event lists</a>.
 
