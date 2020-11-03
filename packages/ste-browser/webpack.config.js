@@ -1,30 +1,44 @@
 var webpack = require('webpack');
 
-var output = {
-  path: __dirname + '/dist',
-  libraryTarget: 'umd',
-  umdNamedDefine: false
-};
 
 module.exports = [
   {
     entry: {
       'ste-core': './src/ste-core.js',
-      'strongly-typed-events': './src/strongly-typed-events.js'
-    },
-    output: output,
-    devtool: 'source-map'
-  },
-  {
-    entry: {
+      'strongly-typed-events': './src/strongly-typed-events.js',
       'ste-events': './src/ste-events.js',
       'ste-signals': './src/ste-signals.js',
       'ste-simple-events': './src/ste-simple-events.js'
     },
-    output: output,
-    externals: [
-      'ste-core'
-    ],
-    devtool: 'source-map'
+    output: {
+      path: __dirname + '/dist',
+      libraryTarget: 'umd',
+      umdNamedDefine: false,
+      filename: '[name].min.js'
+    },
+    devtool: 'source-map',
+    optimization: {
+      minimize: true
+    }
+  },
+  {
+    entry: {
+      'ste-core': './src/ste-core.js',
+      'strongly-typed-events': './src/strongly-typed-events.js',
+      'ste-events': './src/ste-events.js',
+      'ste-signals': './src/ste-signals.js',
+      'ste-simple-events': './src/ste-simple-events.js'
+    },
+    output: {
+      path: __dirname + '/dist',
+      libraryTarget: 'umd',
+      umdNamedDefine: false,
+      filename: '[name].js'
+    },
+    devtool: 'source-map',
+    optimization: {
+      minimize: false
+    }
+
   }
 ];

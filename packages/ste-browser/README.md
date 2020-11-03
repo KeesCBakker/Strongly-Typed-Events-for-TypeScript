@@ -11,6 +11,16 @@ a CDN for extra speed (or easy prototyping). The packae is UMD compatible.
 Include the script from this NPM package or from a CDN:
 ```html
 <script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/strongly-typed-events.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/strongly-typed-events.min.js"></script>
+```
+Or include one of the flavors:
+```html
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-events.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-events.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-simple-events.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-simple-events.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-signals.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-signals.min.js"></script>
 ```
 
 ### Subscription is easy
@@ -79,24 +89,19 @@ The package contains the following scripts:
 
 - Events that are modeled after .Net with a `sender` and `argument`. 
     - dist/ste-events.js
-    - dist/ste-events.min.js
-    - dist/ste-events.min.js.map<br/><br/>
+    - dist/ste-events.min.js<br/><br/>
 - A simpler version of the `ste-event`-event. No sender, just an argument.
     - dist/ste-simple-events.js
-    - dist/ste-simple-events.min.js
-    - dist/ste-simple-events.min.js.map<br/><br/>
+    - dist/ste-simple-events.min.js<br/><br/>
 - A signal is even simpler, it is just a callback for when you need to be alerted without any scope.
     - dist/ste-signals.js
-    - dist/ste-signals.min.js
-    - dist/ste-signals.min.js.map<br/><br/>
+    - dist/ste-signals.min.js<br/><br/>
 - All objects to build and use events:
     - dist/strongly-typed-events.js
-    - dist/strongly-typed-events.min.js
-    - dist/strongly-typed-events.min.js.map<br/><br/>
+    - dist/strongly-typed-events.min.js<br/><br/>
 - Want to build your own style of events? You can use the dispatcher and other base classes for our core project:
     - dist/ste-core.js
     - dist/ste-core.min.js
-    - dist/ste-core.min.js.map
 
 ## CDN
 You want to use a CDN? Great!

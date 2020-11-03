@@ -3,9 +3,8 @@
   "version": "1.6.22",
   "description": "Add the power of events directly to your client projects. This version of Strongly Typed Events works in the browser.",
   "scripts": {
-    "webpack:dev": "webpack --mode=development",
-    "webpack:prod": "webpack --mode=production --output-filename=[name].min.js",
-    "build": "del-cli ./dist && npm run webpack:prod"
+    "webpack": "webpack",
+    "build": "del-cli ./dist && npm run webpack"
   },
   "repository": {
     "type": "git",
