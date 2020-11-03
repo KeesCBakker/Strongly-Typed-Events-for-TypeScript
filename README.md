@@ -3,7 +3,7 @@ Add the power of events to your projects. We even have 3 flavors for you.
 
 [![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
 [![npm version](https://badge.fury.io/js/strongly-typed-events.svg)](https://badge.fury.io/js/strongly-typed-events)
-[![forever](https://david-dm.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg)](https://david-dm.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Event types
 This project gives you the following event types:
