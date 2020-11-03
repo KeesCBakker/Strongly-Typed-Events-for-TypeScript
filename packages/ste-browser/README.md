@@ -108,10 +108,10 @@ You want to use a CDN? Great!
 
 |What|Link|
 |----|----|
-|All event types|https://cdn.jsdelivr.net/npm/ste-browser/dist/strongly-typed-events.min.js|
-|Events|https://cdn.jsdelivr.net/npm/ste-browser/dist/ste-events.min.js|
-|Simple Events|https://cdn.jsdelivr.net/npm/ste-browser/dist/ste-simple-events.min.js|
-|Signals|https://cdn.jsdelivr.net/npm/ste-browser/dist/ste-sigals.min.js|
+|All event types|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/strongly-typed-events.min.js|
+|Events|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-events.min.js|
+|Simple Events|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-simple-events.min.js|
+|Signals|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-signals.min.js|
 |Core|https://cdn.jsdelivr.net/npm/ste-browser/dist/strongly-typed-events.min.js|
 
 Every link comes with a `.map`. If you need a specific version, just include after
