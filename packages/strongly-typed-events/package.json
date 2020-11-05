@@ -46,10 +46,10 @@
     "node": ">=4.2.4"
   },
   "dependencies": {
-    "ste-core": "^1.7.1",
-    "ste-events": "^1.7.1",
-    "ste-signals": "^1.7.1",
-    "ste-simple-events": "^1.7.1"
+    "ste-core": "^1.7.2",
+    "ste-events": "^1.7.2",
+    "ste-signals": "^1.7.2",
+    "ste-simple-events": "^1.7.2"
   },
   "gitHead": "fd05578200503492858113549ab429c123e7a9fe"
 }
