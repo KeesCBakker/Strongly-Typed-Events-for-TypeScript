@@ -49,7 +49,6 @@ export abstract class PromiseDispatcherBase<
     ): Promise<IPropagationStatus | null> {
         //execute on a copy because of bug #9
         for (let sub of [...this._subscriptions]) {
-            console.log("sub");
 
             let ev = new EventManagement(() => this.unsub(sub.handler));
             let nargs: any = Array.prototype.slice.call(args);

@@ -4,7 +4,7 @@ import { expect } from "chai";
 
 import { PromiseSignalDispatcher, PromiseSignalList } from "../src";
 
-describe("Strongly Typed Events - PromiseSignal", () => {
+describe("Strongly Typed Events - Promise Signal", () => {
   describe("PromiseSignalDispatcher", () => {
 
     it("Counting subscriptions", () => {

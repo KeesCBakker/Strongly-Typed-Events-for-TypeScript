@@ -2,19 +2,20 @@
 
 import { expect } from "chai";
 
-import { PromiseSignalDispatcher } from "../src";
+import { PromiseEventDispatcher } from "../src";
 
 function delay(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-describe("Strongly Typed Events - Signal", async () => {
-    describe("PromiseSignalDispatcher", async () => {
+describe("Strongly Typed Events - Promise Event", async () => {
+    describe("PromiseEventDispatcher", async () => {
         it("stopPropagation through ev", async () => {
-            let dispatcher = new PromiseSignalDispatcher();
+            const n = {};
+            let dispatcher = new PromiseEventDispatcher<{}, {}>();
 
             let a = 0;
-            dispatcher.sub(async (ev) => {
+            dispatcher.sub(async (sender, args, ev) => {
                 await delay(10);
                 a++;
                 if (a > 2) {
@@ -27,10 +28,10 @@ describe("Strongly Typed Events - Signal", async () => {
                 b++;
             });
 
-            await dispatcher.dispatch();
-            await dispatcher.dispatch();
-            await dispatcher.dispatch();
-            await dispatcher.dispatch();
+            await dispatcher.dispatch(n, n);
+            await dispatcher.dispatch(n, n);
+            await dispatcher.dispatch(n, n);
+            await dispatcher.dispatch(n, n);
 
             expect(a).to.eq(4, "A should be 4, because 4 dispatches are done.");
 
