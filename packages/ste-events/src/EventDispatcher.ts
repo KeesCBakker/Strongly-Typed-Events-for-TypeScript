@@ -1,17 +1,26 @@
-import { DispatcherBase } from "ste-core";
-import { IEventHandler } from "./IEventHandler";
+import { DispatcherBase, DispatchError, IPropagationStatus } from "ste-core";
 import { IEvent } from "./IEvent";
+import { IEventHandler } from "./IEventHandler";
 
 /**
  * Dispatcher implementation for events. Can be used to subscribe, unsubscribe
  * or dispatch events. Use the ToEvent() method to expose the event.
+ *
+ * @export
+ * @class EventDispatcher
+ * @extends {DispatcherBase<IEventHandler<TSender, TArgs>>}
+ * @implements {IEvent<TSender, TArgs>}
+ * @template TSender
+ * @template TArgs
  */
-
 export class EventDispatcher<TSender, TArgs>
     extends DispatcherBase<IEventHandler<TSender, TArgs>>
     implements IEvent<TSender, TArgs> {
+
     /**
-     * Creates a new EventDispatcher instance.
+     * Creates an instance of EventDispatcher.
+     *
+     * @memberOf EventDispatcher
      */
     constructor() {
         super();
@@ -19,11 +28,19 @@ export class EventDispatcher<TSender, TArgs>
 
     /**
      * Dispatches the event.
-     * @param sender The sender.
-     * @param args The arguments object.
+     *
+     * @param {TSender} sender The sender object.
+     * @param {TArgs} args The arguments object.
+     * @returns {IPropagationStatus} The event status.
+     *
+     * @memberOf EventDispatcher
      */
-    public dispatch(sender: TSender, args: TArgs): void {
-        this._dispatch(false, this, arguments);
+    public dispatch(sender: TSender, args: TArgs): IPropagationStatus {
+        const result = this._dispatch(false, this, arguments);
+        if (result == null) {
+            throw new DispatchError("Got `null` back from dispatch.");
+        }
+        return result;
     }
 
     /**
@@ -38,6 +55,10 @@ export class EventDispatcher<TSender, TArgs>
     /**
      * Creates an event from the dispatcher. Will return the dispatcher
      * in a wrapper. This will prevent exposure of any dispatcher methods.
+     * 
+     * @returns {IEvent<TSender, TArgs>} The event.
+     * 
+     * @memberOf EventDispatcher
      */
     public asEvent(): IEvent<TSender, TArgs> {
         return super.asEvent();
