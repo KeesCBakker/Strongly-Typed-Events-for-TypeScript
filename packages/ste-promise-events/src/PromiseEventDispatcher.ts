@@ -9,8 +9,14 @@ import {
 /**
  * Dispatcher implementation for events. Can be used to subscribe, unsubscribe
  * or dispatch events. Use the ToEvent() method to expose the event.
+ * 
+ * @export
+ * @class PromiseEventDispatcher
+ * @extends {PromiseDispatcherBase<IPromiseEventHandler<TSender, TArgs>>}
+ * @implements {IPromiseEvent<TSender, TArgs>}
+ * @template TSender 
+ * @template TArgs 
  */
-
 export class PromiseEventDispatcher<TSender, TArgs>
     extends PromiseDispatcherBase<IPromiseEventHandler<TSender, TArgs>>
     implements IPromiseEvent<TSender, TArgs> {
@@ -23,8 +29,12 @@ export class PromiseEventDispatcher<TSender, TArgs>
 
     /**
      * Dispatches the event.
-     * @param sender The sender.
-     * @param args The arguments object.
+     * 
+     * @param {TSender} sender The sender object.
+     * @param {TArgs} args The argument object.
+     * @returns {Promise<IPropagationStatus>} The status.
+     * 
+     * @memberOf PromiseEventDispatcher
      */
     public async dispatch(
         sender: TSender,
@@ -39,9 +49,12 @@ export class PromiseEventDispatcher<TSender, TArgs>
     }
 
     /**
-     * Dispatches the events thread.
-     * @param sender The sender.
-     * @param args The arguments object.
+     * Dispatches the event without waiting for the result.
+     * 
+     * @param {TSender} sender The sender object.
+     * @param {TArgs} args The argument object.
+     * 
+     * @memberOf PromiseEventDispatcher
      */
     public dispatchAsync(sender: TSender, args: TArgs): void {
         this._dispatchAsPromise(true, this, arguments);
