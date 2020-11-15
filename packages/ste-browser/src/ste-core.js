@@ -13,5 +13,11 @@ expose({
     DispatcherBase: m.DispatcherBase,
     DispatcherWrapper: m.DispatcherWrapper,
     EventListBase: m.EventListBase,
-    Subscription: m.Subscription
+    Subscription: m.Subscription,
+    EventManagement: m.EventManagement,
+    DispatchError: m.DispatchError,
+    PromiseSubscription: m.PromiseSubscription,
+    PromiseDispatcherBase: m.PromiseDispatcherBase,
+    HandlingBase: m.HandlingBase,
 });
+
