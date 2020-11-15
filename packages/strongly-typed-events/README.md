@@ -7,10 +7,9 @@ Add the power of events to your projects. We even have 3 flavors for you.
 
 ## Event types
 This project gives you the following event types:
-- **Events** - styled after the way .Net implements events. With each event you'll get a `sender` and an `argument` object. If you use typescript, you can implement them using generics. `npm install ste-events --save`
-- **Simple events** - basically the same thing, with only an argument. `npm install ste-simple-events --save`
-- **Signals** - for when no data is needed, just the firing of the event is enough. `npm install ste-signals --save`
-- You want them all? Just use `npm install strongly-typed-events --save`.
+- **Events** - styled after the way .Net implements events. With each event you'll get a `sender` and an `argument` object. If you use typescript, you can implement them using generics.
+- **Simple events** - basically the same thing, with only 1 argument.
+- **Signals** - for when no data is needed, just the firing of the event is enough.
 
 ### Subscription made easy
 An example says more than a 1000 words. Imagine if you have events like this on your class:
@@ -86,72 +85,8 @@ This project will help you to add events, event handling en event dispatching to
 
 # History
 
-#### Version 1.7
-Added browser support for the individual flavors of events:
+<a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/history.md">The change history can be found here.</a>
 
-```html
-<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-events.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-events.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-simple-events.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-simple-events.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-signals.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-signals.min.js"></script>
-```
-
-#### Version 1.6
-<a href="https://github.com/DustinWoods">@DustinWoods</a> added support for <a href="/documentation/HowToAddDynamicNamedEeventsToAClass.md#non-uniform-event-lists">non uniform event lists</a>.
-
-#### Version 1.5
-Added support for subscription `.count` from the dispatcher.
-
-#### Version 1.4
-Added support for UMD for the ste-browser package.
-
-#### Version 1.3
-We transformed the single package to 5 packages:
-
-|Package|Description|
-|-------|-----------|
-|`ste-core`|Package that contains all the building blocks for the creation of events. The dispatcher implementation is its main hero.|
-|`ste-events`|Events that are modeled after .Net with a `sender` and `argument`. If you use typescript, you can leverage the support for generics and get strongly typed code.|
-|`ste-simple-events`|A simpler version of the `ste-event`-event. No sender, just an argument.|
-|`ste-signals`|A signal is even simpler, it is just a callback for when you need to be alerted without any scope.|
-|`strongly-typed-events`|This package all the events.|
-|`ste-browser`|Compiled JavaScript files for the browser.|
-
-#### Version 1.2
-Added `ev.stopPropagation` and `ev.unsub()` to aid in event management. Each event type has
-an extra parameter that can be used to manage the event:
-```typescript
-//log the name of the clock and the tick argument to the console - this is an event
-clock.onClockTick.subscribe((c, n, ev) =>
-
-  console.log(`${c.name} ticked ${n} times.`)
-
-  //stop further event propagation:
-  ev.stopPropagation();
-
-  //unsubscribes the event handler that caused the event:
-  ev.unsub();
-);
-```
-
-#### Version 1.1
-Removed the static. Internal restructuring of the package. Removed default exports, all exports are now named. _This is a breaking change_.
-An unsubscribe function is now returned when registering a subscription: `let unsub = x.sub(x => {}); unsub();`.
-
-#### Version 1.0
-Added default exports. Removed emulation through window. 
-
-#### Version 0.5
-Restructured includes for 'normal' web applications. Using `import` / `export` mechanisme. Emulating `exports` and `require` nodes through the `window` object for web.
-
-#### Version 0.4
-Introduced the `one` method on events to subscribe only once. Added `sub` and `unsub` methods as shorthands for `subscribe` and `unsubscribe`. Added a `has` method to check if a handler has been registered.
-Now supports Node.js through npm package: `npm i strongly-typed-events`. Rewrote and split tests.<br/>
-0.4.2: Introduced the `clear` method on events to clear all subscriptions.
-
-<a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/history.md">Click here for more history...</a>
 
 ## Maintenance
 This project is maintained by <a href="https://keestalkstech.com/">Kees C. Bakker</a>.
