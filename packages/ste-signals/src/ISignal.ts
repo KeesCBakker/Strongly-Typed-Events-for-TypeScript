@@ -7,3 +7,4 @@ import { ISignalHandler } from "./ISignalHandler";
  * @extends {ISubscribable<ISignalHandler>}
  */
 export interface ISignal extends ISubscribable<ISignalHandler> {}
+

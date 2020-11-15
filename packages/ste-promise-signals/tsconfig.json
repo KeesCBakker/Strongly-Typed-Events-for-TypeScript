@@ -9,7 +9,7 @@
     "strict": true
   },
   "include": [
-    "src/**/*.ts", "../ste-promise-signals/PromiseDispatcherBase.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules"

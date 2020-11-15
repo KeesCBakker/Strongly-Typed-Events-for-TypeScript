@@ -1,57 +1,46 @@
 /**
- * Indicates the object implements generic subscriptions.
+ * Base interface for event handling.
  */
-export interface ISubscribable<THandlerType> {
-
+export interface IBaseEventHandling<TEventHandler> {
   /**
-   * Returns the number of subsriptions.
-   * 
-   * @type {number}
-   * @memberOf ISubscribable
-   */
-  readonly count: number;
-
-  /**
-   * Subscribe to the event.
+   * Subscribe to the event with the specified name.
+   * @param name The name of the event.
    * @param fn The event handler that is called when the event is dispatched.
-   * @returns A function that unsubscribes the event handler from the event.
    */
-  subscribe(fn: THandlerType): () => void;
+  subscribe(name: string, fn: TEventHandler): void;
 
   /**
-   * Subscribe to the event.
+   * Subscribe to the event with the specified name.
+   * @param name The name of the event.
    * @param fn The event handler that is called when the event is dispatched.
-   * @returns A function that unsubscribes the event handler from the event.
    */
-  sub(fn: THandlerType): () => void;
+  sub(name: string, fn: TEventHandler): void;
 
   /**
-   * Unsubscribe from the event.
-   * @param fn The event handler that will be unsubsribed from the event.
+   * Unsubscribe from the event with the specified name.
+   * @param name The name of the event.
+   * @param fn The event handler that is will be unsubsribed from the event.
    */
-  unsubscribe(fn: THandlerType): void;
+  unsubscribe(name: string, fn: TEventHandler): void;
 
   /**
-   * Unsubscribe from the event.
-   * @param fn The event handler that will be unsubsribed from the event.
+   * Unsubscribe from the event with the specified name.
+   * @param name The name of the event.
+   * @param fn The event handler that is will be unsubsribed from the event.
    */
-  unsub(fn: THandlerType): void;
+  unsub(name: string, fn: TEventHandler): void;
 
   /**
-   * Subscribes to the event only once.
+   * Subscribe once to the event with the specified name.
+   * @param name The name of the event.
    * @param fn The event handler that is called when the event is dispatched.
-   * @returns A function that unsubscribes the event handler from the event.
    */
-  one(fn: THandlerType): () => void;
+  one(name: string, fn: TEventHandler): void;
 
   /**
    * Checks it the event has a subscription for the specified handler.
+   * @param name The name of the event.
    * @param fn The event handler.
    */
-  has(fn: THandlerType): boolean;
-
-  /**
-   * Clears all the subscriptions.
-   */
-  clear(): void;
+  has(name: string, fn: TEventHandler): boolean;
 }

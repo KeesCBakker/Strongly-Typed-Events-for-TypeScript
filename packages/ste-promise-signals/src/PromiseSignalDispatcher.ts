@@ -1,14 +1,14 @@
-import { DispatcherBase, IPropagationStatus, DispatchError } from "ste-core";
-import { ISignal } from "./ISignal";
-import { ISignalHandler } from "./ISignalHandler";
+import { DispatchError, IPropagationStatus, PromiseDispatcherBase } from 'ste-core';
+import { IPromiseSignal } from './IPromiseSignal';
+import { IPromiseSignalHandler } from './IPromiseSignalHandler';
 
 /**
  * The dispatcher handles the storage of subsciptions and facilitates
  * subscription, unsubscription and dispatching of a signal event.
  */
-export class SignalDispatcher
-    extends DispatcherBase<ISignalHandler>
-    implements ISignal {
+export class PromiseSignalDispatcher
+    extends PromiseDispatcherBase<IPromiseSignalHandler>
+    implements IPromiseSignal {
     /**
      * Creates a new SignalDispatcher instance.
      */
@@ -18,14 +18,14 @@ export class SignalDispatcher
 
     /**
      * Dispatches the signal.
-     * 
+     *
      * @returns {IPropagationStatus} The status of the dispatch.
-     * 
+     *
      * @memberOf SignalDispatcher
      */
-    public dispatch(): IPropagationStatus {
-        const result = this._dispatch(false, this, arguments);
-        if(result == null){
+    public async dispatch(): Promise<IPropagationStatus> {
+        const result = await this._dispatchAsPromise(false, this, arguments);
+        if (result == null) {
             throw new DispatchError("Got `null` back from dispatch.");
         }
 
@@ -36,14 +36,16 @@ export class SignalDispatcher
      * Dispatches the signal threaded.
      */
     public dispatchAsync(): void {
-        this._dispatch(true, this, arguments);
+        this._dispatchAsPromise(true, this, arguments);
     }
 
     /**
      * Creates an event from the dispatcher. Will return the dispatcher
      * in a wrapper. This will prevent exposure of any dispatcher methods.
      */
-    public asEvent(): ISignal {
+    public asEvent(): IPromiseSignal {
         return super.asEvent();
     }
 }
+
+

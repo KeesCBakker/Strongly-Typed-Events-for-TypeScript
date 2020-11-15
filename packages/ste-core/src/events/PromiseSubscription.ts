@@ -1,11 +1,6 @@
 import { ISubscription } from "./ISubscription";
 
-/**
- * Stores a handler. Manages execution meta data.
- * @class Subscription
- * @template TEventHandler
- */
-export class Subscription<TEventHandler> implements ISubscription<TEventHandler> {
+export class PromiseSubscription<TEventHandler> implements ISubscription<TEventHandler> {
     /**
      * Indicates if the subscription has been executed before.
      */
@@ -17,7 +12,10 @@ export class Subscription<TEventHandler> implements ISubscription<TEventHandler>
      * @param {TEventHandler} handler The handler for the subscription.
      * @param {boolean} isOnce Indicates if the handler should only be executed once.
      */
-    constructor(public handler: TEventHandler, public isOnce: boolean) { }
+    constructor(
+        public handler: TEventHandler,
+        public isOnce: boolean
+    ) {}
 
     /**
      * Executes the handler.
@@ -26,19 +24,28 @@ export class Subscription<TEventHandler> implements ISubscription<TEventHandler>
      * @param {*} scope The scope the scope of the event.
      * @param {IArguments} args The arguments for the event.
      */
-    public execute(executeAsync: boolean, scope: any, args: IArguments) {
+    public async execute(
+        executeAsync: boolean,
+        scope: any,
+        args: IArguments
+    ): Promise<void> {
+
         if (!this.isOnce || !this.isExecuted) {
             this.isExecuted = true;
 
+            //TODO: do we need to cast to any -- seems yuck
             var fn: any = this.handler;
 
             if (executeAsync) {
                 setTimeout(() => {
                     fn.apply(scope, args);
                 }, 1);
-            } else {
-                fn.apply(scope, args);
+
+                return;
             }
+
+            let result = fn.apply(scope, args) as Promise<void>;
+            await result;
         }
     }
 }

@@ -8,13 +8,20 @@
  */
 
 export {
+  IEventManagement,
+  ISubscribable,
+  Subscription,
+  IBaseEventHandling,
   DispatcherBase,
   DispatcherWrapper,
   EventListBase,
-  Subscription,
-  IEventManagement,
-  ISubscribable,
-  IBaseEventHandling
+  EventManagement,
+  IPropagationStatus,
+  DispatchError,
+  PromiseSubscription,
+  ISubscription,
+  PromiseDispatcherBase,
+  HandlingBase
 } from "ste-core";
 
 export {

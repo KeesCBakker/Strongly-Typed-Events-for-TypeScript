@@ -1,8 +1,11 @@
-import { 
-    DispatcherWrapper, 
-    ISubscribable, 
-    Subscription, 
-    EventManagement } from "..";
+import { IPropagationStatus } from "./IPropagationStatus";
+import { ISubscription } from "../events/ISubscription";
+import {
+    DispatcherWrapper,
+    ISubscribable,
+    Subscription,
+    EventManagement,
+} from "..";
 
 /**
  * Base class for implementation of the dispatcher. It facilitates the subscribe
@@ -13,7 +16,7 @@ import {
 export abstract class DispatcherBase<TEventHandler>
     implements ISubscribable<TEventHandler> {
     private _wrap = new DispatcherWrapper(this);
-    private _subscriptions = new Array<Subscription<TEventHandler>>();
+    protected _subscriptions = new Array<ISubscription<TEventHandler>>();
 
     /**
      * Returns the number of subscriptions.
@@ -33,9 +36,7 @@ export abstract class DispatcherBase<TEventHandler>
      */
     public subscribe(fn: TEventHandler): () => void {
         if (fn) {
-            this._subscriptions.push(
-                new Subscription<TEventHandler>(fn, false)
-            );
+            this._subscriptions.push(this.createSubscription(fn, false));
         }
         return () => {
             this.unsubscribe(fn);
@@ -58,7 +59,7 @@ export abstract class DispatcherBase<TEventHandler>
      */
     public one(fn: TEventHandler): () => void {
         if (fn) {
-            this._subscriptions.push(new Subscription<TEventHandler>(fn, true));
+            this._subscriptions.push(this.createSubscription(fn, true));
         }
         return () => {
             this.unsubscribe(fn);
@@ -101,36 +102,53 @@ export abstract class DispatcherBase<TEventHandler>
      * Generic dispatch will dispatch the handlers with the given arguments.
      *
      * @protected
-     * @param {boolean} executeAsync True if the even should be executed async.
-     * @param {*} The scope the scope of the event. The scope becomes the "this" for handler.
+     * @param {boolean} executeAsync `True` if the even should be executed async.
+     * @param {*} scrop The scope of the event. The scope becomes the `this` for handler.
      * @param {IArguments} args The arguments for the event.
+     * @returns {(IPropagationStatus | null)} The propagation status, or if an `executeAsync` is used `null`.
+     *
+     * @memberOf DispatcherBase
      */
     protected _dispatch(
         executeAsync: boolean,
         scope: any,
         args: IArguments
-    ): void {
+    ): IPropagationStatus | null {
         //execute on a copy because of bug #9
         for (let sub of [...this._subscriptions]) {
             let ev = new EventManagement(() => this.unsub(sub.handler));
             let nargs: any = Array.prototype.slice.call(args);
             nargs.push(ev);
 
-            sub.execute(executeAsync, scope, nargs as IArguments);
+            let s = sub as Subscription<TEventHandler>;
+            s.execute(executeAsync, scope, nargs as IArguments);
 
             //cleanup subs that are no longer needed
             this.cleanup(sub);
 
             if (!executeAsync && ev.propagationStopped) {
-                break;
+                return { propagationStopped: true };
             }
         }
+
+        if (executeAsync) {
+            return null;
+        }
+
+        return { propagationStopped: false };
+    }
+
+    protected createSubscription(
+        handler: TEventHandler,
+        isOnce: boolean
+    ): ISubscription<TEventHandler> {
+        return new Subscription<TEventHandler>(handler, isOnce);
     }
 
     /**
      * Cleans up subs that ran and should run only once.
      */
-    protected cleanup(sub: Subscription<TEventHandler>) {
+    protected cleanup(sub: ISubscription<TEventHandler>) {
         if (sub.isOnce && sub.isExecuted) {
             let i = this._subscriptions.indexOf(sub);
             if (i > -1) {
