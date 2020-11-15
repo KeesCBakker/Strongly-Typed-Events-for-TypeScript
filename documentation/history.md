@@ -1,5 +1,11 @@
 # History
 
+#### Version 2.0
+Better support for code splitting. All objects now recide in their own
+class, which makes splitting and tree shaking easier and should produce
+smaller packages.
+
+
 #### Version 1.3
 We transformed the single package to 5 packages:
 
@@ -12,8 +18,7 @@ We transformed the single package to 5 packages:
 |`strongly-typed-events`|This package includes everything.|
 
 #### Version 1.2
-Added `ev.stopPropagation` and `ev.unsub()` to aid in event management. Each event type has
-an extra parameter that can be used to manage the event:
+Added `ev.stopPropagation` and `ev.unsub()` to aid in event management. Each event type has an extra parameter that can be used to manage the event:
 ```typescript
 //log the name of the clock and the tick argument to the console - this is an event
 clock.onClockTick.subscribe((c, n, ev) =>
