@@ -31,9 +31,6 @@
     "del-cli": "^3.0.1",
     "ste-core": "^1.7.3",
     "ste-events": "^1.7.3",
-    "ste-promise-events": "^1.7.3",
-    "ste-promise-signals": "^1.7.3",
-    "ste-promise-simple-events": "^1.7.3",
     "ste-signals": "^1.7.3",
     "ste-simple-events": "^1.7.3",
     "strongly-typed-events": "^1.7.3",
@@ -43,5 +40,14 @@
   "engines": {
     "node": ">=4.2.4"
   },
-  "gitHead": "fd05578200503492858113549ab429c123e7a9fe"
+  "gitHead": "fd05578200503492858113549ab429c123e7a9fe",
+  "dependencies": {
+    "ste-core": "^2.0.0",
+    "ste-events": "^2.0.0",
+    "ste-promise-events": "^2.0.0",
+    "ste-promise-signals": "^2.0.0",
+    "ste-promise-simple-events": "^2.0.0",
+    "ste-signals": "^2.0.0",
+    "ste-simple-events": "^2.0.0"
+  }
 }
