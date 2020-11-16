@@ -8,6 +8,7 @@ module.exports = [
       'strongly-typed-events': './src/strongly-typed-events.js',
       'ste-events': './src/ste-events.js',
       'ste-signals': './src/ste-signals.js',
+      'ste-promise-signals': './src/ste-promise-signals.js',
       'ste-simple-events': './src/ste-simple-events.js'
     },
     output: {
@@ -27,6 +28,7 @@ module.exports = [
       'strongly-typed-events': './src/strongly-typed-events.js',
       'ste-events': './src/ste-events.js',
       'ste-signals': './src/ste-signals.js',
+      'ste-promise-signals': './src/ste-promise-signals.js',
       'ste-simple-events': './src/ste-simple-events.js'
     },
     output: {
