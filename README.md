@@ -109,7 +109,6 @@ This project will help you to add events, event handling en event dispatching to
 ## History
 <a href="documentation/history.md">Click here for more history...</a>
 
-
 ## Packages
 Want a smaller package? Check out on of these:
 
