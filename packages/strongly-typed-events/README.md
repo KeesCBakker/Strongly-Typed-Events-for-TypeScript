@@ -119,10 +119,8 @@ This project will help you to add events, event handling en event dispatching to
 
 Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/documentation">documentation</a> or the <a href="examples">examples</a> for more information.
 
-# History
-
+## History
 <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/history.md">The change history can be found here.</a>
-
 
 ## Maintenance
 This project is maintained by <a href="https://keestalkstech.com/">Kees C. Bakker</a>.
