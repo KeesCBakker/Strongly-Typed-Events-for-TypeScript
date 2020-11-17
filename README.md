@@ -123,6 +123,5 @@ Want a smaller package? Check out on of these:
 |<a href="https://www.npmjs.com/package/ste-browser">`ste-browser`</a>|Helps to host events in the browser.|
 <br/>
 
-
 ## Maintenance
 This project is maintained by <a href="https://keestalkstech.com/">Kees C. Bakker</a>.
