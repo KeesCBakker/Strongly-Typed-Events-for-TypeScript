@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <script src="../dist/ste-simple-events.js"></script>
+        <script>
+            function worker_function() {
+                self.addEventListener(
+                    "message",
+                    function (e) {
+                        startCalcs(e.data.size, e.data.feedback);
+                    },
+                    false
+                );
+
+                function startCalcs(digits, s) {
+                    let i = 1n;
+                    let x = 3n * 10n ** (BigInt(digits) + 20n);
+                    let pi = x;
+
+                    a = 0;
+
+                    while (x > 0) {
+                        x = (x * i) / ((i + 1n) * 4n);
+                        pi += x / (i + 2n);
+                        i += 2n;
+
+                        a++;
+
+                        if (a % s == 0) {
+                            self.postMessage({
+                                pi: formatPi(pi),
+                                finished: false,
+                            });
+                        }
+                    }
+
+                    self.postMessage({
+                        pi: formatPi(pi),
+                        finished: true,
+                    });
+                }
+
+                function formatPi(pi) {
+                    const pistr10 = (pi / 10n ** 20n).toString(10);
+                    let str = pistr10;
+                    str = str.charAt(0) + "." + str.substr(1);
+                    return str;
+                }
+            }
+        </script>
+        <style>
+            html, body {
+                word-break: break-all;
+                font-family: Consolas, 'Courier New', Courier, monospace;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="log"></div>
+
+        <script>
+            replaceLog();
+
+            console.log("Starting...");
+            var calc = new PiCalculator(5000, 10);
+
+            //log the sequence parameter to the console - this is a simple event
+            calc.onNewData.subscribe(function (pi) {
+                console.log(`${calc.finished ? 
+                  '___Finished ' : 
+                  'Caclulating '}PI with ${calc.size} digits: ${pi}`);
+            });
+
+            function PiCalculator(size, feedback) {
+
+                _this = this;
+                this.size = size;
+                this.finished = false;
+                this.pi = 0;
+
+                var _onNewData = new SimpleEventDispatcher();
+                var _worker = new Worker(
+                    URL.createObjectURL(
+                        new Blob(["(" + worker_function.toString() + ")()"], {
+                            type: "text/javascript",
+                        })
+                    )
+                );
+
+                _worker.addEventListener(
+                    "message",
+                    function (e) {
+                        _this.finished = e.data.finished;
+                        _this.pi = e.data.pi;
+                        _onNewData.dispatch(_this.pi);
+                    },
+                    false
+                );
+
+                _worker.postMessage({
+                    size: size,
+                    feedback: feedback,
+                });
+
+                Object.defineProperty(this, "onNewData", {
+                    get: function () {
+                        return _onNewData.asEvent();
+                    },
+                });
+            }
+
+            function replaceLog() {
+                console = {
+                    log: function (str) {
+                        var lg = document.getElementById("log");
+                        lg.innerHTML = "<div>" + console.encode(str) + "</div>";
+                    },
+
+                    encode: function (str) {
+                        var buf = [];
+
+                        for (var i = str.length - 1; i >= 0; i--) {
+                            buf.unshift(
+                                ["&#", str[i].charCodeAt(), ";"].join("")
+                            );
+                        }
+
+                        return buf.join("");
+                    },
+                };
+            }
+        </script>
+    </body>
+</html>

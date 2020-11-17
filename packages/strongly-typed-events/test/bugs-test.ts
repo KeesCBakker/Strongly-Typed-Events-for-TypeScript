@@ -1,4 +1,4 @@
-import { SimpleEventDispatcher, SignalDispatcher } from "./../src/";
+import { SignalDispatcher } from "./../src/";
 import { expect } from "chai";
 
 describe("Bug fixes", () => {

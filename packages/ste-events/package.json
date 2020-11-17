@@ -1,6 +1,6 @@
 {
   "name": "ste-events",
-  "version": "1.7.2",
+  "version": "2.0.0",
   "description": "Add the power of Events to your projects. They are styled after .Net using a sender and arguments.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -32,8 +32,8 @@
   "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
   "devDependencies": {
     "@types/chai": "^4.2.14",
-    "@types/mocha": "^8.0.3",
-    "@types/node": "^14.14.6",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^14.14.7",
     "chai": "^4.2.0",
     "del-cli": "^3.0.1",
     "mocha": "^8.2.1",
@@ -44,7 +44,7 @@
     "node": ">=4.2.4"
   },
   "dependencies": {
-    "ste-core": "^1.7.2"
+    "ste-core": "^2.0.0"
   },
   "gitHead": "fd05578200503492858113549ab429c123e7a9fe"
 }
