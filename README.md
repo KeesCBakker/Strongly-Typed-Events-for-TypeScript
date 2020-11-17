@@ -7,10 +7,10 @@ Add the power of events to your projects. We even have 3 flavors for you.
 
 ## Event types
 This project gives you the following event types:
-- **Events** - styled after the way .Net implements events. With each event you'll get a `sender` and an `argument` object. If you use typescript, you can implement them using generics.<br/>`npm install ste-events --save`
-- **Simple events** - basically the same thing, with only an argument.<br/>`npm install ste-simple-events --save`
-- **Signals** - for when no data is needed, just the firing of the event is enough.<br/>`npm install ste-signals --save`
-- You want them all? Just use<br/>`npm install strongly-typed-events --save`.
+- **Events** - styled after the way .Net implements events. With each event you'll get a `sender` and an `argument` object. If you use typescript, you can implement them using generics.<br/>`npm install ste-events` or `npm install ste-promise-events` for event handlers that support `Promise`.
+- **Simple events** - basically the same thing, with only an argument.<br/>`npm install ste-simple-events` or `npm install ste-promise-simple-events` for event handlers that support `Promise`.
+- **Signals** - for when no data is needed, just the firing of the event is enough.<br/>`npm install ste-signals` or `npm install ste-promise-signals` for event handlers that support `Promise`.
+- You want them all? Just use<br/>`npm install strongly-typed-events`.
 
 
 ### Subscription made easy
@@ -63,6 +63,33 @@ class Clock {
     return this._onClockTick.asEvent();
   }
 }
+```
+
+### Stopping events
+You can stop events from being propagated.
+
+```typescript
+let dispatcher = new SignalDispatcher();
+
+  let a = 0;
+  dispatcher.sub(ev => {
+    a++;
+    if (a > 2) {
+      ev.stopPropagation();
+    }
+  });
+
+  let b = 0;
+  dispatcher.sub(() => { b++; });
+
+  dispatcher.dispatch();
+  dispatcher.dispatch();
+  dispatcher.dispatch();
+  dispatcher.dispatch();
+
+  // a should be 4, because 4 dispatches are done.");
+  // b should be 2, because events after the 2nd dispatch are stopped."
+
 ```
 
 Check the <a href="documentation">documentation</a> or the <a href="examples">examples</a> for more information.

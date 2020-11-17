@@ -11,5 +11,8 @@ Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-Type
 
 Need more info? Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript">repo</a>.
 
+## Example?
+It is hard to come up with sensible examples for promise based handlers, but check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript">GitHub page</a> for a general overview.
+
 ## Maintenance
 This project is maintained by <a href="https://keestalkstech.com/">Kees C. Bakker</a>.

@@ -63,13 +63,47 @@ class Clock {
 }
 ```
 
-Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/documentation">documentation</a> or the <a href="examples">examples</a> for more information.
+### Stopping events
+You can stop events from being propagated.
 
-## Installation
-Installation is easy using NPM:
+```typescript
+let dispatcher = new SignalDispatcher();
+
+  let a = 0;
+  dispatcher.sub(ev => {
+    a++;
+    if (a > 2) {
+      ev.stopPropagation();
+    }
+  });
+
+  let b = 0;
+  dispatcher.sub(() => { b++; });
+
+  dispatcher.dispatch();
+  dispatcher.dispatch();
+  dispatcher.dispatch();
+  dispatcher.dispatch();
+
+  // a should be 4, because 4 dispatches are done.");
+  // b should be 2, because events after the 2nd dispatch are stopped."
+
 ```
-npm install strongly-typed-events --save
-```
+
+## Packages
+The project is separated into multiple packages, so you only need
+to include what you need. We have the following packages:
+
+|Package|Description|
+|-------|-----------|
+|<a href="https://www.npmjs.com/package/ste-core">`ste-core`</a>|Package that contains all the building blocks for the creation of events. The dispatcher implementation is its main hero.|
+|<a href="https://www.npmjs.com/package/ste-events">`ste-events`</a> or <a href="https://www.npmjs.com/package/ste-promise-events">`ste-promise-events`</a>|Events that are modeled after .Net with a `sender` and `argument`. If you use typescript, you can leverage the support for generics and get strongly typed code.|
+|<a href="https://www.npmjs.com/package/ste-simple-events">`ste-simple-events`</a> or <a href="https://www.npmjs.com/package/ste-promise-simple-events">`ste-promise-simple-events`</a>|A simpler version of the `ste-event`-event. No sender, just an argument.|
+|<a href="https://www.npmjs.com/package/ste-signals">`ste-signals`</a> or <a href="https://www.npmjs.com/package/ste-promise-signals">`ste-promise-signals`</a>|A signal is even simpler, it is just a callback for when you need to be alerted without any scope.|
+|<a href="https://www.npmjs.com/package/strongly-typed-events">`strongly-typed-events`</a>|This package includes everything.|
+|<a href="https://www.npmjs.com/package/ste-browser">`ste-browser`</a>|Helps to host events in the browser.|
+<br/>
+
 
 ## Documentation
 This project will help you to add events, event handling en event dispatching to your classes. To get you started, check:
@@ -82,6 +116,8 @@ This project will help you to add events, event handling en event dispatching to
 - <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/OnEventsDispatchersAndLists.md">On events, dispatchers and lists (a general explanation of the system)</a>
 - <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/HowToUseInNodeJs.md">How to use Strongly Typed Events in Node.js?</a>
 - <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/SomeUnsubStrategies.md">Some unsubscribe strategies</a>
+
+Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/documentation">documentation</a> or the <a href="examples">examples</a> for more information.
 
 # History
 

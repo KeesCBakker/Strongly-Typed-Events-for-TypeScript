@@ -78,13 +78,19 @@ The package contains the following scripts:
 
 - Events that are modeled after .Net with a `sender` and `argument`. 
     - dist/ste-events.js
-    - dist/ste-events.min.js<br/><br/>
+    - dist/ste-events.min.js
+    - dist/ste-promise-events.js
+    - dist/ste-promise-events.min.js<br/><br/>
 - A simpler version of the `ste-event`-event. No sender, just an argument.
     - dist/ste-simple-events.js
-    - dist/ste-simple-events.min.js<br/><br/>
+    - dist/ste-simple-events.min.js
+    - dist/ste-promise-simple-events.js
+    - dist/ste-promise-simple-events.min.js<br/><br/>
 - A signal is even simpler, it is just a callback for when you need to be alerted without any scope.
     - dist/ste-signals.js
-    - dist/ste-signals.min.js<br/><br/>
+    - dist/ste-signals.min.js
+    - dist/ste-promise-signals.js
+    - dist/ste-promise-signals.min.js<br/><br/>
 - All objects to build and use events:
     - dist/strongly-typed-events.js
     - dist/strongly-typed-events.min.js<br/><br/>
@@ -99,8 +105,11 @@ You want to use a CDN? Great!
 |----|----|
 |All event types|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/strongly-typed-events.min.js|
 |Events|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-events.min.js|
+|Events with Promise|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-promise-events.min.js|
 |Simple Events|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-simple-events.min.js|
+|Simple Events with Promise|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-promise-simple-events.min.js|
 |Signals|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-signals.min.js|
+|Signals with Promise|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-promise-signals.min.js|
 |Core|https://cdn.jsdelivr.net/npm/ste-browser/dist/strongly-typed-events.min.js|
 
 Every link comes with a `.map`. If you need a specific version, just include after
@@ -115,9 +124,9 @@ to include what you need. We have the following packages:
 |Package|Description|
 |-------|-----------|
 |<a href="https://www.npmjs.com/package/ste-core">`ste-core`</a>|Package that contains all the building blocks for the creation of events. The dispatcher implementation is its main hero.|
-|<a href="https://www.npmjs.com/package/ste-events">`ste-events`</a>|Events that are modeled after .Net with a `sender` and `argument`. If you use typescript, you can leverage the support for generics and get strongly typed code.|
-|<a href="https://www.npmjs.com/package/ste-simple-events">`ste-simple-events`</a>|A simpler version of the `ste-event`-event. No sender, just an argument.|
-|<a href="https://www.npmjs.com/package/ste-signals">`ste-signals`</a>|A signal is even simpler, it is just a callback for when you need to be alerted without any scope.|
+|<a href="https://www.npmjs.com/package/ste-events">`ste-events`</a> or <a href="https://www.npmjs.com/package/ste-promise-events">`ste-promise-events`</a>|Events that are modeled after .Net with a `sender` and `argument`. If you use typescript, you can leverage the support for generics and get strongly typed code.|
+|<a href="https://www.npmjs.com/package/ste-simple-events">`ste-simple-events`</a> or <a href="https://www.npmjs.com/package/ste-promise-simple-events">`ste-promise-simple-events`</a>|A simpler version of the `ste-event`-event. No sender, just an argument.|
+|<a href="https://www.npmjs.com/package/ste-signals">`ste-signals`</a> or <a href="https://www.npmjs.com/package/ste-promise-signals">`ste-promise-signals`</a>|A signal is even simpler, it is just a callback for when you need to be alerted without any scope.|
 |<a href="https://www.npmjs.com/package/strongly-typed-events">`strongly-typed-events`</a>|This package includes everything.|
 |<a href="https://www.npmjs.com/package/ste-browser">`ste-browser`</a>|Helps to host events in the browser.|
 <br/>
