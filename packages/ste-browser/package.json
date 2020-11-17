@@ -29,13 +29,13 @@
   "devDependencies": {
     "@types/node": "^14.14.7",
     "del-cli": "^3.0.1",
-    "ste-core": "^2.0.1",
-    "ste-events": "^2.0.1",
-    "ste-promise-events": "^2.0.1",
-    "ste-promise-signals": "^2.0.1",
-    "ste-promise-simple-events": "^2.0.1",
-    "ste-signals": "^2.0.1",
-    "ste-simple-events": "^2.0.1",
+    "ste-core": "^2.0.2",
+    "ste-events": "^2.0.2",
+    "ste-promise-events": "^2.0.2",
+    "ste-promise-signals": "^2.0.2",
+    "ste-promise-simple-events": "^2.0.2",
+    "ste-signals": "^2.0.2",
+    "ste-simple-events": "^2.0.2",
     "strongly-typed-events": "^2.0.1",
     "webpack": "^5.4.0",
     "webpack-cli": "^4.2.0"
@@ -43,5 +43,5 @@
   "engines": {
     "node": ">=4.2.4"
   },
-  "gitHead": "fd05578200503492858113549ab429c123e7a9fe"
+  "gitHead": "7ea8b18a2c8fb3333d3121d3ea6606cbe1b4620f"
 }
