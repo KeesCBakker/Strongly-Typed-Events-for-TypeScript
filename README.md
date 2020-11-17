@@ -106,8 +106,23 @@ This project will help you to add events, event handling en event dispatching to
 - <a href="documentation/HowToUseInNodeJs.md">How to use Strongly Typed Events in Node.js?</a>
 - <a href="documentation/SomeUnsubStrategies.md">Some unsubscribe strategies</a>
 
-# History
+## History
 <a href="documentation/history.md">Click here for more history...</a>
+
+
+## Packages
+Want a smaller package? Check out on of these:
+
+|Package|Description|
+|-------|-----------|
+|<a href="https://www.npmjs.com/package/ste-core">`ste-core`</a>|Package that contains all the building blocks for the creation of events. The dispatcher implementation is its main hero.|
+|<a href="https://www.npmjs.com/package/ste-events">`ste-events`</a> or <a href="https://www.npmjs.com/package/ste-promise-events">`ste-promise-events`</a>|Events that are modeled after .Net with a `sender` and `argument`. If you use typescript, you can leverage the support for generics and get strongly typed code.|
+|<a href="https://www.npmjs.com/package/ste-simple-events">`ste-simple-events`</a> or <a href="https://www.npmjs.com/package/ste-promise-simple-events">`ste-promise-simple-events`</a>|A simpler version of the `ste-event`-event. No sender, just an argument.|
+|<a href="https://www.npmjs.com/package/ste-signals">`ste-signals`</a> or <a href="https://www.npmjs.com/package/ste-promise-signals">`ste-promise-signals`</a>|A signal is even simpler, it is just a callback for when you need to be alerted without any scope.|
+|<a href="https://www.npmjs.com/package/strongly-typed-events">`strongly-typed-events`</a>|This package includes everything.|
+|<a href="https://www.npmjs.com/package/ste-browser">`ste-browser`</a>|Helps to host events in the browser.|
+<br/>
+
 
 ## Maintenance
 This project is maintained by <a href="https://keestalkstech.com/">Kees C. Bakker</a>.

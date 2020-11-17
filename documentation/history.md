@@ -5,6 +5,47 @@ Better support for code splitting. All objects now recide in their own
 class, which makes splitting and tree shaking easier and should produce
 smaller packages.
 
+New features:
+
+- All `dispatch` methods will now return an <a href="../packages/ste-core/src/dispatching/IPropagationStatus.ts">IPropagationStatus</a> with an indication if the event was stopped (`propagationStopped`). Note: does not work for `dispatchAsync`, because this dispatch is not handled synchronously.
+- We have support for `Promise` handlers, please check <a href="../packages/ste-promise-events/src/PromiseEventDispatcher.ts">PromiseEventDispatcher</a>, <a href="../packages/ste-promise-simple-events/src/PromiseSimpleEventDispatcher.ts">PromiseSimpleEventDispatcher</a> and <a href="../packages/ste-promise-signals/src/PromiseSignalDispatcher.ts">PromiseSignalDispatcher</a>.
+- A new base class that will give classes generic events: <a href="../packages/ste-core/src/handling/HandlingBase.ts">HandlingBase</a>. This base class is now used by all the `...HandlingBase`-classes.
+
+We now have the following packages:
+
+|Package|Description|
+|-------|-----------|
+|<a href="https://www.npmjs.com/package/ste-core">`ste-core`</a>|Package that contains all the building blocks for the creation of events. The dispatcher implementation is its main hero.|
+|<a href="https://www.npmjs.com/package/ste-events">`ste-events`</a> or <a href="https://www.npmjs.com/package/ste-promise-events">`ste-promise-events`</a>|Events that are modeled after .Net with a `sender` and `argument`. If you use typescript, you can leverage the support for generics and get strongly typed code.|
+|<a href="https://www.npmjs.com/package/ste-simple-events">`ste-simple-events`</a> or <a href="https://www.npmjs.com/package/ste-promise-simple-events">`ste-promise-simple-events`</a>|A simpler version of the `ste-event`-event. No sender, just an argument.|
+|<a href="https://www.npmjs.com/package/ste-signals">`ste-signals`</a> or <a href="https://www.npmjs.com/package/ste-promise-signals">`ste-promise-signals`</a>|A signal is even simpler, it is just a callback for when you need to be alerted without any scope.|
+|<a href="https://www.npmjs.com/package/strongly-typed-events">`strongly-typed-events`</a>|This package includes everything.|
+|<a href="https://www.npmjs.com/package/ste-browser">`ste-browser`</a>|Helps to host events in the browser.|
+<br/>
+
+
+
+#### Version 1.7
+Added browser support for the individual flavors of events:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-events.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-events.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-simple-events.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-simple-events.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-signals.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-signals.min.js"></script>
+```
+
+#### Version 1.6
+<a href="https://github.com/DustinWoods">@DustinWoods</a> added support for <a href="/documentation/HowToAddDynamicNamedEeventsToAClass.md#non-uniform-event-lists">non uniform event lists</a>.
+
+#### Version 1.5
+Added support for subscription `.count` from the dispatcher.
+
+#### Version 1.4
+Added support for UMD for the ste-browser package.
+
 
 #### Version 1.3
 We transformed the single package to 5 packages:
