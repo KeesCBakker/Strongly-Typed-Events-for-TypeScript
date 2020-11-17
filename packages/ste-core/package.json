@@ -1,6 +1,6 @@
 {
   "name": "ste-core",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Core files for the Strongly Typed Events project.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -42,6 +42,5 @@
   "engines": {
     "node": ">=4.2.4"
   },
-  "gitHead": "fd05578200503492858113549ab429c123e7a9fe",
-  "dependencies": {}
+  "gitHead": "fd05578200503492858113549ab429c123e7a9fe"
 }
