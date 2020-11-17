@@ -1,6 +1,6 @@
 {
   "name": "ste-promise-simple-events",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Add the power of Simple Events to your projects. Every event has an argument with its data. Every handler can be a promise.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -44,7 +44,7 @@
     "node": ">=4.2.4"
   },
   "dependencies": {
-    "ste-core": "^2.0.4"
+    "ste-core": "^2.0.5"
   },
   "gitHead": "7ea8b18a2c8fb3333d3121d3ea6606cbe1b4620f"
 }
