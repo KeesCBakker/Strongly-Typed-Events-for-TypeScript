@@ -5,7 +5,7 @@
   "scripts": {
     "webpack": "webpack",
     "build": "del-cli ./dist && npm run webpack",
-    "test": "echo 'nada'"
+    "test": "exit 0"
   },
   "repository": {
     "type": "git",
