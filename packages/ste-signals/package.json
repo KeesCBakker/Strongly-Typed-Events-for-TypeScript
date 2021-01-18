@@ -1,6 +1,6 @@
 {
   "name": "ste-signals",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Add the power of Signals to your projects. They are the most bare bones implementation of an event.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -44,7 +44,7 @@
     "node": ">=4.2.4"
   },
   "dependencies": {
-    "ste-core": "^2.0.7"
+    "ste-core": "^2.0.8"
   },
   "gitHead": "4e4bbba60eaf33e67d85b2f4c882e74a2a63bf53"
 }
