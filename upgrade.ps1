@@ -67,6 +67,7 @@ npm test
 
 git add .
 git commit -m "Packages upgrade"
+git push
 
 echo ""
 echo "Ready!"
