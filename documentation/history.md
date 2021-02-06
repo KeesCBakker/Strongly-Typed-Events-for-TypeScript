@@ -1,5 +1,10 @@
 # History
 
+#### Version 2.1
+It is now possible to subscribe to `onSubscriptionChange` on all dispatchers; this allows you to monitor a change in subscriptions. Both `onSubscriptionChange` and `asEvent` are (now) lazy loading.
+
+Methods that will trigger a change: `subscribe`, `sub`, `unsubcribe`, `unsub`, `one` and sometimes `dispatch` (after a `one` trigger is dispatched and that trigger is removed).
+
 #### Version 2.0
 Better support for code splitting. All objects now recide in their own
 class, which makes splitting and tree shaking easier and should produce

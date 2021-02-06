@@ -6,6 +6,7 @@ import {
     IPropagationStatus,
     EventManagement,
     Subscription,
+    SubscriptionChangeEventHandler,
 } from "..";
 
 /**
@@ -21,27 +22,35 @@ export abstract class DispatcherBase<TEventHandler>
         | SubscriptionChangeEventDispatcher
         | undefined;
 
+    /**
+     * The subscriptions.
+     * 
+     * @protected
+     * 
+     * @memberOf DispatcherBase
+     */
     protected _subscriptions = new Array<ISubscription<TEventHandler>>();
 
     /**
      * Returns the number of subscriptions.
-     *
+     * 
      * @readonly
-     *
+     * @type {number}
      * @memberOf DispatcherBase
      */
-    get count() {
+    get count(): number {
         return this._subscriptions.length;
     }
 
+    
     /**
      * Triggered when subscriptions are changed (added or removed).
-     *
+     * 
      * @readonly
      * @type {ISubscribable<SubscriptionChangeEventHandler>}
-     * @memberOf DispatcherWrapper
+     * @memberOf DispatcherBase
      */
-    get onSubscriptionChange() {
+    get onSubscriptionChange():ISubscribable<SubscriptionChangeEventHandler> {
         if (this._onSubscriptionChange == null) {
             this._onSubscriptionChange = new SubscriptionChangeEventDispatcher();
         }
@@ -51,8 +60,11 @@ export abstract class DispatcherBase<TEventHandler>
 
     /**
      * Subscribe to the event dispatcher.
-     * @param fn The event handler that is called when the event is dispatched.
+     * 
+     * @param {TEventHandler} fn The event handler that is called when the event is dispatched.
      * @returns A function that unsubscribes the event handler from the event.
+     *
+     * @memberOf DispatcherBase
      */
     subscribe(fn: TEventHandler): () => void {
         if (fn) {
@@ -66,8 +78,11 @@ export abstract class DispatcherBase<TEventHandler>
 
     /**
      * Subscribe to the event dispatcher.
-     * @param fn The event handler that is called when the event is dispatched.
+     * 
+     * @param {TEventHandler} fn The event handler that is called when the event is dispatched.
      * @returns A function that unsubscribes the event handler from the event.
+     *
+     * @memberOf DispatcherBase
      */
     sub(fn: TEventHandler): () => void {
         return this.subscribe(fn);
@@ -75,8 +90,11 @@ export abstract class DispatcherBase<TEventHandler>
 
     /**
      * Subscribe once to the event with the specified name.
-     * @param fn The event handler that is called when the event is dispatched.
+     * 
+     * @param {TEventHandler} fn The event handler that is called when the event is dispatched.
      * @returns A function that unsubscribes the event handler from the event.
+     * 
+     * @memberOf DispatcherBase
      */
     one(fn: TEventHandler): () => void {
         if (fn) {
@@ -90,7 +108,10 @@ export abstract class DispatcherBase<TEventHandler>
 
     /**
      * Checks it the event has a subscription for the specified handler.
-     * @param fn The event handler.
+     *     
+     * @param {TEventHandler} fn The event handler.
+     * 
+     * @memberOf DispatcherBase
      */
     has(fn: TEventHandler): boolean {
         if (!fn) return false;
@@ -99,7 +120,10 @@ export abstract class DispatcherBase<TEventHandler>
 
     /**
      * Unsubscribes the handler from the dispatcher.
-     * @param fn The event handler.
+     * 
+     * @param {TEventHandler} fn The event handler.
+     * 
+     * @memberOf DispatcherBase
      */
     unsubscribe(fn: TEventHandler): void {
         if (!fn) return;
@@ -121,7 +145,10 @@ export abstract class DispatcherBase<TEventHandler>
 
     /**
      * Unsubscribes the handler from the dispatcher.
-     * @param fn The event handler.
+     * 
+     * @param {TEventHandler} fn The event handler.
+     * 
+     * @memberOf DispatcherBase
      */
     unsub(fn: TEventHandler): void {
         this.unsubscribe(fn);
@@ -167,6 +194,16 @@ export abstract class DispatcherBase<TEventHandler>
         return { propagationStopped: false };
     }
 
+    /**
+     * Creates a subscription.
+     * 
+     * @protected
+     * @param {TEventHandler} handler The handler.
+     * @param {boolean} isOnce True if the handler should run only one.
+     * @returns {ISubscription<TEventHandler>} The subscription.
+     * 
+     * @memberOf DispatcherBase
+     */
     protected createSubscription(
         handler: TEventHandler,
         isOnce: boolean
@@ -176,6 +213,11 @@ export abstract class DispatcherBase<TEventHandler>
 
     /**
      * Cleans up subs that ran and should run only once.
+     * 
+     * @protected
+     * @param {ISubscription<TEventHandler>} sub The subscription.
+     * 
+     * @memberOf DispatcherBase
      */
     protected cleanup(sub: ISubscription<TEventHandler>) {
         let changes = false;
@@ -195,6 +237,10 @@ export abstract class DispatcherBase<TEventHandler>
     /**
      * Creates an event from the dispatcher. Will return the dispatcher
      * in a wrapper. This will prevent exposure of any dispatcher methods.
+     * 
+     * @returns {ISubscribable<TEventHandler>} 
+     * 
+     * @memberOf DispatcherBase
      */
     asEvent(): ISubscribable<TEventHandler> {
         if (this._wrap == null) {
@@ -205,7 +251,9 @@ export abstract class DispatcherBase<TEventHandler>
     }
 
     /**
-     * Clears all the subscriptions.
+     * Clears the subscriptions.
+     * 
+     * @memberOf DispatcherBase
      */
     clear(): void {
         if (this._subscriptions.length != 0) {
@@ -214,6 +262,13 @@ export abstract class DispatcherBase<TEventHandler>
         }
     }
 
+    /**
+     * Triggers the subscription change event.
+     * 
+     * @private
+     * 
+     * @memberOf DispatcherBase
+     */
     private triggerSubscriptionChange(): void {
         if (this._onSubscriptionChange != null) {
             this._onSubscriptionChange.dispatch(this.count);
