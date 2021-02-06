@@ -1,5 +1,5 @@
 import { EventListBase } from "ste-core";
-import { SignalDispatcher } from "./SignalDispatcher";
+import { SignalDispatcher } from ".";
 
 /**
  * Storage class for multiple signal events that are accessible by name.

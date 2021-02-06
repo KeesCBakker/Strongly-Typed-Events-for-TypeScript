@@ -1,5 +1,5 @@
 import { ISubscribable } from "ste-core";
-import { ISignalHandler } from "./ISignalHandler";
+import { ISignalHandler } from ".";
 
 /**
  * Models a signal. This type of events has no arguments.
@@ -9,12 +9,4 @@ import { ISignalHandler } from "./ISignalHandler";
  * @extends {ISubscribable<ISignalHandler>}
  */
 export interface ISignal extends ISubscribable<ISignalHandler> {
-
-    /**
-     * Invoked when the subscriptions changes.
-     *
-     * @type {ISignal}
-     * @memberof ISignal
-     */
-    readonly onSubscriptionChange: ISignal;
 }

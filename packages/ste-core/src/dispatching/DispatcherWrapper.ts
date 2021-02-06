@@ -1,4 +1,4 @@
-import { ISubscribable } from "..";
+import { ISubscribable, SubscriptionChangeEventHandler } from "..";
 
 /**
  * Hides the implementation of the event dispatcher. Will expose methods that
@@ -11,6 +11,7 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
     private _has: (fn: THandler) => boolean;
     private _clear: () => void;
     private _count: () => number;
+    private _onSubscriptionChange: () => ISubscribable<SubscriptionChangeEventHandler>;
 
     /**
      * Creates a new EventDispatcherWrapper instance.
@@ -23,6 +24,18 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
         this._has = (fn: THandler) => dispatcher.has(fn);
         this._clear = () => dispatcher.clear();
         this._count = () => dispatcher.count;
+        this._onSubscriptionChange = () => dispatcher.onSubscriptionChange;
+    }
+
+    /**
+     * Triggered when subscriptions are changed (added or removed).
+     *
+     * @readonly
+     * @type {ISubscribable<SubscriptionChangeEventHandler>}
+     * @memberOf DispatcherWrapper
+     */
+    get onSubscriptionChange(): ISubscribable<SubscriptionChangeEventHandler> {
+        return this._onSubscriptionChange();
     }
 
     /**

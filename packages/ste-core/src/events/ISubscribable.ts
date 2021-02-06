@@ -1,3 +1,5 @@
+import { SubscriptionChangeEventHandler } from "../dispatching/SubscriptionChangeEventHandler";
+
 /**
  * Indicates the object implements generic subscriptions.
  */
@@ -13,8 +15,11 @@ export interface ISubscribable<THandlerType> {
 
   /**
    * Subscribe to the event.
-   * @param fn The event handler that is called when the event is dispatched.
-   * @returns A function that unsubscribes the event handler from the event.
+   * 
+   * @param {THandlerType} fn The event handler that is called when the event is dispatched.
+   * @returns {() => void} function that unsubscribes the event handler from the event.
+   * 
+   * @memberOf ISubscribable
    */
   subscribe(fn: THandlerType): () => void;
 
@@ -52,6 +57,16 @@ export interface ISubscribable<THandlerType> {
 
   /**
    * Clears all the subscriptions.
+   * 
+   * @memberOf ISubscribable
    */
   clear(): void;
+
+  /**
+   * Triggered when subscriptions are changed (added or removed).
+   * 
+   * @type {ISubscribable<SubscriptionChangeEventHandler>}
+   * @memberOf ISubscribable
+   */
+  readonly onSubscriptionChange: ISubscribable<SubscriptionChangeEventHandler>;
 }

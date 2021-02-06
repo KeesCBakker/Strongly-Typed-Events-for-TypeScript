@@ -11,11 +11,14 @@ describe("Features", () => {
     class CustomDispatcher extends DispatcherBase<signal> {
       
       public onSubscriptionChangeTriggered = 0;
-    
-      protected onSubscriptionChange(){
-        this.onSubscriptionChangeTriggered++;
-      }
 
+      constructor(){
+        super();
+        this.onSubscriptionChange.sub(()=>{
+          this.onSubscriptionChangeTriggered++;
+        });
+      }
+   
       public dispatch(){
         return this._dispatch(false, this, arguments);
       }
@@ -80,6 +83,18 @@ describe("Features", () => {
       expect(d.onSubscriptionChangeTriggered).eql(2);
     });
 
+
+    it("Counters should match", ()=>{
+      var s = () => {};
+      var count = 0;
+      var d = new CustomDispatcher();
+      d.onSubscriptionChange.sub(cnt => count = cnt);
+      d.sub(s);
+      d.sub(s);
+
+      expect(count).eql(d.count);
+
+    });
 
   });
 

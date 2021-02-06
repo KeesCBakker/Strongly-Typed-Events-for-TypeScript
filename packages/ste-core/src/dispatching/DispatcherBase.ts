@@ -1,10 +1,11 @@
-import { IPropagationStatus } from "./IPropagationStatus";
-import { ISubscription } from "../events/ISubscription";
 import {
-    DispatcherWrapper,
     ISubscribable,
-    Subscription,
+    DispatcherWrapper,
+    SubscriptionChangeEventDispatcher,
+    ISubscription,
+    IPropagationStatus,
     EventManagement,
+    Subscription,
 } from "..";
 
 /**
@@ -15,7 +16,11 @@ import {
  */
 export abstract class DispatcherBase<TEventHandler>
     implements ISubscribable<TEventHandler> {
-    private _wrap = new DispatcherWrapper(this);
+    private _wrap: DispatcherWrapper<TEventHandler> | undefined;
+    private _onSubscriptionChange:
+        | SubscriptionChangeEventDispatcher
+        | undefined;
+
     protected _subscriptions = new Array<ISubscription<TEventHandler>>();
 
     /**
@@ -25,8 +30,23 @@ export abstract class DispatcherBase<TEventHandler>
      *
      * @memberOf DispatcherBase
      */
-    public get count() {
+    get count() {
         return this._subscriptions.length;
+    }
+
+    /**
+     * Triggered when subscriptions are changed (added or removed).
+     *
+     * @readonly
+     * @type {ISubscribable<SubscriptionChangeEventHandler>}
+     * @memberOf DispatcherWrapper
+     */
+    get onSubscriptionChange() {
+        if (this._onSubscriptionChange == null) {
+            this._onSubscriptionChange = new SubscriptionChangeEventDispatcher();
+        }
+
+        return this._onSubscriptionChange.asEvent();
     }
 
     /**
@@ -34,7 +54,7 @@ export abstract class DispatcherBase<TEventHandler>
      * @param fn The event handler that is called when the event is dispatched.
      * @returns A function that unsubscribes the event handler from the event.
      */
-    public subscribe(fn: TEventHandler): () => void {
+    subscribe(fn: TEventHandler): () => void {
         if (fn) {
             this._subscriptions.push(this.createSubscription(fn, false));
             this.triggerSubscriptionChange();
@@ -49,7 +69,7 @@ export abstract class DispatcherBase<TEventHandler>
      * @param fn The event handler that is called when the event is dispatched.
      * @returns A function that unsubscribes the event handler from the event.
      */
-    public sub(fn: TEventHandler): () => void {
+    sub(fn: TEventHandler): () => void {
         return this.subscribe(fn);
     }
 
@@ -58,7 +78,7 @@ export abstract class DispatcherBase<TEventHandler>
      * @param fn The event handler that is called when the event is dispatched.
      * @returns A function that unsubscribes the event handler from the event.
      */
-    public one(fn: TEventHandler): () => void {
+    one(fn: TEventHandler): () => void {
         if (fn) {
             this._subscriptions.push(this.createSubscription(fn, true));
             this.triggerSubscriptionChange();
@@ -72,7 +92,7 @@ export abstract class DispatcherBase<TEventHandler>
      * Checks it the event has a subscription for the specified handler.
      * @param fn The event handler.
      */
-    public has(fn: TEventHandler): boolean {
+    has(fn: TEventHandler): boolean {
         if (!fn) return false;
         return this._subscriptions.some((sub) => sub.handler == fn);
     }
@@ -81,7 +101,7 @@ export abstract class DispatcherBase<TEventHandler>
      * Unsubscribes the handler from the dispatcher.
      * @param fn The event handler.
      */
-    public unsubscribe(fn: TEventHandler): void {
+    unsubscribe(fn: TEventHandler): void {
         if (!fn) return;
 
         let changes = false;
@@ -103,7 +123,7 @@ export abstract class DispatcherBase<TEventHandler>
      * Unsubscribes the handler from the dispatcher.
      * @param fn The event handler.
      */
-    public unsub(fn: TEventHandler): void {
+    unsub(fn: TEventHandler): void {
         this.unsubscribe(fn);
     }
 
@@ -176,19 +196,27 @@ export abstract class DispatcherBase<TEventHandler>
      * Creates an event from the dispatcher. Will return the dispatcher
      * in a wrapper. This will prevent exposure of any dispatcher methods.
      */
-    public asEvent(): ISubscribable<TEventHandler> {
+    asEvent(): ISubscribable<TEventHandler> {
+        if (this._wrap == null) {
+            this._wrap = new DispatcherWrapper<TEventHandler>(this);
+        }
+
         return this._wrap;
     }
 
     /**
      * Clears all the subscriptions.
      */
-    public clear(): void {
+    clear(): void {
         if (this._subscriptions.length != 0) {
             this._subscriptions.splice(0, this._subscriptions.length);
             this.triggerSubscriptionChange();
         }
     }
 
-    protected triggerSubscriptionChange(): void {}
+    private triggerSubscriptionChange(): void {
+        if (this._onSubscriptionChange != null) {
+            this._onSubscriptionChange.dispatch(this.count);
+        }
+    }
 }

@@ -1,23 +1,18 @@
-import { SignalDispatcher } from './SignalDispatcher';
-import { HandlingBase } from 'ste-core';
-
-import { ISignalHandling } from "./ISignalHandling";
-import { ISignalHandler } from "./ISignalHandler";
-import { SignalList } from "./SignalList";
+import { HandlingBase } from "ste-core";
+import {
+    ISignalHandler,
+    ISignalHandling,
+    SignalDispatcher,
+    SignalList,
+} from ".";
 
 /**
  * Extends objects with signal event handling capabilities.
  */
-export abstract class SignalHandlingBase extends HandlingBase<
-    ISignalHandler,
-    SignalDispatcher,
-    SignalList>
+export abstract class SignalHandlingBase
+    extends HandlingBase<ISignalHandler, SignalDispatcher, SignalList>
     implements ISignalHandling {
-
-        constructor(){
-            super(new SignalList())
-        }
+    constructor() {
+        super(new SignalList());
+    }
 }
-
-
-
