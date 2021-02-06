@@ -2,6 +2,10 @@ import { SubscriptionChangeEventHandler } from "../dispatching/SubscriptionChang
 
 /**
  * Indicates the object implements generic subscriptions.
+ * 
+ * @export
+ * @interface ISubscribable
+ * @template THandlerType The type of events to handle.
  */
 export interface ISubscribable<THandlerType> {
 
@@ -25,33 +29,43 @@ export interface ISubscribable<THandlerType> {
 
   /**
    * Subscribe to the event.
-   * @param fn The event handler that is called when the event is dispatched.
+   * @param {THandlerType} fn The event handler that is called when the event is dispatched.
    * @returns A function that unsubscribes the event handler from the event.
+   * 
+   * @memberOf ISubscribable
    */
   sub(fn: THandlerType): () => void;
 
   /**
    * Unsubscribe from the event.
-   * @param fn The event handler that will be unsubsribed from the event.
+   * @param {THandlerType} fn The event handler that will be unsubsribed from the event.
+   * 
+   * @memberOf ISubscribable
    */
   unsubscribe(fn: THandlerType): void;
 
   /**
    * Unsubscribe from the event.
-   * @param fn The event handler that will be unsubsribed from the event.
+   * @param {THandlerType} fn The event handler that will be unsubsribed from the event.
+   * 
+   * @memberOf ISubscribable
    */
   unsub(fn: THandlerType): void;
 
   /**
    * Subscribes to the event only once.
-   * @param fn The event handler that is called when the event is dispatched.
+   * @param {THandlerType} fn The event handler that is called when the event is dispatched.
    * @returns A function that unsubscribes the event handler from the event.
+   * 
+   * @memberOf ISubscribable
    */
   one(fn: THandlerType): () => void;
 
   /**
    * Checks it the event has a subscription for the specified handler.
-   * @param fn The event handler.
+   * @param {THandlerType} fn The event handler.
+   * 
+   * @memberOf ISubscribable
    */
   has(fn: THandlerType): boolean;
 
