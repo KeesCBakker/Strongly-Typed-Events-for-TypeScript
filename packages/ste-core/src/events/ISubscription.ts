@@ -3,7 +3,7 @@
  * 
  * @export
  * @interface ISubscription
- * @template TEventHandler 
+ * @template TEventHandler The type of event handler.
  */
 export interface ISubscription<TEventHandler> {
     

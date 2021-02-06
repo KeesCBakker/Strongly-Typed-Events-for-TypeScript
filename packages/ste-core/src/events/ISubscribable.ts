@@ -5,9 +5,9 @@ import { SubscriptionChangeEventHandler } from "../dispatching/SubscriptionChang
  * 
  * @export
  * @interface ISubscribable
- * @template THandlerType The type of events to handle.
+ * @template TEventHandler The type of events to handle.
  */
-export interface ISubscribable<THandlerType> {
+export interface ISubscribable<TEventHandler> {
 
   /**
    * Returns the number of subscriptions.
@@ -20,54 +20,54 @@ export interface ISubscribable<THandlerType> {
   /**
    * Subscribe to the event.
    * 
-   * @param {THandlerType} fn The event handler that is called when the event is dispatched.
+   * @param {TEventHandler} fn The event handler that is called when the event is dispatched.
    * @returns {() => void} function that unsubscribes the event handler from the event.
    * 
    * @memberOf ISubscribable
    */
-  subscribe(fn: THandlerType): () => void;
+  subscribe(fn: TEventHandler): () => void;
 
   /**
    * Subscribe to the event.
-   * @param {THandlerType} fn The event handler that is called when the event is dispatched.
+   * @param {TEventHandler} fn The event handler that is called when the event is dispatched.
    * @returns A function that unsubscribes the event handler from the event.
    * 
    * @memberOf ISubscribable
    */
-  sub(fn: THandlerType): () => void;
+  sub(fn: TEventHandler): () => void;
 
   /**
    * Unsubscribe from the event.
-   * @param {THandlerType} fn The event handler that will be unsubsribed from the event.
+   * @param {TEventHandler} fn The event handler that will be unsubsribed from the event.
    * 
    * @memberOf ISubscribable
    */
-  unsubscribe(fn: THandlerType): void;
+  unsubscribe(fn: TEventHandler): void;
 
   /**
    * Unsubscribe from the event.
-   * @param {THandlerType} fn The event handler that will be unsubsribed from the event.
+   * @param {TEventHandler} fn The event handler that will be unsubsribed from the event.
    * 
    * @memberOf ISubscribable
    */
-  unsub(fn: THandlerType): void;
+  unsub(fn: TEventHandler): void;
 
   /**
    * Subscribes to the event only once.
-   * @param {THandlerType} fn The event handler that is called when the event is dispatched.
+   * @param {TEventHandler} fn The event handler that is called when the event is dispatched.
    * @returns A function that unsubscribes the event handler from the event.
    * 
    * @memberOf ISubscribable
    */
-  one(fn: THandlerType): () => void;
+  one(fn: TEventHandler): () => void;
 
   /**
    * Checks it the event has a subscription for the specified handler.
-   * @param {THandlerType} fn The event handler.
+   * @param {TEventHandler} fn The event handler.
    * 
    * @memberOf ISubscribable
    */
-  has(fn: THandlerType): boolean;
+  has(fn: TEventHandler): boolean;
 
   /**
    * Clears all the subscriptions.

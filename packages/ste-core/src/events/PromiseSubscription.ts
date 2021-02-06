@@ -6,7 +6,7 @@ import { ISubscription } from "./ISubscription";
  * @export
  * @class PromiseSubscription
  * @implements {ISubscription<TEventHandler>}
- * @template TEventHandler The event specification.
+ * @template TEventHandler The type of event handler.
  */
 export class PromiseSubscription<TEventHandler> implements ISubscription<TEventHandler> {
 

@@ -19,7 +19,7 @@ import {
  * @abstract
  * @class DispatcherBase
  * @implements {ISubscribable<TEventHandler>}
- * @template TEventHandler 
+ * @template TEventHandler The type of event handler.
  */
 export abstract class DispatcherBase<TEventHandler>
     implements ISubscribable<TEventHandler> {

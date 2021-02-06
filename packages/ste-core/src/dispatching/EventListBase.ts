@@ -3,8 +3,8 @@
  * 
  * @export
  * @abstract
- * @class EventListBase
- * @template TEventDispatcher 
+ * @class EventListBaset
+ * @template TEventDispatcher The type of event dispatcher.
  */
 export abstract class EventListBase<TEventDispatcher> {
     
