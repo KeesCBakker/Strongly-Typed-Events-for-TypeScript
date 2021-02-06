@@ -14,6 +14,12 @@ import {
  * and unsubscribe methods based on generic handlers. The TEventType specifies
  * the type of event that should be exposed. Use the asEvent to expose the
  * dispatcher as event.
+ * 
+ * @export
+ * @abstract
+ * @class DispatcherBase
+ * @implements {ISubscribable<TEventHandler>}
+ * @template TEventHandler 
  */
 export abstract class DispatcherBase<TEventHandler>
     implements ISubscribable<TEventHandler> {
@@ -159,7 +165,7 @@ export abstract class DispatcherBase<TEventHandler>
      *
      * @protected
      * @param {boolean} executeAsync `True` if the even should be executed async.
-     * @param {*} scrop The scope of the event. The scope becomes the `this` for handler.
+     * @param {*} scope The scope of the event. The scope becomes the `this` for handler.
      * @param {IArguments} args The arguments for the event.
      * @returns {(IPropagationStatus | null)} The propagation status, or if an `executeAsync` is used `null`.
      *

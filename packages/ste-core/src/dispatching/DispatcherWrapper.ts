@@ -3,6 +3,11 @@ import { ISubscribable, SubscriptionChangeEventHandler } from "..";
 /**
  * Hides the implementation of the event dispatcher. Will expose methods that
  * are relevent to the event.
+ * 
+ * @export
+ * @class DispatcherWrapper
+ * @implements {ISubscribable<THandler>}
+ * @template THandler 
  */
 export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
     private _subscribe: (fn: THandler) => () => void;
@@ -14,8 +19,10 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
     private _onSubscriptionChange: () => ISubscribable<SubscriptionChangeEventHandler>;
 
     /**
-     * Creates a new EventDispatcherWrapper instance.
-     * @param dispatcher The dispatcher.
+     * Creates an instance of DispatcherWrapper.
+     * @param {ISubscribable<THandler>} dispatcher 
+     * 
+     * @memberOf DispatcherWrapper
      */
     constructor(dispatcher: ISubscribable<THandler>) {
         this._subscribe = (fn: THandler) => dispatcher.subscribe(fn);

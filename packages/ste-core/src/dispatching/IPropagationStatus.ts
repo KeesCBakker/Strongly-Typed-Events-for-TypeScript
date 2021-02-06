@@ -1,4 +1,3 @@
-
 /**
  * Indicates the object support a propagation status.
  * 
@@ -8,7 +7,7 @@
 export interface IPropagationStatus
 {
     /**
-     * Indicates if propagation was stopped.
+     * Indicates if the propagation was stopped.
      * 
      * @type {boolean}
      * @memberOf IPropagationStatus

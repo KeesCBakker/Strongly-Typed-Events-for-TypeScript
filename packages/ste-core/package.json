@@ -9,7 +9,8 @@
     "mocha": "mocha -r ts-node/register",
     "build": "del-cli dist & tsc",
     "prepublishOnly": "npm run build & npm test",
-    "postpublish": "git push origin --tags"
+    "postpublish": "git push origin --tags",
+    "doc": "jsdoc -d docs --configure jsconf.json main.js"
   },
   "repository": {
     "type": "git",
