@@ -1,14 +1,15 @@
 /**
  * Manages the event.
- *
+ * 
  * @export
  * @interface IEventManagement
- */
+     */
 export interface IEventManagement {
+   
     /**
-     * Will unsubscribe the handler.
-     *
-     * @memberof IEventManagement
+     * Unsubscribe the current handler.
+     * 
+     * @memberOf IEventManagement
      */
     unsub(): void;
 
