@@ -51,8 +51,11 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
 
     /**
      * Subscribe to the event dispatcher.
-     * @param fn The event handler that is called when the event is dispatched.
-     * @returns A function that unsubscribes the event handler from the event.
+     * 
+     * @param {THandler} fn The event handler that is called when the event is dispatched.
+     * @returns {() => void} A function that unsubscribes the event handler from the event.
+     * 
+     * @memberOf DispatcherWrapper
      */
     public subscribe(fn: THandler): () => void {
         return this._subscribe(fn);
@@ -60,8 +63,11 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
 
     /**
      * Subscribe to the event dispatcher.
-     * @param fn The event handler that is called when the event is dispatched.
-     * @returns A function that unsubscribes the event handler from the event.
+     * 
+     * @param {THandler} fn The event handler that is called when the event is dispatched.
+     * @returns {() => void} A function that unsubscribes the event handler from the event.
+     * 
+     * @memberOf DispatcherWrapper
      */
     public sub(fn: THandler): () => void {
         return this.subscribe(fn);
@@ -69,7 +75,10 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
 
     /**
      * Unsubscribe from the event dispatcher.
-     * @param fn The event handler that is called when the event is dispatched.
+     * 
+     * @param {THandler} fn The event handler that is called when the event is dispatched.
+     * 
+     * @memberOf DispatcherWrapper
      */
     public unsubscribe(fn: THandler): void {
         this._unsubscribe(fn);
@@ -77,7 +86,10 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
 
     /**
      * Unsubscribe from the event dispatcher.
-     * @param fn The event handler that is called when the event is dispatched.
+     * 
+     * @param {THandler} fn The event handler that is called when the event is dispatched.
+     * 
+     * @memberOf DispatcherWrapper
      */
     public unsub(fn: THandler): void {
         this.unsubscribe(fn);
@@ -85,7 +97,10 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
 
     /**
      * Subscribe once to the event with the specified name.
-     * @param fn The event handler that is called when the event is dispatched.
+     * 
+     * @returns {() => void} A function that unsubscribes the event handler from the event.
+     * 
+     * @memberOf DispatcherWrapper
      */
     public one(fn: THandler): () => void {
         return this._one(fn);
@@ -93,7 +108,10 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
 
     /**
      * Checks it the event has a subscription for the specified handler.
-     * @param fn The event handler.
+     * 
+     * @param {THandler} fn The event handler that is called when the event is dispatched.
+     * 
+     * @memberOf DispatcherWrapper
      */
     public has(fn: THandler): boolean {
         return this._has(fn);
@@ -101,6 +119,8 @@ export class DispatcherWrapper<THandler> implements ISubscribable<THandler> {
 
     /**
      * Clears all the subscriptions.
+     * 
+     * @memberOf DispatcherWrapper
      */
     public clear(): void {
         this._clear();
