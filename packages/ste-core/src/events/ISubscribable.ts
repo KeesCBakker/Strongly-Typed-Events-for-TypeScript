@@ -4,7 +4,7 @@
 export interface ISubscribable<THandlerType> {
 
   /**
-   * Returns the number of subsriptions.
+   * Returns the number of subscriptions.
    *
    * @type {number}
    * @memberOf ISubscribable

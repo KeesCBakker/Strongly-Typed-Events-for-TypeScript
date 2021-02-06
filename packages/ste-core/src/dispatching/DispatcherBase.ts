@@ -37,6 +37,7 @@ export abstract class DispatcherBase<TEventHandler>
     public subscribe(fn: TEventHandler): () => void {
         if (fn) {
             this._subscriptions.push(this.createSubscription(fn, false));
+            this.triggerSubscriptionChange();
         }
         return () => {
             this.unsubscribe(fn);
@@ -60,6 +61,7 @@ export abstract class DispatcherBase<TEventHandler>
     public one(fn: TEventHandler): () => void {
         if (fn) {
             this._subscriptions.push(this.createSubscription(fn, true));
+            this.triggerSubscriptionChange();
         }
         return () => {
             this.unsubscribe(fn);
@@ -82,11 +84,18 @@ export abstract class DispatcherBase<TEventHandler>
     public unsubscribe(fn: TEventHandler): void {
         if (!fn) return;
 
+        let changes = false;
+
         for (let i = 0; i < this._subscriptions.length; i++) {
             if (this._subscriptions[i].handler == fn) {
                 this._subscriptions.splice(i, 1);
+                changes = true;
                 break;
             }
+        }
+
+        if (changes) {
+            this.triggerSubscriptionChange();
         }
     }
 
@@ -149,11 +158,17 @@ export abstract class DispatcherBase<TEventHandler>
      * Cleans up subs that ran and should run only once.
      */
     protected cleanup(sub: ISubscription<TEventHandler>) {
+        let changes = false;
         if (sub.isOnce && sub.isExecuted) {
             let i = this._subscriptions.indexOf(sub);
             if (i > -1) {
                 this._subscriptions.splice(i, 1);
+                changes = true;
             }
+        }
+
+        if (changes) {
+            this.triggerSubscriptionChange();
         }
     }
 
@@ -169,6 +184,11 @@ export abstract class DispatcherBase<TEventHandler>
      * Clears all the subscriptions.
      */
     public clear(): void {
-        this._subscriptions.splice(0, this._subscriptions.length);
+        if (this._subscriptions.length != 0) {
+            this._subscriptions.splice(0, this._subscriptions.length);
+            this.triggerSubscriptionChange();
+        }
     }
+
+    protected triggerSubscriptionChange(): void {}
 }
