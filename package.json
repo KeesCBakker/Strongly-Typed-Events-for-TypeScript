@@ -5,7 +5,7 @@
     "strongly-typed-events": "*"
   },
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "lerna": "^4.0.0"
   },
   "scripts": {
     "build": "lerna bootstrap & lerna run build",
