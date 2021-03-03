@@ -4,9 +4,10 @@ node_js:
 install:
   - npm install --g lerna
   - npm install
-  - npm run build
+  - lerna bootstrap --hoist
   
 script:
+  - npm run build
   - npm run test
 
 # Send coverage data to Coveralls
