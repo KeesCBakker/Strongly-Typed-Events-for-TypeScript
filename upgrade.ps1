@@ -1,7 +1,10 @@
 echo ""
 echo "Upgrading NCU:"
 npm install -g npm-check-updates
-npm audit fix
+
+echo ""
+echo "Bootstrapping"
+lerna bootstrap
 
 cd packages
 
