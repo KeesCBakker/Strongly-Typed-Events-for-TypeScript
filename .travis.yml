@@ -4,11 +4,10 @@ node_js:
 install:
   - npm install --g lerna
   - npm install
-  - lerna bootstrap --hoist
-  - lerna exec "npm install"
+  - npm run build
   
 script:
-  - lerna exec "npm test"
+  - npm run test
 
 # Send coverage data to Coveralls
 # after_script: "cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
