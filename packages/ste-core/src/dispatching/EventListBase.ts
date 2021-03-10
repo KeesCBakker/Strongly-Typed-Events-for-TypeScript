@@ -1,5 +1,10 @@
 /**
  * Base class for event lists classes. Implements the get and remove.
+ * 
+ * @export
+ * @abstract
+ * @class EventListBaset
+ * @template TEventDispatcher The type of event dispatcher.
  */
 export abstract class EventListBase<TEventDispatcher> {
     
@@ -7,7 +12,11 @@ export abstract class EventListBase<TEventDispatcher> {
 
     /**
      * Gets the dispatcher associated with the name.
-     * @param name The name of the event.
+     * 
+     * @param {string} name The name of the event.
+     * @returns {TEventDispatcher} The disptacher.
+     * 
+     * @memberOf EventListBase
      */
     get(name: string): TEventDispatcher {
         let event = this._events[name];
@@ -23,7 +32,10 @@ export abstract class EventListBase<TEventDispatcher> {
 
     /**
      * Removes the dispatcher associated with the name.
-     * @param name The name of the event.
+     * 
+     * @param {string} name 
+     * 
+     * @memberOf EventListBase
      */
     remove(name: string): void {
         delete this._events[name];
@@ -31,6 +43,12 @@ export abstract class EventListBase<TEventDispatcher> {
 
     /**
      * Creates a new dispatcher instance.
+     * 
+     * @protected
+     * @abstract
+     * @returns {TEventDispatcher} 
+     * 
+     * @memberOf EventListBase
      */
     protected abstract createDispatcher(): TEventDispatcher;
 }

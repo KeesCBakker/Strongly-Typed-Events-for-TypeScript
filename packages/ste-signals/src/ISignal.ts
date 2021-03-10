@@ -1,10 +1,12 @@
 import { ISubscribable } from "ste-core";
-import { ISignalHandler } from "./ISignalHandler";
+import { ISignalHandler } from ".";
 
 /**
  * Models a signal. This type of events has no arguments.
- * @interface ISignalHandler
+ * 
+ * @export
+ * @interface ISignal
  * @extends {ISubscribable<ISignalHandler>}
  */
-export interface ISignal extends ISubscribable<ISignalHandler> {}
-
+export interface ISignal extends ISubscribable<ISignalHandler> {
+}

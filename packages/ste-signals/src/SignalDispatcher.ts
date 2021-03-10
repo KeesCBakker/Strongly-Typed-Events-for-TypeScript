@@ -1,6 +1,5 @@
 import { DispatcherBase, IPropagationStatus, DispatchError } from "ste-core";
-import { ISignal } from "./ISignal";
-import { ISignalHandler } from "./ISignalHandler";
+import { ISignal, ISignalHandler } from ".";
 
 /**
  * The dispatcher handles the storage of subsciptions and facilitates
@@ -16,19 +15,10 @@ export class SignalDispatcher
     implements ISignal {
 
     /**
-     * Creates an instance of SignalDispatcher.
-     * 
-     * @memberOf SignalDispatcher
-     */
-    constructor() {
-        super();
-    }
-
-    /**
      * Dispatches the signal.
-     * 
+     *
      * @returns {IPropagationStatus} The status of the signal.
-     * 
+     *
      * @memberOf SignalDispatcher
      */
     public dispatch(): IPropagationStatus {
@@ -39,10 +29,9 @@ export class SignalDispatcher
         return result;
     }
 
-
     /**
      * Dispatches the signal without waiting for the result.
-     * 
+     *
      * @memberOf SignalDispatcher
      */
     public dispatchAsync(): void {
@@ -52,9 +41,9 @@ export class SignalDispatcher
     /**
      * Creates an event from the dispatcher. Will return the dispatcher
      * in a wrapper. This will prevent exposure of any dispatcher methods.
-     * 
+     *
      * @returns {ISignal} The signal.
-     * 
+     *
      * @memberOf SignalDispatcher
      */
     public asEvent(): ISignal {

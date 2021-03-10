@@ -21,6 +21,7 @@ import { ISubscription } from './events/ISubscription';
 import { PromiseDispatcherBase } from './dispatching/PromiseDispatcherBase';
 import { PromiseSubscription } from './events/PromiseSubscription';
 import { Subscription } from './events/Subscription';
+import { SubscriptionChangeEventDispatcher, SubscriptionChangeEventHandler } from './dispatching/SubscriptionChangeEventHandler';
 
 export {
     IEventManagement,
@@ -36,5 +37,7 @@ export {
     PromiseSubscription,
     ISubscription,
     PromiseDispatcherBase,
-    HandlingBase
+    HandlingBase,
+    SubscriptionChangeEventHandler,
+    SubscriptionChangeEventDispatcher,
 };

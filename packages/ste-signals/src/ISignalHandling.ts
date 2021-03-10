@@ -1,5 +1,5 @@
 import { IBaseEventHandling } from "ste-core";
-import { ISignalHandler } from "./ISignalHandler";
+import { ISignalHandler } from ".";
 
 /**
  * Indicates the object is capable of handling named signals.

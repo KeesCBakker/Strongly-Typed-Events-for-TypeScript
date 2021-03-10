@@ -10,8 +10,8 @@ import { IEventHandler } from "./IEventHandler";
  * @class EventDispatcher
  * @extends {DispatcherBase<IEventHandler<TSender, TArgs>>}
  * @implements {IEvent<TSender, TArgs>}
- * @template TSender
- * @template TArgs
+ * @template TSender The sender type.
+ * @template TArgs The event arguments type.
  */
 export class EventDispatcher<TSender, TArgs>
     extends DispatcherBase<IEventHandler<TSender, TArgs>>
@@ -28,11 +28,11 @@ export class EventDispatcher<TSender, TArgs>
 
     /**
      * Dispatches the event.
-     *
-     * @param {TSender} sender The sender object.
-     * @param {TArgs} args The arguments object.
-     * @returns {IPropagationStatus} The event status.
-     *
+     * 
+     * @param {TSender} sender The sender.
+     * @param {TArgs} args The arguments.
+     * @returns {IPropagationStatus} The propagation status to interact with the event
+     * 
      * @memberOf EventDispatcher
      */
     public dispatch(sender: TSender, args: TArgs): IPropagationStatus {
@@ -43,10 +43,14 @@ export class EventDispatcher<TSender, TArgs>
         return result;
     }
 
+    
     /**
-     * Dispatches the events thread.
-     * @param sender The sender.
-     * @param args The arguments object.
+     * Dispatches the event in an async way. Does not support event interaction.
+     * 
+     * @param {TSender} sender The sender.
+     * @param {TArgs} args The arguments.
+     * 
+     * @memberOf EventDispatcher
      */
     public dispatchAsync(sender: TSender, args: TArgs): void {
         this._dispatch(true, this, arguments);

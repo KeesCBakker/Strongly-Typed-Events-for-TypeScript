@@ -8,21 +8,30 @@ import { EventListBase, ISubscribable } from "..";
  * @export
  * @abstract
  * @class HandlingBase
- * @template TEventHandler 
- * @template TDispatcher 
- * @template TList 
+ * @template TEventHandler The type of event handler.
+ * @template TDispatcher The type of dispatcher.
+ * @template TList The type of event list.
  */
 export abstract class HandlingBase<
     TEventHandler,
     TDispatcher extends ISubscribable<TEventHandler>,
     TList extends EventListBase<TDispatcher>
 > {
+
+    /**
+     * Creates an instance of HandlingBase.
+     * @param {TList} events The event list. Used for event management.
+     * 
+     * @memberOf HandlingBase
+     */
     constructor(protected events: TList) {}
 
     /**
      * Subscribes once to the event with the specified name.
-     * @param name The name of the event.
-     * @param fn The event handler.
+     * @param {string} name The name of the event.
+     * @param {TEventHandler} fn The event handler.
+     * 
+     * @memberOf HandlingBase
      */
     one(name: string, fn: TEventHandler): void {
         this.events.get(name).one(fn);
@@ -30,8 +39,10 @@ export abstract class HandlingBase<
 
     /**
      * Checks it the event has a subscription for the specified handler.
-     * @param name The name of the event.
-     * @param fn The event handler.
+     * @param {string} name The name of the event.
+     * @param {TEventHandler} fn The event handler.
+     * 
+     * @memberOf HandlingBase
      */
     has(name: string, fn: TEventHandler): boolean {
         return this.events.get(name).has(fn);
@@ -39,8 +50,10 @@ export abstract class HandlingBase<
 
     /**
      * Subscribes to the event with the specified name.
-     * @param name The name of the event.
-     * @param fn The event handler.
+     * @param {string} name The name of the event.
+     * @param {TEventHandler} fn The event handler.
+     * 
+     * @memberOf HandlingBase
      */
     subscribe(name: string, fn: TEventHandler): void {
         this.events.get(name).subscribe(fn);
@@ -48,8 +61,10 @@ export abstract class HandlingBase<
 
     /**
      * Subscribes to the event with the specified name.
-     * @param name The name of the event.
-     * @param fn The event handler.
+     * @param {string} name The name of the event.
+     * @param {TEventHandler} fn The event handler.
+     * 
+     * @memberOf HandlingBase
      */
     sub(name: string, fn: TEventHandler): void {
         this.subscribe(name, fn);
@@ -57,8 +72,10 @@ export abstract class HandlingBase<
 
     /**
      * Unsubscribes from the event with the specified name.
-     * @param name The name of the event.
-     * @param fn The event handler.
+     * @param {string} name The name of the event.
+     * @param {TEventHandler} fn The event handler.
+     * 
+     * @memberOf HandlingBase
      */
     unsubscribe(name: string, fn: TEventHandler): void {
         this.events.get(name).unsubscribe(fn);
@@ -66,8 +83,10 @@ export abstract class HandlingBase<
 
     /**
      * Unsubscribes from the event with the specified name.
-     * @param name The name of the event.
-     * @param fn The event handler.
+     * @param {string} name The name of the event.
+     * @param {TEventHandler} fn The event handler.
+     * 
+     * @memberOf HandlingBase
      */
     unsub(name: string, fn: TEventHandler): void {
         this.unsubscribe(name, fn);
