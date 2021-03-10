@@ -2,10 +2,6 @@ echo ""
 echo "Upgrading NCU:"
 npm install -g npm-check-updates
 
-echo ""
-echo "Bootstrapping"
-lerna bootstrap
-
 cd packages
 
 echo ""
@@ -45,12 +41,32 @@ ncu -u
 cd ..
 
 echo ""
+echo "Upgrading ste-promise-events:"
+cd ste-promise-events
+ncu -u
+cd ..
+
+echo ""
+echo "Upgrading ste-promise-signals:"
+cd ste-promise-signals
+ncu -u
+cd ..
+
+echo ""
+echo "Upgrading ste-promise-simple-events:"
+cd ste-promise-simple-events
+ncu -u
+cd ..
+
+echo ""
 echo "Upgrading root:"
 cd ..
 ncu -u
 
 echo ""
 echo "Building & testing:"
+
+npm install
 npm run build
 npm test
 
