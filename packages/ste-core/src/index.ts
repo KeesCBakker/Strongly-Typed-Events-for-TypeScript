@@ -20,7 +20,7 @@ import { ISubscribable } from './events/ISubscribable';
 import { ISubscription } from './events/ISubscription';
 import { PromiseDispatcherBase } from './dispatching/PromiseDispatcherBase';
 import { PromiseSubscription } from './events/PromiseSubscription';
-import { Subscription } from './events/Subscription';
+import { Subscription } from './events/subscription';
 import { SubscriptionChangeEventDispatcher, SubscriptionChangeEventHandler } from './dispatching/SubscriptionChangeEventHandler';
 
 export {
