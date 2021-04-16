@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
   "devDependencies": {
-    "@types/node": "^14.14.37",
+    "@types/node": "^14.14.41",
     "del-cli": "^3.0.1",
     "ste-core": "^2.1.6",
     "ste-events": "^2.1.6",
@@ -38,7 +38,7 @@
     "ste-signals": "^2.1.6",
     "ste-simple-events": "^2.1.6",
     "strongly-typed-events": "^2.1.6",
-    "webpack": "^5.30.0",
+    "webpack": "^5.33.2",
     "webpack-cli": "^4.6.0"
   },
   "engines": {
