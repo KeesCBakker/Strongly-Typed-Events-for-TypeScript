@@ -37,7 +37,7 @@
     "chai": "^4.3.4",
     "del-cli": "^3.0.1",
     "mocha": "^8.3.2",
-    "ts-node": "^9.1.1",
+    "ts-node": "^10.0.0",
     "typescript": "^4.2.4"
   },
   "engines": {
