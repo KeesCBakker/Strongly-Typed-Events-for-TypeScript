@@ -33,14 +33,14 @@
   },
   "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
   "devDependencies": {
-    "@types/chai": "^4.2.17",
+    "@types/chai": "^4.2.19",
     "@types/mocha": "^8.2.2",
-    "@types/node": "^15.0.1",
+    "@types/node": "^15.12.5",
     "chai": "^4.3.4",
-    "del-cli": "^3.0.1",
-    "mocha": "^8.3.2",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.4"
+    "del-cli": "^4.0.0",
+    "mocha": "^9.0.1",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.4"
   },
   "engines": {
     "node": ">=4.2.4"
