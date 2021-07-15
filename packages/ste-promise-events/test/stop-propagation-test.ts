@@ -5,7 +5,7 @@ import { expect } from "chai";
 import { PromiseEventDispatcher } from "../src";
 
 function delay(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms, []));
 }
 
 describe("Strongly Typed Events - Promise Event", async () => {
