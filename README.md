@@ -1,7 +1,7 @@
 # Strongly Typed Events
 Add the power of events to your projects. We even have 3 flavors for you.
 
-[![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
+[![Build Status](https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/actions/workflows/node.js.yml/badge.svg)](https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/actions/workflows/node.js.yml)
 [![npm version](https://badge.fury.io/js/strongly-typed-events.svg)](https://badge.fury.io/js/strongly-typed-events)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
