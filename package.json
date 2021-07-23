@@ -7,7 +7,7 @@
   "devDependencies": {
     "lerna": "^4.0.0",
     "@types/chai": "^4.2.21",
-    "@types/mocha": "^8.2.3",
+    "@types/mocha": "^9.0.0",
     "@types/node": "^16.3.3",
     "chai": "^4.3.4",
     "del-cli": "^4.0.1",
