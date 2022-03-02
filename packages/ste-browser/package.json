@@ -1,6 +1,6 @@
 {
   "name": "ste-browser",
-  "version": "2.1.14",
+  "version": "2.1.15",
   "description": "Add the power of events directly to your client projects. This version of Strongly Typed Events works in the browser.",
   "scripts": {
     "webpack": "webpack",
@@ -30,14 +30,14 @@
   "devDependencies": {
     "@types/node": "^17.0.21",
     "del-cli": "^4.0.1",
-    "ste-core": "^2.1.14",
-    "ste-events": "^2.1.14",
-    "ste-promise-events": "^2.1.14",
-    "ste-promise-signals": "^2.1.14",
-    "ste-promise-simple-events": "^2.1.14",
-    "ste-signals": "^2.1.14",
-    "ste-simple-events": "^2.1.14",
-    "strongly-typed-events": "^2.1.14",
+    "ste-core": "^2.1.15",
+    "ste-events": "^2.1.15",
+    "ste-promise-events": "^2.1.15",
+    "ste-promise-signals": "^2.1.15",
+    "ste-promise-simple-events": "^2.1.15",
+    "ste-signals": "^2.1.15",
+    "ste-simple-events": "^2.1.15",
+    "strongly-typed-events": "^2.1.15",
     "webpack": "^5.69.1",
     "webpack-cli": "^4.9.2"
   },
