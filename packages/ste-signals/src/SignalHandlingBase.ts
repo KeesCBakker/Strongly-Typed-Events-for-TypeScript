@@ -1,10 +1,8 @@
 import { HandlingBase } from "ste-core";
-import {
-    ISignalHandler,
-    ISignalHandling,
-    SignalDispatcher,
-    SignalList,
-} from ".";
+import type { ISignalHandler, ISignalHandling } from ".";
+import { SignalDispatcher } from "./SignalDispatcher";
+import { SignalList } from "./SignalList";
+
 
 /**
  * Extends objects with signal event handling capabilities.

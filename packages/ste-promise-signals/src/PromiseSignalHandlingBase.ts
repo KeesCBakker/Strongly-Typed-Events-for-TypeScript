@@ -1,5 +1,5 @@
 import { HandlingBase } from "ste-core";
-import { PromiseSignalDispatcher } from ".";
+import { PromiseSignalDispatcher } from "./PromiseSignalDispatcher";
 import { IPromiseSignalHandler } from "./IPromiseSignalHandler";
 import { IPromiseSignalHandling } from "./IPromiseSignalHandling";
 import { PromiseSignalList } from "./PromiseSignalList";

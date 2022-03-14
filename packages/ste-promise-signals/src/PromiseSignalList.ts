@@ -1,5 +1,5 @@
 import { EventListBase } from "ste-core";
-import { PromiseSignalDispatcher } from ".";
+import { PromiseSignalDispatcher } from "./PromiseSignalDispatcher";
 
 /**
  * Storage class for multiple signal events that are accessible by name.
