@@ -1,5 +1,8 @@
 # History
 
+### Version 3.0
+Solved dependency problems when using ViteJs (https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/issues/269).
+
 #### Version 2.1
 It is now possible to subscribe to `onSubscriptionChange` on all dispatchers; this allows you to monitor a change in subscriptions. Both `onSubscriptionChange` and `asEvent` are (now) lazy loading.
 
