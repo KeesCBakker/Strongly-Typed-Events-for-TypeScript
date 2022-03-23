@@ -1,13 +1,10 @@
-import {
-    ISubscribable,
-    DispatcherWrapper,
-    SubscriptionChangeEventDispatcher,
-    ISubscription,
-    IPropagationStatus,
-    EventManagement,
-    Subscription,
-    SubscriptionChangeEventHandler,
-} from "..";
+import type { ISubscribable } from "../events/ISubscribable";
+import type { ISubscription } from "../events/ISubscription";
+import type { SubscriptionChangeEventHandler } from "./SubscriptionChangeEventHandler";
+import { DispatcherWrapper } from "./DispatcherWrapper";
+import type { IPropagationStatus } from "./IPropagationStatus";
+import { Subscription } from "../events/Subscription";
+import { EventManagement } from "../management/EventManagement";
 
 /**
  * Base class for implementation of the dispatcher. It facilitates the subscribe
@@ -281,3 +278,27 @@ export abstract class DispatcherBase<TEventHandler>
         }
     }
 }
+
+
+/**
+ * Dispatcher for subscription changes.
+ *
+ * @export
+ * @class SubscriptionChangeEventDispatcher
+ * @extends {DispatcherBase<SubscriptionChangeEventHandler>}
+ */
+
+ export class SubscriptionChangeEventDispatcher extends DispatcherBase<SubscriptionChangeEventHandler>
+ {
+     /**
+      * Dispatches the event.
+      *
+      * @param {number} count The currrent number of subscriptions.
+      *
+      * @memberOf SubscriptionChangeEventDispatcher
+      */
+     public dispatch(count: number) {
+         this._dispatch(false, this, arguments);
+     }
+ }
+ 

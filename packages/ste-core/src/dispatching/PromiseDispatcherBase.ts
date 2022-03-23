@@ -1,11 +1,9 @@
-import {
-    DispatcherBase,
-    IPropagationStatus,
-    DispatchError,
-    EventManagement,
-    PromiseSubscription,
-    ISubscription,
-} from "..";
+import type { ISubscription } from "../events/ISubscription";
+import { PromiseSubscription } from "../events/PromiseSubscription";
+import { EventManagement } from "../management/EventManagement";
+import { DispatcherBase } from "./DispatcherBase";
+import { DispatchError } from "./DispatchError";
+import type { IPropagationStatus } from "./IPropagationStatus";
 
 /**
  * Dispatcher base for dispatchers that use promises. Each promise

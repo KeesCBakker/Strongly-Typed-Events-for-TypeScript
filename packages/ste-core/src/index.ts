@@ -7,7 +7,7 @@
  * Released under the MIT license
  */
 
-import { DispatcherBase } from './dispatching/DispatcherBase';
+import { DispatcherBase, SubscriptionChangeEventDispatcher } from './dispatching/DispatcherBase';
 import { DispatchError } from './dispatching/DispatchError';
 import { DispatcherWrapper } from './dispatching/DispatcherWrapper';
 import { EventListBase } from './dispatching/EventListBase';
@@ -21,7 +21,7 @@ import { ISubscription } from './events/ISubscription';
 import { PromiseDispatcherBase } from './dispatching/PromiseDispatcherBase';
 import { PromiseSubscription } from './events/PromiseSubscription';
 import { Subscription } from './events/Subscription';
-import { SubscriptionChangeEventDispatcher, SubscriptionChangeEventHandler } from './dispatching/SubscriptionChangeEventHandler';
+import { SubscriptionChangeEventHandler } from './dispatching/SubscriptionChangeEventHandler';
 
 export {
     IEventManagement,
