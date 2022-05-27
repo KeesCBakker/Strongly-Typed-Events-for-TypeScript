@@ -1,4 +1,8 @@
 echo ""
+echo "Pulling the latest:"
+git pull
+
+echo ""
 echo "Upgrading NCU:"
 npm install -g npm-check-updates
 
