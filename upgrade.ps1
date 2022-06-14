@@ -2,70 +2,66 @@ echo ""
 echo "Pulling the latest:"
 git pull
 
-echo ""
-echo "Upgrading NCU:"
-npm install -g npm-check-updates
-
 cd packages
 
 echo ""
 echo "Upgrading ste-core:"
 cd ste-core
-ncu -u
+npx npm-check-updates -u
 cd ..
 
 echo ""
 echo "Upgrading ste-events:"
 cd ste-events
-ncu -u
+npx npm-check-updates -u
 cd ..
 
 echo ""
 echo "Upgrading ste-signals:"
 cd ste-signals
-ncu -u
+npx npm-check-updates -u
 cd ..
 
 echo ""
 echo "Upgrading ste-simple-events:"
 cd ste-simple-events
-ncu -u
+npx npm-check-updates -u
 cd ..
 
 echo ""
 echo "Upgrading strongly-typed-Events:"
 cd strongly-typed-events
-ncu -u
+npx npm-check-updates -u
 cd ..
 
 echo ""
 echo "Upgrading ste-browser:"
 cd ste-browser
-ncu -u
+npx npm-check-updates -u
 cd ..
 
 echo ""
 echo "Upgrading ste-promise-events:"
 cd ste-promise-events
-ncu -u
+npx npm-check-updates -u
 cd ..
 
 echo ""
 echo "Upgrading ste-promise-signals:"
 cd ste-promise-signals
-ncu -u
+npx npm-check-updates -u
 cd ..
 
 echo ""
 echo "Upgrading ste-promise-simple-events:"
 cd ste-promise-simple-events
-ncu -u
+npx npm-check-updates -u
 cd ..
 
 echo ""
 echo "Upgrading root:"
 cd ..
-ncu -u
+npx npm-check-updates -u
 
 echo ""
 echo "Building & testing:"
