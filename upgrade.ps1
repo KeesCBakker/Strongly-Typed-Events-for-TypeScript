@@ -2,13 +2,13 @@ Write-Host ""
 Write-Host "Pulling the latest:"  -ForegroundColor Green
 git pull
 
-# if(git status --porcelain | Where-Object {$_ -match '^\?\?'}){
-#     throw "Untracked files exist"
-#     exit 
-# } 
-# elseif(git status --porcelain | Where-Object {$_ -notmatch '^\?\?'}) {
-#     throw "Uncommitted changes"
-# }
+if(git status --porcelain | Where-Object {$_ -match '^\?\?'}){
+    throw "Untracked files exist"
+    exit 
+} 
+elseif(git status --porcelain | Where-Object {$_ -notmatch '^\?\?'}) {
+    throw "Uncommitted changes"
+}
 
 Push-Location packages
 
