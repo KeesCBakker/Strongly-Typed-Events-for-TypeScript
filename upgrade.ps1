@@ -1,78 +1,62 @@
-echo ""
-echo "Pulling the latest:"
+Write-Host ""
+Write-Host "Pulling the latest:"  -ForegroundColor Green
 git pull
 
-cd packages
+# if(git status --porcelain | Where-Object {$_ -match '^\?\?'}){
+#     throw "Untracked files exist"
+#     exit 
+# } 
+# elseif(git status --porcelain | Where-Object {$_ -notmatch '^\?\?'}) {
+#     throw "Uncommitted changes"
+# }
 
-echo ""
-echo "Upgrading ste-core:"
-cd ste-core
+Push-Location packages
+
+
+$dir = dir .
+$c = $dir.count
+$c += 1
+
+foreach ($d in $dir){
+
+    $i = $dir.IndexOf($d)
+    $i += 1
+    
+    Push-Location $d
+    Write-Host ""
+    Write-Host "($i/$c) Upgrading ste-events:" -ForegroundColor Yellow
+    npx npm-check-updates -u
+    npm install
+    npm audit fix
+    Pop-Location
+}
+
+Pop-Location
+
+Write-Host ""
+Write-Host "($c/$c) Upgrading root" -ForegroundColor Yellow
+
 npx npm-check-updates -u
-cd ..
+npm install
+npm audit fix
 
-echo ""
-echo "Upgrading ste-events:"
-cd ste-events
-npx npm-check-updates -u
-cd ..
-
-echo ""
-echo "Upgrading ste-signals:"
-cd ste-signals
-npx npm-check-updates -u
-cd ..
-
-echo ""
-echo "Upgrading ste-simple-events:"
-cd ste-simple-events
-npx npm-check-updates -u
-cd ..
-
-echo ""
-echo "Upgrading strongly-typed-Events:"
-cd strongly-typed-events
-npx npm-check-updates -u
-cd ..
-
-echo ""
-echo "Upgrading ste-browser:"
-cd ste-browser
-npx npm-check-updates -u
-cd ..
-
-echo ""
-echo "Upgrading ste-promise-events:"
-cd ste-promise-events
-npx npm-check-updates -u
-cd ..
-
-echo ""
-echo "Upgrading ste-promise-signals:"
-cd ste-promise-signals
-npx npm-check-updates -u
-cd ..
-
-echo ""
-echo "Upgrading ste-promise-simple-events:"
-cd ste-promise-simple-events
-npx npm-check-updates -u
-cd ..
-
-echo ""
-echo "Upgrading root:"
-cd ..
-npx npm-check-updates -u
-
-echo ""
-echo "Building & testing:"
+Write-Host ""
+Write-Host "Building & testing:" -ForegroundColor Green
 
 npm install
 npm run build
 npm test
 
+Write-Host ""
+Write-Host "Commit to Git" -ForegroundColor Yellow
+
 git add .
-git commit -m "Packages upgrade"
+git commit -m "Packages upgrade" -ForegroundColor Green
 git push
 
-echo ""
-echo "Ready!"
+Write-Host "" -ForegroundColor Yellow
+Write-Host "Publish" -ForegroundColor Yellow
+npm run make
+
+Write-Host ""
+Write-Host "Ready!" -ForegroundColor Green
