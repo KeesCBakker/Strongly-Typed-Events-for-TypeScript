@@ -51,7 +51,7 @@ Write-Host ""
 Write-Host "Commit to Git" -ForegroundColor Yellow
 
 git add .
-git commit -m "Packages upgrade" -ForegroundColor Green
+git commit -m "Packages upgrade"
 git push
 
 Write-Host "" -ForegroundColor Yellow
