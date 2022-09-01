@@ -1,6 +1,6 @@
 {
   "name": "ste-promise-signals",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "Add the power of Promise Signals to your projects. They are the most bare bones implementation of an event that supports promises.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -45,7 +45,7 @@
     "node": ">=4.2.4"
   },
   "dependencies": {
-    "ste-core": "^3.0.4"
+    "ste-core": "^3.0.5"
   },
   "gitHead": "c7777610ff9d6aaf120dda232959c1b1b0ff540c"
 }
