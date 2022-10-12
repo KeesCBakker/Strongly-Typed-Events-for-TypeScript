@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
   "devDependencies": {
-    "@types/node": "^18.7.14",
+    "@types/node": "^18.8.4",
     "del-cli": "^5.0.0",
     "ste-core": "^3.0.5",
     "ste-events": "^3.0.5",
