@@ -1,6 +1,6 @@
 {
   "name": "ste-promise-events",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "description": "Add the power of Events to your projects. They are styled after .Net using a sender and arguments. Handlers can be promises.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
