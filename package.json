@@ -5,7 +5,7 @@
     "strongly-typed-events": "*"
   },
   "devDependencies": {
-    "lerna": "^6.4.0",
+    "lerna": "^6.4.1",
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.11.18",
