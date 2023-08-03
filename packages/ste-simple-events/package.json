@@ -1,50 +1,55 @@
 {
-  "name": "ste-simple-events",
-  "version": "3.0.9",
-  "description": "Add the power of Simple Events to your projects. Every event has an argument with its data.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "test": "npm run mocha --recursive test/**/*-test.ts --exit",
-    "mocha": "mocha -r ts-node/register",
-    "build": "del-cli dist & tsc",
-    "prepublishOnly": "npm run build & npm test",
-    "postpublish": "git push origin --tags"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript.git"
-  },
-  "keywords": [
-    "signals",
-    "events",
-    "event",
-    "strongly",
-    "typed",
-    "typescript",
-    "DotNet"
-  ],
-  "author": "Kees C. Bakker (https://keestalkstech.com)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/issues"
-  },
-  "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
-  "devDependencies": {
-    "@types/chai": "^4.3.5",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "^20.4.6",
-    "chai": "^4.3.7",
-    "del-cli": "^5.0.0",
-    "mocha": "^10.2.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.1.6"
-  },
-  "engines": {
-    "node": ">=4.2.4"
-  },
-  "dependencies": {
-    "ste-core": "^3.0.8"
-  },
-  "gitHead": "c7777610ff9d6aaf120dda232959c1b1b0ff540c"
+    "name": "ste-simple-events",
+    "version": "3.0.9",
+    "description": "Add the power of Simple Events to your projects. Every event has an argument with its data.",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "test": "npm run mocha --recursive test/**/*-test.ts --exit",
+        "mocha": "mocha -r ts-node/register",
+        "build": "del-cli dist & tsc",
+        "prepublishOnly": "npm run build & npm test",
+        "postpublish": "git push origin --tags"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript.git"
+    },
+    "keywords": [
+        "signals",
+        "events",
+        "event",
+        "strongly",
+        "typed",
+        "typescript",
+        "DotNet"
+    ],
+    "author": "Kees C. Bakker (https://keestalkstech.com)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/issues"
+    },
+    "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
+    "devDependencies": {
+        "@types/chai": "^4.3.5",
+        "@types/mocha": "^10.0.1",
+        "@types/node": "^20.4.6",
+        "chai": "^4.3.7",
+        "del-cli": "^5.0.0",
+        "mocha": "^10.2.0",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.1.6"
+    },
+    "engines": {
+        "node": ">=4.2.4"
+    },
+    "dependencies": {
+        "ste-core": "^3.0.8"
+    },
+    "gitHead": "c7777610ff9d6aaf120dda232959c1b1b0ff540c",
+    "files": [
+        "dist/**/*.js",
+        "dist/**/*.d.ts",
+        "dist/**/*.txt"
+    ]
 }

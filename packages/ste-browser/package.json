@@ -1,48 +1,53 @@
 {
-  "name": "ste-browser",
-  "version": "3.0.9",
-  "description": "Add the power of events directly to your client projects. This version of Strongly Typed Events works in the browser.",
-  "scripts": {
-    "webpack": "webpack",
-    "build": "del-cli ./dist && npm run webpack",
-    "test": "exit 0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript.git"
-  },
-  "keywords": [
-    "browser",
-    "signals",
-    "events",
-    "event",
-    "strongly",
-    "typed",
-    "typescript",
-    "DotNet"
-  ],
-  "author": "Kees C. Bakker (https://keestalkstech.com)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/issues"
-  },
-  "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
-  "devDependencies": {
-    "@types/node": "^20.4.6",
-    "del-cli": "^5.0.0",
-    "ste-core": "^3.0.8",
-    "ste-events": "^3.0.9",
-    "ste-promise-events": "^3.0.9",
-    "ste-promise-signals": "^3.0.9",
-    "ste-promise-simple-events": "^3.0.9",
-    "ste-signals": "^3.0.9",
-    "ste-simple-events": "^3.0.9",
-    "strongly-typed-events": "^3.0.9",
-    "webpack": "^5.88.2",
-    "webpack-cli": "^5.1.4"
-  },
-  "engines": {
-    "node": ">=4.2.4"
-  },
-  "gitHead": "c7777610ff9d6aaf120dda232959c1b1b0ff540c"
+    "name": "ste-browser",
+    "version": "3.0.9",
+    "description": "Add the power of events directly to your client projects. This version of Strongly Typed Events works in the browser.",
+    "scripts": {
+        "webpack": "webpack",
+        "build": "del-cli ./dist && npm run webpack",
+        "test": "exit 0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript.git"
+    },
+    "keywords": [
+        "browser",
+        "signals",
+        "events",
+        "event",
+        "strongly",
+        "typed",
+        "typescript",
+        "DotNet"
+    ],
+    "author": "Kees C. Bakker (https://keestalkstech.com)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/issues"
+    },
+    "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
+    "devDependencies": {
+        "@types/node": "^20.4.6",
+        "del-cli": "^5.0.0",
+        "ste-core": "^3.0.8",
+        "ste-events": "^3.0.9",
+        "ste-promise-events": "^3.0.9",
+        "ste-promise-signals": "^3.0.9",
+        "ste-promise-simple-events": "^3.0.9",
+        "ste-signals": "^3.0.9",
+        "ste-simple-events": "^3.0.9",
+        "strongly-typed-events": "^3.0.9",
+        "webpack": "^5.88.2",
+        "webpack-cli": "^5.1.4"
+    },
+    "engines": {
+        "node": ">=4.2.4"
+    },
+    "gitHead": "c7777610ff9d6aaf120dda232959c1b1b0ff540c",
+    "files": [
+        "dist/**/*.js",
+        "dist/**/*.d.ts",
+        "dist/**/*.txt"
+    ]
 }
