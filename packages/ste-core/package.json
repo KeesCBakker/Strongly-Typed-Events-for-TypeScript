@@ -43,7 +43,7 @@
     "engines": {
         "node": ">=4.2.4"
     },
-    "gitHead": "c7777610ff9d6aaf120dda232959c1b1b0ff540c",
+    "gitHead": "ddecc6b007733716bc0d65aa845ac4a1fb3bdd8c",
     "files": [
         "dist/**/*.js",
         "dist/**/*.d.ts",
