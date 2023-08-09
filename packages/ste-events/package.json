@@ -1,6 +1,6 @@
 {
     "name": "ste-events",
-    "version": "3.0.10",
+    "version": "3.0.11",
     "description": "Add the power of Events to your projects. They are styled after .Net using a sender and arguments.",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -44,7 +44,7 @@
         "node": ">=4.2.4"
     },
     "dependencies": {
-        "ste-core": "^3.0.10"
+        "ste-core": "^3.0.11"
     },
     "gitHead": "ddecc6b007733716bc0d65aa845ac4a1fb3bdd8c",
     "files": [
