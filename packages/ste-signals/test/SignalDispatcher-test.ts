@@ -1,7 +1,8 @@
 "use strict";
 
-import { expect } from "chai";
-import { SignalDispatcher } from "../src";
+import { describe, it } from "node:test";
+import * as assert from "node:assert/strict";
+import { SignalDispatcher } from "ste-signals";
 
 describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
     it("Counting subscriptions", () => {
@@ -9,14 +10,14 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         let callback = () => {};
         let callback2 = () => {};
 
-        expect(dispatcher.count, "Subscription count should be 0").to.equal(0);
+        assert.strictEqual(dispatcher.count, 0, "Subscription count should be 0");
         dispatcher.sub(callback);
-        expect(dispatcher.count, "Subscription count should be 1").to.equal(1);
+        assert.strictEqual(dispatcher.count, 1, "Subscription count should be 1");
         dispatcher.unsub(callback);
-        expect(dispatcher.count, "Subscription count should be 0").to.equal(0);
+        assert.strictEqual(dispatcher.count, 0, "Subscription count should be 0");
         dispatcher.sub(callback);
         dispatcher.sub(callback2);
-        expect(dispatcher.count, "Subscription count should be 2").to.equal(2);
+        assert.strictEqual(dispatcher.count, 2, "Subscription count should be 2");
     });
 
     it("Subscribing to the signal dispatcher", () => {
@@ -29,7 +30,7 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
 
         dispatcher.dispatch();
 
-        expect(resultNr, "resultNr should be 7.").to.equal(7);
+        assert.strictEqual(resultNr, 7, "resultNr should be 7.");
     });
 
     it("Sub to the signal dispatcher", () => {
@@ -42,7 +43,7 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
 
         dispatcher.dispatch();
 
-        expect(resultNr, "resultNr should be 7.").to.equal(7);
+        assert.strictEqual(resultNr, 7, "resultNr should be 7.");
     });
 
     it("Subscribing to the signal dispatcher. Fire twice", () => {
@@ -56,7 +57,7 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         dispatcher.dispatch();
         dispatcher.dispatch();
 
-        expect(resultNr, "resultNr should be 12.").to.equal(12);
+        assert.strictEqual(resultNr, 12, "resultNr should be 12.");
     });
 
     it("Sub to the signal dispatcher. Fire twice", () => {
@@ -70,7 +71,7 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         dispatcher.dispatch();
         dispatcher.dispatch();
 
-        expect(resultNr, "resultNr should be 12.").to.equal(12);
+        assert.strictEqual(resultNr, 12, "resultNr should be 12.");
     });
 
     it("One subscription to the signal dispatcher. Fire twice.", () => {
@@ -84,7 +85,7 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         dispatcher.dispatch();
         dispatcher.dispatch();
 
-        expect(resultNr, "resultNr should be 2.").to.equal(2);
+        assert.strictEqual(resultNr, 2, "resultNr should be 2.");
     });
 
     it("Unsubscribing to the signal dispatcher.", () => {
@@ -99,7 +100,7 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         dispatcher.unsubscribe(fn);
         dispatcher.dispatch();
 
-        expect(resultNr, "resultNr should be 0.").to.equal(0);
+        assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsub to the signal dispatcher.", () => {
@@ -114,7 +115,7 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         dispatcher.unsub(fn);
         dispatcher.dispatch();
 
-        expect(resultNr, "resultNr should be 0.").to.equal(0);
+        assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsubscribing from signal dispatcher using subscribe's return function.", () => {
@@ -127,7 +128,7 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         unsub();
         dispatcher.dispatch();
 
-        expect(resultNr, "resultNr should be 0.").to.equal(0);
+        assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsubscribing from signal dispatcher using sub's return function.", () => {
@@ -140,7 +141,7 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         unsub();
         dispatcher.dispatch();
 
-        expect(resultNr, "resultNr should be 0.").to.equal(0);
+        assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsubscribing from one subscription.", () => {
@@ -155,7 +156,7 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         dispatcher.unsubscribe(fn);
         dispatcher.dispatch();
 
-        expect(resultNr, "resultNr should be 0.").to.equal(0);
+        assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsubscribing from signal dispatcher using one's return function.", () => {
@@ -168,7 +169,7 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         unsub();
         dispatcher.dispatch();
 
-        expect(resultNr, "resultNr should be 0.").to.equal(0);
+        assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsub from one subscription.", () => {
@@ -183,14 +184,14 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         dispatcher.unsub(fn);
         dispatcher.dispatch();
 
-        expect(resultNr, "resultNr should be 0.").to.equal(0);
+        assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Has no event.", () => {
         var fn = () => {};
         let dispatcher = new SignalDispatcher();
         let result = dispatcher.has(fn);
-        expect(result, "Handler should not be present.").to.equal(false);
+        assert.strictEqual(result, false, "Handler should not be present.");
     });
 
     it("Has event through subscribe.", () => {
@@ -198,7 +199,7 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         let dispatcher = new SignalDispatcher();
         dispatcher.subscribe(fn);
         let result = dispatcher.has(fn);
-        expect(result, "Handler should be present.").to.equal(true);
+        assert.strictEqual(result, true, "Handler should be present.");
     });
 
     it("Has event through one.", () => {
@@ -206,7 +207,7 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         let dispatcher = new SignalDispatcher();
         dispatcher.one(fn);
         let result = dispatcher.has(fn);
-        expect(result, "Handler should be present.").to.equal(true);
+        assert.strictEqual(result, true, "Handler should be present.");
     });
 
     it("Test subscribe -> unsubscribe -> has", () => {
@@ -215,10 +216,10 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         dispatcher.subscribe(fn);
         dispatcher.unsubscribe(fn);
         let result = dispatcher.has(fn);
-        expect(
-            result,
+        assert.strictEqual(
+            result, false,
             "Handler should not be present because of unsubscribe."
-        ).to.equal(false);
+        );
     });
 
     it("Clear subscriptions.", () => {
@@ -232,6 +233,6 @@ describe("Strongly Typed Events - Signal: SignalDispatcher", () => {
         dispatcher.clear();
         dispatcher.dispatch();
 
-        expect(resultNr, "resultNr should be 0.").to.equal(0);
+        assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 });

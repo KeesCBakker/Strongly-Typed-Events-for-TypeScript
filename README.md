@@ -6,6 +6,11 @@ Add the power of events to your projects. We even have 3 flavors for you.
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Event types
+Version 4.0.0 requires Node.js 22.22.2 or newer for Node.js usage. The packages
+have no external runtime dependencies; dependencies between this project's
+packages provide the shared event implementation. For direct browser script
+loading, use [`ste-browser`](packages/ste-browser/README.md).
+
 This project gives you the following event types:
 - **Events** - styled after the way .Net implements events. With each event you'll get a `sender` and an `argument` object. If you use typescript, you can implement them using generics.<br/>`npm install ste-events` or `npm install ste-promise-events` for event handlers that support `Promise`.
 - **Simple events** - basically the same thing, with only an argument.<br/>`npm install ste-simple-events` or `npm install ste-promise-simple-events` for event handlers that support `Promise`.
@@ -69,27 +74,27 @@ class Clock {
 You can stop events from being propagated.
 
 ```typescript
+import { SignalDispatcher } from "strongly-typed-events";
+
 let dispatcher = new SignalDispatcher();
 
-  let a = 0;
-  dispatcher.sub(ev => {
-    a++;
-    if (a > 2) {
-      ev.stopPropagation();
-    }
-  });
+let a = 0;
+dispatcher.sub(ev => {
+  a++;
+  if (a > 2) {
+    ev.stopPropagation();
+  }
+});
 
-  let b = 0;
-  dispatcher.sub(() => { b++; });
+let b = 0;
+dispatcher.sub(() => { b++; });
 
-  dispatcher.dispatch();
-  dispatcher.dispatch();
-  dispatcher.dispatch();
-  dispatcher.dispatch();
+dispatcher.dispatch();
+dispatcher.dispatch();
+dispatcher.dispatch();
+dispatcher.dispatch();
 
-  // a should be 4, because 4 dispatches are done.");
-  // b should be 2, because events after the 2nd dispatch are stopped."
-
+// a is 4; b is 2 because propagation stops on the third dispatch.
 ```
 
 Check the <a href="documentation">documentation</a> or the <a href="examples">examples</a> for more information.
@@ -123,4 +128,8 @@ Want a smaller package? Check out on of these:
 <br/>
 
 ## Maintenance
+For repository setup, testing, dependency upgrades, and releases, see
+[CONTRIBUTING.md](CONTRIBUTING.md). From a fresh clone, use `npm ci` followed by
+`npm run check`; `npm test` alone requires an existing build.
+
 This project is maintained by <a href="https://keestalkstech.com/">Kees C. Bakker</a>.

@@ -1,8 +1,9 @@
 "use strict";
 
-import { expect } from "chai";
+import { describe, it } from "node:test";
+import * as assert from "node:assert/strict";
 
-import { PromiseSimpleEventDispatcher, PromiseSimpleEventList, NonUniformPromiseSimpleEventList } from "../src";
+import { PromiseSimpleEventDispatcher, PromiseSimpleEventList, NonUniformPromiseSimpleEventList } from "ste-promise-simple-events";
 
 describe("Strongly Typed Events - Simple event", () => {
   describe("SimpleEventDispatcher", () => {
@@ -16,7 +17,7 @@ describe("Strongly Typed Events - Simple event", () => {
 
       await dispatcher.dispatch(7);
 
-      expect(resultNr, "resultNr should be 7.").to.equal(7);
+      assert.strictEqual(resultNr, 7, "resultNr should be 7.");
     });
 
     it("Sub to the simple event dispatcher", async () => {
@@ -29,7 +30,7 @@ describe("Strongly Typed Events - Simple event", () => {
 
       await dispatcher.dispatch(7);
 
-      expect(resultNr, "resultNr should be 7.").to.equal(7);
+      assert.strictEqual(resultNr, 7, "resultNr should be 7.");
     });
 
     it("Subscribing to the simple event dispatcher. Fire twice", async () => {
@@ -43,7 +44,7 @@ describe("Strongly Typed Events - Simple event", () => {
       await dispatcher.dispatch(7);
       await dispatcher.dispatch(6);
 
-      expect(resultNr, "resultNr should be 13.").to.equal(13);
+      assert.strictEqual(resultNr, 13, "resultNr should be 13.");
     });
 
     it("Sub to the simple event dispatcher. Fire twice", async () => {
@@ -57,7 +58,7 @@ describe("Strongly Typed Events - Simple event", () => {
       await dispatcher.dispatch(7);
       await dispatcher.dispatch(6);
 
-      expect(resultNr, "resultNr should be 13.").to.equal(13);
+      assert.strictEqual(resultNr, 13, "resultNr should be 13.");
     });
 
     it("One subscription to the simple event dispatcher. Fire twice.", async () => {
@@ -71,7 +72,7 @@ describe("Strongly Typed Events - Simple event", () => {
       await dispatcher.dispatch(7);
       await dispatcher.dispatch(6);
 
-      expect(resultNr, "resultNr should be 7.").to.equal(7);
+      assert.strictEqual(resultNr, 7, "resultNr should be 7.");
     });
 
     it("Unsubscribing to the simple event dispatcher.", async () => {
@@ -86,7 +87,7 @@ describe("Strongly Typed Events - Simple event", () => {
       dispatcher.unsub(fn);
       await dispatcher.dispatch(6);
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsub to the simple event dispatcher.", async () => {
@@ -101,7 +102,7 @@ describe("Strongly Typed Events - Simple event", () => {
       dispatcher.unsub(fn);
       await dispatcher.dispatch(6);
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsubscribing from simple event dispatcher using subscribe's return function.", async () => {
@@ -114,7 +115,7 @@ describe("Strongly Typed Events - Simple event", () => {
       unsub();
       await dispatcher.dispatch(6);
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsubscribing from simple event dispatcher using sub's return function.", async () => {
@@ -127,7 +128,7 @@ describe("Strongly Typed Events - Simple event", () => {
       unsub();
       await dispatcher.dispatch(6);
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsubscribing to a one subscription.", async () => {
@@ -142,7 +143,7 @@ describe("Strongly Typed Events - Simple event", () => {
       dispatcher.unsubscribe(fn);
       await dispatcher.dispatch(6);
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsubscribing from simple event dispatcher using one's return function.", async () => {
@@ -155,10 +156,10 @@ describe("Strongly Typed Events - Simple event", () => {
       unsub();
       await dispatcher.dispatch(6);
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
-    it("Unsub from one subscription.", () => {
+    it("Unsub from one subscription.", async () => {
       let dispatcher = new PromiseSimpleEventDispatcher<number>();
       let resultNr = 0;
 
@@ -168,16 +169,16 @@ describe("Strongly Typed Events - Simple event", () => {
 
       dispatcher.one(fn);
       dispatcher.unsub(fn);
-      dispatcher.dispatch(6);
+      await dispatcher.dispatch(6);
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Has no event.", () => {
       var fn = async (nr: number) => { };
       let dispatcher = new PromiseSimpleEventDispatcher<number>();
       let result = dispatcher.has(fn);
-      expect(result, "Handler should not be present.").to.equal(false);
+      assert.strictEqual(result, false, "Handler should not be present.");
     });
 
     it("Has event through subscribe.", () => {
@@ -185,7 +186,7 @@ describe("Strongly Typed Events - Simple event", () => {
       let dispatcher = new PromiseSimpleEventDispatcher<number>();
       dispatcher.subscribe(fn);
       let result = dispatcher.has(fn);
-      expect(result, "Handler should be present.").to.equal(true);
+      assert.strictEqual(result, true, "Handler should be present.");
     });
 
     it("Has event through one.", () => {
@@ -193,7 +194,7 @@ describe("Strongly Typed Events - Simple event", () => {
       let dispatcher = new PromiseSimpleEventDispatcher<number>();
       dispatcher.one(fn);
       let result = dispatcher.has(fn);
-      expect(result, "Handler should be present.").to.equal(true);
+      assert.strictEqual(result, true, "Handler should be present.");
     });
 
     it("Test subscribe -> unsubscribe -> has", () => {
@@ -202,10 +203,10 @@ describe("Strongly Typed Events - Simple event", () => {
       dispatcher.subscribe(fn);
       dispatcher.unsubscribe(fn);
       let result = dispatcher.has(fn);
-      expect(
-        result,
+      assert.strictEqual(
+        result, false,
         "Handler should not be present because of unsubscribe."
-      ).to.equal(false);
+      );
     });
 
     it("Clear subscriptions.", async () => {
@@ -219,7 +220,7 @@ describe("Strongly Typed Events - Simple event", () => {
       dispatcher.clear();
       await dispatcher.dispatch(7);
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
   });
 
@@ -231,7 +232,7 @@ describe("Strongly Typed Events - Simple event", () => {
 
       list.get(event).subscribe(fn);
       var result = list.get(event).has(fn);
-      expect(result, "result should be true.").to.equals(true);
+      assert.strictEqual(result, true, "result should be true.");
     });
 
     it("Unsubscribe to event name", async () => {
@@ -243,12 +244,10 @@ describe("Strongly Typed Events - Simple event", () => {
       list.get(event).unsubscribe(fn);
 
       var result = list.get(event).has(fn);
-      expect(result, "result should be false due to unsubscribe.").to.equals(
-        false
-      );
+      assert.strictEqual(result, false, "result should be false due to unsubscribe.");
     });
 
-    it("Test firing two events in one list", () => {
+    it("Test firing two events in one list", async () => {
       let list = new PromiseSimpleEventList<number>();
       let result = "";
 
@@ -265,11 +264,11 @@ describe("Strongly Typed Events - Simple event", () => {
       list.get(event1).subscribe(fn1);
       list.get(event2).subscribe(fn2);
 
-      list.get(event2).dispatch(16);
-      expect(result, 'Result should be "ev2:16.').to.equal("ev2:16");
+      await list.get(event2).dispatch(16);
+      assert.strictEqual(result, "ev2:16", 'Result should be "ev2:16.');
 
-      list.get(event1).dispatch(8);
-      expect(result, 'Result should be "ev1:8.').to.equal("ev1:8");
+      await list.get(event1).dispatch(8);
+      assert.strictEqual(result, "ev1:8", 'Result should be "ev1:8.');
     });
 
     it("Test remove from list.", () => {
@@ -283,15 +282,15 @@ describe("Strongly Typed Events - Simple event", () => {
       list.get(event2).subscribe(fn);
 
       let result = list.get(event2).has(fn);
-      expect(result, "Event 2 should be present.").to.equal(true);
+      assert.strictEqual(result, true, "Event 2 should be present.");
 
       list.remove(event2);
 
       result = list.get(event1).has(fn);
-      expect(result, "Event 1 should still be present.").to.equal(true);
+      assert.strictEqual(result, true, "Event 1 should still be present.");
 
       result = list.get(event2).has(fn);
-      expect(result, "Event 2 should not be present.").to.equal(false);
+      assert.strictEqual(result, false, "Event 2 should not be present.");
     });
   });
 
@@ -303,7 +302,7 @@ describe("Strongly Typed Events - Simple event", () => {
 
       list.get("myEvent").subscribe(fn);
       var result = list.get("myEvent").has(fn);
-      expect(result, "result should be true.").to.equals(true);
+      assert.strictEqual(result, true, "result should be true.");
     });
 
     it("Unsubscribe to event name", () => {
@@ -315,12 +314,10 @@ describe("Strongly Typed Events - Simple event", () => {
       list.get("myEvent").unsubscribe(fn);
 
       var result = list.get("myEvent").has(fn);
-      expect(result, "result should be false due to unsubscribe.").to.equals(
-        false
-      );
+      assert.strictEqual(result, false, "result should be false due to unsubscribe.");
     });
 
-    it("Test firing two events in one list", () => {
+    it("Test firing two events in one list", async () => {
       type ArgMap = { "ev1": number, "ev2": number };
       let list = new NonUniformPromiseSimpleEventList<ArgMap>();
       let result = "";
@@ -336,11 +333,11 @@ describe("Strongly Typed Events - Simple event", () => {
       list.get("ev1").subscribe(fn1);
       list.get("ev2").subscribe(fn2);
 
-      list.get("ev2").dispatch(16);
-      expect(result, 'Result should be "ev2:16.').to.equal("ev2:16");
+      await list.get("ev2").dispatch(16);
+      assert.strictEqual(result, "ev2:16", 'Result should be "ev2:16.');
 
-      list.get("ev1").dispatch(8);
-      expect(result, 'Result should be "ev1:8.').to.equal("ev1:8");
+      await list.get("ev1").dispatch(8);
+      assert.strictEqual(result, "ev1:8", 'Result should be "ev1:8.');
     });
 
     it("Test remove from list.", () => {
@@ -353,15 +350,15 @@ describe("Strongly Typed Events - Simple event", () => {
       list.get("ev2").subscribe(fn);
 
       let result = list.get("ev2").has(fn);
-      expect(result, "Event 2 should be present.").to.equal(true);
+      assert.strictEqual(result, true, "Event 2 should be present.");
 
       list.remove("ev2");
 
       result = list.get("ev1").has(fn);
-      expect(result, "Event 1 should still be present.").to.equal(true);
+      assert.strictEqual(result, true, "Event 1 should still be present.");
 
       result = list.get("ev2").has(fn);
-      expect(result, "Event 2 should not be present.").to.equal(false);
+      assert.strictEqual(result, false, "Event 2 should not be present.");
     });
   });
 

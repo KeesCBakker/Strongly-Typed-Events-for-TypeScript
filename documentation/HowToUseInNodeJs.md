@@ -1,39 +1,47 @@
 # How to use Strongly Typed Events in Node.js?
-We've got a node package for you! Install it the usual way:
-```
-npm install strongly-typed-events --save
+Version 4.0.0 requires Node.js 22.22.2 or newer. Install the package:
+```sh
+npm install strongly-typed-events
 ```
 ## Code example
 Using it is pretty straight forward:
-```typescript
+```javascript
 const { EventDispatcher } = require('strongly-typed-events');
 
-export class TfsBuildClient {
+class TfsBuildClient {
+    _notifier = new EventDispatcher();
 
-    private _notifier = new EventDispatcher<TfsBuildClient, IBuildData>();
-
-    public get onNotify() {
+    get onNotify() {
         return this._notifier.asEvent();
     }
+
+    notify(buildData) {
+        this._notifier.dispatch(this, buildData);
+    }
 }
+
+const client = new TfsBuildClient();
+client.onNotify.subscribe((sender, buildData) => {
+    console.log(buildData.status);
+});
+client.notify({ status: 'completed' });
 ```
+Output: `completed`.
+
+In TypeScript, use a named import (`import { EventDispatcher } from
+"strongly-typed-events"`) and supply the sender and argument types when creating
+the dispatcher, for example `new EventDispatcher<TfsBuildClient, IBuildData>()`
+with your own `IBuildData` interface.
 ## Exposed classes and methods
-The following classes are exposed through the module exports:
+Named exports include:
 
-```typescript
-    EventDispatcher: <TSender, TArgs>() => EventDispatcher<TSender, TArgs>;
-    SimpleEventDispatcher: <TArgs>() => SimpleEventDispatcher<TArgs>;
-    SignalDispatcher: () => SignalDispatcher;
+- Dispatchers: `EventDispatcher`, `SimpleEventDispatcher`, `SignalDispatcher`.
+- Lists: `EventList`, `SimpleEventList`, `SignalList`.
+- Handling base classes: `EventHandlingBase`, `SimpleEventHandlingBase`, `SignalHandlingBase`.
+- Core building blocks: `EventListBase`, `DispatcherBase`, `DispatcherWrapper`.
+- Promise variants, including `PromiseEventDispatcher`, `PromiseSimpleEventDispatcher`, and `PromiseSignalDispatcher`.
 
-    EventList: <TSender, TArgs>() => EventList<TSender, TArgs>;
-    SimpleEventList: <TArgs>() => SimpleEventList<TArgs>;
-    SignalList: () => SignalList;
-
-    EventHandlingBase: <TSender, TArgs>() => EventHandlingBase<TSender, TArgs>;
-    SimpleEventHandlingBase: <TArgs>() => SimpleEventHandlingBase<TArgs>;
-    SignalHandlingBase: () => SignalHandlingBase;
-
-    EventListBase: <TEventDispatcher>() => EventListBase<TEventDispatcher>;
-    DispatcherBase: <TEventHandler>() => DispatcherBase<TEventHandler>;
-    DispatcherWrapper: <THandlerType>() => DispatcherWrapper<THandlerType>;
-```
+Construct dispatchers and lists with `new`; extend abstract base classes to
+implement your own behavior. TypeScript interfaces and generic type parameters
+do not exist at JavaScript runtime. See the
+[public export list](../packages/strongly-typed-events/src/index.ts) for all exports.

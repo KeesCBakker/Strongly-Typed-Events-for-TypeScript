@@ -12,7 +12,7 @@ var m = require("ste-simple-events");
 
 var expose = require("./expose");
 
-expose({
+module.exports = expose({
     
     DispatcherBase: c.DispatcherBase,
     DispatcherWrapper: c.DispatcherWrapper,

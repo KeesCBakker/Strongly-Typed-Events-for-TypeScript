@@ -1,0 +1,22 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@4.0.1/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "fixed": [[
+    "ste-core",
+    "ste-events",
+    "ste-simple-events",
+    "ste-signals",
+    "ste-promise-events",
+    "ste-promise-simple-events",
+    "ste-promise-signals",
+    "strongly-typed-events",
+    "ste-browser"
+  ]],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "master",
+  "format": false,
+  "updateInternalDependencies": "patch",
+  "ignore": []
+}

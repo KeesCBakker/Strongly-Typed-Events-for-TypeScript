@@ -1,5 +1,6 @@
-import { SignalDispatcher } from "./../src/";
-import { expect } from "chai";
+import { SignalDispatcher } from "strongly-typed-events";
+import { describe, it } from "node:test";
+import * as assert from "node:assert/strict";
 
 describe("Bug fixes", () => {
   it("#9 - unsubscribe during dispatch", () => {
@@ -26,13 +27,13 @@ describe("Bug fixes", () => {
 
     dispatcher.dispatch();
 
-    expect(result).to.eq(
+    assert.strictEqual(result,
       11,
       "Result should be 11, because both subscription should have been triggered."
     );
 
     dispatcher.dispatch();
-    expect(result).to.eq(
+    assert.strictEqual(result,
       21,
       "Result should be 21, because only the second subscription should have been triggered."
     );

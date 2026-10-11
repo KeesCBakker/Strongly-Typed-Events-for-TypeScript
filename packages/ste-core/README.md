@@ -3,7 +3,8 @@ Core package for the Strongly Typed Events projects. This
 project adds events to your projecs. Because events can have
 multiple flavours, we've created multiple packages.
 
-[![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
+Version 4.0.0 requires Node.js 22.22.2 or newer.
+
 [![npm version](https://badge.fury.io/js/ste-core.svg)](https://badge.fury.io/js/ste-core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

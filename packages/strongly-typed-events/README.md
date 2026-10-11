@@ -1,11 +1,13 @@
 # Strongly Typed Events
 Add the power of events to your projects. We even have 3 flavors for you.
 
-[![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
 [![npm version](https://badge.fury.io/js/strongly-typed-events.svg)](https://badge.fury.io/js/strongly-typed-events)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Event types
+Version 4.0.0 requires Node.js 22.22.2 or newer. Its runtime dependencies are
+only this project's event packages, with no external runtime dependencies.
+
 This project gives you the following event types:
 - **Events** - styled after the way .Net implements events. With each event you'll get a `sender` and an `argument` object. If you use typescript, you can implement them using generics.
 - **Simple events** - basically the same thing, with only 1 argument.
@@ -67,27 +69,27 @@ class Clock {
 You can stop events from being propagated.
 
 ```typescript
+import { SignalDispatcher } from "strongly-typed-events";
+
 let dispatcher = new SignalDispatcher();
 
-  let a = 0;
-  dispatcher.sub(ev => {
-    a++;
-    if (a > 2) {
-      ev.stopPropagation();
-    }
-  });
+let a = 0;
+dispatcher.sub(ev => {
+  a++;
+  if (a > 2) {
+    ev.stopPropagation();
+  }
+});
 
-  let b = 0;
-  dispatcher.sub(() => { b++; });
+let b = 0;
+dispatcher.sub(() => { b++; });
 
-  dispatcher.dispatch();
-  dispatcher.dispatch();
-  dispatcher.dispatch();
-  dispatcher.dispatch();
+dispatcher.dispatch();
+dispatcher.dispatch();
+dispatcher.dispatch();
+dispatcher.dispatch();
 
-  // a should be 4, because 4 dispatches are done.");
-  // b should be 2, because events after the 2nd dispatch are stopped."
-
+// a is 4; b is 2 because propagation stops on the third dispatch.
 ```
 
 ## Packages
@@ -117,7 +119,7 @@ This project will help you to add events, event handling en event dispatching to
 - <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/HowToUseInNodeJs.md">How to use Strongly Typed Events in Node.js?</a>
 - <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/SomeUnsubStrategies.md">Some unsubscribe strategies</a>
 
-Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/documentation">documentation</a> or the <a href="examples">examples</a> for more information.
+Check the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/tree/master/documentation">documentation</a> or the <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/tree/master/examples">examples</a> for more information.
 
 ## History
 <a href="https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript/blob/master/documentation/history.md">The change history can be found here.</a>

@@ -7,6 +7,8 @@ Adding an event to a class is pretty easy. Expose it an an `IEvent<TSender, TArg
 Conside the following example:
 
 ```typescript
+import { EventDispatcher, IEvent } from "strongly-typed-events";
+
 class MyClass
 {
 	private _myEvent = new EventDispatcher<MyClass, string>();
@@ -47,7 +49,7 @@ unsubscribe();
 ``` 
 
 ### Event methods
-The `IEvent<TSender, TArgs>`, `ISimple<TArgs>`, `EventDispatcher<TSender, TArgs>`, `SimpleEvenDispatcher<TArgs>` share the 
+The `IEvent<TSender, TArgs>`, `ISimpleEvent<TArgs>`, `EventDispatcher<TSender, TArgs>`, `SimpleEventDispatcher<TArgs>` share the
 same basic methods:
 
 - `subscribe(eventHandler)` - subscribes to the event by registring an event handler. The handler will be executed when
@@ -55,6 +57,7 @@ the event is dispatched. The subscribe method returns a function that can be use
 - `unsubscribe(eventHandler)` - removes the subscription by removing the handler. This will stop the handler from being executed
 when the event is dispatched.
 
-Only the  `EventDispatcher<TSender, TArgs>` and `SimpleEvenDispatcher<TArgs>` have a `dispatch` method:
+Only the `EventDispatcher<TSender, TArgs>` and `SimpleEventDispatcher<TArgs>` have a `dispatch` method:
 
-- `dispatch(args)` - dispatches the event by calling all the registered event handler with the arguments.
+- `EventDispatcher.dispatch(sender, args)` - calls the registered handlers with the sender and arguments.
+- `SimpleEventDispatcher.dispatch(args)` - calls the registered handlers with the arguments.

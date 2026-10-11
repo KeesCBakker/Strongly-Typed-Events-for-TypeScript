@@ -1,5 +1,6 @@
-import { SignalDispatcher, SimpleEventList, NonUniformSimpleEventList , ISimpleEvent } from "../src";
-import { expect } from "chai";
+import { SignalDispatcher, SimpleEventList, NonUniformSimpleEventList , ISimpleEvent } from "strongly-typed-events";
+import { describe, it } from "node:test";
+import * as assert from "node:assert/strict";
 
 describe("Features", () => {
 
@@ -10,16 +11,16 @@ describe("Features", () => {
 
             let myEvents = new SimpleEventList<number|string>();
 
-            let test = null
+            let test: number | string | null = null
 
             myEvents.get('alpha').subscribe(args =>{
                 test = args;
             });
 
             myEvents.get('alpha').dispatch(0);
-            expect(test).to.equal(0);
+            assert.strictEqual(test, 0);
             myEvents.get('alpha').dispatch("1");
-            expect(test).to.equal("1");
+            assert.strictEqual(test, "1");
 
         });
 
@@ -71,16 +72,16 @@ describe("Features", () => {
 
             file.onRename.sub((x:string) => name = x);
             file.rename("kees.jpg");
-            expect(name).to.equal("kees.jpg");
+            assert.strictEqual(name, "kees.jpg");
 
             var openHandles = 0;
             file.onOpenHandlesChange.sub((x:number) => openHandles = x);
             file.open();
-            expect(openHandles).to.equal(1);
+            assert.strictEqual(openHandles, 1);
             file.open();
-            expect(openHandles).to.equal(2);
+            assert.strictEqual(openHandles, 2);
             file.close();
-            expect(openHandles).to.equal(1);
+            assert.strictEqual(openHandles, 1);
         });
     });
 
@@ -94,15 +95,15 @@ describe("Features", () => {
             let fn1 = () => { };
             let fn2 = () => { };
 
-            expect(dispatcher.count, "Count should be 0").to.equal(0);
+            assert.strictEqual(dispatcher.count, 0, "Count should be 0");
             dispatcher.sub(fn1);
-            expect(dispatcher.count, "Count should be 1").to.equal(1);
+            assert.strictEqual(dispatcher.count, 1, "Count should be 1");
             dispatcher.sub(fn2);
-            expect(dispatcher.count, "Count should be 2").to.equal(2);
+            assert.strictEqual(dispatcher.count, 2, "Count should be 2");
             dispatcher.unsub(fn1);
-            expect(dispatcher.count, "Count should be 1").to.equal(1);
+            assert.strictEqual(dispatcher.count, 1, "Count should be 1");
             dispatcher.unsub(fn2);
-            expect(dispatcher.count, "Count should be 0").to.equal(0);
+            assert.strictEqual(dispatcher.count, 0, "Count should be 0");
         });
 
         it("Count on event", ()=>{
@@ -112,15 +113,15 @@ describe("Features", () => {
             let fn1 = () => { };
             let fn2 = () => { };
 
-            expect(ev.count, "Count should be 0").to.equal(0);
+            assert.strictEqual(ev.count, 0, "Count should be 0");
             dispatcher.sub(fn1);
-            expect(ev.count, "Count should be 1").to.equal(1);
+            assert.strictEqual(ev.count, 1, "Count should be 1");
             dispatcher.sub(fn2);
-            expect(ev.count, "Count should be 2").to.equal(2);
+            assert.strictEqual(ev.count, 2, "Count should be 2");
             dispatcher.unsub(fn1);
-            expect(ev.count, "Count should be 1").to.equal(1);
+            assert.strictEqual(ev.count, 1, "Count should be 1");
             dispatcher.unsub(fn2);
-            expect(ev.count, "Count should be 0").to.equal(0);
+            assert.strictEqual(ev.count, 0, "Count should be 0");
 
         });
 
@@ -129,11 +130,11 @@ describe("Features", () => {
             let dispatcher = new SignalDispatcher();
             let fn1 = () => { };
 
-            expect(dispatcher.count, "Count should be 0").to.equal(0);
+            assert.strictEqual(dispatcher.count, 0, "Count should be 0");
             dispatcher.one(fn1);
-            expect(dispatcher.count, "Count should be 1").to.equal(1);
+            assert.strictEqual(dispatcher.count, 1, "Count should be 1");
             dispatcher.dispatch();
-            expect(dispatcher.count, "Count should be 0").to.equal(0);
+            assert.strictEqual(dispatcher.count, 0, "Count should be 0");
         });
     });
 });

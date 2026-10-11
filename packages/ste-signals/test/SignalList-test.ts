@@ -1,7 +1,8 @@
 "use strict";
 
-import { expect } from "chai";
-import { SignalList } from "../src";
+import { describe, it } from "node:test";
+import * as assert from "node:assert/strict";
+import { SignalList } from "ste-signals";
 
 describe("Strongly Typed Events - Signal: SignalList", () => {
     it("Subscribe to event name", () => {
@@ -11,7 +12,7 @@ describe("Strongly Typed Events - Signal: SignalList", () => {
 
         list.get(event).subscribe(fn);
         var result = list.get(event).has(fn);
-        expect(result, "result should be true.").to.equals(true);
+        assert.strictEqual(result, true, "result should be true.");
     });
 
     it("Unsubscribe to event name", () => {
@@ -23,9 +24,7 @@ describe("Strongly Typed Events - Signal: SignalList", () => {
         list.get(event).unsubscribe(fn);
 
         var result = list.get(event).has(fn);
-        expect(result, "result should be false due to unsubscribe.").to.equals(
-            false
-        );
+        assert.strictEqual(result, false, "result should be false due to unsubscribe.");
     });
 
     it("Test firing two events in one list", () => {
@@ -46,10 +45,10 @@ describe("Strongly Typed Events - Signal: SignalList", () => {
         list.get(event2).subscribe(fn2);
 
         list.get(event2).dispatch();
-        expect(result, 'Result should be "ev2:16.').to.equal("ev2:16");
+        assert.strictEqual(result, "ev2:16", 'Result should be "ev2:16.');
 
         list.get(event1).dispatch();
-        expect(result, 'Result should be "ev1:8.').to.equal("ev1:8");
+        assert.strictEqual(result, "ev1:8", 'Result should be "ev1:8.');
     });
 
     it("Test remove from list.", () => {
@@ -63,14 +62,14 @@ describe("Strongly Typed Events - Signal: SignalList", () => {
         list.get(event2).subscribe(fn);
 
         let result = list.get(event2).has(fn);
-        expect(result, "Event 2 should be present.").to.equal(true);
+        assert.strictEqual(result, true, "Event 2 should be present.");
 
         list.remove(event2);
 
         result = list.get(event1).has(fn);
-        expect(result, "Event 1 should still be present.").to.equal(true);
+        assert.strictEqual(result, true, "Event 1 should still be present.");
 
         result = list.get(event2).has(fn);
-        expect(result, "Event 2 should not be present.").to.equal(false);
+        assert.strictEqual(result, false, "Event 2 should not be present.");
     });
 });

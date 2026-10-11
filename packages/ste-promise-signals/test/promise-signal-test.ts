@@ -1,8 +1,9 @@
 "use strict";
 
-import { expect } from "chai";
+import { describe, it } from "node:test";
+import * as assert from "node:assert/strict";
 
-import { PromiseSignalDispatcher, PromiseSignalList } from "../src";
+import { PromiseSignalDispatcher, PromiseSignalList } from "ste-promise-signals";
 
 describe("Strongly Typed Events - Promise Signal", () => {
   describe("PromiseSignalDispatcher", () => {
@@ -12,14 +13,14 @@ describe("Strongly Typed Events - Promise Signal", () => {
       let callback = async ()=>{};
       let callback2 = async ()=>{};
 
-      expect(dispatcher.count, "Subscription count should be 0").to.equal(0);
+      assert.strictEqual(dispatcher.count, 0, "Subscription count should be 0");
       dispatcher.sub(callback);
-      expect(dispatcher.count, "Subscription count should be 1").to.equal(1);
+      assert.strictEqual(dispatcher.count, 1, "Subscription count should be 1");
       dispatcher.unsub(callback);
-      expect(dispatcher.count, "Subscription count should be 0").to.equal(0);
+      assert.strictEqual(dispatcher.count, 0, "Subscription count should be 0");
       dispatcher.sub(callback);
       dispatcher.sub(callback2);
-      expect(dispatcher.count, "Subscription count should be 2").to.equal(2);
+      assert.strictEqual(dispatcher.count, 2, "Subscription count should be 2");
     });
 
     it("Subscribing to the signal dispatcher", async () => {
@@ -32,7 +33,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
 
       await dispatcher.dispatch();
 
-      expect(resultNr, "resultNr should be 7.").to.equal(7);
+      assert.strictEqual(resultNr, 7, "resultNr should be 7.");
     });
 
     it("Sub to the signal dispatcher", async () => {
@@ -45,7 +46,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
 
       await dispatcher.dispatch();
 
-      expect(resultNr, "resultNr should be 7.").to.equal(7);
+      assert.strictEqual(resultNr, 7, "resultNr should be 7.");
     });
 
     it("Subscribing to the signal dispatcher. Fire twice", async () => {
@@ -59,7 +60,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
       await dispatcher.dispatch();
       await dispatcher.dispatch();
 
-      expect(resultNr, "resultNr should be 12.").to.equal(12);
+      assert.strictEqual(resultNr, 12, "resultNr should be 12.");
     });
 
     it("Sub to the signal dispatcher. Fire twice", async () => {
@@ -73,7 +74,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
       await dispatcher.dispatch();
       await dispatcher.dispatch();
 
-      expect(resultNr, "resultNr should be 12.").to.equal(12);
+      assert.strictEqual(resultNr, 12, "resultNr should be 12.");
     });
 
     it("One subscription to the signal dispatcher. Fire twice.", async () => {
@@ -87,7 +88,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
       await dispatcher.dispatch();
       await dispatcher.dispatch();
 
-      expect(resultNr, "resultNr should be 2.").to.equal(2);
+      assert.strictEqual(resultNr, 2, "resultNr should be 2.");
     });
 
     it("Unsubscribing to the signal dispatcher.", async () => {
@@ -102,7 +103,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
       dispatcher.unsubscribe(fn);
       await dispatcher.dispatch();
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsub to the signal dispatcher.", async () => {
@@ -117,7 +118,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
       dispatcher.unsub(fn);
       await dispatcher.dispatch();
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsubscribing from signal dispatcher using subscribe's return function.", async () => {
@@ -130,7 +131,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
       unsub();
       await dispatcher.dispatch();
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsubscribing from signal dispatcher using sub's return function.", async () => {
@@ -143,7 +144,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
       unsub();
       await dispatcher.dispatch();
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsubscribing from one subscription.", async () => {
@@ -158,7 +159,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
       dispatcher.unsubscribe(fn);
       await dispatcher.dispatch();
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsubscribing from signal dispatcher using one's return function.", async () => {
@@ -171,7 +172,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
       unsub();
       await dispatcher.dispatch();
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Unsub from one subscription.", async () => {
@@ -186,14 +187,14 @@ describe("Strongly Typed Events - Promise Signal", () => {
       dispatcher.unsub(fn);
       await dispatcher.dispatch();
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
 
     it("Has no event.", () => {
       var fn = async () => {};
       let dispatcher = new PromiseSignalDispatcher();
       let result = dispatcher.has(fn);
-      expect(result, "Handler should not be present.").to.equal(false);
+      assert.strictEqual(result, false, "Handler should not be present.");
     });
 
     it("Has event through subscribe.", () => {
@@ -201,7 +202,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
       let dispatcher = new PromiseSignalDispatcher();
       dispatcher.subscribe(fn);
       let result = dispatcher.has(fn);
-      expect(result, "Handler should be present.").to.equal(true);
+      assert.strictEqual(result, true, "Handler should be present.");
     });
 
     it("Has event through one.", () => {
@@ -209,7 +210,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
       let dispatcher = new PromiseSignalDispatcher();
       dispatcher.one(fn);
       let result = dispatcher.has(fn);
-      expect(result, "Handler should be present.").to.equal(true);
+      assert.strictEqual(result, true, "Handler should be present.");
     });
 
     it("Test subscribe -> unsubscribe -> has", () => {
@@ -218,10 +219,10 @@ describe("Strongly Typed Events - Promise Signal", () => {
       dispatcher.subscribe(fn);
       dispatcher.unsubscribe(fn);
       let result = dispatcher.has(fn);
-      expect(
-        result,
+      assert.strictEqual(
+        result, false,
         "Handler should not be present because of unsubscribe."
-      ).to.equal(false);
+      );
     });
 
     it("Clear subscriptions.", async () => {
@@ -235,7 +236,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
       dispatcher.clear();
       await dispatcher.dispatch();
 
-      expect(resultNr, "resultNr should be 0.").to.equal(0);
+      assert.strictEqual(resultNr, 0, "resultNr should be 0.");
     });
   });
 
@@ -247,7 +248,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
 
       list.get(event).subscribe(fn);
       var result = list.get(event).has(fn);
-      expect(result, "result should be true.").to.equals(true);
+      assert.strictEqual(result, true, "result should be true.");
     });
 
     it("Unsubscribe to event name", () => {
@@ -259,9 +260,7 @@ describe("Strongly Typed Events - Promise Signal", () => {
       list.get(event).unsubscribe(fn);
 
       var result = list.get(event).has(fn);
-      expect(result, "result should be false due to unsubscribe.").to.equals(
-        false
-      );
+      assert.strictEqual(result, false, "result should be false due to unsubscribe.");
     });
 
     it("Test firing two events in one list", async () => {
@@ -282,10 +281,10 @@ describe("Strongly Typed Events - Promise Signal", () => {
       list.get(event2).subscribe(fn2);
 
       await list.get(event2).dispatch();
-      expect(result, 'Result should be "ev2:16.').to.equal("ev2:16");
+      assert.strictEqual(result, "ev2:16", 'Result should be "ev2:16.');
 
       await list.get(event1).dispatch();
-      expect(result, 'Result should be "ev1:8.').to.equal("ev1:8");
+      assert.strictEqual(result, "ev1:8", 'Result should be "ev1:8.');
     });
 
     it("Test remove from list.", () => {
@@ -299,15 +298,15 @@ describe("Strongly Typed Events - Promise Signal", () => {
       list.get(event2).subscribe(fn);
 
       let result = list.get(event2).has(fn);
-      expect(result, "Event 2 should be present.").to.equal(true);
+      assert.strictEqual(result, true, "Event 2 should be present.");
 
       list.remove(event2);
 
       result = list.get(event1).has(fn);
-      expect(result, "Event 1 should still be present.").to.equal(true);
+      assert.strictEqual(result, true, "Event 1 should still be present.");
 
       result = list.get(event2).has(fn);
-      expect(result, "Event 2 should not be present.").to.equal(false);
+      assert.strictEqual(result, false, "Event 2 should not be present.");
     });
   });
 });

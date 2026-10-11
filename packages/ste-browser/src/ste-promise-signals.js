@@ -12,7 +12,7 @@ var m = require("ste-promise-signals");
 
 var expose = require("./expose");
 
-expose({
+module.exports = expose({
 
     DispatcherBase: c.DispatcherBase,
     PromiseDispatcherBase: c.PromiseDispatcherBase,

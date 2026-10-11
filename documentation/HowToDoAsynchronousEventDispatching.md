@@ -1,27 +1,37 @@
 ﻿# How to do asynchronous event dispatching?
 Normally event dispatching using a `EventDispatcher<TSender, TArgs>` or `SimpleEventDispatcher<TArgs>`
-is a synchronous process. This might not be desirable because a long event handler can hold up the rest of the
-handlers from being executed. That's why dispatchers can dispatch asynchronously by calling `dispatchAsync`.
+is a synchronous process. Calling `dispatchAsync` schedules the handlers with
+timers and returns before they run. Handlers still run on the same JavaScript
+thread, so a long-running handler can still block other handlers.
 
 ### Example
 Conside the following example:
 
-```typescript
-QUnit.test('Testing simple event async dispatch', (assert) => {
+```javascript
+const assert = require('node:assert/strict');
+const { SimpleEventDispatcher } = require('strongly-typed-events');
 
-    let dispatcher = new SimpleEventDispatcher<number>();
-
-    let i = 0;
-
-    dispatcher.subscribe((a) => {
-        i = a;
-
-        assert.equal(i, 1);
+async function example() {
+    const dispatcher = new SimpleEventDispatcher();
+    let value = 0;
+    const handled = new Promise(resolve => {
+        dispatcher.one(argument => {
+            value = argument;
+            resolve();
+        });
     });
 
     dispatcher.dispatchAsync(1);
+    assert.equal(value, 0);
+    await handled;
+    assert.equal(value, 1);
+}
 
-    assert.equal(i, 0);
+example().catch(error => {
+    console.error(error);
+    process.exitCode = 1;
 });
 ```
-Dispatching is now done asynchronously.
+The example completes without assertion failures. `dispatchAsync` does not
+return a Promise to await handler completion and cannot stop propagation between
+scheduled handlers. Use a Promise dispatcher when handlers return Promises.

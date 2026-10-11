@@ -1,5 +1,6 @@
-import { SignalList } from "./../src/";
-import { expect } from "chai";
+import { SignalList } from "strongly-typed-events";
+import { describe, it } from "node:test";
+import * as assert from "node:assert/strict";
 
 describe("EventList", () => {
   it("Testing add and remove.", () => {
@@ -11,16 +12,16 @@ describe("EventList", () => {
       i++;
     };
 
-    expect(i).to.eq(0, "Nothing should have been changed at this point.");
+    assert.strictEqual(i, 0, "Nothing should have been changed at this point.");
 
     eventList.get("myEvent").sub(fn1);
     eventList.get("myEvent").dispatch();
 
-    expect(i).to.eq(i, "i should have been bumped to 1.");
+    assert.strictEqual(i, 1, "i should have been bumped to 1.");
 
     eventList.remove("myEvent");
     eventList.get("myEvent").dispatch();
 
-    expect(i).to.eq(i, "i should still be 1.");
+    assert.strictEqual(i, 1, "i should still be 1.");
   });
 });

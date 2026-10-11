@@ -1,7 +1,8 @@
 import {
   DispatcherBase,
-} from "../src";
-import { expect } from "chai";
+} from "ste-core";
+import { describe, it } from "node:test";
+import * as assert from "node:assert/strict";
 
 describe("Features", () => {
 
@@ -29,43 +30,43 @@ describe("Features", () => {
       var d = new CustomDispatcher();
       d.sub(s);
       d.subscribe(s);
-      expect(d.onSubscriptionChangeTriggered).eql(2);
+      assert.deepStrictEqual(d.onSubscriptionChangeTriggered, 2);
     });
 
     it("Should trigger on sub/unsub and subscribe/unsubscribe", ()=>{
       var s = () => {};
       var d = new CustomDispatcher();
       d.sub(s);
-      expect(d.onSubscriptionChangeTriggered).eql(1);
+      assert.deepStrictEqual(d.onSubscriptionChangeTriggered, 1);
       
       d.unsub(s);
-      expect(d.onSubscriptionChangeTriggered).eql(2);
+      assert.deepStrictEqual(d.onSubscriptionChangeTriggered, 2);
 
       d.subscribe(s);
-      expect(d.onSubscriptionChangeTriggered).eql(3);
+      assert.deepStrictEqual(d.onSubscriptionChangeTriggered, 3);
 
       d.unsub(s);
-      expect(d.onSubscriptionChangeTriggered).eql(4);
+      assert.deepStrictEqual(d.onSubscriptionChangeTriggered, 4);
     });
 
     it("Should trigger after dispatch of one", ()=>{
       var s = () => {};
       var d = new CustomDispatcher();
       d.one(s);
-      expect(d.onSubscriptionChangeTriggered).eql(1);
+      assert.deepStrictEqual(d.onSubscriptionChangeTriggered, 1);
 
       d.dispatch();
-      expect(d.onSubscriptionChangeTriggered).eql(2);
+      assert.deepStrictEqual(d.onSubscriptionChangeTriggered, 2);
     });
 
     it("Should not trigger after dispatch of subscribe", ()=>{
       var s = () => {};
       var d = new CustomDispatcher();
       d.subscribe(s);
-      expect(d.onSubscriptionChangeTriggered).eql(1);
+      assert.deepStrictEqual(d.onSubscriptionChangeTriggered, 1);
 
       d.dispatch();
-      expect(d.onSubscriptionChangeTriggered).eql(1);
+      assert.deepStrictEqual(d.onSubscriptionChangeTriggered, 1);
     });
 
 
@@ -74,13 +75,13 @@ describe("Features", () => {
 
       var d = new CustomDispatcher();
       d.clear();
-      expect(d.onSubscriptionChangeTriggered).eql(0);
+      assert.deepStrictEqual(d.onSubscriptionChangeTriggered, 0);
 
       d.sub(s);
-      expect(d.onSubscriptionChangeTriggered).eql(1);
+      assert.deepStrictEqual(d.onSubscriptionChangeTriggered, 1);
 
       d.clear();
-      expect(d.onSubscriptionChangeTriggered).eql(2);
+      assert.deepStrictEqual(d.onSubscriptionChangeTriggered, 2);
     });
 
 
@@ -92,7 +93,7 @@ describe("Features", () => {
       d.sub(s);
       d.sub(s);
 
-      expect(count).eql(d.count);
+      assert.deepStrictEqual(count, d.count);
 
     });
 

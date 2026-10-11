@@ -1,11 +1,10 @@
 {
     "name": "ste-browser",
-    "version": "3.0.11",
+    "version": "4.0.0",
     "description": "Add the power of events directly to your client projects. This version of Strongly Typed Events works in the browser.",
     "scripts": {
-        "webpack": "webpack",
-        "build": "del-cli ./dist && npm run webpack",
-        "test": "exit 0"
+        "build": "node build.mjs",
+        "test": "node --test \"test/**/*.test.mjs\""
     },
     "repository": {
         "type": "git",
@@ -28,25 +27,23 @@
     },
     "homepage": "https://github.com/KeesCBakker/Strongly-Typed-Events-for-TypeScript#readme",
     "devDependencies": {
-        "@types/node": "^20.4.9",
-        "del-cli": "^5.0.0",
-        "ste-core": "^3.0.11",
-        "ste-events": "^3.0.11",
-        "ste-promise-events": "^3.0.11",
-        "ste-promise-signals": "^3.0.11",
-        "ste-promise-simple-events": "^3.0.11",
-        "ste-signals": "^3.0.11",
-        "ste-simple-events": "^3.0.11",
-        "strongly-typed-events": "^3.0.11",
-        "webpack": "^5.88.2",
-        "webpack-cli": "^5.1.4"
+        "@types/node": "^22.20.5",
+        "ste-core": "^4.0.0",
+        "ste-events": "^4.0.0",
+        "ste-promise-events": "^4.0.0",
+        "ste-promise-signals": "^4.0.0",
+        "ste-promise-simple-events": "^4.0.0",
+        "ste-signals": "^4.0.0",
+        "ste-simple-events": "^4.0.0",
+        "strongly-typed-events": "^4.0.0",
+        "esbuild": "^0.28.2"
     },
     "engines": {
-        "node": ">=4.2.4"
+        "node": ">=22.22.2"
     },
-    "gitHead": "ddecc6b007733716bc0d65aa845ac4a1fb3bdd8c",
     "files": [
         "dist/**/*.js",
+        "dist/**/*.map",
         "dist/**/*.d.ts",
         "dist/**/*.txt"
     ]

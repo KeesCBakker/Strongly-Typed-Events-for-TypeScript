@@ -3,7 +3,7 @@ import {
   DispatcherWrapper,
   EventListBase,
   Subscription
-} from "./../src";
-import { expect } from "chai";
+} from "ste-core";
+import { describe } from "node:test";
 
 describe("Bug fixes", () => {});

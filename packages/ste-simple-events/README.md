@@ -1,10 +1,11 @@
 # Strongly Typed Events - Simple events
 Simple events are a type of event that will provide an `argument` with data when fired. If you use typescript, you can leverage the support for generics and get strongly typed code.
 
+Version 4.0.0 requires Node.js 22.22.2 or newer.
+
 Need a different type of event? Check out <a href="https://www.npmjs.com/package/strongly-typed-events">the others</a>.
 
-[![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
-[![npm version](https://badge.fury.io/js/ste-signals.svg)](https://badge.fury.io/js/ste-signals)
+[![npm version](https://badge.fury.io/js/ste-simple-events.svg)](https://badge.fury.io/js/ste-simple-events)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ### Subscription made easy
@@ -12,9 +13,8 @@ An example says more than a 1000 words. Imagine if you have events like this on 
 ```typescript
 let clock = new Clock("Smu", 1000);
 
-//log the name of the clock and the tick argument to the console - this is an event
-clock.onClockTick.subscribe((c, n) =>
-  console.log(`${c.name} ticked ${n} times.`)
+clock.onSequenceTick.subscribe(n =>
+  console.log(`Sequence: ${n}`)
 );
 ```
 

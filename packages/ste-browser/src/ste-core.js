@@ -9,7 +9,7 @@
 var m = require("ste-core");
 var expose = require("./expose");
 
-expose({
+module.exports = expose({
     DispatcherBase: m.DispatcherBase,
     DispatcherWrapper: m.DispatcherWrapper,
     EventListBase: m.EventListBase,
@@ -20,4 +20,3 @@ expose({
     PromiseDispatcherBase: m.PromiseDispatcherBase,
     HandlingBase: m.HandlingBase,
 });
-
