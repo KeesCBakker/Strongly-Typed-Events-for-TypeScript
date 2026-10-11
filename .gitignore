@@ -61,3 +61,4 @@ packages/strongly-typed-events/src/**/*.js
 .metals/**/*
 tmp/
 .nx/
+opencode.json
