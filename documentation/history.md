@@ -46,7 +46,7 @@ Added browser support for the individual flavors of events:
 ```
 
 #### Version 1.6
-<a href="https://github.com/DustinWoods">@DustinWoods</a> added support for <a href="/documentation/HowToAddDynamicNamedEeventsToAClass.md#non-uniform-event-lists">non uniform event lists</a>.
+<a href="https://github.com/DustinWoods">@DustinWoods</a> added support for <a href="HowToAddDynamicNamedEeventsToAClass.md#non-uniform-event-lists">non uniform event lists</a>.
 
 #### Version 1.5
 Added support for subscription `.count` from the dispatcher.
@@ -117,7 +117,7 @@ unsubscribe or dispatch events. Use the ToEvent() method to expose the event
 - Added an `asEvent` method to the dispatchers that will expose only the subsribe / unsubscribe methods. This will prevent
 the `dispatch` method from being exposed through the events.
 - Added an `dispatchAsync` method to the dispatchers that will execute all subsriptions asynchronously. 
-<a href="documentation/HowToDoAsynchronousEventDispatching.md">Check this for more information</a>.
+<a href="HowToDoAsynchronousEventDispatching.md">Check this for more information</a>.
 
 #### Version 0.1
 Introducing the events - use a generic sender and a generic argument to dispatch events through your projects. The following 

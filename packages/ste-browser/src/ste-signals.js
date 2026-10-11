@@ -12,7 +12,7 @@ var m = require("ste-signals");
 
 var expose = require("./expose");
 
-expose({
+module.exports = expose({
 
     DispatcherBase: c.DispatcherBase,
     DispatcherWrapper: c.DispatcherWrapper,

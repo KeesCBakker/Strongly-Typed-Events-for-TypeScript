@@ -22,10 +22,12 @@ for (const [name, constructorName] of bundles) {
         for (const mode of ["script", "AMD", "CommonJS"]) {
             test(`${filename} loads through ${mode} and exposes working globals`, async () => {
                 const window = {};
-                const sandbox = { window, setTimeout, clearTimeout };
+                const sandbox = { setTimeout, clearTimeout };
                 let factory;
 
-                if (mode === "AMD") {
+                if (mode === "script") {
+                    sandbox.window = window;
+                } else if (mode === "AMD") {
                     sandbox.define = (dependencies, callback) => {
                         assert.equal(dependencies.length, 0);
                         factory = callback;
@@ -38,16 +40,23 @@ for (const [name, constructorName] of bundles) {
                 runInNewContext(await readFile(url, "utf8"), sandbox, { filename });
 
                 if (mode === "AMD") {
-                    assert.equal(window._e, undefined);
                     assert.equal(typeof factory, "function");
-                    assert.equal(typeof factory(), "object");
+                    const exports = factory();
+                    assert.equal(typeof exports[constructorName], "function");
                 } else if (mode === "CommonJS") {
-                    assert.equal(typeof sandbox.module.exports, "object");
+                    assert.equal(typeof sandbox.module.exports[constructorName], "function");
                 }
 
-                const Constructor = window[constructorName];
-                assert.equal(typeof Constructor, "function");
-                assert.equal(window._e[constructorName], Constructor);
+                const Constructor = mode === "script"
+                    ? window[constructorName]
+                    : mode === "AMD"
+                        ? factory()[constructorName]
+                        : sandbox.module.exports[constructorName];
+
+                if (mode === "script") {
+                    assert.equal(typeof Constructor, "function");
+                    assert.equal(window._e[constructorName], Constructor);
+                }
 
                 if (name !== "ste-core") {
                     const dispatcher = new Constructor();

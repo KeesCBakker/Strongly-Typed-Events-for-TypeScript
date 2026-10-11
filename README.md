@@ -74,27 +74,27 @@ class Clock {
 You can stop events from being propagated.
 
 ```typescript
+import { SignalDispatcher } from "strongly-typed-events";
+
 let dispatcher = new SignalDispatcher();
 
-  let a = 0;
-  dispatcher.sub(ev => {
-    a++;
-    if (a > 2) {
-      ev.stopPropagation();
-    }
-  });
+let a = 0;
+dispatcher.sub(ev => {
+  a++;
+  if (a > 2) {
+    ev.stopPropagation();
+  }
+});
 
-  let b = 0;
-  dispatcher.sub(() => { b++; });
+let b = 0;
+dispatcher.sub(() => { b++; });
 
-  dispatcher.dispatch();
-  dispatcher.dispatch();
-  dispatcher.dispatch();
-  dispatcher.dispatch();
+dispatcher.dispatch();
+dispatcher.dispatch();
+dispatcher.dispatch();
+dispatcher.dispatch();
 
-  // a should be 4, because 4 dispatches are done.");
-  // b should be 2, because events after the 2nd dispatch are stopped."
-
+// a is 4; b is 2 because propagation stops on the third dispatch.
 ```
 
 Check the <a href="documentation">documentation</a> or the <a href="examples">examples</a> for more information.

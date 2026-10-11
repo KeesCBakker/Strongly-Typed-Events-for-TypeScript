@@ -1,7 +1,8 @@
 # Strongly Typed Events for your browser
 Why not use Strongly Typed Events in your browser? We got a special package for
 you that already contains all the files you need. You can even serve them from
-a CDN for extra speed (or easy prototyping). The packae is UMD compatible.
+a CDN for extra speed (or easy prototyping). The bundles support UMD, CommonJS,
+AMD, and browser globals.
 
 [![npm version](https://badge.fury.io/js/ste-browser.svg)](https://badge.fury.io/js/ste-browser)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -11,6 +12,8 @@ Include the script from this NPM package or from a CDN:
 ```html
 <script src="https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/strongly-typed-events.min.js"></script>
 ```
+In a browser, constructors are exposed on `window` and under `window._e`. AMD
+and CommonJS consumers receive the constructors as module exports.
 ### Subscription is easy
 Let's assume you have a clock, subscribing to events on it is easy:
 ```javascript

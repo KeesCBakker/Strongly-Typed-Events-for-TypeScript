@@ -1,6 +1,8 @@
 # Strongly Typed Events - Promise Events
 Add events that are modeled after .Net with a `sender` and `argument` to your project. If you use typescript, you can leverage the support for generics and get strongly typed code. Handlers can be promises.
 
+Version 4.0.0 requires Node.js 22.22.2 or newer.
+
 Need a different type of event? Check out <a href="https://www.npmjs.com/package/strongly-typed-events">the others</a>.
 
 [![npm version](https://badge.fury.io/js/ste-promise-events.svg)](https://badge.fury.io/js/ste-promise-events)

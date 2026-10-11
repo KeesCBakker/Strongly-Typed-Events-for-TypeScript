@@ -34,10 +34,11 @@ await Promise.all([false, true].map(minify => build({
     bundle: true,
     platform: "browser",
     format: "iife",
+    globalName: "bundle",
     target: "es2018",
     minify,
     sourcemap: "linked",
     legalComments: "eof",
     banner: { js: banner },
-    footer: { js: "return {};\n});" }
+    footer: { js: "return bundle;\n});" }
 })));

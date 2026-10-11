@@ -12,7 +12,7 @@ var m = require("ste-promise-simple-events");
 
 var expose = require("./expose");
 
-expose({
+module.exports = expose({
 
     DispatcherBase: c.DispatcherBase,
     PromiseDispatcherBase: c.PromiseDispatcherBase,

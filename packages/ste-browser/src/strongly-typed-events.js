@@ -9,7 +9,7 @@
 var m = require("strongly-typed-events");
 var expose = require("./expose");
 
-expose({
+module.exports = expose({
     Subscription: m.Subscription,
     DispatcherBase: m.DispatcherBase,
     DispatcherWrapper: m.DispatcherWrapper,
