@@ -59,3 +59,5 @@ packages/strongly-typed-events/src/**/*.js
 *.tgz
 
 .metals/**/*
+tmp/
+.nx/

@@ -3,8 +3,7 @@ Add events that are modeled after .Net with a `sender` and `argument` to your pr
 
 Need a different type of event? Check out <a href="https://www.npmjs.com/package/strongly-typed-events">the others</a>.
 
-[![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
-[![npm version](https://badge.fury.io/js/ste-signals.svg)](https://badge.fury.io/js/ste-signals)
+[![npm version](https://badge.fury.io/js/ste-events.svg)](https://badge.fury.io/js/ste-events)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ### Subscription made easy
@@ -25,7 +24,7 @@ So let's look at the implementation from a TypeScript perspective. (Do you progr
 import { EventDispatcher } from "ste-events";
 
 class Clock {
-  private _onClockTick = new EventDispatcher();
+  private _onClockTick = new EventDispatcher<Clock, number>();
   private _ticks: number = 0;
 
   constructor(public name: string, timeout: number) {

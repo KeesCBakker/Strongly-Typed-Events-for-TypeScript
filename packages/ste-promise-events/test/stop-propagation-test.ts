@@ -1,12 +1,10 @@
 "use strict";
 
-import { expect } from "chai";
+import { describe, it } from "node:test";
+import * as assert from "node:assert/strict";
+import { setImmediate } from "node:timers/promises";
 
-import { PromiseEventDispatcher } from "../src";
-
-function delay(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms, []));
-}
+import { PromiseEventDispatcher } from "ste-promise-events";
 
 describe("Strongly Typed Events - Promise Event", async () => {
     describe("PromiseEventDispatcher", async () => {
@@ -16,7 +14,7 @@ describe("Strongly Typed Events - Promise Event", async () => {
 
             let a = 0;
             dispatcher.sub(async (sender, args, ev) => {
-                await delay(10);
+                 await setImmediate();
                 a++;
                 if (a > 2) {
                     ev.stopPropagation();
@@ -33,9 +31,9 @@ describe("Strongly Typed Events - Promise Event", async () => {
             await dispatcher.dispatch(n, n);
             await dispatcher.dispatch(n, n);
 
-            expect(a).to.eq(4, "A should be 4, because 4 dispatches are done.");
+            assert.strictEqual(a, 4, "A should be 4, because 4 dispatches are done.");
 
-            expect(b).to.eq(
+            assert.strictEqual(b,
                 2,
                 "B should be 2, because everything after the 2nd dispatch is cancelled."
             );

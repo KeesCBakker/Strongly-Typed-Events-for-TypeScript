@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.test.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "../../tmp/test/ste-promise-events"
+  },
+  "include": ["test/**/*.ts"]
+}

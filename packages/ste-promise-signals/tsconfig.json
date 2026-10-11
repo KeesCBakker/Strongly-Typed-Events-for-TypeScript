@@ -2,7 +2,9 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es2018",
-    "module": "commonjs",
+    "module": "node16",
+    "rootDir": "src",
+    "types": ["node"],
     "lib": ["es2018"],
     "outDir": "dist",
     "declaration": true,

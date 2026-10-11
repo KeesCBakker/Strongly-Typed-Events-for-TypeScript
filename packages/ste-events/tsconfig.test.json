@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.test.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "../../tmp/test/ste-events"
+  },
+  "include": ["test/**/*.ts"]
+}

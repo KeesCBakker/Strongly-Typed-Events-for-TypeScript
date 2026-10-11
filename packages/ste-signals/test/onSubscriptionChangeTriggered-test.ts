@@ -1,8 +1,9 @@
 "use strict";
 
-import { expect } from "chai";
+import { describe, it } from "node:test";
+import * as assert from "node:assert/strict";
 
-import { SignalDispatcher } from "../src";
+import { SignalDispatcher } from "ste-signals";
 
 describe("Strongly Typed Events - Signal: subscription changes", () => {
     class CustomDispatcher extends SignalDispatcher {
@@ -21,87 +22,87 @@ describe("Strongly Typed Events - Signal: subscription changes", () => {
         let s = () => {};
 
         let dispatcher = new CustomDispatcher();
-        expect(
-            dispatcher.onSubscriptionChangeTriggered,
+        assert.deepStrictEqual(
+            dispatcher.onSubscriptionChangeTriggered, 0,
             "Starting, nothing should be triggered."
-        ).eql(0);
+        );
 
         dispatcher.sub(s);
-        expect(
-            dispatcher.onSubscriptionChangeTriggered,
+        assert.deepStrictEqual(
+            dispatcher.onSubscriptionChangeTriggered, 1,
             "Triggered 1x, because of sub."
-        ).eql(1);
+        );
 
         dispatcher.unsub(s);
-        expect(
-            dispatcher.onSubscriptionChangeTriggered,
+        assert.deepStrictEqual(
+            dispatcher.onSubscriptionChangeTriggered, 2,
             "Triggered 2x, because of sub + unsub."
-        ).eql(2);
+        );
     });
 
     it("Sub/unsub", () => {
         let s = () => {};
 
         let dispatcher = new CustomDispatcher();
-        expect(
-            dispatcher.onSubscriptionChangeTriggered,
+        assert.deepStrictEqual(
+            dispatcher.onSubscriptionChangeTriggered, 0,
             "Starting, nothing should be triggered."
-        ).eql(0);
+        );
 
         dispatcher.subscribe(s);
-        expect(
-            dispatcher.onSubscriptionChangeTriggered,
+        assert.deepStrictEqual(
+            dispatcher.onSubscriptionChangeTriggered, 1,
             "Triggered 1x, because of subscribe."
-        ).eql(1);
+        );
 
         dispatcher.unsubscribe(s);
-        expect(
-            dispatcher.onSubscriptionChangeTriggered,
+        assert.deepStrictEqual(
+            dispatcher.onSubscriptionChangeTriggered, 2,
             "Triggered 2x, because of sub + unsubscribe."
-        ).eql(2);
+        );
     });
 
     it("One/Dispatch", () => {
         let s = () => {};
 
         let dispatcher = new CustomDispatcher();
-        expect(
-            dispatcher.onSubscriptionChangeTriggered,
+        assert.deepStrictEqual(
+            dispatcher.onSubscriptionChangeTriggered, 0,
             "Starting, nothing should be triggered."
-        ).eql(0);
+        );
 
         dispatcher.one(s);
-        expect(
-            dispatcher.onSubscriptionChangeTriggered,
+        assert.deepStrictEqual(
+            dispatcher.onSubscriptionChangeTriggered, 1,
             "Triggered 1x, because of one."
-        ).eql(1);
+        );
 
         dispatcher.dispatch();
-        expect(
-            dispatcher.onSubscriptionChangeTriggered,
+        assert.deepStrictEqual(
+            dispatcher.onSubscriptionChangeTriggered, 2,
             "Triggered 2x, because of one + dispatch."
-        ).eql(2);
+        );
     });
 
     it("Clear", () => {
         let s = () => {};
 
         let dispatcher = new CustomDispatcher();
-        expect(
-            dispatcher.onSubscriptionChangeTriggered,
+        assert.deepStrictEqual(
+            dispatcher.onSubscriptionChangeTriggered, 0,
             "Starting, nothing should be triggered."
-        ).eql(0);
+        );
 
         dispatcher.sub(s);
-        expect(
-            dispatcher.onSubscriptionChangeTriggered,
+        assert.deepStrictEqual(
+            dispatcher.onSubscriptionChangeTriggered, 1,
             "Triggered 1x, because of sub."
-        ).eql(1);
+        );
 
         dispatcher.clear();
-        expect(
-            dispatcher.onSubscriptionChangeTriggered,
+        assert.deepStrictEqual(
+            dispatcher.onSubscriptionChangeTriggered, 2,
             "Triggered 2x, because of sub + clear."
-        ).eql(2);
+        );
     });
 });

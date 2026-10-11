@@ -1,27 +1,26 @@
 {
     "name": "strongly-typed-events-mono-root",
     "private": true,
+    "workspaces": ["packages/*"],
+    "engines": {
+        "node": ">=22.22.2",
+        "npm": ">=10.9.0"
+    },
     "dependencies": {
         "strongly-typed-events": "*"
     },
     "devDependencies": {
-        "lerna": "^7.1.4",
-        "@types/chai": "^4.3.5",
-        "@types/mocha": "^10.0.1",
-        "@types/node": "^20.4.9",
-        "chai": "^4.3.7",
-        "del-cli": "^5.0.0",
-        "mocha": "^10.2.0",
-        "ts-node": "^10.9.1",
-        "typescript": "^5.1.6",
-        "webpack": "^5.88.2",
-        "webpack-cli": "^5.1.4",
-        "trim-newlines": ">=5.0.0"
+        "@changesets/cli": "^3.0.3",
+        "@types/node": "^22.20.5",
+        "typescript": "^7.0.2"
     },
     "scripts": {
-        "build": "lerna bootstrap --hoist & lerna run build",
-        "test": "lerna run test",
-        "make": "lerna run build && lerna publish --yes --bump patch & git add . & git commit -m Version-bump & git push ",
-        "make-feature": "lerna run build && lerna publish --yes --bump minor & git add . & git commit -m Version-bump & git push "
+        "clean": "node scripts/clean.mjs",
+        "build": "npm run clean && npm run build --workspace ste-core && npm run build --workspace ste-events --workspace ste-simple-events --workspace ste-signals --workspace ste-promise-events --workspace ste-promise-simple-events --workspace ste-promise-signals && npm run build --workspace strongly-typed-events && npm run build --workspace ste-browser",
+        "test": "npm run test --workspaces",
+        "check": "npm run build && npm test",
+        "changeset": "changeset",
+        "version-packages": "changeset version && npm install --package-lock-only",
+        "release": "npm run check && changeset publish"
     }
 }

@@ -3,8 +3,7 @@ Why not use Strongly Typed Events in your browser? We got a special package for
 you that already contains all the files you need. You can even serve them from
 a CDN for extra speed (or easy prototyping). The packae is UMD compatible.
 
-[![Build Status](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript.svg?branch=master)](https://travis-ci.org/KeesCBakker/Strongly-Typed-Events-for-TypeScript)
-[![npm version](https://badge.fury.io/js/ste-browser.svg)](https://badge.fury.io/js/ste-core)
+[![npm version](https://badge.fury.io/js/ste-browser.svg)](https://badge.fury.io/js/ste-browser)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Code
@@ -74,6 +73,12 @@ function Clock(name, timeout) {
 ```
 
 ## Usage
+The bundles are built with esbuild and a UMD wrapper, not ES module output.
+Load them as regular scripts. They expose constructors such as
+`window.SignalDispatcher` and also make them available through `window._e`.
+The build targets ES2018 browser syntax. Node.js 22.22.2 or newer is required
+for building the package, not for loading a bundle in a browser.
+
 The package contains the following scripts:
 
 - Events that are modeled after .Net with a `sender` and `argument`. 
@@ -110,11 +115,13 @@ You want to use a CDN? Great!
 |Simple Events with Promise|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-promise-simple-events.min.js|
 |Signals|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-signals.min.js|
 |Signals with Promise|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-promise-signals.min.js|
-|Core|https://cdn.jsdelivr.net/npm/ste-browser/dist/strongly-typed-events.min.js|
+|Core|https://cdn.jsdelivr.net/npm/ste-browser@latest/dist/ste-core.min.js|
 
-Every link comes with a `.map`. If you need a specific version, just include after
-`ste-browser` (like `ste-browser@1.3` will serve you version 1.3 with the latest 
-patches). Like a non-minified version, just remove `.min` from the link.
+Each of the eight entry names has a `.js` bundle, a `.min.js` bundle, and a
+source map for each (`.js.map` and `.min.js.map`) included in the package.
+For reproducible deployments, replace `@latest` with the version you have
+verified, such as `@4.0.0` once that release is published. For a non-minified
+version, remove `.min` from the link.
 
 
 ## Packages

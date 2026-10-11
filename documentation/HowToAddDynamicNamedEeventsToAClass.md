@@ -11,11 +11,13 @@ a `get` method to get the event dispatcher by name. When it doesn't exists, one 
 done by calling the `dispatch` on the dispatcher.
 
 ```typescript
+import { EventList, IEvent } from "strongly-typed-events";
+
 class Stopwatch {
 
     private _events = new EventList<Stopwatch, StopwatchEventArgs>();
     private _ticks = 0;
-    private _timer: number;
+    private _timer: number | null = null;
 
     get onStart(): IEvent<Stopwatch, StopwatchEventArgs> {
         return this._events.get('onStart').asEvent();
@@ -86,12 +88,14 @@ class StopwatchEventArgs {
 The `EventList<TSender, TArgs>` and `SimpleEventList<TArgs>` share the same basic methods:
 
 - `get(name)` - returns a dispatcher for the event with the given name.
-- `remove(name)` - removed the dispatcher associated with the given name. This will disconnect all subscriptions.
+- `remove(name)` - removes the dispatcher from the list. The next `get(name)` creates a new dispatcher with no subscriptions. Existing references to the old dispatcher or its event keep their subscriptions.
 
 ### Non uniform event lists
 Often events are not styled the same way and use different arguments. That's why the `NonUniformEventList` and `NonUniformSimpleEventList` were build. You can supply a type-map to define the name of the event and the type of the argument.
 
 ```typescript
+import { NonUniformSimpleEventList, ISimpleEvent } from "strongly-typed-events";
+
 type FileHandlesArgMap = {
     "rename": string,
     "openHandlesChange": number
@@ -103,7 +107,7 @@ class FileHandles
     private _openHandles = 0;
     private _name: string;
     
-    constructor(name){
+    constructor(name: string){
         this._name = name;
     }
 
